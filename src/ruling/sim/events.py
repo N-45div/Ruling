@@ -95,6 +95,10 @@ class Match:
     home_lineup: list[str] = field(default_factory=list)
     away_lineup: list[str] = field(default_factory=list)
 
+    def attacks_right(self, team: str, period: int) -> bool:
+        """The home team attacks towards x = 105 in the first half, the away team in the second."""
+        return (team == self.home) == (period == 1)
+
     def score(self) -> tuple[int, int]:
         home = sum(1 for e in self.events if e.result == GOAL and e.team == self.home)
         away = sum(1 for e in self.events if e.result == GOAL and e.team == self.away)
