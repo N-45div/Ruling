@@ -1,0 +1,11 @@
+[project]
+name = "ruling"
+version = "0.1.0"
+description = "A decision desk for refereeing calls: computed evidence, the Law, precedent, and checked explanations."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+dependencies = []
+
+[dependency-groups]
+dev = ["pytest>=8"]
