@@ -69,7 +69,7 @@ class Event:
     end_x: float
     end_y: float
     body_part: str = "foot"
-    receiver: str | None = None
+    receiver: str | None = None  # the intended receiver of a pass or cross, or the fouled player
     xg: float | None = None
     detail: str | None = None  # e.g. the reason for a restart or a card
 
