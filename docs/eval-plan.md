@@ -57,4 +57,7 @@ All arms use the same model deployment and the same incident data.
 
 ## Amendments
 
-None yet.
+**1. 2026-10-15, before any data, tools or prompts exist.** The reference text is the Laws of the Game 2026/27 (in force from 1 July 2026). The unsupported-claim rate gains a named sub-metric, the **stale-law citation rate**: the share of explanations that rely on wording removed or changed in earlier editions. Examples:
+- the handball "arm above shoulder level" criterion and its listed exceptions, removed in 2022/23;
+- DOGSO considerations that omit the location and number of attackers, added in 2026/27;
+- treating a second caution as never reviewable, when a clearly wrong one is reviewable from 2026/27.
