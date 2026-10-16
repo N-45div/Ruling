@@ -1,7 +1,7 @@
 import math
 
 from ruling.sim import pitch
-from ruling.sim.events import GOAL, PASS, Event, Match, read_events, write_events
+from ruling.sim.events import GOAL, NO_GOAL, PASS, SHOT, VAR_DECISION, Event, Match, read_events, write_events
 
 
 def make_event(**overrides) -> Event:
@@ -49,13 +49,15 @@ def test_clock_shows_stoppage_time():
     assert make_event(period=2, second=45 * 60 + 5).clock == "90+0:05"
 
 
-def test_score_counts_goals_per_team():
+def test_score_counts_goals_that_stand_after_var():
     match = Match(id="m1", seed=1, home="AGA", away="BRC", events=[
-        make_event(index=0, result=GOAL, team="AGA"),
-        make_event(index=1, result=GOAL, team="BRC"),
-        make_event(index=2, result=GOAL, team="AGA"),
+        make_event(index=0, type=SHOT, result=GOAL, team="AGA"),
+        make_event(index=1, type=SHOT, result=GOAL, team="BRC"),
+        make_event(index=2, type=SHOT, result=GOAL, team="AGA"),
+        make_event(index=3, type=VAR_DECISION, result=NO_GOAL, team="AGA", detail="var_overturn|shot:2"),
     ])
-    assert match.score() == (2, 1)
+    assert match.disallowed() == {2}
+    assert match.score() == (1, 1)
 
 
 def test_events_round_trip_through_json_lines(tmp_path):

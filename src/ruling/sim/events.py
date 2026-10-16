@@ -39,13 +39,17 @@ FREE_KICK = "free_kick"
 PENALTY = "penalty"
 PERIOD_START = "period_start"
 PERIOD_END = "period_end"
+# Video review: a check on an event, then the decision ("<review>|shot:<index>" in detail)
+VAR_CHECK = "var_check"
+VAR_DECISION = "var_decision"
 
 RESTARTS = frozenset({KICKOFF, THROW_IN, GOAL_KICK, CORNER, FREE_KICK, PENALTY})
 
 # Results
 SUCCESS = "success"
 FAIL = "fail"
-GOAL = "goal"
+GOAL = "goal"  # for a shot: the ball crossed the line; VAR may still rule it out
+NO_GOAL = "no_goal"
 SAVED = "saved"
 OFF_TARGET = "off_target"
 BLOCKED = "blocked"
@@ -94,15 +98,28 @@ class Match:
     events: list[Event] = field(default_factory=list)
     home_lineup: list[str] = field(default_factory=list)
     away_lineup: list[str] = field(default_factory=list)
+    incidents: list = field(default_factory=list)  # ruling.incidents.model.Incident
+
+    def disallowed(self) -> set[int]:
+        """Indices of shots that crossed the line but were ruled out after a VAR decision."""
+        out = set()
+        for e in self.events:
+            if e.type == VAR_DECISION and e.result == NO_GOAL and e.detail:
+                out.update(int(p[5:]) for p in e.detail.split("|") if p.startswith("shot:"))
+        return out
 
     def attacks_right(self, team: str, period: int) -> bool:
         """The home team attacks towards x = 105 in the first half, the away team in the second."""
         return (team == self.home) == (period == 1)
 
+    def goals(self) -> list[Event]:
+        """Goals that stand."""
+        ruled_out = self.disallowed()
+        return [e for e in self.events if e.type == SHOT and e.result == GOAL and e.index not in ruled_out]
+
     def score(self) -> tuple[int, int]:
-        home = sum(1 for e in self.events if e.result == GOAL and e.team == self.home)
-        away = sum(1 for e in self.events if e.result == GOAL and e.team == self.away)
-        return home, away
+        goals = self.goals()
+        return sum(e.team == self.home for e in goals), sum(e.team == self.away for e in goals)
 
 
 def write_events(path: Path, events: Iterable[Event]) -> None:

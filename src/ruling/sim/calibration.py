@@ -42,7 +42,7 @@ def aggregates(match: ev.Match) -> dict[str, float]:
     events = match.events
     passes = [e for e in events if e.type == ev.PASS]
     return {
-        "goals": sum(e.result == ev.GOAL for e in events),
+        "goals": len(match.goals()),  # goals that stand after VAR
         "shots": sum(e.type == ev.SHOT for e in events),
         "passes": len(passes),
         "pass_accuracy": sum(e.result == ev.SUCCESS for e in passes) / max(1, len(passes)),

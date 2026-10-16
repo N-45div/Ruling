@@ -49,9 +49,8 @@ def test_each_period_opens_and_closes(matches):
 def test_the_conceding_team_kicks_off_after_a_goal(matches):
     checked = 0
     for match in matches:
-        for i, e in enumerate(match.events):
-            if e.result != ev.GOAL:
-                continue
+        for e in match.goals():
+            i = e.index
             # A goal in stoppage time can be the last action of the half.
             restart = next((n for n in match.events[i + 1:]
                             if n.type == ev.KICKOFF and n.period == e.period), None)

@@ -16,6 +16,8 @@ import math
 import random
 from dataclasses import dataclass, field
 
+from ..incidents.offside import GoalPlan, OffsidePlanner, make_incident
+from ..laws import var
 from . import events as ev
 from . import pitch
 from .clubs import ROLE_DEF, ROLE_FWD, ROLE_GK, ROLE_MID, Club, Player
@@ -35,9 +37,9 @@ class Params:
     pressing_penalty: float = 0.06
     dribble_success: float = 0.48
     cross_success: float = 0.24
-    cross_cleared_for_corner: float = 0.48  # share of cleared crosses that go behind
+    cross_cleared_for_corner: float = 0.44  # share of cleared crosses that go behind
     carry_loss: float = 0.10
-    shot_appetite: float = 0.42  # multiplies xG to give the per-action shot weight
+    shot_appetite: float = 0.48  # multiplies xG to give the per-action shot weight
     long_shot_weight: float = 0.14  # baseline shot weight within 32 m of goal
     pass_preference: float = 1.7  # weight of a short pass relative to other actions
     cautioned_restraint: float = 0.5  # a cautioned player fouls, and is booked, less often
@@ -99,9 +101,12 @@ def expected_goals(x: float, y: float, header: bool = False) -> float:
 
 
 class MatchEngine:
-    def __init__(self, home: Club, away: Club, seed: int, params: Params = DEFAULT_PARAMS):
+    def __init__(self, home: Club, away: Club, seed: int, params: Params = DEFAULT_PARAMS,
+                 incidents: bool = True):
         self.rng = random.Random(seed)
         self.params = params
+        # Plans the offside question behind each goal; it has its own random stream.
+        self.offside = OffsidePlanner(seed) if incidents else None
         self.match = ev.Match(id=f"{home.code}-{away.code}-{seed}", seed=seed, home=home.code, away=away.code)
         self.sides = (self._side(home, True), self._side(away, False))
         self.match.home_lineup = [p.id for p in home.starters]
@@ -379,7 +384,17 @@ class MatchEngine:
         goal_mouth = (pitch.LENGTH, rng.uniform(pitch.CENTRE_Y - 3.6, pitch.CENTRE_Y + 3.6))
         part = "head" if header else "foot"
         if scored:
+            plan = None
+            if self.offside and detail != "penalty":
+                plan = self.offside.plan(self.match, self.sides[team].club.code, shooter.id, (x, y))
+            if plan and plan.pre_touch:
+                defender_id, touch, position = plan.pre_touch
+                defender = self.sides[1 - team].club.player(defender_id)
+                frame_xy = pitch.to_absolute(*position, self.sides[1 - team].attacks_right(self.period))
+                self._emit(1 - team, defender, ev.CLEARANCE, ev.FAIL, frame_xy, detail=touch)
             self._emit(team, shooter, ev.SHOT, ev.GOAL, (x, y), goal_mouth, xg=xg, body_part=part, detail=detail)
+            if plan:
+                return self._review_goal(team, plan)
             self._tick(*_DEAD_TIME[ev.KICKOFF])
             return _Restart(ev.KICKOFF, 1 - team, pitch.HALFWAY_X, pitch.CENTRE_Y)
         opp = self.sides[1 - team]
@@ -405,6 +420,26 @@ class MatchEngine:
         self._tick(*_DEAD_TIME[ev.GOAL_KICK])
         return _Restart(ev.GOAL_KICK, 1 - team, 5.5, pitch.CENTRE_Y)
 
+    def _review_goal(self, team: int, plan: GoalPlan) -> _Restart:
+        """Flag (if given), VAR check and decision for the goal just recorded, then the right restart."""
+        shot_index = len(self.match.events) - 1
+        side = self.sides[team]
+        assessed = side.club.player(plan.situation.attacker)
+        offence = pitch.to_absolute(*plan.offence_point, side.attacks_right(self.period))  # into team's frame
+        if plan.on_field == var.NO_GOAL:
+            self._emit(team, assessed, ev.OFFSIDE, ev.FAIL, offence, detail="flag")
+        self._tick(*{var.CHECK_COMPLETE: (5, 25), var.VAR_OVERTURN: (60, 150),
+                     var.ON_FIELD_REVIEW: (90, 200)}[plan.outcome.review])
+        self._emit(team, assessed, ev.VAR_CHECK, ev.SUCCESS, offence, detail="offside")
+        result = ev.GOAL if plan.outcome.final == var.GOAL else ev.NO_GOAL
+        self._emit(team, None, ev.VAR_DECISION, result, offence, detail=f"{plan.outcome.review}|shot:{shot_index}")
+        self.match.incidents.append(make_incident(self.match, plan, shot_index))
+        if plan.outcome.final == var.GOAL:
+            self._tick(*_DEAD_TIME[ev.KICKOFF])
+            return _Restart(ev.KICKOFF, 1 - team, pitch.HALFWAY_X, pitch.CENTRE_Y)
+        self._tick(*_DEAD_TIME[ev.FREE_KICK])
+        return _Restart(ev.FREE_KICK, 1 - team, *pitch.flip(*offence), detail="offside")
+
     def _out_of_play(self, team: int, x: float, y: float) -> _Restart:
         """Restart for the opponent after `team` put the ball out at (x, y), attacking frame."""
         self._emit(team, None, ev.BALL_OUT, ev.FAIL, (x, y))
@@ -416,5 +451,6 @@ class MatchEngine:
         return _Restart(ev.THROW_IN, 1 - team, fx, 0.0 if fy < pitch.CENTRE_Y else pitch.WIDTH)
 
 
-def simulate(home: Club, away: Club, seed: int, params: Params = DEFAULT_PARAMS) -> ev.Match:
-    return MatchEngine(home, away, seed, params).play()
+def simulate(home: Club, away: Club, seed: int, params: Params = DEFAULT_PARAMS,
+             incidents: bool = True) -> ev.Match:
+    return MatchEngine(home, away, seed, params, incidents).play()

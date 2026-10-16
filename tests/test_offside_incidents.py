@@ -22,7 +22,7 @@ def plans_for(seeds):
     clubs = league()
     out = []
     for home, away, seed in fixtures(seeds):
-        match = simulate(clubs[home], clubs[away], seed)
+        match = simulate(clubs[home], clubs[away], seed, incidents=False)
         for i, e in enumerate(match.events):
             if e.type != ev.SHOT or e.result != ev.GOAL or e.detail == "penalty":
                 continue
