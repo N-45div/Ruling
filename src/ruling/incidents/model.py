@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 
 from ..sim import pitch
 
@@ -69,3 +69,50 @@ class OffsideSituation:
 
     def opponents(self) -> list[Body]:
         return [b for b in self.bodies if b.team != self.attacking_team]
+
+
+@dataclass(frozen=True, slots=True)
+class Incident:
+    """A VAR-reviewable moment with its known correct outcome.
+
+    `scenario`, `law_decision`, `ruling` and the review outcome are ground truth: the
+    evaluation hides them from the desk, which sees only the match up to the check, the
+    situation and the on-field decision.
+    """
+
+    id: str
+    match_id: str
+    category: str
+    scenario: str
+    period: int
+    second: float
+    team: str  # the team whose goal is under review
+    shot_index: int  # the event under review
+    key_index: int  # the moment the decision turns on, e.g. the team-mate's pass
+    subjective: bool
+    clear_and_obvious: bool
+    on_field: str
+    law_decision: str
+    var_review: str
+    final: str
+    announced: bool
+    situation: OffsideSituation
+    ruling: dict  # the category's ruling, e.g. an OffsideRuling as a dict
+
+
+def incident_to_dict(incident: Incident) -> dict:
+    data = asdict(incident)
+    data["situation"]["bodies"] = [
+        {**b, "parts": {k: list(v) for k, v in b["parts"].items()}} for b in data["situation"]["bodies"]
+    ]
+    return data
+
+
+def incident_from_dict(data: dict) -> Incident:
+    s = dict(data["situation"])
+    s["ball"] = tuple(s["ball"])
+    s["bodies"] = tuple(
+        Body(b["player"], b["team"], b["shirt"], b["role"], {k: tuple(v) for k, v in b["parts"].items()})
+        for b in s["bodies"]
+    )
+    return Incident(**{**data, "situation": OffsideSituation(**s)})
