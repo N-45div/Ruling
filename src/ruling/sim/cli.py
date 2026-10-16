@@ -5,7 +5,8 @@
     ruling-sim generate held-out --confirm-held-out   # seeds 9001-9020, evaluation only
     ruling-sim summary 5001            # one match, printed
 
-Each match is written to <out>/<set>/<match id>/ as events.jsonl plus match.json.
+Each match is written to <out>/<set>/<match id>/ as events.jsonl, incidents.jsonl and match.json.
+Incidents carry ground truth: the evaluation must not show those fields to the desk.
 """
 
 from __future__ import annotations
@@ -14,6 +15,7 @@ import argparse
 import json
 from pathlib import Path
 
+from ..incidents.model import incident_to_dict
 from .calibration import fixtures
 from .clubs import league
 from .engine import simulate
@@ -35,12 +37,16 @@ def match_for_seed(seed: int) -> Match:
 def write_match(match: Match, folder: Path) -> None:
     folder.mkdir(parents=True, exist_ok=True)
     write_events(folder / "events.jsonl", match.events)
+    with (folder / "incidents.jsonl").open("w", encoding="utf-8") as fh:
+        for incident in match.incidents:
+            fh.write(json.dumps(incident_to_dict(incident), separators=(",", ":")) + "\n")
     home_goals, away_goals = match.score()
     meta = {
         "id": match.id, "seed": match.seed, "home": match.home, "away": match.away,
         "score": [home_goals, away_goals],
         "home_lineup": match.home_lineup, "away_lineup": match.away_lineup,
         "events": len(match.events),
+        "incidents": len(match.incidents),
     }
     (folder / "match.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
 
@@ -60,10 +66,17 @@ def _summary(args: argparse.Namespace) -> None:
     clubs = league()
     home_goals, away_goals = match.score()
     print(f"{clubs[match.home].name} {home_goals}-{away_goals} {clubs[match.away].name}  ({match.id})")
+    incidents = {i.shot_index: i for i in match.incidents}
     for e in match.events:
-        if e.result == "goal" or e.type in ("card", "penalty", "offside"):
+        if e.result == "goal" or e.type in ("card", "penalty", "offside", "var_decision"):
             who = clubs[e.team].player(e.player).name if e.player else e.team
-            print(f"  {e.clock:>8}  {e.type:8} {e.result:13} {who} ({e.team})")
+            line = f"  {e.clock:>8}  {e.type:12} {e.result:13} {who} ({e.team})"
+            if e.type == "var_decision":
+                incident = incidents[int(e.detail.split("shot:")[1])]
+                ruling = incident.ruling
+                margin = f", {ruling['margin_m'] * 100:+.0f} cm" if ruling.get("margin_m") is not None else ""
+                line += f"  [{e.detail.split('|')[0]}: Law {ruling['clause']} {ruling['reason']}{margin}]"
+            print(line)
 
 
 def main(argv: list[str] | None = None) -> None:

@@ -26,3 +26,5 @@ def test_generate_writes_events_and_metadata(tmp_path):
     meta = json.loads((folders[0] / "match.json").read_text(encoding="utf-8"))
     events = list(read_events(folders[0] / "events.jsonl"))
     assert meta["events"] == len(events) and meta["seed"] in SETS["dev"]
+    incidents = (folders[0] / "incidents.jsonl").read_text(encoding="utf-8").splitlines()
+    assert len(incidents) == meta["incidents"]
