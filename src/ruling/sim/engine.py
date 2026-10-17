@@ -16,11 +16,13 @@ import math
 import random
 from dataclasses import dataclass, field
 
-from ..incidents.offside import GoalPlan, OffsidePlanner, make_incident
-from ..laws import var
+from ..incidents.offside import OffsidePlanner
 from . import events as ev
 from . import pitch
 from .clubs import ROLE_DEF, ROLE_FWD, ROLE_GK, ROLE_MID, Club, Player
+from .flow import DEAD_TIME as _DEAD_TIME
+from .flow import Restart as _Restart
+from .reviews import VarReviews
 
 SUBSTITUTION = "substitution"
 
@@ -55,13 +57,6 @@ class Params:
 
 DEFAULT_PARAMS = Params()
 
-# Range of seconds the ball is dead before each restart.
-_DEAD_TIME = {
-    ev.THROW_IN: (7, 16), ev.GOAL_KICK: (16, 30), ev.CORNER: (22, 40), ev.FREE_KICK: (16, 40),
-    ev.KICKOFF: (50, 85), ev.PENALTY: (60, 110), ev.OFFSIDE: (14, 28),
-}
-
-
 @dataclass
 class _Side:
     club: Club
@@ -80,15 +75,6 @@ class _Side:
         return rng.choices(pool, weights=w)[0]
 
 
-@dataclass(frozen=True)
-class _Restart:
-    kind: str  # an events restart type, or "regain" for open-play turnovers
-    team: int  # 0 = home, 1 = away
-    x: float  # attacking frame of `team`
-    y: float
-    detail: str | None = None
-
-
 def expected_goals(x: float, y: float, header: bool = False) -> float:
     """A simple location model: chance of a shot from (x, y), attacking frame, scoring.
 
@@ -100,7 +86,7 @@ def expected_goals(x: float, y: float, header: bool = False) -> float:
     return round(1 / (1 + math.exp(-logit)), 4)
 
 
-class MatchEngine:
+class MatchEngine(VarReviews):
     def __init__(self, home: Club, away: Club, seed: int, params: Params = DEFAULT_PARAMS,
                  incidents: bool = True):
         self.rng = random.Random(seed)
@@ -419,26 +405,6 @@ class MatchEngine:
         self._emit(team, shooter, ev.SHOT, ev.OFF_TARGET, (x, y), wide, xg=xg, body_part=part, detail=detail)
         self._tick(*_DEAD_TIME[ev.GOAL_KICK])
         return _Restart(ev.GOAL_KICK, 1 - team, 5.5, pitch.CENTRE_Y)
-
-    def _review_goal(self, team: int, plan: GoalPlan) -> _Restart:
-        """Flag (if given), VAR check and decision for the goal just recorded, then the right restart."""
-        shot_index = len(self.match.events) - 1
-        side = self.sides[team]
-        assessed = side.club.player(plan.situation.attacker)
-        offence = pitch.to_absolute(*plan.offence_point, side.attacks_right(self.period))  # into team's frame
-        if plan.on_field == var.NO_GOAL:
-            self._emit(team, assessed, ev.OFFSIDE, ev.FAIL, offence, detail="flag")
-        self._tick(*{var.CHECK_COMPLETE: (5, 25), var.VAR_OVERTURN: (60, 150),
-                     var.ON_FIELD_REVIEW: (90, 200)}[plan.outcome.review])
-        self._emit(team, assessed, ev.VAR_CHECK, ev.SUCCESS, offence, detail="offside")
-        result = ev.GOAL if plan.outcome.final == var.GOAL else ev.NO_GOAL
-        self._emit(team, None, ev.VAR_DECISION, result, offence, detail=f"{plan.outcome.review}|shot:{shot_index}")
-        self.match.incidents.append(make_incident(self.match, plan, shot_index))
-        if plan.outcome.final == var.GOAL:
-            self._tick(*_DEAD_TIME[ev.KICKOFF])
-            return _Restart(ev.KICKOFF, 1 - team, pitch.HALFWAY_X, pitch.CENTRE_Y)
-        self._tick(*_DEAD_TIME[ev.FREE_KICK])
-        return _Restart(ev.FREE_KICK, 1 - team, *pitch.flip(*offence), detail="offside")
 
     def _out_of_play(self, team: int, x: float, y: float) -> _Restart:
         """Restart for the opponent after `team` put the ball out at (x, y), attacking frame."""
