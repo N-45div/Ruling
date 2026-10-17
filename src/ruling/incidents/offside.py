@@ -26,10 +26,10 @@ from .bodies import capture, freeze, front, place_front, shift
 SCENARIOS: dict[str, tuple[float, float]] = {
     "clear_onside": (0.62, 0.99),
     "tight_onside": (0.10, 0.70),
-    "tight_offside": (0.05, 0.40),
-    "clear_offside": (0.015, 0.95),
+    "tight_offside": (0.035, 0.40),
+    "clear_offside": (0.01, 0.95),
     "arm_beyond": (0.05, 0.75),
-    "teammate_blocks_view": (0.02, 0.55),
+    "teammate_blocks_view": (0.015, 0.55),
     "teammate_marginal_view": (0.02, 0.50),
     "teammate_not_involved": (0.05, 0.85),
     "deliberate_play_reset": (0.03, 0.70),

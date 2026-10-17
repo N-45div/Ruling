@@ -16,6 +16,7 @@ import math
 import random
 from dataclasses import dataclass, field
 
+from ..incidents.fouls import FoulPlanner
 from ..incidents.offside import OffsidePlanner
 from . import events as ev
 from . import pitch
@@ -41,10 +42,10 @@ class Params:
     cross_success: float = 0.24
     cross_cleared_for_corner: float = 0.44  # share of cleared crosses that go behind
     carry_loss: float = 0.10
-    shot_appetite: float = 0.48  # multiplies xG to give the per-action shot weight
+    shot_appetite: float = 0.58  # multiplies xG to give the per-action shot weight
     long_shot_weight: float = 0.14  # baseline shot weight within 32 m of goal
     pass_preference: float = 1.7  # weight of a short pass relative to other actions
-    cautioned_restraint: float = 0.5  # a cautioned player fouls, and is booked, less often
+    cautioned_restraint: float = 0.3  # a cautioned player fouls, and is booked, less often
     foul_on_tackle: float = 0.60
     foul_in_box_factor: float = 0.12  # defenders foul far less inside their own area
     handball_share: float = 0.05
@@ -53,9 +54,16 @@ class Params:
     offside_rate: float = 0.04  # forward passes into the final third flagged offside
     stoppage_first: tuple[int, int] = (60, 300)
     stoppage_second: tuple[int, int] = (150, 480)
+    # VAR-checked incidents (used only when incidents are on)
+    penalty_claim_rate: float = 0.14  # duels near the area that become penalty claims
+    red_check_rate: float = 0.007  # other duels that become possible sending-offs
+    handball_block_rate: float = 0.045  # blocked shots that strike an arm
+    handball_cross_rate: float = 0.012  # cleared crosses that strike an arm
+    handball_goal_rate: float = 0.12  # goals with no real offside question that follow an attacker's touch
 
 
 DEFAULT_PARAMS = Params()
+
 
 @dataclass
 class _Side:
@@ -91,8 +99,10 @@ class MatchEngine(VarReviews):
                  incidents: bool = True):
         self.rng = random.Random(seed)
         self.params = params
-        # Plans the offside question behind each goal; it has its own random stream.
+        # Incident planners and the triggers that call them have their own random streams.
         self.offside = OffsidePlanner(seed) if incidents else None
+        self.fouls = FoulPlanner(seed) if incidents else None
+        self.irng = random.Random(f"triggers:{seed}")
         self.match = ev.Match(id=f"{home.code}-{away.code}-{seed}", seed=seed, home=home.code, away=away.code)
         self.sides = (self._side(home, True), self._side(away, False))
         self.match.home_lineup = [p.id for p in home.starters]
@@ -297,6 +307,15 @@ class MatchEngine(VarReviews):
         rng, p = self.rng, self.params
         opp = self.sides[1 - team]
         defender = self._defender(opp, x)
+        if self.fouls:
+            if x >= 84 and abs(y - pitch.CENTRE_Y) <= 24:
+                if self.irng.random() < p.penalty_claim_rate:
+                    return self._penalty_claim(team, carrier, defender, x, y)
+                # Every penalty is a VAR-checked claim; other duels by the area are clean tackles.
+                self._emit(1 - team, defender, ev.TACKLE, ev.SUCCESS, pitch.flip(x, y))
+                return _Restart("regain", 1 - team, *pitch.flip(x, y))
+            if self.irng.random() < p.red_check_rate:
+                return self._red_check(team, carrier, defender, x, y)
         foul_chance = p.foul_on_tackle * (0.6 + defender.aggression)
         if defender.id in opp.cautioned:
             foul_chance *= p.cautioned_restraint
@@ -313,7 +332,8 @@ class MatchEngine(VarReviews):
             ("trip", "trip", "push", "holding", "tackle", "charge", "kick"))
         self._emit(1 - team, offender, ev.FOUL, ev.FAIL, pitch.flip(x, y), detail=kind, receiver=fouled.id)
         roll = rng.random()
-        excessive = p.excessive_share * (0.5 + offender.aggression)
+        # With incidents on, every straight red goes through a VAR-checked red-card incident.
+        excessive = 0.0 if self.fouls else p.excessive_share * (0.5 + offender.aggression)
         reckless = p.reckless_share * (0.5 + offender.aggression)
         if offender.id in self.sides[1 - team].cautioned:
             reckless *= p.cautioned_restraint
@@ -358,8 +378,12 @@ class MatchEngine(VarReviews):
         if rng.random() < self.params.cross_cleared_for_corner:
             corner_y = 0.0 if ty < pitch.CENTRE_Y else pitch.WIDTH
             self._tick(*_DEAD_TIME[ev.CORNER])
-            return _Restart(ev.CORNER, team, pitch.LENGTH, corner_y)
-        return _Restart("regain", 1 - team, *pitch.flip(rng.uniform(20, 45), rng.uniform(5, 63)))
+            otherwise = _Restart(ev.CORNER, team, pitch.LENGTH, corner_y)
+        else:
+            otherwise = _Restart("regain", 1 - team, *pitch.flip(rng.uniform(20, 45), rng.uniform(5, 63)))
+        if self.fouls and self.irng.random() < self.params.handball_cross_rate:
+            return self._handball_claim(team, clearer, tx, ty, otherwise)
+        return otherwise
 
     def _shot(self, team: int, shooter: Player, x: float, y: float, header: bool = False,
               xg: float | None = None, detail: str | None = None) -> _Restart:
@@ -378,9 +402,17 @@ class MatchEngine(VarReviews):
                 defender = self.sides[1 - team].club.player(defender_id)
                 frame_xy = pitch.to_absolute(*position, self.sides[1 - team].attacks_right(self.period))
                 self._emit(1 - team, defender, ev.CLEARANCE, ev.FAIL, frame_xy, detail=touch)
+            handball = None
+            no_offside_question = plan is None or plan.scenario == "clear_onside"
+            if (no_offside_question and self.fouls and detail != "penalty"
+                    and self.irng.random() < self.params.handball_goal_rate):
+                handball = self.fouls.handball_goal(self.match, self.sides[team].club.code, shooter.id, (x, y))
+                plan = None  # the check that matters for this goal is the handball
             self._emit(team, shooter, ev.SHOT, ev.GOAL, (x, y), goal_mouth, xg=xg, body_part=part, detail=detail)
             if plan:
                 return self._review_goal(team, plan)
+            if handball:
+                return self._review_handball_goal(team, shooter, handball)
             self._tick(*_DEAD_TIME[ev.KICKOFF])
             return _Restart(ev.KICKOFF, 1 - team, pitch.HALFWAY_X, pitch.CENTRE_Y)
         opp = self.sides[1 - team]
@@ -391,8 +423,13 @@ class MatchEngine(VarReviews):
             self._emit(1 - team, blocker, ev.CLEARANCE, ev.SUCCESS, pitch.flip(x, y), detail="block")
             if rng.random() < 0.4:
                 self._tick(*_DEAD_TIME[ev.CORNER])
-                return _Restart(ev.CORNER, team, pitch.LENGTH, rng.choice((0.0, pitch.WIDTH)))
-            return _Restart("regain", 1 - team, *pitch.flip(x, y))
+                otherwise = _Restart(ev.CORNER, team, pitch.LENGTH, rng.choice((0.0, pitch.WIDTH)))
+            else:
+                otherwise = _Restart("regain", 1 - team, *pitch.flip(x, y))
+            if self.fouls and x >= 80 and self.irng.random() < self.params.handball_block_rate:
+                block_xy = (x + (pitch.LENGTH - x) * 0.3, y + (pitch.CENTRE_Y - y) * 0.3)
+                return self._handball_claim(team, blocker, *block_xy, otherwise)
+            return otherwise
         if roll < 0.62:
             keeper = opp.pick({ROLE_GK: 1.0}, rng)
             self._emit(team, shooter, ev.SHOT, ev.SAVED, (x, y), goal_mouth, xg=xg, body_part=part, detail=detail)

@@ -37,13 +37,14 @@ GOAL_KICK = "goal_kick"
 CORNER = "corner"
 FREE_KICK = "free_kick"
 PENALTY = "penalty"
+DROPPED_BALL = "dropped_ball"
 PERIOD_START = "period_start"
 PERIOD_END = "period_end"
 # Video review: a check on an event, then the decision ("<review>|shot:<index>" in detail)
 VAR_CHECK = "var_check"
 VAR_DECISION = "var_decision"
 
-RESTARTS = frozenset({KICKOFF, THROW_IN, GOAL_KICK, CORNER, FREE_KICK, PENALTY})
+RESTARTS = frozenset({KICKOFF, THROW_IN, GOAL_KICK, CORNER, FREE_KICK, PENALTY, DROPPED_BALL})
 
 # Results
 SUCCESS = "success"

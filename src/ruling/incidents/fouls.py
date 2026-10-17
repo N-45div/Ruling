@@ -23,39 +23,39 @@ from .bodies import capture, freeze, move_torso
 
 # scenario: (weight, chance the on-field call matches the Law, clear and obvious if wrong)
 PENALTY_CLAIMS = {
-    "clear_foul_inside": (0.14, 0.85, True),
+    "clear_foul_inside": (0.07, 0.85, True),
     "clear_foul_outside": (0.10, 0.90, True),
-    "line_contact_inside": (0.07, 0.55, True),
+    "line_contact_inside": (0.04, 0.55, True),
     "line_contact_outside": (0.07, 0.55, True),
-    "played_ball_first": (0.16, 0.75, True),
-    "attacker_initiated": (0.10, 0.70, True),
-    "no_contact_dive": (0.08, 0.85, True),
-    "holding": (0.12, 0.55, True),
-    "marginal_contact": (0.16, 0.50, False),
+    "played_ball_first": (0.22, 0.75, True),
+    "attacker_initiated": (0.15, 0.70, True),
+    "no_contact_dive": (0.12, 0.85, True),
+    "holding": (0.07, 0.55, True),
+    "marginal_contact": (0.12, 0.50, False),
 }
 HANDBALL_CLAIMS = {
-    "arm_extended_unjustified": (0.20, 0.60, True),
-    "arm_natural_close": (0.20, 0.85, True),
-    "off_own_body": (0.12, 0.70, True),
+    "arm_extended_unjustified": (0.12, 0.60, True),
+    "arm_natural_close": (0.26, 0.85, True),
+    "off_own_body": (0.14, 0.70, True),
     "supporting_arm": (0.10, 0.75, True),
-    "deliberate_reach": (0.08, 0.80, True),
-    "above_shoulder_justified": (0.12, 0.60, True),
+    "deliberate_reach": (0.04, 0.80, True),
+    "above_shoulder_justified": (0.16, 0.60, True),
     "marginal_arm": (0.18, 0.50, False),
 }
 HANDBALL_GOALS = {
-    "scorer_arm_before_goal": (0.45, 0.50, True),
-    "team_mate_accidental": (0.55, 0.85, True),
+    "scorer_arm_before_goal": (0.30, 0.50, True),
+    "team_mate_accidental": (0.70, 0.85, True),
 }
 RED_CARDS = {
-    "sfp_excessive": (0.12, 0.55, True),
-    "reckless_not_red": (0.18, 0.85, True),
+    "sfp_excessive": (0.10, 0.55, True),
+    "reckless_not_red": (0.26, 0.85, True),
     "borderline_sfp": (0.10, 0.50, False),
-    "violent_conduct_missed": (0.06, 0.30, True),
-    "dogso_clear": (0.12, 0.70, True),
+    "violent_conduct_missed": (0.03, 0.30, True),
+    "dogso_clear": (0.10, 0.70, True),
     "dogso_covering_defender": (0.14, 0.65, True),
     "dogso_wide_angle": (0.10, 0.75, True),
     "dogso_in_area_attempt": (0.10, 0.60, True),
-    "dogso_in_area_holding": (0.08, 0.55, True),
+    "dogso_in_area_holding": (0.07, 0.55, True),
 }
 _DOGSO = frozenset(s for s in RED_CARDS if s.startswith("dogso"))
 _AREA_X = pitch.LENGTH - pitch.PENALTY_AREA_DEPTH
