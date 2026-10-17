@@ -66,6 +66,66 @@ CLAUSES: dict[str, Clause] = {c.id: c for c in (
         f"{_IFAB}/offside/",
     ),
     Clause(
+        "12.1", "Law 12 Fouls and misconduct", "Direct free kick offences",
+        "A direct free kick is awarded when a player charges, jumps at, kicks, pushes, strikes, "
+        "tackles or trips an opponent (or attempts to) in a way the referee considers careless, "
+        "reckless or using excessive force, or holds or impedes an opponent with contact.",
+        (
+            "Careless: a lack of attention or consideration, or acting without precaution. No card.",
+            "Reckless: acting with disregard for the danger to, or consequences for, the opponent. A caution.",
+            "Using excessive force: far exceeding the necessary force and endangering the opponent. A sending-off.",
+            "Contact offences are penalised where the contact happens.",
+        ),
+        f"{_IFAB}/fouls-and-misconduct/",
+    ),
+    Clause(
+        "12.1-handball", "Law 12 Fouls and misconduct", "Handling the ball",
+        "It is an offence if a player deliberately touches the ball with the hand or arm, touches it "
+        "with a hand or arm that has made the body unnaturally bigger, or scores in the opponents' goal "
+        "directly from the hand or arm or immediately after the ball touched it, even accidentally.",
+        (
+            "The arm starts at the bottom of the armpit.",
+            "Unnaturally bigger: the arm's position is not a consequence of, or justifiable by, the body's movement in that situation.",
+            "There is no automatic offence for an arm above the shoulder; that wording was removed in 2022/23.",
+            "An accidental touch by an attacker that is followed by a team-mate scoring is not an offence.",
+        ),
+        f"{_IFAB}/fouls-and-misconduct/",
+    ),
+    Clause(
+        "12.3-dogso", "Law 12 Fouls and misconduct", "Denying an obvious goal-scoring opportunity",
+        "A player is sent off for denying an obvious goal-scoring opportunity to an opponent whose "
+        "overall movement is towards the offender's goal, by an offence punishable by a free kick.",
+        (
+            "The referee considers the distance to goal, the general direction of play, the likelihood of keeping "
+            "or gaining control of the ball, and the location and number of defenders and attackers (attackers added in 2026/27).",
+            "Inside their own penalty area, when a penalty is awarded, the offender is cautioned instead if the offence "
+            "was an attempt to play or challenge for the ball; holding, pulling, pushing or having no possibility to play "
+            "the ball is still a sending-off.",
+        ),
+        f"{_IFAB}/fouls-and-misconduct/",
+    ),
+    Clause(
+        "12.3-sfp", "Law 12 Fouls and misconduct", "Serious foul play",
+        "A tackle or challenge that endangers the safety of an opponent or uses excessive force or "
+        "brutality is serious foul play and is punished with a sending-off.",
+        ("Lunging at an opponent from the front, side or behind with one or both legs, with excessive force or endangering safety, is serious foul play.",),
+        f"{_IFAB}/fouls-and-misconduct/",
+    ),
+    Clause(
+        "12.3-vc", "Law 12 Fouls and misconduct", "Violent conduct",
+        "Using or attempting excessive force or brutality against an opponent when not challenging "
+        "for the ball is violent conduct and is punished with a sending-off.",
+        ("Deliberately striking an opponent on the head or face with the hand or arm is violent conduct unless the force was negligible.",),
+        f"{_IFAB}/fouls-and-misconduct/",
+    ),
+    Clause(
+        "14", "Law 14 The penalty kick", "When a penalty kick is awarded",
+        "A penalty kick is awarded when a player commits a direct free kick offence inside their own "
+        "penalty area.",
+        ("The lines belong to the area they enclose: contact on the line is inside the penalty area.",),
+        f"{_IFAB}/the-penalty-kick/",
+    ),
+    Clause(
         "VAR.scope", "VAR protocol", "Reviewable decisions",
         "The video assistant referee may only assist with a clear and obvious error or a serious "
         "missed incident in four match-changing situations: goal or no goal, penalty or no penalty, "
