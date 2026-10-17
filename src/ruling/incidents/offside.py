@@ -20,6 +20,7 @@ from ..sim import pitch
 from ..sim.clubs import ROLE_FWD, ROLE_GK, ROLE_MID
 from ..sim.shape import frame_at
 from . import model as m
+from .bodies import capture, freeze, front, place_front, shift
 
 # scenario: (weight, chance the on-field call matches the Law)
 SCENARIOS: dict[str, tuple[float, float]] = {
@@ -65,39 +66,6 @@ def key_pass_index(events: list[ev.Event], team: str, shooter: str) -> int | Non
     return None
 
 
-def _pose(x: float, y: float, facing: float, rng: random.Random) -> dict[str, list[float]]:
-    """Body parts around a torso at (x, y), attacking frame. facing is +1 or -1 along x."""
-    lean = rng.uniform(-0.05, 0.15) * facing
-    front, back = rng.uniform(0.1, 0.55) * facing, -rng.uniform(0.1, 0.45) * facing
-    side = 1 if rng.random() < 0.5 else -1
-    return {
-        "torso": [x, y],
-        "head": [x + lean, y],
-        "left_shoulder": [x + lean * 0.8, y + 0.22],
-        "right_shoulder": [x + lean * 0.8, y - 0.22],
-        "left_knee": [x + (front if side > 0 else back) * 0.5, y + 0.12],
-        "right_knee": [x + (back if side > 0 else front) * 0.5, y - 0.12],
-        "left_foot": [x + (front if side > 0 else back), y + 0.15],
-        "right_foot": [x + (back if side > 0 else front), y - 0.15],
-        "left_arm": [x + rng.uniform(-0.3, 0.55) * facing, y + 0.35],
-        "right_arm": [x + rng.uniform(-0.3, 0.55) * facing, y - 0.35],
-    }
-
-
-def _front(parts: dict[str, list[float]], names: tuple[str, ...] = m.COUNTING_PARTS) -> float:
-    return max(parts[n][0] for n in names)
-
-
-def _shift(parts: dict[str, list[float]], dx: float, dy: float = 0.0) -> None:
-    for p in parts.values():
-        p[0] += dx
-        p[1] += dy
-
-
-def _place_front(parts: dict[str, list[float]], target: float) -> None:
-    _shift(parts, target - _front(parts))
-
-
 class OffsidePlanner:
     def __init__(self, seed: int):
         self.seed = seed
@@ -113,61 +81,51 @@ class OffsidePlanner:
         prev = match.events[key - 1] if key else None
         kick = _KICKS.get(prev.type, m.OPEN_PLAY) if prev and prev.player == key_event.player else m.OPEN_PLAY
 
-        frame = frame_at(match, key)
-        poses, info = {}, {}
-        for spot in frame.players:
-            ax, ay = pitch.to_absolute(spot.x, spot.y, right)  # absolute -> attacking frame (self-inverse)
-            facing = 1.0 if spot.team == team else -1.0
-            poses[spot.player] = _pose(ax, ay, facing, rng)
-            info[spot.player] = spot
+        poses, info = capture(frame_at(match, key), team, right, rng)
         ball_x = pitch.to_absolute(key_event.start_x, key_event.start_y, right)[0]
         defenders = [p for p, s in info.items() if s.team != team]
-        line_d = sorted((_front(poses[p]) for p in defenders), reverse=True)[1]
+        line_d = sorted((front(poses[p]) for p in defenders), reverse=True)[1]
         line = max(line_d, ball_x)
 
         scenario = self._choose(rng, kick, ball_x, line_d)
         assessed, involvement, intervening = shooter, m.PLAYED_BALL, None
         # Keep everyone else in the attacking team onside so only the planted question is open.
         for pid, s in info.items():
-            if s.team == team and pid not in (shooter, key_event.player) and _front(poses[pid]) > line - 0.1:
-                _place_front(poses[pid], line - rng.uniform(0.3, 3.0))
+            if s.team == team and pid not in (shooter, key_event.player) and front(poses[pid]) > line - 0.1:
+                place_front(poses[pid], line - rng.uniform(0.3, 3.0))
 
         scorer = poses[shooter]
         if scenario == "clear_onside":
-            _place_front(scorer, min(_front(scorer), line - rng.uniform(1.0, 6.0)))
+            place_front(scorer, min(front(scorer), line - rng.uniform(1.0, 6.0)))
         elif scenario == "tight_onside":
-            _place_front(scorer, line - rng.choice((0.0, rng.uniform(0.01, 0.25))))
+            place_front(scorer, line - rng.choice((0.0, rng.uniform(0.01, 0.25))))
         elif scenario == "tight_offside":
-            _place_front(scorer, line + rng.uniform(0.02, 0.25))
+            place_front(scorer, line + rng.uniform(0.02, 0.25))
         elif scenario in ("clear_offside", "deliberate_play_reset", "deflection_offside", "restart_exempt"):
-            _place_front(scorer, line + rng.uniform(0.6, 2.5))
+            place_front(scorer, line + rng.uniform(0.6, 2.5))
             if scenario == "deliberate_play_reset":
                 intervening = m.DELIBERATE_PLAY
             elif scenario == "deflection_offside":
                 intervening = m.DEFLECTION
         elif scenario == "arm_beyond":
-            _place_front(scorer, line - rng.uniform(0.02, 0.15))
+            place_front(scorer, line - rng.uniform(0.02, 0.15))
             arm = max(("left_arm", "right_arm"), key=lambda n: scorer[n][0])
             scorer[arm][0] = line + rng.uniform(0.05, 0.35)
         else:  # a team-mate in an offside position near or away from the goalkeeper's line of vision
-            _place_front(scorer, line - rng.uniform(0.3, 2.0))
+            place_front(scorer, line - rng.uniform(0.3, 2.0))
             assessed = self._teammate(info, team, (shooter, key_event.player), rng)
             mate = poses[assessed]
-            _place_front(mate, line + rng.uniform(0.6, 2.0))
+            place_front(mate, line + rng.uniform(0.6, 2.0))
             sight_y = _sight_line_y(shot_xy, mate["torso"][0])
             offset = {"teammate_blocks_view": rng.uniform(-0.5, 0.5),
                       "teammate_marginal_view": rng.choice((-1, 1)) * rng.uniform(1.8, 3.0),
                       "teammate_not_involved": rng.choice((-1, 1)) * rng.uniform(10.0, 16.0)}[scenario]
-            _shift(mate, 0.0, pitch.clamp(sight_y + offset, 1.0, pitch.WIDTH - 1.0) - mate["torso"][1])
+            shift(mate, 0.0, pitch.clamp(sight_y + offset, 1.0, pitch.WIDTH - 1.0) - mate["torso"][1])
             involvement = {"teammate_blocks_view": m.LINE_OF_VISION,
                            "teammate_marginal_view": rng.choice((m.LINE_OF_VISION, m.NOT_INVOLVED)),
                            "teammate_not_involved": m.NOT_INVOLVED}[scenario]
 
-        bodies = tuple(
-            m.Body(pid, s.team, s.shirt, s.role,
-                   {k: tuple(round(c, 3) for c in pitch.to_absolute(v[0], v[1], right)) for k, v in poses[pid].items()})
-            for pid, s in info.items()
-        )
+        bodies = freeze(poses, info, right)
         ball_abs = (key_event.start_x, key_event.start_y)
         situation = m.OffsideSituation(team, right, ball_abs, kick, key_event.player, assessed,
                                        involvement, intervening, bodies)
