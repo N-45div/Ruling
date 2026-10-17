@@ -61,3 +61,20 @@ All arms use the same model deployment and the same incident data.
 - the handball "arm above shoulder level" criterion and its listed exceptions, removed in 2022/23;
 - DOGSO considerations that omit the location and number of attackers, added in 2026/27;
 - treating a second caution as never reviewable, when a clearly wrong one is reviewable from 2026/27.
+
+**2. 2026-10-18, before any held-out match has been generated.**
+
+*Measured incident density.* The generator now plants five incident categories:
+- offside checks on goals
+- penalty claims
+- handball claims
+- handball before a goal
+- possible red cards
+
+On the development and precedent seeds only (5001-5020 and 1-120, 140 matches), it produces 4.09 VAR-reviewable incidents per match. Of those, 0.97 per match are contested: the on-field call differs from the Law, or the incident is borderline.
+
+*Change 1: a larger held-out set.* 20 held-out matches would give about 82 incidents, short of the 300 targeted above. The held-out set therefore becomes **seeds 9001-9080 (80 matches, about 327 incidents expected)**. The seeds were chosen before generation, and no held-out match exists yet.
+
+*Change 2: a contested breakdown.* Every metric will also be reported for the **contested subset**, because silent "check complete" incidents dominate the count and are easy for both arms.
+
+*Disclosure: planted error rates.* On-field error rates are planted per scenario and are higher than in real matches (the generator gives about 0.74 VAR interventions per match), so that the evaluation sees enough contested decisions. This is a design choice for the test, not a claim about real refereeing.
