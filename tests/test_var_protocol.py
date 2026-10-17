@@ -17,6 +17,11 @@ def test_a_wrong_subjective_call_goes_to_an_announced_on_field_review():
     assert outcome.review == ON_FIELD_REVIEW and outcome.final == NO_GOAL and outcome.announced
 
 
+def test_a_call_outside_the_var_scope_stands_even_if_wrong():
+    outcome = review("yellow", "no_card", subjective=True, reviewable=False)
+    assert outcome.review == CHECK_COMPLETE and outcome.final == "yellow"
+
+
 def test_a_subjective_call_that_is_wrong_but_not_clearly_wrong_stands():
     outcome = review(GOAL, NO_GOAL, subjective=True, clear_and_obvious=False)
     assert outcome.review == CHECK_COMPLETE and outcome.final == GOAL and not outcome.changed
