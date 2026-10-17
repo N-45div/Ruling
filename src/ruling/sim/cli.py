@@ -66,16 +66,18 @@ def _summary(args: argparse.Namespace) -> None:
     clubs = league()
     home_goals, away_goals = match.score()
     print(f"{clubs[match.home].name} {home_goals}-{away_goals} {clubs[match.away].name}  ({match.id})")
-    incidents = {i.event_index: i for i in match.incidents if i.category == "offside"}
+    incidents = {i.event_index: i for i in match.incidents}
     for e in match.events:
         if e.result == "goal" or e.type in ("card", "penalty", "offside", "var_decision"):
             who = clubs[e.team].player(e.player).name if e.player else e.team
             line = f"  {e.clock:>8}  {e.type:12} {e.result:13} {who} ({e.team})"
             if e.type == "var_decision":
-                incident = incidents[int(e.detail.split("shot:")[1])]
+                incident = incidents[int(e.detail.rsplit(":", 1)[1])]
                 ruling = incident.ruling
-                margin = f", {ruling['margin_m'] * 100:+.0f} cm" if ruling.get("margin_m") is not None else ""
-                line += f"  [{e.detail.split('|')[0]}: Law {ruling['clause']} {ruling['reason']}{margin}]"
+                margin = ruling.get("margin_m", ruling.get("area_margin_m"))
+                margin = f", {margin * 100:+.0f} cm" if margin is not None and abs(margin) < 3 else ""
+                line += (f"  [{incident.category}, on-field {incident.on_field}, {e.detail.split('|')[0]}:"
+                         f" Law {ruling['clause']} {ruling['reason']}{margin}]")
             print(line)
 
 
