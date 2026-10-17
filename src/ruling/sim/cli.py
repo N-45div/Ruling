@@ -2,7 +2,7 @@
 
     ruling-sim generate dev            # seeds 5001-5020, for development
     ruling-sim generate archive        # seeds 1-120, the precedent library
-    ruling-sim generate held-out --confirm-held-out   # seeds 9001-9020, evaluation only
+    ruling-sim generate held-out --confirm-held-out   # seeds 9001-9080, evaluation only
     ruling-sim summary 5001            # one match, printed
 
 Each match is written to <out>/<set>/<match id>/ as events.jsonl, incidents.jsonl and match.json.
@@ -24,7 +24,7 @@ from .events import Match, write_events
 SETS = {
     "dev": range(5001, 5021),
     "archive": range(1, 121),
-    "held-out": range(9001, 9021),
+    "held-out": range(9001, 9081),
 }
 
 

@@ -9,7 +9,7 @@ from ruling.sim.events import read_events
 def test_seed_sets_match_the_eval_plan_and_never_overlap():
     assert SETS["dev"] == range(5001, 5021)
     assert SETS["archive"] == range(1, 121)
-    assert SETS["held-out"] == range(9001, 9021)
+    assert SETS["held-out"] == range(9001, 9081)  # amendment 2 of docs/eval-plan.md
     seeds = [s for r in SETS.values() for s in r]
     assert len(seeds) == len(set(seeds))
 
