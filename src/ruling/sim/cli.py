@@ -66,7 +66,7 @@ def _summary(args: argparse.Namespace) -> None:
     clubs = league()
     home_goals, away_goals = match.score()
     print(f"{clubs[match.home].name} {home_goals}-{away_goals} {clubs[match.away].name}  ({match.id})")
-    incidents = {i.shot_index: i for i in match.incidents}
+    incidents = {i.event_index: i for i in match.incidents if i.category == "offside"}
     for e in match.events:
         if e.result == "goal" or e.type in ("card", "penalty", "offside", "var_decision"):
             who = clubs[e.team].player(e.player).name if e.player else e.team

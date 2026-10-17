@@ -225,7 +225,7 @@ def make_incident(match: ev.Match, plan: GoalPlan, shot_index: int) -> m.Inciden
     shot = match.events[shot_index]
     return m.Incident(
         id=f"{match.id}:{shot_index}:offside", match_id=match.id, category="offside", scenario=plan.scenario,
-        period=shot.period, second=shot.second, team=plan.situation.attacking_team, shot_index=shot_index,
+        period=shot.period, second=shot.second, team=plan.situation.attacking_team, event_index=shot_index,
         key_index=plan.key_index, subjective=plan.subjective, clear_and_obvious=plan.clear_and_obvious,
         on_field=plan.on_field, law_decision=var.NO_GOAL if plan.ruling.offside else var.GOAL,
         var_review=plan.outcome.review, final=plan.outcome.final, announced=plan.outcome.announced,

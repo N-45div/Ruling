@@ -71,6 +71,73 @@ class OffsideSituation:
         return [b for b in self.bodies if b.team != self.attacking_team]
 
 
+# Incident categories
+OFFSIDE = "offside"
+PENALTY_CLAIM = "penalty_claim"  # a challenge in or near the penalty area
+HANDBALL = "handball"  # the ball touches a defender's arm in their penalty area
+HANDBALL_GOAL = "handball_goal"  # the ball touches an attacker's arm before a goal
+RED_CARD = "red_card"  # a challenge that may deserve a sending-off
+
+
+@dataclass(frozen=True, slots=True)
+class Challenge:
+    """What a referee weighs in a challenge, as read from tracking and contact data."""
+
+    action: str  # tackle | trip | push | holding | charge | kick | strike
+    contact: bool
+    played_ball_first: bool
+    attempt_to_play_ball: bool
+    attacker_initiated: bool  # the attacker sought or created the contact
+    studs_up: bool
+    lunge: bool
+    off_ground: bool  # one or both feet off the ground into the challenge
+    late_s: float  # seconds after the ball had gone (0 if on time)
+    speed_mps: float
+    contact_height: str  # none | foot | ankle | shin | knee | thigh | upper_body | head
+
+
+@dataclass(frozen=True, slots=True)
+class HandballFacts:
+    arm_away_m: float  # distance of the hand from the side of the body
+    above_shoulder: bool
+    moved_towards_ball: bool
+    justified_by_movement: bool  # the arm position follows from the body's movement for that situation
+    supporting_arm: bool  # the arm is on the ground supporting a fall
+    off_own_body: bool  # the ball came off the player's own body or head first
+    distance_m: float  # how far the ball travelled to the arm
+    by_attacker: bool
+    scorer: bool  # the attacker scored
+    immediately_before_goal: bool
+    goal_bound: bool  # the ball was heading into the goal
+
+
+@dataclass(frozen=True, slots=True)
+class DogsoFacts:
+    distance_m: float  # from the offence to the centre of the goal
+    towards_goal: bool  # the attacker's overall movement is towards the goal
+    angle_deg: float  # between the attacker's direction and the line to goal
+    control: str  # likely | unlikely: keeping or gaining control of the ball
+    defenders_able: int  # defenders, besides the offender, able to intervene
+    attackers_support: int  # other attackers in a position to continue the attack
+
+
+@dataclass(frozen=True, slots=True)
+class FoulSituation:
+    kind: str  # the incident category
+    attacking_team: str  # the team in possession
+    attacks_right: bool
+    offender: str
+    victim: str | None
+    point: tuple[float, float]  # absolute: the contact point, or where the ball touched the arm
+    challenge: Challenge | None
+    handball: HandballFacts | None
+    dogso: DogsoFacts | None
+    bodies: tuple[Body, ...]
+
+    def body(self, player: str) -> Body:
+        return next(b for b in self.bodies if b.player == player)
+
+
 @dataclass(frozen=True, slots=True)
 class Incident:
     """A VAR-reviewable moment with its known correct outcome.
@@ -86,8 +153,8 @@ class Incident:
     scenario: str
     period: int
     second: float
-    team: str  # the team whose goal is under review
-    shot_index: int  # the event under review
+    team: str  # the team in possession whose goal or claim is under review
+    event_index: int  # the event under review (the goal, the challenge, the handball)
     key_index: int  # the moment the decision turns on, e.g. the team-mate's pass
     subjective: bool
     clear_and_obvious: bool
@@ -96,8 +163,8 @@ class Incident:
     var_review: str
     final: str
     announced: bool
-    situation: OffsideSituation
-    ruling: dict  # the category's ruling, e.g. an OffsideRuling as a dict
+    situation: OffsideSituation | FoulSituation
+    ruling: dict  # the category's ruling as a dict
 
 
 def incident_to_dict(incident: Incident) -> dict:
@@ -110,9 +177,16 @@ def incident_to_dict(incident: Incident) -> dict:
 
 def incident_from_dict(data: dict) -> Incident:
     s = dict(data["situation"])
-    s["ball"] = tuple(s["ball"])
     s["bodies"] = tuple(
         Body(b["player"], b["team"], b["shirt"], b["role"], {k: tuple(v) for k, v in b["parts"].items()})
         for b in s["bodies"]
     )
-    return Incident(**{**data, "situation": OffsideSituation(**s)})
+    if data["category"] == OFFSIDE:
+        s["ball"] = tuple(s["ball"])
+        situation = OffsideSituation(**s)
+    else:
+        s["point"] = tuple(s["point"])
+        for key, cls in (("challenge", Challenge), ("handball", HandballFacts), ("dogso", DogsoFacts)):
+            s[key] = cls(**s[key]) if s[key] else None
+        situation = FoulSituation(**s)
+    return Incident(**{**data, "situation": situation})

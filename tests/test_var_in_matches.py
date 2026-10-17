@@ -16,9 +16,9 @@ def matches():
 def test_each_incident_points_at_a_goal_and_is_followed_by_a_check_and_a_decision(matches):
     for match in matches:
         for incident in match.incidents:
-            shot = match.events[incident.shot_index]
+            shot = match.events[incident.event_index]
             assert shot.type == ev.SHOT and shot.result == ev.GOAL
-            after = match.events[incident.shot_index + 1:incident.shot_index + 4]
+            after = match.events[incident.event_index + 1:incident.event_index + 4]
             kinds = [e.type for e in after]
             assert ev.VAR_CHECK in kinds and ev.VAR_DECISION in kinds
 
@@ -26,7 +26,7 @@ def test_each_incident_points_at_a_goal_and_is_followed_by_a_check_and_a_decisio
 def test_the_flag_goes_up_only_when_the_on_field_call_was_offside(matches):
     for match in matches:
         for incident in match.incidents:
-            next_event = match.events[incident.shot_index + 1]
+            next_event = match.events[incident.event_index + 1]
             flagged = next_event.type == ev.OFFSIDE and next_event.detail == "flag"
             assert flagged == (incident.on_field == var.NO_GOAL)
 
@@ -34,10 +34,10 @@ def test_the_flag_goes_up_only_when_the_on_field_call_was_offside(matches):
 def test_the_recorded_decision_matches_the_incident_and_the_score(matches):
     for match in matches:
         for incident in match.incidents:
-            decision = next(e for e in match.events[incident.shot_index:] if e.type == ev.VAR_DECISION)
+            decision = next(e for e in match.events[incident.event_index:] if e.type == ev.VAR_DECISION)
             assert decision.result == (ev.GOAL if incident.final == var.GOAL else ev.NO_GOAL)
-            assert decision.detail == f"{incident.var_review}|shot:{incident.shot_index}"
-            stands = incident.shot_index not in match.disallowed()
+            assert decision.detail == f"{incident.var_review}|shot:{incident.event_index}"
+            stands = incident.event_index not in match.disallowed()
             assert stands == (incident.final == var.GOAL)
 
 
