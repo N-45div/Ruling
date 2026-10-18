@@ -113,12 +113,15 @@ class OffsidePlanner:
             place_front(scorer, line - rng.uniform(0.3, 2.0))
             assessed = self._teammate(info, team, (shooter, key_event.player), rng)
             mate = poses[assessed]
-            place_front(mate, line + rng.uniform(0.6, 2.0))
-            sight_y = _sight_line_y(shot_xy, mate["torso"][0])
+            # Beyond the offside line at the pass, and between the shot and the goal when it is struck.
+            target = max(line + rng.uniform(0.6, 2.0), shot_xy[0] + rng.uniform(1.0, 3.0))
+            place_front(mate, min(target, pitch.LENGTH - 0.5))
+            sight_y, cos_angle = _sight_line(shot_xy, mate["torso"][0])
+            # Distance from the line of sight, measured perpendicular to it.
             offset = {"teammate_blocks_view": rng.uniform(-0.5, 0.5),
                       "teammate_marginal_view": rng.choice((-1, 1)) * rng.uniform(1.8, 3.0),
                       "teammate_not_involved": rng.choice((-1, 1)) * rng.uniform(10.0, 16.0)}[scenario]
-            shift(mate, 0.0, pitch.clamp(sight_y + offset, 1.0, pitch.WIDTH - 1.0) - mate["torso"][1])
+            shift(mate, 0.0, pitch.clamp(sight_y + offset / cos_angle, 1.0, pitch.WIDTH - 1.0) - mate["torso"][1])
             involvement = {"teammate_blocks_view": m.LINE_OF_VISION,
                            "teammate_marginal_view": rng.choice((m.LINE_OF_VISION, m.NOT_INVOLVED)),
                            "teammate_not_involved": m.NOT_INVOLVED}[scenario]
@@ -165,13 +168,15 @@ class OffsidePlanner:
         return rng.choice(pool)
 
 
-def _sight_line_y(shot_xy: tuple[float, float], x: float) -> float:
-    """y of the line from the shot to the centre of the goal, at x (attacking frame)."""
+def _sight_line(shot_xy: tuple[float, float], x: float) -> tuple[float, float]:
+    """y of the line from the shot to the centre of the goal at x (attacking frame), and the
+    cosine of that line's angle to the goal line's normal (to turn perpendicular offsets into y)."""
     sx, sy = shot_xy
-    if pitch.LENGTH - sx < 1e-6:
-        return pitch.CENTRE_Y
-    t = (x - sx) / (pitch.LENGTH - sx)
-    return sy + (pitch.CENTRE_Y - sy) * pitch.clamp(t, 0.0, 1.0)
+    dx, dy = pitch.LENGTH - sx, pitch.CENTRE_Y - sy
+    if dx < 1e-6:
+        return pitch.CENTRE_Y, 1.0
+    t = pitch.clamp((x - sx) / dx, 0.0, 1.0)
+    return sy + dy * t, max(0.2, dx / math.hypot(dx, dy))
 
 
 def _distance(a, b) -> float:

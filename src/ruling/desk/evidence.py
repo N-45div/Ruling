@@ -63,15 +63,14 @@ def _name(packet: CheckPacket, pid: str | None) -> str:
 
 
 def _sight_distance(packet: CheckPacket, s: m.OffsideSituation) -> float | None:
-    """Distance of the assessed attacker from the line between the shot and the goal (attacking frame)."""
+    """Distance of the assessed attacker from the segment between the shot and the goal (attacking frame)."""
     if packet.event["type"] != "shot":
         return None
     sx, sy = pitch.to_absolute(*packet.event["start"], s.attacks_right)
     ax, ay = pitch.to_absolute(*s.body(s.attacker).torso, s.attacks_right)
-    gx, gy = pitch.LENGTH, pitch.CENTRE_Y
-    dx, dy = gx - sx, gy - sy
-    length = math.hypot(dx, dy) or 1.0
-    return round(abs(dy * (ax - sx) - dx * (ay - sy)) / length, 2)
+    dx, dy = pitch.LENGTH - sx, pitch.CENTRE_Y - sy
+    t = pitch.clamp(((ax - sx) * dx + (ay - sy) * dy) / ((dx * dx + dy * dy) or 1.0), 0.0, 1.0)
+    return round(math.hypot(ax - (sx + t * dx), ay - (sy + t * dy)), 2)
 
 
 def distance_words(metres: float) -> str:
