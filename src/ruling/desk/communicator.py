@@ -19,7 +19,9 @@ INSTRUCTIONS = (
     f"The Laws of the Game {EDITION} apply. Use only the facts and the Law summary you are given: "
     "do not add positions, distances, intentions or rules that are not in them. "
     "Say what was decided and why, in plain words, in at most 60 words. "
-    "Name players as they appear in the facts. Never criticise the referee."
+    "Name players as they appear in the facts and refer to them by name or role, not by pronoun. "
+    "The facts come from tracking data: never say that video or a replay shows anything. "
+    "Never criticise the referee."
 )
 
 _DECISIONS = {
