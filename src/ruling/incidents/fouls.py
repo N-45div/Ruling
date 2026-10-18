@@ -208,9 +208,9 @@ class FoulPlanner:
             on_field = truth
         else:
             on_field = _wrong(category, scenario, truth, rng)
-        reviewable = _reviewable(category, on_field, truth)
-        subjective = _subjective(category, scenario, on_field, truth)
-        outcome = var.review(on_field, truth, subjective, clear, reviewable=reviewable)
+        kind = var.classify(category, on_field, truth, ruling.reason)
+        subjective = kind.subjective
+        outcome = var.review(on_field, truth, subjective, clear, reviewable=kind.reviewable)
         final_card = ruling.card if outcome.final in (law.PENALTY, law.FREE_KICK) else law.NO_CARD
         if category == m.RED_CARD:
             final_card = outcome.final
@@ -279,22 +279,3 @@ def _wrong(category: str, scenario: str, truth: str, rng: random.Random) -> str:
     if truth == law.RED:
         return law.NO_CARD if scenario == "violent_conduct_missed" else law.YELLOW
     return law.RED
-
-
-def _reviewable(category: str, on_field: str, truth: str) -> bool:
-    if category in (m.PENALTY_CLAIM, m.HANDBALL):
-        return law.PENALTY in (on_field, truth)
-    if category == m.RED_CARD:
-        return law.RED in (on_field, truth)
-    return True
-
-
-def _subjective(category: str, scenario: str, on_field: str, truth: str) -> bool:
-    if category == m.HANDBALL_GOAL:
-        return False  # an accidental touch by the scorer is a factual matter
-    if category == m.PENALTY_CLAIM:
-        if {on_field, truth} == {law.PENALTY, law.FREE_KICK}:
-            return False  # only the location is in question: inside or outside the area
-        return not scenario.startswith("line_contact")
-    return True
-

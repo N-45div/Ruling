@@ -36,8 +36,6 @@ SCENARIOS: dict[str, tuple[float, float]] = {
     "deflection_offside": (0.01, 0.50),
 }
 RESTART_EXEMPT_CORRECT = 0.97
-SUBJECTIVE = frozenset({"teammate_blocks_view", "teammate_marginal_view", "teammate_not_involved",
-                        "deliberate_play_reset", "deflection_offside"})
 _KICKS = {ev.THROW_IN: m.THROW_IN, ev.CORNER: m.CORNER, ev.GOAL_KICK: m.GOAL_KICK}
 
 
@@ -131,7 +129,6 @@ class OffsidePlanner:
                                        involvement, intervening, bodies)
         ruling = judge(situation)
         law_decision = var.NO_GOAL if ruling.offside else var.GOAL
-        subjective = scenario in SUBJECTIVE
         clear = scenario != "teammate_marginal_view"
         correct_rate = RESTART_EXEMPT_CORRECT if scenario == "restart_exempt" else SCENARIOS[scenario][1]
         if not clear:
@@ -140,7 +137,9 @@ class OffsidePlanner:
             on_field = law_decision
         else:
             on_field = var.GOAL if law_decision == var.NO_GOAL else var.NO_GOAL
-        outcome = var.review(on_field, law_decision, subjective, clear, factual_offside=not subjective)
+        kind = var.classify(m.OFFSIDE, on_field, law_decision, ruling.reason)
+        subjective = kind.subjective
+        outcome = var.review(on_field, law_decision, subjective, clear, factual_offside=kind.factual_offside)
 
         pre_touch = None
         if intervening:

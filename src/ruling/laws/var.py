@@ -17,6 +17,36 @@ VAR_OVERTURN = "var_overturn"  # factual correction by the VAR alone
 ON_FIELD_REVIEW = "on_field_review"  # the referee reviews at the monitor and changes the decision
 
 
+PENALTY, FREE_KICK, RED = "penalty", "free_kick", "red"
+# Offside rulings that turn on a judgement of involvement rather than on position.
+SUBJECTIVE_OFFSIDE = frozenset({"interfering_with_an_opponent", "not_involved", "deliberate_play_reset",
+                                "gaining_an_advantage"})
+
+
+@dataclass(frozen=True, slots=True)
+class Classification:
+    subjective: bool  # needs the referee's judgement at the monitor
+    reviewable: bool  # at least one of the two calls falls in the VAR's scope
+    factual_offside: bool  # a factual offside or onside decision (no stadium announcement)
+
+
+def classify(category: str, on_field: str, law_decision: str, reason: str) -> Classification:
+    """How the protocol treats a disagreement between the on-field call and the Law."""
+    if category == "offside":
+        subjective = reason in SUBJECTIVE_OFFSIDE
+        return Classification(subjective, True, not subjective)
+    if category == "handball":
+        return Classification(True, PENALTY in (on_field, law_decision), False)
+    if category == "penalty_claim":
+        location_only = {on_field, law_decision} == {PENALTY, FREE_KICK}  # inside or outside the area
+        return Classification(not location_only, PENALTY in (on_field, law_decision), False)
+    if category == "handball_goal":
+        return Classification(False, True, False)  # an accidental touch by the scorer is a factual matter
+    if category == "red_card":
+        return Classification(True, RED in (on_field, law_decision), False)
+    raise ValueError(f"unknown category: {category}")
+
+
 @dataclass(frozen=True, slots=True)
 class VarOutcome:
     review: str

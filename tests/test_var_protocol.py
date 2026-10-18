@@ -17,6 +17,18 @@ def test_a_wrong_subjective_call_goes_to_an_announced_on_field_review():
     assert outcome.review == ON_FIELD_REVIEW and outcome.final == NO_GOAL and outcome.announced
 
 
+def test_classify_separates_factual_from_subjective_and_out_of_scope_calls():
+    from ruling.laws.var import classify
+    position = classify("offside", GOAL, NO_GOAL, "interfering_with_play")
+    assert not position.subjective and position.factual_offside
+    assert classify("offside", GOAL, NO_GOAL, "interfering_with_an_opponent").subjective
+    assert not classify("penalty_claim", "penalty", "free_kick", "trip").subjective  # location only
+    assert classify("penalty_claim", "no_foul", "penalty", "trip").subjective
+    assert not classify("penalty_claim", "free_kick", "no_foul", "trip").reviewable  # no penalty involved
+    assert not classify("red_card", "yellow", "no_card", "trip").reviewable  # cautions are not reviewed
+    assert not classify("handball_goal", GOAL, NO_GOAL, "scorer_touched_immediately_before_goal").subjective
+
+
 def test_a_call_outside_the_var_scope_stands_even_if_wrong():
     outcome = review("yellow", "no_card", subjective=True, reviewable=False)
     assert outcome.review == CHECK_COMPLETE and outcome.final == "yellow"
