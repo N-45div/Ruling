@@ -1,0 +1,5973 @@
+{
+ "settings": {
+  "set": "dev",
+  "incidents": 79,
+  "arms": {
+   "model_only": {
+    "effort": "medium"
+   },
+   "ruling_v0": {
+    "effort": "low"
+   }
+  },
+  "model": "gpt-5-mini",
+  "commit": "d7d6078",
+  "utc": "20261018T1956Z"
+ },
+ "summary": {
+  "arms": {
+   "model_only": {
+    "incidents": 79,
+    "verdict_ok": 0.8861,
+    "final_ok": 0.8987,
+    "card_ok": 0.9747,
+    "review_ok": 0.8481,
+    "law_ok": 0.9747,
+    "clause_ok": 0.1013,
+    "contested": {
+     "incidents": 19,
+     "verdict_ok": 0.6842
+    },
+    "by_category": {
+     "handball": {
+      "incidents": 12,
+      "verdict_ok": 0.9167
+     },
+     "handball_goal": {
+      "incidents": 2,
+      "verdict_ok": 0.5
+     },
+     "offside": {
+      "incidents": 46,
+      "verdict_ok": 0.913
+     },
+     "penalty_claim": {
+      "incidents": 14,
+      "verdict_ok": 0.8571
+     },
+     "red_card": {
+      "incidents": 5,
+      "verdict_ok": 0.8
+     }
+    },
+    "stale_rate": 0.0,
+    "errors": 0,
+    "mean_seconds": 12.39,
+    "tokens": {
+     "input": 282981,
+     "output": 99730
+    }
+   },
+   "ruling_v0": {
+    "incidents": 79,
+    "verdict_ok": 1.0,
+    "final_ok": 1.0,
+    "card_ok": 1.0,
+    "review_ok": 1.0,
+    "law_ok": 1.0,
+    "clause_ok": 1.0,
+    "contested": {
+     "incidents": 19,
+     "verdict_ok": 1.0
+    },
+    "by_category": {
+     "handball": {
+      "incidents": 12,
+      "verdict_ok": 1.0
+     },
+     "handball_goal": {
+      "incidents": 2,
+      "verdict_ok": 1.0
+     },
+     "offside": {
+      "incidents": 46,
+      "verdict_ok": 1.0
+     },
+     "penalty_claim": {
+      "incidents": 14,
+      "verdict_ok": 1.0
+     },
+     "red_card": {
+      "incidents": 5,
+      "verdict_ok": 1.0
+     }
+    },
+    "stale_rate": 0.0,
+    "errors": 0,
+    "mean_seconds": 6.51,
+    "tokens": {
+     "input": 32357,
+     "output": 27689
+    }
+   }
+  },
+  "difference": {
+   "all": {
+    "comparison": "ruling_v0 - model_only",
+    "verdict_ok": 0.1139,
+    "ci95": [
+     0.0506,
+     0.1899
+    ],
+    "pairs": 79
+   },
+   "contested": {
+    "comparison": "ruling_v0 - model_only",
+    "verdict_ok": 0.3158,
+    "ci95": [
+     0.1053,
+     0.5263
+    ],
+    "pairs": 19
+   }
+  }
+ },
+ "records": [
+  {
+   "arm": "model_only",
+   "incident_id": "MLA-HFW-5001:426:handball",
+   "category": "handball",
+   "scenario": "supporting_arm",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "Arm was below shoulder, used for support (supporting_arm true), did not move towards the ball and was not deliberate. On-field decision to play on stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "MLA-HFW-5001:426:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 16.11,
+    "input_tokens": 1737,
+    "output_tokens": 852,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "MLA-HFW-5001:426:handball",
+   "category": "handball",
+   "scenario": "supporting_arm",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball",
+    "explanation": "Decision: On-field decision stands \u2014 no foul, play restarts without a penalty. Reason: The ball struck MLA No.11 Goran Zanivic\u2019s arm 10.3 m inside the penalty area, but the arm was held 0.60 m from the body while supporting a fall, so its position was a consequence of the body\u2019s movement and not an unlawful handball under Law 12.1."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "MLA-HFW-5001:426:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 10.67,
+    "input_tokens": 436,
+    "output_tokens": 315,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "MLA-HFW-5001:738:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "played_ball_first",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "MLA-8 played the ball first and attempted to play it, made ankle contact, with no studs-up, not off the ground and no late contact recorded. This does not demonstrate a clear and obvious foul; the on-field no-foul stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "MLA-HFW-5001:738:penalty_claim",
+    "category": "penalty_claim",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 14.73,
+    "input_tokens": 1906,
+    "output_tokens": 889,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "MLA-HFW-5001:738:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "played_ball_first",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1",
+    "explanation": "Decision: on-field decision stands \u2014 no foul; play restarts without a penalty. Reason: MLA No.8 Dario Falinni played the ball before making contact with HFW No.6 Mateo Zanleigh. The point of contact was 1.9 m inside the penalty area, but VAR concluded the contact did not meet the criteria for a foul under Law 12."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "MLA-HFW-5001:738:penalty_claim",
+    "category": "penalty_claim",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 11.93,
+    "input_tokens": 429,
+    "output_tokens": 397,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "MLA-HFW-5001:785:handball_goal",
+   "category": "handball_goal",
+   "scenario": "scorer_arm_before_goal",
+   "on_field": "goal",
+   "expected": {
+    "final": "no_goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "Ball struck HFW-24\u2019s right arm below shoulder; arm was 0.22 m from body, did not move towards the ball and its position was justified by movement. Contact occurred immediately before the goal but was not a clear handball; on-field decision stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "MLA-HFW-5001:785:handball_goal",
+    "category": "handball_goal",
+    "contested": true,
+    "verdict_ok": false,
+    "final_ok": false,
+    "card_ok": true,
+    "review_ok": false,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 16.01,
+    "input_tokens": 1739,
+    "output_tokens": 1130,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "MLA-HFW-5001:785:handball_goal",
+   "category": "handball_goal",
+   "scenario": "scorer_arm_before_goal",
+   "on_field": "goal",
+   "expected": {
+    "final": "no_goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12.1-handball",
+    "explanation": "On-field: goal stood. VAR reviewed and corrected a factual decision. Final decision: goal disallowed. Reason: the ball touched HFW No.24 Dario Nevivic\u2019s arm immediately before the score; under Law 12.1 a goal scored immediately after the ball touches a player\u2019s hand/arm is an offence, so the goal is disallowed."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "MLA-HFW-5001:785:handball_goal",
+    "category": "handball_goal",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 10.66,
+    "input_tokens": 398,
+    "output_tokens": 365,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "MLA-HFW-5001:890:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "no_contact_dive",
+   "on_field": "penalty",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "on_field_review",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12.1",
+    "explanation": "MLA-15 attempted a trip on HFW-3 at x=98.01 (inside the penalty area). Challenge data records no contact and the ball was not played. The on-field penalty is overturned \u2014 no foul."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "MLA-HFW-5001:890:penalty_claim",
+    "category": "penalty_claim",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": false,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 15.41,
+    "input_tokens": 1954,
+    "output_tokens": 1096,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "MLA-HFW-5001:890:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "no_contact_dive",
+   "on_field": "penalty",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "on_field_review",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "on_field_review",
+    "clause": "12.1",
+    "explanation": "On-field decision: penalty. Review: no foul. The point of contact was 7.0 m inside the penalty area, but there was no contact between MLA No.15 Callum Ultano and HFW No.3 Lucas Yorkova. Under Law 12, contact offences require contact, so the referee changed the decision and play restarts without a penalty."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "MLA-HFW-5001:890:penalty_claim",
+    "category": "penalty_claim",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 10.06,
+    "input_tokens": 406,
+    "output_tokens": 306,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "MLA-HFW-5001:990:red_card",
+   "category": "red_card",
+   "scenario": "sfp_excessive",
+   "on_field": "yellow",
+   "expected": {
+    "final": "red",
+    "card": "red",
+    "review": "on_field_review",
+    "clause": "12.3-sfp"
+   },
+   "verdict": {
+    "final_decision": "red",
+    "card": "red",
+    "review": "var_overturn",
+    "clause": "12.1",
+    "explanation": "HFW-22 made a studs-up lunge, contacted MLA-8\u2019s knee (contact: true; contact_height: knee) at 6.88 m/s and did not play the ball (played_ball_first: false). Serious foul play \u2014 red card."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "MLA-HFW-5001:990:red_card",
+    "category": "red_card",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": false,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 8.27,
+    "input_tokens": 1787,
+    "output_tokens": 867,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "MLA-HFW-5001:990:red_card",
+   "category": "red_card",
+   "scenario": "sfp_excessive",
+   "on_field": "yellow",
+   "expected": {
+    "final": "red",
+    "card": "red",
+    "review": "on_field_review",
+    "clause": "12.3-sfp"
+   },
+   "verdict": {
+    "final_decision": "red",
+    "card": "red",
+    "review": "on_field_review",
+    "clause": "12.3-sfp",
+    "explanation": "Referee changed yellow to red after review. Goran Nevberik lunged at Dario Falinni, making knee contact with studs showing, at 6.9 m/s. This tackle used excessive force and endangered safety, so it is serious foul play and merits a sending-off."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "MLA-HFW-5001:990:red_card",
+    "category": "red_card",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 6.55,
+    "input_tokens": 345,
+    "output_tokens": 230,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "MLA-HFW-5001:1327:offside",
+   "category": "offside",
+   "scenario": "restart_exempt",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "The ball was played from a corner by MLA-33. Under Law 11 there is no offside offence if a player receives the ball directly from a corner. MLA-26 played the ball and the on-field goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "MLA-HFW-5001:1327:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 10.55,
+    "input_tokens": 4740,
+    "output_tokens": 1309,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "MLA-HFW-5001:1327:offside",
+   "category": "offside",
+   "scenario": "restart_exempt",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3",
+    "explanation": "VAR checked and the on-field decision stands: the goal stands. Zeno Rudwellby received the ball directly from a corner kick. Law 11.3 says there is no offside offence when a player receives the ball directly from a corner, so no offside offence occurred."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "MLA-HFW-5001:1327:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 5.28,
+    "input_tokens": 288,
+    "output_tokens": 327,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "MLA-HFW-5001:1438:handball",
+   "category": "handball",
+   "scenario": "arm_natural_close",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "Arm 0.04 m from body, below the shoulder, did not move towards the ball and the position is justified by movement. Contact is not a deliberate handball, so the on-field no-foul decision stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "MLA-HFW-5001:1438:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 7.74,
+    "input_tokens": 1664,
+    "output_tokens": 763,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "MLA-HFW-5001:1438:handball",
+   "category": "handball",
+   "scenario": "arm_natural_close",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball",
+    "explanation": "VAR checked: on-field decision stands \u2014 no handball. The ball struck Jonah Uldello's arm 8.2 m inside the penalty area; the arm started at the bottom of the armpit and was 0.04 m from the body and its position followed from the body's movement, so it was not \"unnaturally bigger.\""
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "MLA-HFW-5001:1438:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 5.9,
+    "input_tokens": 438,
+    "output_tokens": 589,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "BRC-GLH-5002:242:offside",
+   "category": "offside",
+   "scenario": "tight_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "At the pass (ball x=21.71) GLH-16 was level with the second-last opponent: both had a foot at x=5.26 (GLH-16 right foot and BRC-39 left foot). Being level with the second-last defender is not offside, so the goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "BRC-GLH-5002:242:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 15.13,
+    "input_tokens": 4885,
+    "output_tokens": 1841,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "BRC-GLH-5002:242:offside",
+   "category": "offside",
+   "scenario": "tight_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "At the moment of the pass, GLH No.16 Callum Brenurza was level with the offside line set by BRC No.39 Nils Cordello (the second\u2011last opponent). Law 11 states being level is not offside. Therefore the on-field decision stands and the goal stands."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "BRC-GLH-5002:242:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 6.98,
+    "input_tokens": 410,
+    "output_tokens": 554,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "BRC-GLH-5002:1159:handball",
+   "category": "handball",
+   "scenario": "above_shoulder_justified",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "Ball struck BRC-3's arm at [98.897,23.843]; arm was above the shoulder and 0.45 m from the body, but the position is recorded as justified by movement and the arm did not move towards the ball. No clear and obvious error \u2014 on-field decision stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "BRC-GLH-5002:1159:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 16.2,
+    "input_tokens": 1689,
+    "output_tokens": 2248,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "BRC-GLH-5002:1159:handball",
+   "category": "handball",
+   "scenario": "above_shoulder_justified",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball",
+    "explanation": "VAR checked and on-field decision stands: no foul. The ball hit Umar Kalholme\u2019s arm 10.0 m inside the penalty area; the arm was 0.45 m from the body and above the shoulder. Because the arm position followed from the body\u2019s movement and was not \u201cunnaturally bigger,\u201d this is not a handball offence."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "BRC-GLH-5002:1159:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.05,
+    "input_tokens": 443,
+    "output_tokens": 288,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "BRC-GLH-5002:1498:offside",
+   "category": "offside",
+   "scenario": "tight_offside",
+   "on_field": "goal",
+   "expected": {
+    "final": "no_goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.2"
+   },
+   "verdict": {
+    "final_decision": "no_goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11",
+    "explanation": "GLH-33 was in an offside position when GLH-5 played the ball. GLH-33's left foot (x=98.28 m) was ahead of the second-last opponent BRC-28's left foot (x=98.25 m), so the goal is disallowed."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "BRC-GLH-5002:1498:offside",
+    "category": "offside",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 15.73,
+    "input_tokens": 4914,
+    "output_tokens": 1989,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "BRC-GLH-5002:1498:offside",
+   "category": "offside",
+   "scenario": "tight_offside",
+   "on_field": "goal",
+   "expected": {
+    "final": "no_goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.2"
+   },
+   "verdict": {
+    "final_decision": "no_goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.2",
+    "explanation": "Sami Kalinni was in an offside position at the moment of the pass: his left foot was 3 cm beyond the offside line set by Florin Evezar. Under Law 11, a player in that position when the ball is played and becoming involved is penalised. The goal is therefore disallowed."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "BRC-GLH-5002:1498:offside",
+    "category": "offside",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 7.59,
+    "input_tokens": 453,
+    "output_tokens": 817,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "QMF-OHT-5003:58:offside",
+   "category": "offside",
+   "scenario": "tight_onside",
+   "on_field": "no_goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11",
+    "explanation": "When QMF-37 played the ball (x=93.28), QMF-5\u2019s most advanced point (left foot x=99.85) was behind OHT-23\u2019s most advanced point (left foot x=99.89). Attacker was onside, so the goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "QMF-OHT-5003:58:offside",
+    "category": "offside",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 20.48,
+    "input_tokens": 4890,
+    "output_tokens": 2522,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "QMF-OHT-5003:58:offside",
+   "category": "offside",
+   "scenario": "tight_onside",
+   "on_field": "no_goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.1",
+    "explanation": "VAR checked the pass: QMF No.5 Adem Rudholme was onside \u2014 his left foot was 4 cm behind the offside line (set by OHT No.23 Lucas Tordello). Only an arm was beyond the line, and arms are ignored. Goal stands."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "QMF-OHT-5003:58:offside",
+    "category": "offside",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 7.15,
+    "input_tokens": 430,
+    "output_tokens": 292,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "QMF-OHT-5003:243:red_card",
+   "category": "red_card",
+   "scenario": "reckless_not_red",
+   "on_field": "red",
+   "expected": {
+    "final": "yellow",
+    "card": "yellow",
+    "review": "on_field_review",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "red",
+    "card": "red",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "On-field red stands. OHT-16\u2019s tackle made contact to QMF-20\u2019s ankle, did not play the ball first, and contact was 0.88s late at 5.51 m/s. VAR found no clear and obvious error to overturn."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "QMF-OHT-5003:243:red_card",
+    "category": "red_card",
+    "contested": true,
+    "verdict_ok": false,
+    "final_ok": false,
+    "card_ok": false,
+    "review_ok": false,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 11.63,
+    "input_tokens": 1876,
+    "output_tokens": 1277,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "QMF-OHT-5003:243:red_card",
+   "category": "red_card",
+   "scenario": "reckless_not_red",
+   "on_field": "red",
+   "expected": {
+    "final": "yellow",
+    "card": "yellow",
+    "review": "on_field_review",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "yellow",
+    "card": "yellow",
+    "review": "on_field_review",
+    "clause": "12.1",
+    "explanation": "On review, the referee downgraded the red to a yellow. OHT No.16 Idris Lunovar made ankle contact with QMF No.20 Jonah Zanezar 0.9 s after the ball had gone, at 5.5 m/s. This met Law 12\u2019s definition of reckless (caution), not excessive force (sending\u2011off), so a yellow card was issued."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "QMF-OHT-5003:243:red_card",
+    "category": "red_card",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.66,
+    "input_tokens": 413,
+    "output_tokens": 336,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "QMF-OHT-5003:475:handball",
+   "category": "handball",
+   "scenario": "arm_natural_close",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "No handball: OHT-16 blocked the shot, arms were below shoulder, did not move towards the ball and the contact was justified by the player\u2019s movement, so the on-field decision of no foul stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "QMF-OHT-5003:475:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 8.35,
+    "input_tokens": 1772,
+    "output_tokens": 1051,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "QMF-OHT-5003:475:handball",
+   "category": "handball",
+   "scenario": "arm_natural_close",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball",
+    "explanation": "Decision: no foul, on-field decision stands, play restarts without a penalty. The ball struck OHT No.16 Idris Lunovar\u2019s arm 6.2 m inside the penalty area. Idris\u2019s arm was 0.05 m from the body and its position follows from the body\u2019s movement, so it was not \u2018unnaturally bigger\u2019 and no handball offence occurred."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "QMF-OHT-5003:475:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 3.24,
+    "input_tokens": 439,
+    "output_tokens": 233,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "QMF-OHT-5003:921:offside",
+   "category": "offside",
+   "scenario": "arm_beyond",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2",
+    "explanation": "QMF-23 is onside: his closest playable part (left foot x=6.74) is behind OHT-38\u2019s closest part (right foot x=6.61) at the moment of the pass, so the on-field goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "QMF-OHT-5003:921:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 19.2,
+    "input_tokens": 4887,
+    "output_tokens": 2546,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "QMF-OHT-5003:921:offside",
+   "category": "offside",
+   "scenario": "arm_beyond",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "Goal stands. At the pass, QMF No.23 Jonah Wenfordt\u2019s left foot was 13 cm behind the offside line set by OHT No.38 Florin Yorholme (second-last opponent). Only an arm was beyond the line; arms are ignored for offside. Therefore Jonah Wenfordt was not in an offside position."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "QMF-OHT-5003:921:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.36,
+    "input_tokens": 432,
+    "output_tokens": 389,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "QMF-OHT-5003:1000:handball",
+   "category": "handball",
+   "scenario": "above_shoulder_justified",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "Shot from OHT-16 was blocked by QMF-8 inside the box. QMF-8\u2019s arm was above shoulder but the movement was justified and the arm was not moved towards the ball. The on-field decision of no foul stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "QMF-OHT-5003:1000:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 7.78,
+    "input_tokens": 1633,
+    "output_tokens": 955,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "QMF-OHT-5003:1000:handball",
+   "category": "handball",
+   "scenario": "above_shoulder_justified",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball",
+    "explanation": "Decision: On-field decision of no handball stands. Why: The ball struck Nils Halholme\u2019s arm 7.2 m inside the penalty area. The arm was 0.33 m from the body and above the shoulder, but its position follows from the body\u2019s movement and did not make the body unnaturally bigger, so no foul."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "QMF-OHT-5003:1000:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.05,
+    "input_tokens": 444,
+    "output_tokens": 343,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "QMF-OHT-5003:1038:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "played_ball_first",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "Tackle played the ball first (played_ball_first true) with contact at the ankle after a genuine attempt to play the ball, low speed (4.0 m/s), no studs up and no lunge. The referee\u2019s on-field decision of no foul stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "QMF-OHT-5003:1038:penalty_claim",
+    "category": "penalty_claim",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 7.17,
+    "input_tokens": 1941,
+    "output_tokens": 806,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "QMF-OHT-5003:1038:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "played_ball_first",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1",
+    "explanation": "On-field decision stands: no foul, play restarts without a penalty. QMF No.5 Adem Rudholme played the ball before contact with OHT No.39 Bastian Aldfordt, the contact occurred 1.0 m inside the penalty area. Under Law 12 a tackle is a foul only if careless, reckless or using excessive force, so no foul is awarded."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "QMF-OHT-5003:1038:penalty_claim",
+    "category": "penalty_claim",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 8.2,
+    "input_tokens": 433,
+    "output_tokens": 350,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "NBR-FVT-5004:221:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "line_contact_outside",
+   "on_field": "penalty",
+   "expected": {
+    "final": "free_kick",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "free_kick",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12.1",
+    "explanation": "NBR-10 tripped FVT-19 (contact at the ankle). The contact point is at x=16.559 m, which is outside the penalty area (16.50 m). On-field penalty is overturned; award a direct free kick to FVT. No misconduct shown."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "NBR-FVT-5004:221:penalty_claim",
+    "category": "penalty_claim",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 9.17,
+    "input_tokens": 1800,
+    "output_tokens": 1171,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "NBR-FVT-5004:221:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "line_contact_outside",
+   "on_field": "penalty",
+   "expected": {
+    "final": "free_kick",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "free_kick",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12.1",
+    "explanation": "On-field decision: penalty kick. VAR review corrected the factual finding: the point of contact was 6 cm outside the penalty area. NBR No.10 Bram Istberik tripped FVT No.19 Yusuf Falurza at the ankle. Under Law 12, contact offences are penalised where contact happens, so a direct free kick is awarded outside the area."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "NBR-FVT-5004:221:penalty_claim",
+    "category": "penalty_claim",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.0,
+    "input_tokens": 400,
+    "output_tokens": 333,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "NBR-FVT-5004:425:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "At the pass (ball x=17.19) FVT-39 was at x=28.34 \u2014 behind the ball and behind the second-last defender (NBR-7 at x=7.77). He was not in an offside position, so the on-field goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "NBR-FVT-5004:425:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 10.36,
+    "input_tokens": 4882,
+    "output_tokens": 1267,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "NBR-FVT-5004:425:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "VAR checked and on-field decision stands: goal stands. At the moment of the pass, FVT No.39 Bram Evholme\u2019s right foot was 20.2 m behind the offside line set by NBR No.7 Idris Kalezar (second-last opponent). Under Law 11, Bram was not nearer to the opponents\u2019 goal line than the second-last opponent, so no offside."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "NBR-FVT-5004:425:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 5.36,
+    "input_tokens": 416,
+    "output_tokens": 502,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "NBR-FVT-5004:794:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "played_ball_first",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "FVT-18 attempted to play the ball and played it first; contact was at the ankle, not studs-up, not a lunge and attacker_initiated is false. The challenge was not reckless \u2014 on-field no-foul decision stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "NBR-FVT-5004:794:penalty_claim",
+    "category": "penalty_claim",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 10.28,
+    "input_tokens": 1933,
+    "output_tokens": 1002,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "NBR-FVT-5004:794:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "played_ball_first",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1",
+    "explanation": "VAR review: On-field decision stands. Callum Halwellby played the ball before making ankle contact with Eli Yordello 13.6 m inside the penalty area. Under Law 12 a tackle is penalised only if it is careless, reckless or uses excessive force; because Halwellby played the ball first, no foul is awarded. Play restarts without a penalty."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "NBR-FVT-5004:794:penalty_claim",
+    "category": "penalty_claim",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.66,
+    "input_tokens": 434,
+    "output_tokens": 357,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "NBR-FVT-5004:1044:offside",
+   "category": "offside",
+   "scenario": "tight_offside",
+   "on_field": "goal",
+   "expected": {
+    "final": "no_goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.2"
+   },
+   "verdict": {
+    "final_decision": "no_goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11",
+    "explanation": "FVT-31 was in an offside position at the pass from FVT-18: FVT-31\u2019s head/torso/left foot (x\u224899.02\u201399.36) were ahead of the ball (x=89.00) and the second\u2011last opponent NBR-7 (x\u224898.91). Goal disallowed for offside."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "NBR-FVT-5004:1044:offside",
+    "category": "offside",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 9.35,
+    "input_tokens": 4888,
+    "output_tokens": 1113,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "NBR-FVT-5004:1044:offside",
+   "category": "offside",
+   "scenario": "tight_offside",
+   "on_field": "goal",
+   "expected": {
+    "final": "no_goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.2"
+   },
+   "verdict": {
+    "final_decision": "no_goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.2",
+    "explanation": "Goal disallowed. VAR review: at the moment of the pass FVT No.31 Umar Yorwellby was 15 cm beyond the offside line set by NBR No.7 Idris Kalezar and therefore in an offside position. Under Law 11.2(a), a player in an offside position who plays or touches a team\u2011mate\u2019s pass is penalised, so the goal is overturned."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "NBR-FVT-5004:1044:offside",
+    "category": "offside",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 5.89,
+    "input_tokens": 450,
+    "output_tokens": 499,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "HFW-DMU-5005:715:offside",
+   "category": "offside",
+   "scenario": "tight_onside",
+   "on_field": "no_goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.2",
+    "explanation": "At the moment of the pass (ball x=29.96), DMU\u201123\u2019s closest playable part is x=10.86 while HFW\u201122\u2019s closest part (right foot) is x=10.84. DMU\u201123 was not nearer the opponent goal line than the second\u2011last opponent, so the goal should stand."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "HFW-DMU-5005:715:offside",
+    "category": "offside",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 14.4,
+    "input_tokens": 4893,
+    "output_tokens": 1607,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "HFW-DMU-5005:715:offside",
+   "category": "offside",
+   "scenario": "tight_onside",
+   "on_field": "no_goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.1",
+    "explanation": "VAR checked the offside at the pass. Emre Halholme\u2019s right foot was 2 cm behind the offside line set by Goran Nevberik (second-last opponent). Only an arm was beyond the line; arms are ignored. Therefore Emre was not offside. Decision corrected: goal stands."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "HFW-DMU-5005:715:offside",
+    "category": "offside",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.95,
+    "input_tokens": 432,
+    "output_tokens": 176,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "HFW-DMU-5005:736:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "At the pass DMU-32 (ball) is at x=14.58 while all recorded parts of DMU-24 are at x\u224824.7 \u2014 behind the ball and not nearer the opponents\u2019 goal line. No offside; on-field goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "HFW-DMU-5005:736:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 11.72,
+    "input_tokens": 4917,
+    "output_tokens": 1282,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "HFW-DMU-5005:736:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "VAR check: At the moment of the pass, DMU No.24 Idris Lundello\u2019s left foot was 18.0 m behind the offside line set by HFW No.6 Mateo Zanleigh (the second\u2011last opponent). Under Law 11.1, being level with or behind the second\u2011last opponent is not offside. Decision: goal stands."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "HFW-DMU-5005:736:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.58,
+    "input_tokens": 417,
+    "output_tokens": 337,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "HFW-DMU-5005:964:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "The ball was played from the corner at x=105.0. Attacker DMU-8 was at x=67.8, well behind the ball and behind opponents (x\u224892\u2013101). A player cannot be offside from a corner. On-field goal decision stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "HFW-DMU-5005:964:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 10.26,
+    "input_tokens": 4898,
+    "output_tokens": 1071,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "HFW-DMU-5005:964:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3",
+    "explanation": "VAR checked: Goal stands. DMU No.8 Umar Sevanek received the ball directly from a corner. Law 11.3 states there is no offside offence when a player receives the ball directly from a corner kick. Therefore no offside offence and the on-field decision stands."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "HFW-DMU-5005:964:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.59,
+    "input_tokens": 288,
+    "output_tokens": 263,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "HFW-DMU-5005:1009:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "no_contact_dive",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "Review shows HFW-28 attempted to play the ball and did not make contact with DMU-32 (contact=false). No trip/contact occurred, so the on-field no foul stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "HFW-DMU-5005:1009:penalty_claim",
+    "category": "penalty_claim",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 6.76,
+    "input_tokens": 1914,
+    "output_tokens": 594,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "HFW-DMU-5005:1009:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "no_contact_dive",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1",
+    "explanation": "VAR checked the incident at 62:45. Tracking shows no contact between HFW No.28 Tomas Morberik and DMU No.32 Viktor Brenleigh. Under Law 12 a foul requires contact; therefore no foul is awarded. The on-field decision stands: play restarts without a penalty."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "HFW-DMU-5005:1009:penalty_claim",
+    "category": "penalty_claim",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 6.71,
+    "input_tokens": 410,
+    "output_tokens": 398,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "HFW-CWR-5006:24:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "At the pass by HFW-3 (ball x=84.42), HFW-7\u2019s torso was at x=73.3, clearly behind the ball and the second-last opponent CWR-38 (torso x=98.66). He was onside, so the on-field goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "HFW-CWR-5006:24:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 12.53,
+    "input_tokens": 4887,
+    "output_tokens": 1533,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "HFW-CWR-5006:24:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "Decision: Goal stands. At the moment of the pass, HFW No.7 Felix Brenmannis\u2019s right foot was 25.6 m behind the offside line set by CWR No.38 Viktor Lunurza, so Felix Brenmannis was not in an offside position under Law 11 and no offside offence occurred."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "HFW-CWR-5006:24:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 3.83,
+    "input_tokens": 416,
+    "output_tokens": 319,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "HFW-CWR-5006:267:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "played_ball_first",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "CWR-39 played the ball first and made contact while attempting to play the ball; contact was at the ankle, not studs-up and not late. No foul \u2014 on-field decision stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "HFW-CWR-5006:267:penalty_claim",
+    "category": "penalty_claim",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 17.98,
+    "input_tokens": 1824,
+    "output_tokens": 778,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "HFW-CWR-5006:267:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "played_ball_first",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1",
+    "explanation": "On-field decision stands: no foul. VAR review found CWR No.39 Lucas Ulurza played the ball before making contact with HFW No.7 Felix Brenmannis\u2019 ankle, 6.4 m inside the penalty area. Under Law 12, a foul requires contact that is careless, reckless or uses excessive force; review did not identify such contact. Play restarts without a penalty."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "HFW-CWR-5006:267:penalty_claim",
+    "category": "penalty_claim",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.55,
+    "input_tokens": 432,
+    "output_tokens": 369,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "HFW-CWR-5006:939:offside",
+   "category": "offside",
+   "scenario": "tight_offside",
+   "on_field": "no_goal",
+   "expected": {
+    "final": "no_goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2"
+   },
+   "verdict": {
+    "final_decision": "no_goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2",
+    "explanation": "HFW-25 was in an offside position (torso x=7.76; head x=7.63) ahead of the second-last defender CWR-38 (torso x=7.85, head x=7.89) when HFW-3 played the ball (x=24.5) and then played the ball, so the on-field decision stands (no goal)."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "HFW-CWR-5006:939:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 11.34,
+    "input_tokens": 4889,
+    "output_tokens": 1153,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "HFW-CWR-5006:939:offside",
+   "category": "offside",
+   "scenario": "tight_offside",
+   "on_field": "no_goal",
+   "expected": {
+    "final": "no_goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2"
+   },
+   "verdict": {
+    "final_decision": "no_goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2",
+    "explanation": "VAR checked and confirmed: Florin Evholme was in an offside position (left foot 23 cm beyond the offside line set by Viktor Lunurza) at the moment of the pass, and was penalised for interfering with play. The goal is disallowed."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "HFW-CWR-5006:939:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 5.76,
+    "input_tokens": 457,
+    "output_tokens": 483,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "QMF-GLH-5007:1079:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2",
+    "explanation": "When the ball was played, GLH-20\u2019s torso (x 97.35) was behind the ball (x 101.6) and behind the second-last opponent (QMF\u201131 torso x 101.39). He was onside, so the on-field goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "QMF-GLH-5007:1079:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 16.64,
+    "input_tokens": 4890,
+    "output_tokens": 2144,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "QMF-GLH-5007:1079:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "VAR checked offside at 64:19. At the pass, GLH No.20 Emre Kalvanek was 3.8 m behind the offside line set by QMF No.31 Bastian Lunsendt (second-last opponent). Under Law 11, being level with or behind the second-last opponent is not offside. No offside offence; the on-field decision stands and the goal is awarded."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "QMF-GLH-5007:1079:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 5.84,
+    "input_tokens": 418,
+    "output_tokens": 331,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "QMF-GLH-5007:1315:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "line_contact_outside",
+   "on_field": "penalty",
+   "expected": {
+    "final": "free_kick",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "free_kick",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12",
+    "explanation": "QMF-37 tripped GLH-14 (contact at the ankle; attempted to play the ball). The foul location is at x=88.232, outside the defending penalty area (penalty area begins at x=88.5). On-field penalty overturned; restart is a direct free kick."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "QMF-GLH-5007:1315:penalty_claim",
+    "category": "penalty_claim",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 10.02,
+    "input_tokens": 1808,
+    "output_tokens": 1231,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "QMF-GLH-5007:1315:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "line_contact_outside",
+   "on_field": "penalty",
+   "expected": {
+    "final": "free_kick",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "free_kick",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12.1",
+    "explanation": "On-field penalty overturned. Contact: QMF No.37 Mateo Dalleigh tripped GLH No.14 Rafael Zanwellby at the ankle. Point of contact was 27 cm outside the penalty area, so a direct free kick is awarded outside the area under Law 12."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "QMF-GLH-5007:1315:penalty_claim",
+    "category": "penalty_claim",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.11,
+    "input_tokens": 400,
+    "output_tokens": 220,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "QMF-GLH-5007:1422:offside",
+   "category": "offside",
+   "scenario": "teammate_marginal_view",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2"
+   },
+   "verdict": {
+    "final_decision": "no_goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11",
+    "explanation": "QMF-5 was in an offside position (torso x=13.53) at the pass from QMF-29 (x=49.91) and was interfering with an opponent\u2019s line of vision; the goal is disallowed."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "QMF-GLH-5007:1422:offside",
+    "category": "offside",
+    "contested": true,
+    "verdict_ok": false,
+    "final_ok": false,
+    "card_ok": true,
+    "review_ok": false,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 14.68,
+    "input_tokens": 4892,
+    "output_tokens": 1718,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "QMF-GLH-5007:1422:offside",
+   "category": "offside",
+   "scenario": "teammate_marginal_view",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2",
+    "explanation": "Decision: Goal stands. VAR checked and the on-field decision is upheld. Adem Rudholme was in an offside position (20.4 m beyond the offside line) and involvement was noted as obstructing the goalkeeper\u2019s line of vision. Under Law 11 this must clearly impact the opponent; at 2.71 m the impact was debatable, so no offside. "
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "QMF-GLH-5007:1422:offside",
+    "category": "offside",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 5.05,
+    "input_tokens": 520,
+    "output_tokens": 414,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "HFW-DMU-5008:674:handball_goal",
+   "category": "handball_goal",
+   "scenario": "team_mate_accidental",
+   "on_field": "no_goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12",
+    "explanation": "HFW\u20113\u2019s arm was below the shoulder (arm_away 0.38 m), movement was justified, it did not move towards the ball, and the contact was not immediately before or goal\u2011bound. There is no handball offence \u2014 on-field no-goal overturned to goal."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "HFW-DMU-5008:674:handball_goal",
+    "category": "handball_goal",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 26.06,
+    "input_tokens": 1709,
+    "output_tokens": 2378,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "HFW-DMU-5008:674:handball_goal",
+   "category": "handball_goal",
+   "scenario": "team_mate_accidental",
+   "on_field": "no_goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12.1-handball",
+    "explanation": "The VAR reviewed a factual handball: the ball touched HFW No.3 Lucas Yorkova\u2019s arm earlier in the move, then a team-mate scored. Law 12 says an accidental touch by an attacker followed by a team-mate scoring is not an offence. Decision changed: goal stands."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "HFW-DMU-5008:674:handball_goal",
+    "category": "handball_goal",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 5.09,
+    "input_tokens": 400,
+    "output_tokens": 347,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "HFW-DMU-5008:1254:offside",
+   "category": "offside",
+   "scenario": "tight_offside",
+   "on_field": "goal",
+   "expected": {
+    "final": "no_goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.2"
+   },
+   "verdict": {
+    "final_decision": "no_goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.2",
+    "explanation": "At the pass (HFW-28 at x=24.25) HFW-25\u2019s right foot was at x=7.16, nearer the opponents\u2019 goal line than second-last defender DMU-22\u2019s nearest part (right foot x=7.38) and the ball \u2014 offside. Goal disallowed."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "HFW-DMU-5008:1254:offside",
+    "category": "offside",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 20.53,
+    "input_tokens": 4895,
+    "output_tokens": 1718,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "HFW-DMU-5008:1254:offside",
+   "category": "offside",
+   "scenario": "tight_offside",
+   "on_field": "goal",
+   "expected": {
+    "final": "no_goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.2"
+   },
+   "verdict": {
+    "final_decision": "no_goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.2",
+    "explanation": "Decision: Goal disallowed. At the moment of the pass, HFW No.25 Florin Evholme was 22 cm beyond the offside line set by DMU No.22 Emre Wenholme. Evholme was in an offside position and played the ball, so under Law 11.2(a) the goal is disallowed."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "HFW-DMU-5008:1254:offside",
+    "category": "offside",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 27.78,
+    "input_tokens": 453,
+    "output_tokens": 412,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "HFW-DMU-5008:1302:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "At the moment of the pass the ball was at x=31.79 and HFW-7 was at x=38.25 (behind the ball). Two DMU players (GK DMU-1 x=3.51 and DMU-38 x=14.9) were closer to the goal line, so no offside."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "HFW-DMU-5008:1302:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 20.26,
+    "input_tokens": 4894,
+    "output_tokens": 1473,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "HFW-DMU-5008:1302:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "VAR checked the pass to HFW No.7 Felix Brenmannis. At the moment of the pass, Felix Brenmannis was 23.0 m behind the offside line set by DMU No.38 Eli Yorkova, so Felix Brenmannis was not in an offside position. The on-field decision stands: goal awarded."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "HFW-DMU-5008:1302:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 5.04,
+    "input_tokens": 415,
+    "output_tokens": 353,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "OHT-DMU-5009:158:handball",
+   "category": "handball",
+   "scenario": "marginal_arm",
+   "on_field": "penalty",
+   "expected": {
+    "final": "penalty",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12",
+    "explanation": "Ball contacted OHT-23\u2019s right arm which was below shoulder and only 0.31 m from his body; the arm did not move toward the ball and its position is justified by movement. No deliberate or illegal handball \u2014 on-field penalty overturned."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "OHT-DMU-5009:158:handball",
+    "category": "handball",
+    "contested": true,
+    "verdict_ok": false,
+    "final_ok": false,
+    "card_ok": true,
+    "review_ok": false,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 16.76,
+    "input_tokens": 1692,
+    "output_tokens": 771,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "OHT-DMU-5009:158:handball",
+   "category": "handball",
+   "scenario": "marginal_arm",
+   "on_field": "penalty",
+   "expected": {
+    "final": "penalty",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "penalty",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball",
+    "explanation": "Decision: penalty kick stands. The ball struck OHT No.23 Lucas Tordello\u2019s arm 11.1 m inside the penalty area. The arm was 0.31 m from the body and its position followed from the body\u2019s movement. Whether the arm made the body unnaturally bigger was debatable, so the on-field decision is upheld."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "OHT-DMU-5009:158:handball",
+    "category": "handball",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 13.83,
+    "input_tokens": 457,
+    "output_tokens": 228,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "OHT-DMU-5009:265:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "clear_foul_inside",
+   "on_field": "penalty",
+   "expected": {
+    "final": "penalty",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "14"
+   },
+   "verdict": {
+    "final_decision": "penalty",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "Tackle occurred inside the penalty area (point x=10.317). Contact was made to the attacker\u2019s ankle and the defender did not play the ball first (played_ball_first: false). Awarding a penalty is correct; challenge was not reckless, so no card."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "OHT-DMU-5009:265:penalty_claim",
+    "category": "penalty_claim",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": false,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 13.15,
+    "input_tokens": 1770,
+    "output_tokens": 1101,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "OHT-DMU-5009:265:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "clear_foul_inside",
+   "on_field": "penalty",
+   "expected": {
+    "final": "penalty",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "14"
+   },
+   "verdict": {
+    "final_decision": "penalty",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "14",
+    "explanation": "Decision: penalty kick stands. Why: OHT No.32 Hugo Joranek made contact with DMU No.32 Viktor Brenleigh (tackle at the ankle) 6.2 m inside the penalty area. Under Law 14, a direct free-kick offence inside the penalty area awards a penalty."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "OHT-DMU-5009:265:penalty_claim",
+    "category": "penalty_claim",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 20.31,
+    "input_tokens": 315,
+    "output_tokens": 467,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "OHT-DMU-5009:450:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "At the pass (ball at x=97.94) OHT-32\u2019s relevant parts are at x\u224896.3\u201396.8, behind DMU-35\u2019s most advanced relevant part (right foot x=97.9). OHT-32 was onside, so the goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "OHT-DMU-5009:450:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 13.83,
+    "input_tokens": 4888,
+    "output_tokens": 1167,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "OHT-DMU-5009:450:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "Decision: Goal stands. Rationale: At the moment of the pass, OHT No.32 Hugo Joranek was 1.1 m behind the offside line set by DMU No.35 Florin Wenwellby, so Hugo Joranek was not in an offside position under Law 11; therefore the on-field decision is confirmed."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "OHT-DMU-5009:450:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 8.82,
+    "input_tokens": 417,
+    "output_tokens": 540,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "OHT-DMU-5009:548:red_card",
+   "category": "red_card",
+   "scenario": "borderline_sfp",
+   "on_field": "red",
+   "expected": {
+    "final": "red",
+    "card": "red",
+    "review": "check_complete",
+    "clause": "12.3-sfp"
+   },
+   "verdict": {
+    "final_decision": "red",
+    "card": "red",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "DMU-30 made a studs-up tackle, contacted OHT-38\u2019s shin without playing the ball first (speed 6.62 m/s). The challenge endangered the player; the referee\u2019s red card for serious foul play stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "OHT-DMU-5009:548:red_card",
+    "category": "red_card",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 12.44,
+    "input_tokens": 1841,
+    "output_tokens": 1208,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "OHT-DMU-5009:548:red_card",
+   "category": "red_card",
+   "scenario": "borderline_sfp",
+   "on_field": "red",
+   "expected": {
+    "final": "red",
+    "card": "red",
+    "review": "check_complete",
+    "clause": "12.3-sfp"
+   },
+   "verdict": {
+    "final_decision": "red",
+    "card": "red",
+    "review": "check_complete",
+    "clause": "12.3-sfp",
+    "explanation": "Decision: red card to Yusuf Ulwellby. Yusuf Ulwellby made contact with Florin Yorholme with a tackle to the shin; studs were showing and speed was 6.6 m/s. Under Law 12.3 (serious foul play) a lunging tackle that endangers safety or uses excessive force is a sending-off, so the on-field decision stands."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "OHT-DMU-5009:548:red_card",
+    "category": "red_card",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 5.32,
+    "input_tokens": 368,
+    "output_tokens": 325,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "OHT-DMU-5009:672:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "line_contact_outside",
+   "on_field": "penalty",
+   "expected": {
+    "final": "free_kick",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "free_kick",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12.1",
+    "explanation": "DMU-8 fouled OHT-4 with contact at 88.246,15.84. That location is outside the defending penalty area, so the correct restart is a direct free kick, not a penalty."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "OHT-DMU-5009:672:penalty_claim",
+    "category": "penalty_claim",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 9.54,
+    "input_tokens": 1827,
+    "output_tokens": 1103,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "OHT-DMU-5009:672:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "line_contact_outside",
+   "on_field": "penalty",
+   "expected": {
+    "final": "free_kick",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "free_kick",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12.1",
+    "explanation": "Decision: direct free kick to OHT. Why: contact by DMU No.8 Umar Sevanek on OHT No.4 Sami Sevkova (tackle at the ankle) occurred 25 cm outside the penalty area. Law 12 treats a tackle/trip as a direct free kick offence and contact is penalised where it happens, so not a penalty kick."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "OHT-DMU-5009:672:penalty_claim",
+    "category": "penalty_claim",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.67,
+    "input_tokens": 401,
+    "output_tokens": 398,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "OHT-DMU-5009:881:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "OHT-3 (torso x=17.07) was not closer to the goal than the second-last opponent DMU-35 (torso x=4.59) when OHT-6 played the ball (x=22.16), so the attacker was onside \u2014 goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "OHT-DMU-5009:881:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 12.03,
+    "input_tokens": 4725,
+    "output_tokens": 1453,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "OHT-DMU-5009:881:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "At the moment of the pass, OHT No.3 Kofi Zankova was 12.4 m behind the offside line set by DMU No.35 Florin Wenwellby. Kofi Zankova was not nearer to the opponents' goal than the second-last opponent, so he was not offside. The on-field decision stands: goal stands."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "OHT-DMU-5009:881:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.96,
+    "input_tokens": 418,
+    "output_tokens": 292,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "OHT-DMU-5009:908:offside",
+   "category": "offside",
+   "scenario": "teammate_not_involved",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "At the moment of the pass (ball x=88.64) DMU-23\u2019s relevant parts were at x\u2248100.43\u2013100.48, behind OHT-23 (second-last opponent) at x=102.14. DMU-24 was in an offside position (x\u2248103.03) but had no involvement. Goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "OHT-DMU-5009:908:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 12.78,
+    "input_tokens": 4724,
+    "output_tokens": 1676,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "OHT-DMU-5009:908:offside",
+   "category": "offside",
+   "scenario": "teammate_not_involved",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2",
+    "explanation": "VAR checked: Idris Lundello was in an offside position (1.1 m beyond the offside line set by Lucas Tordello) but involvement was not observed. Under Law 11 a player in an offside position is penalised only if becoming involved in active play. Therefore the on-field decision stands: goal awarded."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "OHT-DMU-5009:908:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 5.72,
+    "input_tokens": 489,
+    "output_tokens": 315,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "OHT-DMU-5009:1042:red_card",
+   "category": "red_card",
+   "scenario": "reckless_not_red",
+   "on_field": "yellow",
+   "expected": {
+    "final": "yellow",
+    "card": "yellow",
+    "review": "check_complete",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "yellow",
+    "card": "yellow",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "DMU-24 made a tackle on OHT-1, contacted the ankle and did not play the ball first. No studs-up, not off the ground, moderate speed and late contact 0.64s \u2014 not a clear and obvious red-card offence. On-field yellow stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "OHT-DMU-5009:1042:red_card",
+    "category": "red_card",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 8.34,
+    "input_tokens": 1821,
+    "output_tokens": 959,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "OHT-DMU-5009:1042:red_card",
+   "category": "red_card",
+   "scenario": "reckless_not_red",
+   "on_field": "yellow",
+   "expected": {
+    "final": "yellow",
+    "card": "yellow",
+    "review": "check_complete",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "yellow",
+    "card": "yellow",
+    "review": "check_complete",
+    "clause": "12.1",
+    "explanation": "DMU No.24 Idris Lundello made ankle contact with OHT No.1 Dmitri Evmannis 0.6 s after the ball went, at 5.1 m/s. Under Law 12 this contact was reckless, so the on-field yellow card is upheld."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "OHT-DMU-5009:1042:red_card",
+    "category": "red_card",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 3.57,
+    "input_tokens": 411,
+    "output_tokens": 280,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "OHT-DMU-5009:1256:red_card",
+   "category": "red_card",
+   "scenario": "sfp_excessive",
+   "on_field": "yellow",
+   "expected": {
+    "final": "red",
+    "card": "red",
+    "review": "on_field_review",
+    "clause": "12.3-sfp"
+   },
+   "verdict": {
+    "final_decision": "red",
+    "card": "red",
+    "review": "var_overturn",
+    "clause": "12",
+    "explanation": "DMU-24 made a studs-up lunge at OHT-22, contacting the player at the knee (contact=true) at 7.37 m/s and did not play the ball first. That studs-up lunge is serious foul play \u2014 red card."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "OHT-DMU-5009:1256:red_card",
+    "category": "red_card",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": false,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 9.09,
+    "input_tokens": 1879,
+    "output_tokens": 1080,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "OHT-DMU-5009:1256:red_card",
+   "category": "red_card",
+   "scenario": "sfp_excessive",
+   "on_field": "yellow",
+   "expected": {
+    "final": "red",
+    "card": "red",
+    "review": "on_field_review",
+    "clause": "12.3-sfp"
+   },
+   "verdict": {
+    "final_decision": "red",
+    "card": "red",
+    "review": "on_field_review",
+    "clause": "12.3-sfp",
+    "explanation": "On review, the referee changed the yellow card to a red card for DMU No.24 Idris Lundello for a studs-up, lunging tackle that made contact with OHT No.22 Hugo Rudfordt\u2019s knee at 7.4 m/s. The action met Law 12.3 (serious foul play) \u2014 excessive force/endangering safety."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "OHT-DMU-5009:1256:red_card",
+    "category": "red_card",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 6.4,
+    "input_tokens": 345,
+    "output_tokens": 433,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "OHT-DMU-5009:1389:offside",
+   "category": "offside",
+   "scenario": "tight_onside",
+   "on_field": "no_goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "no_goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2",
+    "explanation": "OHT-24 was in an offside position at the pass: his torso/head x 4.84/4.74 were nearer to the DMU goal line than the second\u2011last defender DMU-38 (torso x 5.0) and the ball (x 21.78). Goal correctly disallowed."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "OHT-DMU-5009:1389:offside",
+    "category": "offside",
+    "contested": true,
+    "verdict_ok": false,
+    "final_ok": false,
+    "card_ok": true,
+    "review_ok": false,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 12.5,
+    "input_tokens": 4595,
+    "output_tokens": 1602,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "OHT-DMU-5009:1389:offside",
+   "category": "offside",
+   "scenario": "tight_onside",
+   "on_field": "no_goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11.1",
+    "explanation": "On review VAR corrected a factual decision. At the moment of the pass OHT No.24 Bastian Ulovar was level with the offside line set by DMU No.38 Eli Yorkova (second-last opponent). Being level is not an offside position under Law 11, so the goal stands."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "OHT-DMU-5009:1389:offside",
+    "category": "offside",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 5.0,
+    "input_tokens": 409,
+    "output_tokens": 397,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "SMA-LKU-5010:78:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "When the pass was played (ball x=92.79), SMA-2\u2019s head/torso/feet were at x\u224891.2, behind the ball, so he was onside. Goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "SMA-LKU-5010:78:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 7.67,
+    "input_tokens": 4880,
+    "output_tokens": 773,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "SMA-LKU-5010:78:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "At the moment of the pass (first touch), SMA No.2 Emre Istsendt was 7.8 m behind the offside line set by LKU No.8 Viktor Coranek (second\u2011last opponent). Under Law 11 the player was not in an offside position, so the VAR confirmed the on\u2011field decision and the goal stands."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "SMA-LKU-5010:78:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 3.69,
+    "input_tokens": 415,
+    "output_tokens": 242,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "TDA-CWR-5012:541:offside",
+   "category": "offside",
+   "scenario": "restart_exempt",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "The goal came from a corner kick (CWR-27 kicked from [0.0,0.0]). Law 11: a player cannot be penalised for offside from a corner, so the on-field goal decision stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "TDA-CWR-5012:541:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 8.25,
+    "input_tokens": 4897,
+    "output_tokens": 816,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "TDA-CWR-5012:541:offside",
+   "category": "offside",
+   "scenario": "restart_exempt",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3",
+    "explanation": "Goal stands. VAR checked and the on-field decision stands because CWR No.10 Oscar Quinezar received the ball directly from a corner; Law 11.3 states there is no offside offence when a player receives the ball directly from a corner kick."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "TDA-CWR-5012:541:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.09,
+    "input_tokens": 288,
+    "output_tokens": 259,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "TDA-CWR-5012:678:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "At the moment of the pass TDA-4\u2019s relevant body parts (x\u224876.5) were behind the ball (x=93.08) and behind the second-last opponent CWR-38 (x\u224898.39). The attacker was onside, so the on-field goal decision stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "TDA-CWR-5012:678:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 9.76,
+    "input_tokens": 4888,
+    "output_tokens": 1226,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "TDA-CWR-5012:678:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "Decision: Goal stands. At the moment of the pass, TDA No.4 Viktor Rudanek was 21.9 m behind the offside line set by CWR No.38 Viktor Lunurza (second\u2011last opponent). Under Law 11 a player nearer the opponents\u2019 goal line than the second\u2011last opponent is offside; Rudanek was not, so the goal stands."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "TDA-CWR-5012:678:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 3.54,
+    "input_tokens": 415,
+    "output_tokens": 316,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "TDA-CWR-5012:774:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "TDA-10 was behind the ball (x 31.24 vs ball x 21.16) and further from CWR\u2019s goal than the second-last opponent (CWR-1 x 3.00 and CWR-22 x 5.49). No offside; goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "TDA-CWR-5012:774:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 11.85,
+    "input_tokens": 4886,
+    "output_tokens": 1283,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "TDA-CWR-5012:774:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "Decision: Goal stands. At the moment of the pass, TDA No.10 Felix Aldurza\u2019s left foot was 25.6 m behind the offside line set by CWR No.22 Tomas Lunanek. Under Law 11.1 a player nearer their own half than the second-last opponent is not in an offside position, so no offside offence occurred."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "TDA-CWR-5012:774:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 5.44,
+    "input_tokens": 416,
+    "output_tokens": 420,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "IVC-KBF-5013:661:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "At the pass moment (KBF-3 at x=22.62), scorer KBF-11\u2019s relevant parts were at x=33.2, behind the ball and not nearer the opponent\u2019s goal line than the ball. Therefore no offside; the on-field goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "IVC-KBF-5013:661:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 57.89,
+    "input_tokens": 4885,
+    "output_tokens": 1076,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "IVC-KBF-5013:661:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "VAR checked whether KBF No.11 Eli Falholme was offside at the moment of the pass, with the offside line set by IVC No.22 Pavel Evberik. At the pass Eli Falholme\u2019s right foot was 27.2 m behind the offside line, so Eli Falholme was not offside. Goal stands."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "IVC-KBF-5013:661:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.03,
+    "input_tokens": 416,
+    "output_tokens": 278,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "IVC-KBF-5013:1450:handball",
+   "category": "handball",
+   "scenario": "supporting_arm",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "The ball struck IVC\u20114\u2019s arm which was below shoulder level and in a natural supporting position; the arm did not move towards the ball and the ball arrived from 7.68 m. No deliberate or unnatural handball \u2014 on-field decision stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "IVC-KBF-5013:1450:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 6.87,
+    "input_tokens": 1689,
+    "output_tokens": 793,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "IVC-KBF-5013:1450:handball",
+   "category": "handball",
+   "scenario": "supporting_arm",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball",
+    "explanation": "Decision: No handball; play restarts without a penalty. Reason: The ball struck IVC No.4 Viktor Gormannis\u2019s arm 5.6 m inside the penalty area while the arm (0.36 m from the body) was supporting a fall. That arm position was a consequence of the body movement and not an offence under Law 12.1."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "IVC-KBF-5013:1450:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.16,
+    "input_tokens": 437,
+    "output_tokens": 269,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "IVC-KBF-5013:1467:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "At the moment of the pass the ball was at x=83.46, KBF-3 was at x\u224893.49 and the second\u2011last opponent IVC-27 was at x\u2248101.54. KBF-3 was behind the second\u2011last opponent (onside), so the on-field goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "IVC-KBF-5013:1467:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 10.18,
+    "input_tokens": 4892,
+    "output_tokens": 1233,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "IVC-KBF-5013:1467:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "VAR checked the moment of the pass: KBF No.3 Idris Gorleigh\u2019s right foot was 8.1 m behind the offside line set by IVC No.27 Sami Yorfordt (second-last opponent). Idris Gorleigh was onside, so the on-field decision stands and the goal stands."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "IVC-KBF-5013:1467:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.74,
+    "input_tokens": 416,
+    "output_tokens": 336,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "IVC-KBF-5013:1515:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "KBF-11 was behind the ball at the pass (attacker x \u224866.7; ball x=74.41). Being behind the ball, he was not in an offside position. The on-field goal decision stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "IVC-KBF-5013:1515:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 7.29,
+    "input_tokens": 4917,
+    "output_tokens": 694,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "IVC-KBF-5013:1515:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "Decision: goal stands. Why: At the moment of the pass, KBF No.11 Eli Falholme\u2019s right foot was 24.9 m behind the offside line set by IVC No.4 Viktor Gormannis (the second\u2011last opponent). Under Law 11, Eli Falholme was not in an offside position, so no offside offence occurred."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "IVC-KBF-5013:1515:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 5.0,
+    "input_tokens": 418,
+    "output_tokens": 550,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "AGA-NBR-5014:48:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "At the moment of the pass (NBR-37 at x=47.07) NBR-14 was at x=38.90 and the second-last opponent (AGA-9) was at x=34.47. NBR-14 was not nearer the opponent goal line than the second-last opponent, so the goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "AGA-NBR-5014:48:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 11.69,
+    "input_tokens": 4836,
+    "output_tokens": 1486,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "AGA-NBR-5014:48:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "Decision: Goal stands. At the moment of the pass, NBR No.14 Adem Praezar was 4.6 m behind the offside line set by AGA No.9 Umar Morinni, so Adem Praezar was not nearer to the opponents' goal line than the second-last opponent and therefore not in an offside position under Law 11.1."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "AGA-NBR-5014:48:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 5.26,
+    "input_tokens": 415,
+    "output_tokens": 582,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "AGA-NBR-5014:421:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "At the pass (ball at x=96.27), AGA-33\u2019s head/torso were at x\u224881.6 (head 81.67, torso 81.58), behind both the ball and the second-last opponent NBR-7 (torso x=96.78). AGA-33 was onside, so the goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "AGA-NBR-5014:421:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 11.21,
+    "input_tokens": 4816,
+    "output_tokens": 1502,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "AGA-NBR-5014:421:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "VAR checked the moment of the pass: at that moment AGA No.33 Goran Gorurza was 15.1 m behind the offside line set by NBR No.7 Idris Kalezar (second-last opponent). Under Law 11 Goran Gorurza was not in an offside position, so the on-field decision stands and the goal is awarded."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "AGA-NBR-5014:421:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.49,
+    "input_tokens": 417,
+    "output_tokens": 358,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "KBF-WVF-5015:687:offside",
+   "category": "offside",
+   "scenario": "tight_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "no_goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11",
+    "explanation": "When WVF-34 played the ball (x=17.9), WVF-37\u2019s right foot was at x=7.30m\u20140.01m closer to the goal line than KBF-2\u2019s left foot at x=7.31m\u2014so WVF-37 was in an offside position. Goal disallowed (Law 11)."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "KBF-WVF-5015:687:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": false,
+    "final_ok": false,
+    "card_ok": true,
+    "review_ok": false,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 12.55,
+    "input_tokens": 4890,
+    "output_tokens": 1602,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "KBF-WVF-5015:687:offside",
+   "category": "offside",
+   "scenario": "tight_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "Decision: Goal stands. At the pass, WVF No.37 Yusuf Jorsendt was level with the offside line set by KBF No.31 Zeno Brenwellby (second\u2011last opponent). Only an arm was beyond the line; arms are ignored and being level is not offside, so the on-field decision is upheld."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "KBF-WVF-5015:687:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.56,
+    "input_tokens": 427,
+    "output_tokens": 263,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "KBF-WVF-5015:820:offside",
+   "category": "offside",
+   "scenario": "teammate_not_involved",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2",
+    "explanation": "KBF-33 was in an offside position at KBF-4\u2019s cross but the packet records his involvement as 'none'. The ball was played by KBF-4 and the scorer was KBF-22. No offside offence; the on-field goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "KBF-WVF-5015:820:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 11.74,
+    "input_tokens": 4882,
+    "output_tokens": 1636,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "KBF-WVF-5015:820:offside",
+   "category": "offside",
+   "scenario": "teammate_not_involved",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2",
+    "explanation": "Tomas Sevovar was in an offside position (3.3 m beyond the offside line set by Pavel Istkova) when the pass was played, but Sevovar was not involved in active play per Law 11.2. No offside offence occurred, so the goal stands."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "KBF-WVF-5015:820:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 3.77,
+    "input_tokens": 487,
+    "output_tokens": 253,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "KBF-WVF-5015:1347:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "When the ball was played (x=76.25), attacker WVF-4 was at x=86.55, which is behind the second-last opponent KBF-2 (x=95.81). The attacker was onside, so the on-field goal decision stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "KBF-WVF-5015:1347:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 9.04,
+    "input_tokens": 4886,
+    "output_tokens": 1091,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "KBF-WVF-5015:1347:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "Decision: Goal stands. At the moment of the pass, WVF No.4 Idris Istvanek\u2019s left foot was 9.2 m behind the offside line set by KBF No.2 Idris Dalmannis. Under Law 11, being level with or behind the second-last opponent is not offside, so no offside offence occurred."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "KBF-WVF-5015:1347:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.32,
+    "input_tokens": 418,
+    "output_tokens": 371,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "IVC-KBF-5016:128:handball",
+   "category": "handball",
+   "scenario": "above_shoulder_justified",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "KBF-35\u2019s arm was above the shoulder but did not move towards the ball and the position is recorded as justified_by_movement. No clear handball \u2014 on-field no-foul decision stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "IVC-KBF-5016:128:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 9.1,
+    "input_tokens": 1661,
+    "output_tokens": 1184,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "IVC-KBF-5016:128:handball",
+   "category": "handball",
+   "scenario": "above_shoulder_justified",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball",
+    "explanation": "VAR checked: on-field decision stands \u2014 no foul, play restarts without a penalty. The ball struck KBF No.35 Idris Rudholme\u2019s arm 9.5 m inside the area, but the arm (0.39 m from body, above shoulder) followed from the body\u2019s movement and did not make the body unnaturally bigger."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "IVC-KBF-5016:128:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 36.25,
+    "input_tokens": 444,
+    "output_tokens": 286,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "IVC-KBF-5016:216:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2",
+    "explanation": "At the pass (IVC\u201124 at x=84.25) the goalkeeper KBF\u20111 was at x=102.75 and the second\u2011last opponent KBF\u20112 at x=98.51. The nearest IVC attackers were at x=96.34 and x=92.27, both behind the second\u2011last opponent. No offside; goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "IVC-KBF-5016:216:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 13.14,
+    "input_tokens": 4886,
+    "output_tokens": 1740,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "IVC-KBF-5016:216:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "Decision: goal stands. At the moment of the pass, IVC No.22 Pavel Evberik was not in an offside position: Pavel Evberik\u2019s right foot was 42.2 m behind the offside line set by KBF No.2 Idris Dalmannis."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "IVC-KBF-5016:216:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 3.77,
+    "input_tokens": 417,
+    "output_tokens": 291,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "IVC-KBF-5016:359:handball",
+   "category": "handball",
+   "scenario": "above_shoulder_justified",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "KBF-22 blocked an IVC shot with the arm 0.33 m from the body and above shoulder. The arm did not move towards the ball and its position was justified by the player's movement. No clear and obvious handball; on-field 'no foul' stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "IVC-KBF-5016:359:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 14.1,
+    "input_tokens": 1772,
+    "output_tokens": 1240,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "IVC-KBF-5016:359:handball",
+   "category": "handball",
+   "scenario": "above_shoulder_justified",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball",
+    "explanation": "Decision: No foul, on-field decision stands; play restarts without a penalty. Rationale: Ball struck KBF No.22 Idris Vasdello\u2019s arm 2.3 m inside the penalty area, but the arm (0.33 m from the body, above the shoulder) follows from the body\u2019s movement, so it did not make the body unnaturally bigger and no deliberate handling occurred under Law 12."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "IVC-KBF-5016:359:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.25,
+    "input_tokens": 444,
+    "output_tokens": 375,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "IVC-KBF-5016:592:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2",
+    "explanation": "At the moment of the pass from IVC-16 (x 61.91), IVC-37 was at x 70.86 and behind the second-last opponent KBF-2 (x 81.35), so onside; goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "IVC-KBF-5016:592:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 12.04,
+    "input_tokens": 4884,
+    "output_tokens": 1570,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "IVC-KBF-5016:592:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "Goal stands. At the moment of the pass, IVC No.37 Eli Kalovar was 10.3 m behind the offside line set by KBF No.2 Idris Dalmannis, so Kalovar was not nearer the opponents\u2019 goal line than the second-last opponent and therefore not in an offside position under Law 11.1."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "IVC-KBF-5016:592:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 3.9,
+    "input_tokens": 416,
+    "output_tokens": 290,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "IVC-KBF-5016:664:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2",
+    "explanation": "IVC-22\u2019s throw-in was played directly to IVC-37, who played the ball and scored. Receiving the ball directly from a throw-in cannot be offside, so the on-field goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "IVC-KBF-5016:664:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 11.56,
+    "input_tokens": 4885,
+    "output_tokens": 1390,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "IVC-KBF-5016:664:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3",
+    "explanation": "VAR checked offside at 42:25. Decision: goal stands. Rationale: IVC No.37 Eli Kalovar received the ball directly from a throw\u2011in. Law 11.3 states there is no offside offence when a player receives the ball directly from a throw\u2011in."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "IVC-KBF-5016:664:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.31,
+    "input_tokens": 288,
+    "output_tokens": 304,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "IVC-KBF-5016:1264:offside",
+   "category": "offside",
+   "scenario": "arm_beyond",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "no_goal",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "11",
+    "explanation": "KBF-3 was offside at the pass: his left foot (x 87.26) was ahead of the second\u2011last opponent IVC-29 (x 87.18) when KBF-22 played the ball (x 72.27). Goal disallowed for offside."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "IVC-KBF-5016:1264:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": false,
+    "final_ok": false,
+    "card_ok": true,
+    "review_ok": false,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 11.8,
+    "input_tokens": 4888,
+    "output_tokens": 1326,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "IVC-KBF-5016:1264:offside",
+   "category": "offside",
+   "scenario": "arm_beyond",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "Decision: Goal stands. At the moment of the pass (76:39), KBF No.3 Idris Gorleigh\u2019s left foot was 11 cm behind the offside line set by IVC No.29 Pavel Ostivic (second-last opponent). Only an arm was beyond the line; arms are ignored under Law 11, so Gorleigh was not in an offside position."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "IVC-KBF-5016:1264:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 5.52,
+    "input_tokens": 430,
+    "output_tokens": 536,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "TDA-PLC-5017:580:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2",
+    "explanation": "The ball was played by PLC-3 from x=12.12. PLC-11\u2019s relevant body parts are at x\u224830.84, which is behind the ball (attack is to the left), so he was not in an offside position. On-field goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "TDA-PLC-5017:580:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 7.0,
+    "input_tokens": 4824,
+    "output_tokens": 706,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "TDA-PLC-5017:580:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "Goal stands. At the moment of the pass, PLC No.11 Emre Vasholme\u2019s right foot was 24.6 m behind the offside line set by TDA No.9 Lucas Vasdello, so Emre Vasholme was not nearer to the opponents\u2019 goal line than the second-last opponent. Under Law 11.1 this is not offside."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "TDA-PLC-5017:580:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 5.69,
+    "input_tokens": 417,
+    "output_tokens": 444,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "TDA-PLC-5017:850:offside",
+   "category": "offside",
+   "scenario": "restart_exempt",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "The ball was played from a corner by PLC-23 and the scorer was PLC-25. Law 11 states there is no offside offence directly from a corner kick, so the on-field goal decision stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "TDA-PLC-5017:850:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 5.91,
+    "input_tokens": 4826,
+    "output_tokens": 539,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "TDA-PLC-5017:850:offside",
+   "category": "offside",
+   "scenario": "restart_exempt",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3",
+    "explanation": "Decision: Goal stands. Reason: PLC No.25 Dario Vaswellby received the ball directly from a corner. Law 11.3 states there is no offside offence when a player receives the ball directly from a corner, so no offside occurred."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "TDA-PLC-5017:850:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 3.74,
+    "input_tokens": 288,
+    "output_tokens": 157,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "TDA-PLC-5017:903:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2",
+    "explanation": "At the moment of the pass the ball was at x=47.98 and attacker TDA-35\u2019s body parts were around x=67.3, so he was behind the ball (not nearer the opponent\u2019s goal). The on-field goal decision stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "TDA-PLC-5017:903:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 12.4,
+    "input_tokens": 4836,
+    "output_tokens": 1554,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "TDA-PLC-5017:903:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "Decision: Goal stands. At the moment of the pass (first contact), TDA No.35 Idris Vasivic was 31.8 m behind the offside line set by PLC No.28 Idris Brenholme, so Vasivic was not nearer to the opponents\u2019 goal line than the second\u2011last opponent. Under Law 11 the position is not offside."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "TDA-PLC-5017:903:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.26,
+    "input_tokens": 416,
+    "output_tokens": 337,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "BRC-FVT-5018:298:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "BRC-23\u2019s most-advanced point (right foot x=94.10) is behind the second-last opponent FVT-37 (most-advanced point x=99.05). He is therefore onside at the moment BRC-22 played the ball (x=91.69); the on-field goal decision stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "BRC-FVT-5018:298:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 12.51,
+    "input_tokens": 4883,
+    "output_tokens": 1564,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "BRC-FVT-5018:298:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "VAR found that at the moment of the pass Umar Wenezar\u2019s right foot was 5.0 m behind the offside line set by Pavel Torezar (second\u2011last opponent). Wenezar was not in an offside position, so the on-field decision stands: goal stands."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "BRC-FVT-5018:298:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.23,
+    "input_tokens": 415,
+    "output_tokens": 306,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "BRC-FVT-5018:483:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "attacker_initiated",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "penalty",
+    "card": "no_card",
+    "review": "var_overturn",
+    "clause": "12.1",
+    "explanation": "FVT-18 made ankle contact and tripped BRC-11, did not play the ball, at x=103.0 (inside the penalty area). On-field \u2018no foul\u2019 was incorrect \u2014 award a penalty. No additional misconduct identified."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "BRC-FVT-5018:483:penalty_claim",
+    "category": "penalty_claim",
+    "contested": false,
+    "verdict_ok": false,
+    "final_ok": false,
+    "card_ok": true,
+    "review_ok": false,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 8.64,
+    "input_tokens": 1774,
+    "output_tokens": 982,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "BRC-FVT-5018:483:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "attacker_initiated",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1",
+    "explanation": "Decision: On-field decision stands \u2014 no foul; play restarts without a penalty. Why: Contact occurred between FVT No.18 Callum Halwellby and BRC No.11 Zeno Gorleigh (trip at the ankle, 11.0 m inside the penalty area), but BRC No.11 Zeno Gorleigh moved into the contact. No punishable foul was identified under Law 12."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "BRC-FVT-5018:483:penalty_claim",
+    "category": "penalty_claim",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.33,
+    "input_tokens": 430,
+    "output_tokens": 423,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "BRC-FVT-5018:569:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "clear_foul_outside",
+   "on_field": "free_kick",
+   "expected": {
+    "final": "free_kick",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "free_kick",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "FVT-6 made contact and did not play the ball (tackle). The foul point is at x=86.357, which is outside the right-side penalty area, so the on-field direct free kick stands; no misconduct shown."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "BRC-FVT-5018:569:penalty_claim",
+    "category": "penalty_claim",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 10.47,
+    "input_tokens": 1826,
+    "output_tokens": 1036,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "BRC-FVT-5018:569:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "clear_foul_outside",
+   "on_field": "free_kick",
+   "expected": {
+    "final": "free_kick",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "free_kick",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1",
+    "explanation": "VAR checked and on-field decision stands: a direct free kick awarded where contact occurred 2.1 m outside the penalty area. FVT No.6 Bastian Yorleigh\u2019s tackle made ankle contact with BRC No.23 Umar Wenezar, a direct free kick offence under Law 12; contact is penalised at the point of contact."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "BRC-FVT-5018:569:penalty_claim",
+    "category": "penalty_claim",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.37,
+    "input_tokens": 409,
+    "output_tokens": 378,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "BRC-FVT-5018:600:offside",
+   "category": "offside",
+   "scenario": "restart_exempt",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "Corner kick by BRC-6 resulted in a goal by BRC-11. Under Law 11 a player cannot be offside directly from a corner kick, so the on-field decision (goal) stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "BRC-FVT-5018:600:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 5.28,
+    "input_tokens": 4881,
+    "output_tokens": 515,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "BRC-FVT-5018:600:offside",
+   "category": "offside",
+   "scenario": "restart_exempt",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3",
+    "explanation": "Decision: Goal stands. The ball reached BRC No.11 Zeno Gorleigh directly from a corner. Law 11.3 states there is no offside offence when a player receives the ball directly from a corner kick. Therefore no offside; the on-field decision stands."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "BRC-FVT-5018:600:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 3.24,
+    "input_tokens": 288,
+    "output_tokens": 225,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "BRC-FVT-5018:920:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "The ball was played directly from a corner by BRC-11 and received/played by BRC-23. There is no offside offence from a corner kick, so the on-field goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "BRC-FVT-5018:920:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 8.64,
+    "input_tokens": 4888,
+    "output_tokens": 930,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "BRC-FVT-5018:920:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.3",
+    "explanation": "VAR checked and the on-field decision stands: the goal stands. Umar Wenezar received the ball directly from a corner, and Law 11.3 says there is no offside offence when the ball is received directly from a corner."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "BRC-FVT-5018:920:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.55,
+    "input_tokens": 288,
+    "output_tokens": 186,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "BRC-FVT-5018:968:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "holding",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "penalty",
+    "card": "no_card",
+    "review": "on_field_review",
+    "clause": "14"
+   },
+   "verdict": {
+    "final_decision": "penalty",
+    "card": "yellow",
+    "review": "var_overturn",
+    "clause": "12",
+    "explanation": "FVT-6 held BRC-11 at point x=9.698 inside the penalty area, made upper-body contact and did not play the ball. Clear foul: penalty awarded and FVT-6 cautioned (yellow) for holding."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "BRC-FVT-5018:968:penalty_claim",
+    "category": "penalty_claim",
+    "contested": true,
+    "verdict_ok": false,
+    "final_ok": true,
+    "card_ok": false,
+    "review_ok": false,
+    "law_ok": false,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 8.83,
+    "input_tokens": 1823,
+    "output_tokens": 990,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "BRC-FVT-5018:968:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "holding",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "penalty",
+    "card": "no_card",
+    "review": "on_field_review",
+    "clause": "14"
+   },
+   "verdict": {
+    "final_decision": "penalty",
+    "card": "no_card",
+    "review": "on_field_review",
+    "clause": "14",
+    "explanation": "Penalty awarded. FVT No.6 Bastian Yorleigh held BRC No.11 Zeno Gorleigh (upper-body contact) 1.0 m inside the penalty area. Holding is a direct free-kick offence; since it occurred inside the penalty area, a penalty kick is awarded under Law 14."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "BRC-FVT-5018:968:penalty_claim",
+    "category": "penalty_claim",
+    "contested": true,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.31,
+    "input_tokens": 325,
+    "output_tokens": 245,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "AGA-QMF-5019:287:handball",
+   "category": "handball",
+   "scenario": "arm_natural_close",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "No foul: AGA-3\u2019s arm was 0.03 m from the body, not above the shoulder, did not move toward the ball and contact was justified by the player\u2019s movement, so no deliberate handball."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "AGA-QMF-5019:287:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 6.82,
+    "input_tokens": 1670,
+    "output_tokens": 721,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "AGA-QMF-5019:287:handball",
+   "category": "handball",
+   "scenario": "arm_natural_close",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball",
+    "explanation": "VAR reviewed contact at 19:09: the ball struck AGA No.3 Dario Vasvanek\u2019s arm 7.3 m inside the penalty area. Vasvanek\u2019s arm was 0.03 m from the body and its position followed from the body\u2019s movement, so it was not deemed an \u2018unnaturally bigger\u2019 or deliberate handball. On-field decision stands: no foul, restart without a penalty."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "AGA-QMF-5019:287:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 6.85,
+    "input_tokens": 440,
+    "output_tokens": 343,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "RHU-IVC-5020:71:offside",
+   "category": "offside",
+   "scenario": "clear_offside",
+   "on_field": "no_goal",
+   "expected": {
+    "final": "no_goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2"
+   },
+   "verdict": {
+    "final_decision": "no_goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2",
+    "explanation": "RHU-16 was in an offside position when RHU-38 played the ball: RHU-16\u2019s most forward part x=86.10 was ahead of second-last opponent IVC-22\u2019s most forward part x=85.41 and ahead of the ball x=68.13. On-field decision confirmed."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "RHU-IVC-5020:71:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 13.18,
+    "input_tokens": 4893,
+    "output_tokens": 1665,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "RHU-IVC-5020:71:offside",
+   "category": "offside",
+   "scenario": "clear_offside",
+   "on_field": "no_goal",
+   "expected": {
+    "final": "no_goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2"
+   },
+   "verdict": {
+    "final_decision": "no_goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.2",
+    "explanation": "Decision: Goal disallowed \u2014 VAR checked and on-field decision stands. At the moment of the pass, RHU No.16 Cian Prawellby was 69 cm beyond the offside line set by IVC No.22 Pavel Evberik, and became involved in active play by playing/touching the ball (interfering with play, Law 11.2(a))."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "RHU-IVC-5020:71:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.19,
+    "input_tokens": 457,
+    "output_tokens": 324,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "RHU-IVC-5020:332:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "At the pass (ball x=9.99) IVC-37\u2019s relevant part was at x=9.88. Two opponents were nearer their goal (RHU-1 x=3.61, RHU-28 x=6.63), so the attacker was onside. Goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "RHU-IVC-5020:332:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 12.16,
+    "input_tokens": 4892,
+    "output_tokens": 1566,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "RHU-IVC-5020:332:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "Decision: Goal stands. Reason: At the moment of the pass, IVC No.37 Eli Kalovar\u2019s right foot was 3.5 m behind the offside line set by RHU No.28 Emre Kalsendt (the second\u2011last opponent). Being behind the second\u2011last opponent means Eli Kalovar was not in an offside position under Law 11, so the on-field decision stands."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "RHU-IVC-5020:332:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 5.18,
+    "input_tokens": 416,
+    "output_tokens": 324,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "RHU-IVC-5020:541:handball",
+   "category": "handball",
+   "scenario": "above_shoulder_justified",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "The ball struck IVC-34\u2019s arm above the shoulder, but the arm did not move towards the ball and its position was justified by the player\u2019s movement, so the on-field decision (no foul) stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "RHU-IVC-5020:541:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 12.67,
+    "input_tokens": 1745,
+    "output_tokens": 1748,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "RHU-IVC-5020:541:handball",
+   "category": "handball",
+   "scenario": "above_shoulder_justified",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball",
+    "explanation": "Decision: No handball \u2014 on-field decision stands. The ball hit IVC No.34 Viktor Zanvanek\u2019s arm 5.0 m inside the penalty area; the arm was 0.32 m from the body and above the shoulder. The arm position followed from the body\u2019s movement, so it was not considered to make the body unnaturally bigger and not an offence."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "RHU-IVC-5020:541:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 3.96,
+    "input_tokens": 443,
+    "output_tokens": 183,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "RHU-IVC-5020:656:handball",
+   "category": "handball",
+   "scenario": "arm_natural_close",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "Ball struck IVC\u201129\u2019s arm 0.18 m from his body, below the shoulder. He did not move his arm towards the ball and the arm position was justified by his movement, so no handball offence \u2014 on-field decision stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "RHU-IVC-5020:656:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 16.18,
+    "input_tokens": 1685,
+    "output_tokens": 724,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "RHU-IVC-5020:656:handball",
+   "category": "handball",
+   "scenario": "arm_natural_close",
+   "on_field": "no_foul",
+   "expected": {
+    "final": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball"
+   },
+   "verdict": {
+    "final_decision": "no_foul",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1-handball",
+    "explanation": "VAR review: contact 4.4 m inside the penalty area \u2014 the ball struck IVC No.29 Pavel Ostivic\u2019s arm, held 0.18 m from the body. The arm position followed from the body\u2019s movement, so it did not make the body \u201cunnaturally bigger\u201d and was not deliberate. On-field decision stands: no handball; play restarts without a penalty."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "RHU-IVC-5020:656:handball",
+    "category": "handball",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.47,
+    "input_tokens": 438,
+    "output_tokens": 288,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "RHU-IVC-5020:1079:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "line_contact_outside",
+   "on_field": "free_kick",
+   "expected": {
+    "final": "free_kick",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "free_kick",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12",
+    "explanation": "IVC\u201129 tripped RHU\u201136 with contact at the ankle at point x=16.586. RHU were attacking left (attacks_right=false); the contact point is just outside the penalty area (16.5 m), so the on-field decision for a free kick stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "RHU-IVC-5020:1079:penalty_claim",
+    "category": "penalty_claim",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 7.29,
+    "input_tokens": 1909,
+    "output_tokens": 875,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "RHU-IVC-5020:1079:penalty_claim",
+   "category": "penalty_claim",
+   "scenario": "line_contact_outside",
+   "on_field": "free_kick",
+   "expected": {
+    "final": "free_kick",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1"
+   },
+   "verdict": {
+    "final_decision": "free_kick",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "12.1",
+    "explanation": "Decision: Free kick outside the penalty area. Reason: IVC No.29 Pavel Ostivic tripped RHU No.36 Viktor Zansendt at the ankle. The point of contact was 9 cm outside the penalty area, and Law 12 says contact offences are penalised where the contact happens, so a direct free kick applies outside the area."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "RHU-IVC-5020:1079:penalty_claim",
+    "category": "penalty_claim",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.95,
+    "input_tokens": 405,
+    "output_tokens": 359,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "RHU-IVC-5020:1287:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "Pass from IVC-24 (ball at x=85.5). IVC-12 was at x=72.55 (behind the ball) at the moment of the pass, so not in an offside position; goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "RHU-IVC-5020:1287:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 8.01,
+    "input_tokens": 4895,
+    "output_tokens": 935,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "RHU-IVC-5020:1287:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "VAR checked the position at the moment of the pass. IVC No.12 Oscar Brenwellby\u2019s left foot was 26.9 m behind the offside line set by RHU No.28 Emre Kalsendt (second\u2011last opponent). Brenwellby was not in an offside position under Law 11, so the on\u2011field decision stands: goal stands."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "RHU-IVC-5020:1287:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 28.96,
+    "input_tokens": 416,
+    "output_tokens": 322,
+    "error": null
+   }
+  },
+  {
+   "arm": "model_only",
+   "incident_id": "RHU-IVC-5020:1501:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11",
+    "explanation": "RHU-36\u2019s closest playable part (torso x=9.78) is behind the second-last opponent IVC-29\u2019s nearest relevant part (left foot x=6.47). The ball was at x=15.81, so RHU-36 was onside. Goal stands."
+   },
+   "score": {
+    "arm": "model_only",
+    "incident_id": "RHU-IVC-5020:1501:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": false,
+    "stale": [],
+    "seconds": 12.15,
+    "input_tokens": 4922,
+    "output_tokens": 1525,
+    "error": null
+   }
+  },
+  {
+   "arm": "ruling_v0",
+   "incident_id": "RHU-IVC-5020:1501:offside",
+   "category": "offside",
+   "scenario": "clear_onside",
+   "on_field": "goal",
+   "expected": {
+    "final": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1"
+   },
+   "verdict": {
+    "final_decision": "goal",
+    "card": "no_card",
+    "review": "check_complete",
+    "clause": "11.1",
+    "explanation": "Decision: Goal stands. At the moment of the pass, RHU No.36 Viktor Zansendt\u2019s right foot was 3.2 m behind the offside line set by IVC No.29 Pavel Ostivic (second\u2011last opponent). Law 11 judges position at the first touch; because Viktor was behind the second\u2011last opponent he was not in an offside position, so no offside offence."
+   },
+   "score": {
+    "arm": "ruling_v0",
+    "incident_id": "RHU-IVC-5020:1501:offside",
+    "category": "offside",
+    "contested": false,
+    "verdict_ok": true,
+    "final_ok": true,
+    "card_ok": true,
+    "review_ok": true,
+    "law_ok": true,
+    "clause_ok": true,
+    "stale": [],
+    "seconds": 4.08,
+    "input_tokens": 417,
+    "output_tokens": 347,
+    "error": null
+   }
+  }
+ ]
+}
