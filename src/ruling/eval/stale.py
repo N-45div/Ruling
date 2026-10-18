@@ -26,15 +26,20 @@ def _sentences(text: str) -> list[str]:
     return [s for s in re.split(r"(?<=[.!?])\s+", text) if s]
 
 
-def stale_citations(text: str, category: str) -> list[str]:
+OFFENCE_DECISIONS = frozenset({"penalty", "free_kick", "no_goal"})
+
+
+def stale_citations(text: str, category: str, decision: str | None = None) -> list[str]:
+    """`decision` is the explanation's final decision: removed handball wording counts as relied on
+    only when it explains an offence."""
     hits = []
     for sentence in _sentences(text):
         for name, pattern in _PATTERNS.items():
             if not pattern.search(sentence):
                 continue
-            # "An arm above the shoulder is not automatically handball" is current Law, not stale.
-            if name == "handball_above_shoulder" and _NEGATION.search(sentence):
-                continue
+            if name == "handball_above_shoulder" and (
+                    _NEGATION.search(sentence) or (decision is not None and decision not in OFFENCE_DECISIONS)):
+                continue  # mentioning the arm's height while finding no offence is current Law
             hits.append(name)
         # DOGSO considerations listed without the attackers added in 2026/27.
         if (category == "red_card" and _DOGSO.search(sentence) and re.search(r"defender", sentence, re.I)

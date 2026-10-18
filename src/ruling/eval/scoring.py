@@ -83,7 +83,7 @@ def score(arm: str, incident: m.Incident, result: ArmResult) -> Score:
         review_ok=v.review == incident.var_review,
         law_ok=_law_number(v.clause) == _law_number(truth_clause),
         clause_ok=_clause(v.clause) == _clause(truth_clause),
-        stale=tuple(stale_citations(v.explanation, incident.category)), **base,
+        stale=tuple(stale_citations(v.explanation, incident.category, v.final_decision)), **base,
     )
 
 

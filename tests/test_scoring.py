@@ -58,3 +58,10 @@ def test_summary_reports_both_arms_and_their_difference(incidents):
     summary = summarize(rows)
     assert summary["arms"]["b"]["verdict_ok"] == 1.0
     assert summary["difference"]["all"]["comparison"] == "b - a"
+
+
+def test_above_the_shoulder_counts_as_stale_only_when_it_explains_an_offence():
+    text = "The arm was above the shoulder, but its position follows from the body's movement."
+    assert stale_citations(text, "handball", "no_foul") == []
+    assert stale_citations("The arm was above the shoulder, so a penalty.", "handball", "penalty") == [
+        "handball_above_shoulder"]
