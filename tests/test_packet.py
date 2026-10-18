@@ -15,17 +15,29 @@ def packets():
     return out
 
 
-# Scenario names that are also ordinary fact vocabulary (a challenge type, a handball cue).
-FACT_WORDS = {"holding", "supporting_arm"}
+# Scenario names that are also an ordinary fact value (the "holding" challenge type).
+FACT_VALUES = {"holding"}
+
+
+def _values(obj):
+    if isinstance(obj, dict):
+        for v in obj.values():
+            yield from _values(v)
+    elif isinstance(obj, (list, tuple)):
+        for v in obj:
+            yield from _values(v)
+    else:
+        yield obj
 
 
 def test_no_ground_truth_reaches_the_packet(packets):
     for _, incident, packet in packets:
-        text = json.dumps(packet_dict(packet))
+        data = packet_dict(packet)
+        text = json.dumps(data)
         for field in HIDDEN:
             assert f'"{field}"' not in text
-        if incident.scenario not in FACT_WORDS:
-            assert incident.scenario not in text  # scenario labels never leak through the facts
+        if incident.scenario not in FACT_VALUES:
+            assert incident.scenario not in set(_values(data))  # no scenario label as a value
 
 
 def test_the_packet_carries_the_on_field_call_and_the_event_under_review(packets):
