@@ -5,7 +5,9 @@ description = "A decision desk for refereeing calls: computed evidence, the Law,
 readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"
-dependencies = []
+dependencies = [
+    "azure-identity>=1.26.0",
+]
 
 [project.scripts]
 ruling-sim = "ruling.sim.cli:main"
