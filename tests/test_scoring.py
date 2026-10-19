@@ -57,7 +57,7 @@ def test_summary_reports_both_arms_and_their_difference(incidents):
         rows.append(score("b", incident, ArmResult(Verdict(final, card, incident.var_review, incident.ruling["clause"]))))
     summary = summarize(rows)
     assert summary["arms"]["b"]["verdict_ok"] == 1.0
-    assert summary["difference"]["all"]["comparison"] == "b - a"
+    assert summary["difference"]["b"]["all"]["comparison"] == "b - a"
 
 
 def test_above_the_shoulder_counts_as_stale_only_when_it_explains_an_offence():

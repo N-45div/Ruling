@@ -27,6 +27,7 @@ class ArmResult:
     input_tokens: int = 0
     output_tokens: int = 0
     error: str | None = None
+    extra: dict | None = None  # arm-specific detail, e.g. the desk's status and revisions
 
 
 @dataclass(frozen=True, slots=True)
@@ -46,6 +47,8 @@ class Score:
     input_tokens: int = 0
     output_tokens: int = 0
     error: str | None = None
+    claims_scored: int = 0  # fact and law claims in the fan explanation (claim audit)
+    claims_unsupported: int = 0
 
 
 def expected(incident: m.Incident) -> tuple[str, str]:
@@ -115,19 +118,27 @@ def summarize(scores: list[Score]) -> dict:
             "by_category": {c: {"incidents": sum(r.category == c for r in rows),
                                 "verdict_ok": _rate([r for r in rows if r.category == c], "verdict_ok")} for c in cats},
             "stale_rate": round(sum(bool(r.stale) for r in rows) / len(rows), 4),
+            "unsupported_claim_rate": (round(sum(r.claims_unsupported for r in rows)
+                                             / sum(r.claims_scored for r in rows), 4)
+                                       if any(r.claims_scored for r in rows) else None),
+            "explanations_with_unsupported": round(sum(r.claims_unsupported > 0 for r in rows) / len(rows), 4),
             "errors": sum(r.error is not None for r in rows),
             "mean_seconds": round(sum(r.seconds for r in rows) / len(rows), 2),
             "tokens": {"input": sum(r.input_tokens for r in rows), "output": sum(r.output_tokens for r in rows)},
         }
+    # Every other arm against the baseline: the model alone if it ran, else the first arm.
     arms = list(by_arm)
-    if len(arms) == 2:
-        a_rows = {r.incident_id: r for r in by_arm[arms[0]]}
-        pairs = [(a_rows[r.incident_id], r) for r in by_arm[arms[1]] if r.incident_id in a_rows]
+    baseline = "model_only" if "model_only" in by_arm else arms[0]
+    base_rows = {r.incident_id: r for r in by_arm[baseline]}
+    for arm in arms:
+        if arm == baseline:
+            continue
+        pairs = [(base_rows[r.incident_id], r) for r in by_arm[arm] if r.incident_id in base_rows]
         for label, subset in (("all", pairs), ("contested", [p for p in pairs if p[0].contested])):
             if subset:
                 diff, low, high = paired_bootstrap([x.verdict_ok for x, _ in subset], [y.verdict_ok for _, y in subset])
-                summary.setdefault("difference", {})[label] = {
-                    "comparison": f"{arms[1]} - {arms[0]}", "verdict_ok": diff, "ci95": [low, high], "pairs": len(subset)}
+                summary.setdefault("difference", {}).setdefault(arm, {})[label] = {
+                    "comparison": f"{arm} - {baseline}", "verdict_ok": diff, "ci95": [low, high], "pairs": len(subset)}
     return summary
 
 

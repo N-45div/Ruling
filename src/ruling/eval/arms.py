@@ -89,4 +89,33 @@ class RulingV0:
                          usage.input_tokens, usage.output_tokens)
 
 
-ARMS = {arm.name: arm for arm in (ModelOnly(), RulingV0())}
+class RulingDesk:
+    """The full desk: the Agent Framework workflow, auto-approved. Flags give the ablations."""
+
+    def __init__(self, name: str = "ruling", use_precedent: bool = True, use_checker: bool = True):
+        self.name, self.use_precedent, self.use_checker = name, use_precedent, use_checker
+        self.effort = "low"
+
+    async def run(self, packet: CheckPacket) -> ArmResult:
+        from ..desk.workflow import run_check  # imported here: the workflow pulls in the precedent index
+
+        started = time.perf_counter()
+        try:
+            case = await run_check(packet, use_precedent=self.use_precedent, use_checker=self.use_checker)
+        except Exception as exc:
+            return ArmResult(None, round(time.perf_counter() - started, 2), error=f"{type(exc).__name__}: {exc}"[:300])
+        text = case.drafts.fan if case.status == "published" else (case.holding or "")
+        verdict = replace(case.verdict, explanation=text) if case.verdict else None
+        extra = {"status": case.status, "revisions": case.revisions, "failure": case.failure,
+                 "consistency_flag": case.consistency_flag,
+                 "steps": [(s.agent, s.seconds, s.note) for s in case.steps],
+                 "drafts": case.drafts.model_dump() if case.drafts else None}
+        return ArmResult(verdict, round(time.perf_counter() - started, 2), case.tokens_in, case.tokens_out,
+                         extra=extra)
+
+
+ARMS = {arm.name: arm for arm in (
+    ModelOnly(), RulingV0(), RulingDesk(),
+    RulingDesk("ruling_no_precedent", use_precedent=False),
+    RulingDesk("ruling_no_checker", use_checker=False),
+)}
