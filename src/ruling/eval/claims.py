@@ -19,6 +19,7 @@ from ..desk import llm
 from ..desk.evidence import gather
 from ..desk.packet import CheckPacket, packet_dict
 from ..laws.clauses import CLAUSES
+from ..sim.clubs import league
 
 JUDGE_INSTRUCTIONS = (
     "You audit explanations of VAR decisions for an evaluation. You receive the raw check data as JSON, measured "
@@ -63,7 +64,9 @@ def _law_summary(category: str) -> str:
 
 async def audit(packet: CheckPacket, explanation: str) -> tuple[ClaimScore, llm.Usage]:
     facts = gather(packet).facts
+    clubs = league()
     prompt = "\n\n".join([
+        f"Clubs: {packet.home} is {clubs[packet.home].name}; {packet.away} is {clubs[packet.away].name}.",
         f"Raw check data:\n{json.dumps(packet_dict(packet), separators=(',', ':'))}",
         "Measured facts:\n" + "\n".join(f"- {f}" for f in facts),
         f"Laws of the Game summary:\n{_law_summary(packet.category)}",
