@@ -28,6 +28,19 @@ def client() -> FoundryChatClient:
                              credential=credential)
 
 
+async def with_retry(call, attempts: int = 3):
+    """Retry a model call on rate limits and transient service errors."""
+    import asyncio
+
+    for attempt in range(attempts):
+        try:
+            return await call()
+        except Exception:
+            if attempt == attempts - 1:
+                raise
+            await asyncio.sleep(4 * (attempt + 1))
+
+
 async def structured(name: str, instructions: str, prompt: str, schema: type, effort: str = "low") -> tuple[Any, Usage]:
     """Ask the model for an answer in `schema` (a pydantic model). Returns the parsed value and usage."""
     agent = client().as_agent(name=name, instructions=instructions,
