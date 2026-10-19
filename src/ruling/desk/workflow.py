@@ -31,6 +31,9 @@ from .packet import CheckPacket
 from .precedent import Precedent
 
 MAX_REVISIONS = 2
+# Reasoning effort for the model calls; the verdict itself never depends on them.
+WRITE_EFFORT = "minimal"  # measured: minimal halves the time and needs fewer rewrites
+CHECK_EFFORT = "low"
 APPROVE = "approve"
 _WORDS = {"goal": "the goal stands", "no_goal": "the goal is disallowed", "penalty": "a penalty is awarded",
           "free_kick": "a free kick is awarded outside the area", "no_foul": "no foul", "red": "a red card",
@@ -60,6 +63,7 @@ class CaseFile:
     holding: str | None = None  # the only message the fail-safe publishes
     consistency_flag: str | None = None  # internal: the recommendation goes against precedent
     steps: list[Step] = field(default_factory=list)
+    check_history: list[list[str]] = field(default_factory=list)  # the checker's findings on each draft
     tokens_in: int = 0
     tokens_out: int = 0
 
@@ -157,7 +161,7 @@ class CommunicatorAgent(Executor):
         line = precedent_line(case.precedent, case.verdict.final_decision)
         try:
             case.drafts, usage = await llm.with_retry(lambda: communicator.draft(
-                case.packet, case.evidence, case.verdict, clubs, line, case.feedback))
+                case.packet, case.evidence, case.verdict, clubs, line, case.feedback, effort=WRITE_EFFORT))
             case.spend(usage)
             note = f"draft {case.revisions + 1}"
         except Exception as exc:
@@ -182,7 +186,7 @@ class CheckerAgent(Executor):
         line = precedent_line(case.precedent, case.verdict.final_decision)
         try:
             case.check, usage = await llm.with_retry(lambda: checking.check(
-                case.drafts, case.packet, case.evidence, case.verdict, line))
+                case.drafts, case.packet, case.evidence, case.verdict, line, effort=CHECK_EFFORT))
             case.spend(usage)
         except Exception as exc:
             case.status, case.failure = "failed", f"checking failed: {type(exc).__name__}"
@@ -199,6 +203,7 @@ class CheckerAgent(Executor):
             case.status, case.feedback, case.revisions = "revise", feedback, case.revisions + 1
         else:
             case.status, case.failure = "failed", f"drafts still failed {len(case.check.issues)} checks"
+        case.check_history.append(list(case.check.issues) + [f"style: {x}" for x in case.check.style])
         case.log("checker", started, f"{case.status}: {len(case.check.issues)} issue(s)")
         await ctx.send_message(case)
 

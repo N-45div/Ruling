@@ -109,7 +109,8 @@ class RulingDesk:
         extra = {"status": case.status, "revisions": case.revisions, "failure": case.failure,
                  "consistency_flag": case.consistency_flag,
                  "steps": [(s.agent, s.seconds, s.note) for s in case.steps],
-                 "drafts": case.drafts.model_dump() if case.drafts else None}
+                 "drafts": case.drafts.model_dump() if case.drafts else None,
+                 "check_history": case.check_history}
         return ArmResult(verdict, round(time.perf_counter() - started, 2), case.tokens_in, case.tokens_out,
                          extra=extra)
 
