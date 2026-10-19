@@ -9,6 +9,7 @@ from dataclasses import asdict, dataclass, field
 
 from ..desk.assessor import Verdict, card_after
 from ..incidents import model as m
+from .readability import raw_artifacts
 from .stale import stale_citations
 
 ALLOWED = {
@@ -43,6 +44,7 @@ class Score:
     law_ok: bool  # the right Law number (11, 12, 14)
     clause_ok: bool  # the right clause (e.g. 11.2, 12.1, 12.3)
     stale: tuple[str, ...] = field(default_factory=tuple)
+    raw: tuple[str, ...] = field(default_factory=tuple)  # raw data in the fan text (amendment 3)
     seconds: float = 0.0
     input_tokens: int = 0
     output_tokens: int = 0
@@ -86,7 +88,8 @@ def score(arm: str, incident: m.Incident, result: ArmResult) -> Score:
         review_ok=v.review == incident.var_review,
         law_ok=_law_number(v.clause) == _law_number(truth_clause),
         clause_ok=_clause(v.clause) == _clause(truth_clause),
-        stale=tuple(stale_citations(v.explanation, incident.category, v.final_decision)), **base,
+        stale=tuple(stale_citations(v.explanation, incident.category, v.final_decision)),
+        raw=tuple(raw_artifacts(v.explanation)), **base,
     )
 
 
@@ -118,6 +121,7 @@ def summarize(scores: list[Score]) -> dict:
             "by_category": {c: {"incidents": sum(r.category == c for r in rows),
                                 "verdict_ok": _rate([r for r in rows if r.category == c], "verdict_ok")} for c in cats},
             "stale_rate": round(sum(bool(r.stale) for r in rows) / len(rows), 4),
+            "raw_data_rate": round(sum(bool(r.raw) for r in rows) / len(rows), 4),
             "unsupported_claim_rate": (round(sum(r.claims_unsupported for r in rows)
                                              / sum(r.claims_scored for r in rows), 4)
                                        if any(r.claims_scored for r in rows) else None),

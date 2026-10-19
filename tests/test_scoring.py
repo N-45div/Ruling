@@ -65,3 +65,10 @@ def test_above_the_shoulder_counts_as_stale_only_when_it_explains_an_offence():
     assert stale_citations(text, "handball", "no_foul") == []
     assert stale_citations("The arm was above the shoulder, so a penalty.", "handball", "penalty") == [
         "handball_above_shoulder"]
+
+
+def test_raw_data_in_fan_text_is_detected():
+    from ruling.eval.readability import raw_artifacts
+    assert raw_artifacts("The ball struck MLA-11's arm (above_shoulder: false) at [93.5, 19.9].") == [
+        "raw_player_id", "field_name", "coordinates", "boolean"]
+    assert raw_artifacts("The ball struck Goran Zanivic's arm, held 0.60 m from the body.") == []
