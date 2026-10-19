@@ -119,6 +119,7 @@ def channel_prompt(packet: CheckPacket, evidence: Evidence, verdict: Verdict, cl
         "- Use only figures that appear in the facts, written the same way.",
         "- Refer to players by name or role, never as he, him, his, she or her.",
         "- The facts come from tracking data: say 'tracking data', never video, replays or cameras.",
+        "- Say who did what: the VAR checks; only for an on-field review does the referee review at the monitor.",
         "- stadium: " + ('REF: "<Club> No.<shirt> ... Final decision is ..." in at most 25 words.'
                          if verdict.announced else "an empty string."),
     ]
