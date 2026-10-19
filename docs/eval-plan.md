@@ -78,3 +78,16 @@ On the development and precedent seeds only (5001-5020 and 1-120, 140 matches), 
 *Change 2: a contested breakdown.* Every metric will also be reported for the **contested subset**, because silent "check complete" incidents dominate the count and are easy for both arms.
 
 *Disclosure: planted error rates.* On-field error rates are planted per scenario and are higher than in real matches (the generator gives about 0.74 VAR interventions per match), so that the evaluation sees enough contested decisions. This is a design choice for the test, not a claim about real refereeing.
+
+**3. 2026-10-20, before any held-out match has been generated.**
+
+*New secondary metric: readability.* The share of fan explanations that leak raw data: a raw player id (for example `MLA-11`), a data field name, a coordinate pair, or a bare true/false value. It is detected by pattern in `src/ruling/eval/readability.py`.
+
+*Why it is added.* It was found on development data, so it is labelled as such. On the development seeds, the model alone leaked raw data in 65 of 79 fan explanations and Ruling in none. It is added now so that the held-out run tests it rather than the development run that suggested it.
+
+*Disclosure: the unsupported-claim audit changed on development data before this point, and the held-out run uses the final version.*
+- The judge now receives the club names.
+- Statements about the VAR process count as decision statements.
+- Claims the desk's checker lists must appear in the drafts.
+
+*Development result on the final code (commit f8a8e08).* Unsupported claims were low for both arms: 1.0% for the model alone and 1.2% for Ruling. No advantage for Ruling on this metric is claimed from development data.
