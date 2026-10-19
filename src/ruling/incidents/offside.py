@@ -86,6 +86,9 @@ class OffsidePlanner:
         line = max(line_d, ball_x)
 
         scenario = self._choose(rng, kick, ball_x, line_d)
+        if scenario.startswith("teammate") and shot_xy[0] > line + 5:
+            # Interference with the goalkeeper only makes sense when the shot comes from near the line.
+            scenario = "clear_onside"
         assessed, involvement, intervening = shooter, m.PLAYED_BALL, None
         # Keep everyone else in the attacking team onside so only the planted question is open.
         for pid, s in info.items():
