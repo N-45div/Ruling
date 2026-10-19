@@ -53,7 +53,9 @@ def prompt_for(packet: CheckPacket, evidence: Evidence, verdict: Verdict) -> str
         *[f"- {c}" for c in law.criteria],
     ]
     if evidence.borderline and verdict.review == "check_complete":
-        lines.append(f"The call was close ({evidence.borderline_reason}), so the on-field decision stands.")
+        lines.append(f"The call was close ({evidence.borderline_reason}), so the on-field decision stands because "
+                     "it was not a clear and obvious error. Say exactly that; do not state the Law's conclusion "
+                     "either way.")
     return "\n".join(lines)
 
 
