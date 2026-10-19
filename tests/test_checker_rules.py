@@ -53,3 +53,10 @@ def test_gendered_pronouns_are_neutralised_before_checking():
     text = neutral("His arm followed his body movement; he was 2 m away.")
     assert text == "The player's arm followed the player's body movement; the player was 2 m away."
     assert style_issues(drafts(fan=text + " The goal is disallowed.")) == []
+
+
+def test_claims_the_checker_invents_are_dropped():
+    from ruling.desk.checker import in_messages
+    messages = "Fan: The goal is disallowed: Kofi Lunanek's right foot was 4 cm beyond the offside line."
+    assert in_messages("Kofi Lunanek's right foot was 4 cm beyond the offside line", messages)
+    assert not in_messages("Any claim that a replay shows a particular camera angle or intention", messages)

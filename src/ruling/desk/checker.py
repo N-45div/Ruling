@@ -38,7 +38,8 @@ _DECISION = {
 }
 
 CHECK_INSTRUCTIONS = (
-    "You check messages about a VAR decision before they are published. List every factual claim in the messages: "
+    "You check messages about a VAR decision before they are published. List every factual claim that is written "
+    "in the messages, in the messages' own words; never list a hypothetical claim that nobody wrote. Claims cover "
     "positions, distances, contact, actions, involvement, rules of the game, the decision and any precedent. "
     "Mark each claim supported if the facts, the Law summary or the decision record state it or directly imply it; "
     "unsupported if they do not; contradicted if it conflicts with them. "
@@ -141,7 +142,21 @@ async def check(drafts: Drafts, packet: CheckPacket, evidence: Evidence, verdict
                           *[f"Broadcaster: {b}" for b in drafts.broadcaster], f"Fan: {drafts.fan}"])
     prompt = f"{_record(packet, evidence, verdict, precedent_line)}\n\nMessages to check:\n{messages}"
     review, usage = await llm.structured("checker", CHECK_INSTRUCTIONS, prompt, ClaimReview, effort=effort)
-    for claim in review.claims:
+    claims = [c for c in review.claims if in_messages(c.text, messages)]
+    for claim in claims:
         if claim.status != "supported":
             issues.append(f"{claim.status} claim {claim.text!r}: {claim.why}")
-    return CheckReport(not issues, tuple(issues), style, tuple(c.model_dump() for c in review.claims)), usage
+    return CheckReport(not issues, tuple(issues), style, tuple(c.model_dump() for c in claims)), usage
+
+
+_WORD = re.compile(r"[a-z0-9]+")
+
+
+def in_messages(claim: str, messages: str) -> bool:
+    """A claim the checker lists must come from the messages: at least half its words appear in them.
+    This drops hypothetical claims ("any claim that a replay shows...") that nobody wrote."""
+    words = [w for w in _WORD.findall(claim.lower()) if len(w) > 3]
+    if not words:
+        return True
+    present = set(_WORD.findall(messages.lower()))
+    return sum(w in present for w in words) / len(words) >= 0.5
