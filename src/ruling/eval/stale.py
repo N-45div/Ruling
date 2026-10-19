@@ -38,8 +38,11 @@ def stale_citations(text: str, category: str, decision: str | None = None) -> li
             if not pattern.search(sentence):
                 continue
             if name == "handball_above_shoulder" and (
-                    _NEGATION.search(sentence) or (decision is not None and decision not in OFFENCE_DECISIONS)):
-                continue  # mentioning the arm's height while finding no offence is current Law
+                    category != "handball" or _NEGATION.search(sentence)
+                    or (decision is not None and decision not in OFFENCE_DECISIONS)):
+                # Only a defender's handball turns on the arm's position; mentioning it while finding
+                # no offence, or for a scorer's touch (always an offence), is not relying on it.
+                continue
             hits.append(name)
         # DOGSO considerations listed without the attackers added in 2026/27.
         if (category == "red_card" and _DOGSO.search(sentence) and re.search(r"defender", sentence, re.I)
