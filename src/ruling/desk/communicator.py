@@ -6,6 +6,8 @@ claim in the explanation can be traced to evidence or to the Law.
 
 from __future__ import annotations
 
+import re
+
 from pydantic import BaseModel, Field
 
 from ..laws.clauses import EDITION, clause
@@ -36,6 +38,25 @@ _REVIEWS = {
 }
 
 
+# Shared with the checker: a close call that stands is explained in exactly these words.
+CLOSE_CALL = "It was a close call, so the on-field decision stands: not a clear and obvious error."
+# Words the fan card must contain for each final decision (the checker looks for them).
+DECISION_PHRASE = {"goal": "the goal stands", "no_goal": "the goal is disallowed", "penalty": "penalty",
+                   "free_kick": "free kick", "no_foul": "no foul", "red": "red card", "yellow": "yellow card",
+                   "no_card": "no card"}
+_PRONOUNS = ((r"\bHis\b", "The player's"), (r"\bhis\b", "the player's"), (r"\bHe\b", "The player"),
+             (r"\bhe\b", "the player"), (r"\bhimself\b", "the player"), (r"\bhim\b", "the player"),
+             (r"\bher\b(?=\s+[a-z])", "the player's"), (r"\bShe\b", "The player"), (r"\bshe\b", "the player"),
+             (r"\bher\b", "the player"))
+
+
+def neutral(text: str) -> str:
+    """Replace gendered pronouns with 'the player': the league's players are referred to by name or role."""
+    for pattern, replacement in _PRONOUNS:
+        text = re.sub(pattern, replacement, text)
+    return text
+
+
 class FanExplanation(BaseModel):
     explanation: str = Field(description="At most 60 words, for fans.")
 
@@ -53,9 +74,8 @@ def prompt_for(packet: CheckPacket, evidence: Evidence, verdict: Verdict) -> str
         *[f"- {c}" for c in law.criteria],
     ]
     if evidence.borderline and verdict.review == "check_complete":
-        lines.append(f"The call was close ({evidence.borderline_reason}), so the on-field decision stands because "
-                     "it was not a clear and obvious error. Say exactly that; do not state the Law's conclusion "
-                     "either way.")
+        lines.append(f"Close call ({evidence.borderline_reason}). Explain it with this sentence and do not state "
+                     f"the Law's conclusion either way: {CLOSE_CALL}")
     return "\n".join(lines)
 
 
@@ -92,6 +112,16 @@ def channel_prompt(packet: CheckPacket, evidence: Evidence, verdict: Verdict, cl
              "A stadium announcement is due." if verdict.announced else "No stadium announcement is due."]
     if precedent_line:
         lines.append(f"Precedent: {precedent_line}")
+    lines += [
+        "Checklist (every draft is checked against it):",
+        "- match_centre at most 280 characters; fan at most 60 words; broadcaster exactly three bullets.",
+        f"- The fan card must contain the words \"{DECISION_PHRASE[verdict.final_decision]}\".",
+        "- Use only figures that appear in the facts, written the same way.",
+        "- Refer to players by name or role, never as he, him, his, she or her.",
+        "- The facts come from tracking data: say 'tracking data', never video, replays or cameras.",
+        "- stadium: " + ('REF: "<Club> No.<shirt> ... Final decision is ..." in at most 25 words.'
+                         if verdict.announced else "an empty string."),
+    ]
     if feedback:
         lines.append("Your previous draft failed these checks; fix every one:")
         lines += [f"- {issue}" for issue in feedback]
@@ -99,6 +129,9 @@ def channel_prompt(packet: CheckPacket, evidence: Evidence, verdict: Verdict, cl
 
 
 async def draft(packet: CheckPacket, evidence: Evidence, verdict: Verdict, clubs: dict[str, str],
-                precedent_line: str | None = None, feedback: list[str] | None = None) -> tuple[Drafts, llm.Usage]:
+                precedent_line: str | None = None, feedback: list[str] | None = None,
+                effort: str = "low") -> tuple[Drafts, llm.Usage]:
     prompt = channel_prompt(packet, evidence, verdict, clubs, precedent_line, feedback or [])
-    return await llm.structured("communicator", CHANNEL_INSTRUCTIONS, prompt, Drafts, effort="low")
+    drafts, usage = await llm.structured("communicator", CHANNEL_INSTRUCTIONS, prompt, Drafts, effort=effort)
+    return Drafts(match_centre=neutral(drafts.match_centre), stadium=neutral(drafts.stadium),
+                  broadcaster=[neutral(b) for b in drafts.broadcaster], fan=neutral(drafts.fan)), usage

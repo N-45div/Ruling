@@ -47,7 +47,9 @@ CHECK_INSTRUCTIONS = (
     "decision, the referee reviewed it at the monitor and changed it); the clock, club names and shirt numbers in "
     "the record; and saying that tracking data shows a listed fact, because every fact was measured from tracking "
     "data. These are unsupported: anything a video or replay supposedly shows, anyone's intentions or feelings, and "
-    "any figure, position or event that is not listed."
+    "any figure, position or event that is not listed. 'Measured' and 'evidence' refer to the tracking data. "
+    "If the record notes a close call, saying it was a close call that stands because it was not a clear and "
+    "obvious error is supported."
 )
 
 
@@ -120,6 +122,8 @@ def _record(packet: CheckPacket, evidence: Evidence, verdict: Verdict, precedent
              f"{clubs[packet.away].name} ({packet.away}); on-field {packet.on_field}; review {verdict.review}; "
              f"final {verdict.final_decision}; card {verdict.card}; stadium announcement "
              f"{'due' if verdict.announced else 'not due'}.",
+             *([f"Close call recorded ({evidence.borderline_reason}): the on-field decision stands because it was "
+                "not a clear and obvious error."] if evidence.borderline and verdict.review == "check_complete" else []),
              "Facts (all measured from tracking data):", *[f"- {f}" for f in evidence.facts],
              f"Law {law.id} ({law.title}): {law.summary}", *[f"- {c}" for c in law.criteria]]
     if precedent_line:
@@ -128,7 +132,7 @@ def _record(packet: CheckPacket, evidence: Evidence, verdict: Verdict, precedent
 
 
 async def check(drafts: Drafts, packet: CheckPacket, evidence: Evidence, verdict: Verdict,
-                precedent_line: str | None = None) -> tuple[CheckReport, llm.Usage | None]:
+                precedent_line: str | None = None, effort: str = "low") -> tuple[CheckReport, llm.Usage | None]:
     issues = rule_issues(drafts, packet, evidence, verdict)
     style = tuple(style_issues(drafts))
     if issues:  # no need for the model review: the rewrite has work to do already
@@ -136,7 +140,7 @@ async def check(drafts: Drafts, packet: CheckPacket, evidence: Evidence, verdict
     messages = "\n".join([f"Match Centre: {drafts.match_centre}", f"Stadium: {drafts.stadium or '(none)'}",
                           *[f"Broadcaster: {b}" for b in drafts.broadcaster], f"Fan: {drafts.fan}"])
     prompt = f"{_record(packet, evidence, verdict, precedent_line)}\n\nMessages to check:\n{messages}"
-    review, usage = await llm.structured("checker", CHECK_INSTRUCTIONS, prompt, ClaimReview, effort="low")
+    review, usage = await llm.structured("checker", CHECK_INSTRUCTIONS, prompt, ClaimReview, effort=effort)
     for claim in review.claims:
         if claim.status != "supported":
             issues.append(f"{claim.status} claim {claim.text!r}: {claim.why}")

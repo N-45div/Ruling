@@ -46,3 +46,10 @@ def test_stadium_announcements_only_when_due():
 def test_speeds_in_metres_per_second_are_not_read_as_distances():
     fine = drafts(broadcaster=["Goal disallowed.", "Right foot 4 cm beyond the line at 6.5 m/s.", "Law 11.2."])
     assert rule_issues(fine, PACKET, EVIDENCE, VERDICT) == []
+
+
+def test_gendered_pronouns_are_neutralised_before_checking():
+    from ruling.desk.communicator import neutral
+    text = neutral("His arm followed his body movement; he was 2 m away.")
+    assert text == "The player's arm followed the player's body movement; the player was 2 m away."
+    assert style_issues(drafts(fan=text + " The goal is disallowed.")) == []
