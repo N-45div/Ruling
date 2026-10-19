@@ -16,6 +16,7 @@ from pydantic import BaseModel
 
 from ..eval.stale import stale_citations
 from ..laws.clauses import clause
+from ..sim.clubs import league
 from . import llm
 from .assessor import Verdict
 from .communicator import Drafts
@@ -40,8 +41,13 @@ CHECK_INSTRUCTIONS = (
     "You check messages about a VAR decision before they are published. List every factual claim in the messages: "
     "positions, distances, contact, actions, involvement, rules of the game, the decision and any precedent. "
     "Mark each claim supported if the facts, the Law summary or the decision record state it or directly imply it; "
-    "unsupported if they do not; contradicted if it conflicts with them. A restatement of the Law that matches the "
-    "Law summary is supported. A claim about video, replays or anyone's intentions is unsupported."
+    "unsupported if they do not; contradicted if it conflicts with them. "
+    "These are supported: a restatement of the Law that matches the Law summary; statements about the VAR process "
+    "that match the decision record (the VAR checked, the on-field decision stands, the VAR corrected a factual "
+    "decision, the referee reviewed it at the monitor and changed it); the clock, club names and shirt numbers in "
+    "the record; and saying that tracking data shows a listed fact, because every fact was measured from tracking "
+    "data. These are unsupported: anything a video or replay supposedly shows, anyone's intentions or feelings, and "
+    "any figure, position or event that is not listed."
 )
 
 
@@ -108,8 +114,13 @@ def rule_issues(drafts: Drafts, packet: CheckPacket, evidence: Evidence, verdict
 
 def _record(packet: CheckPacket, evidence: Evidence, verdict: Verdict, precedent_line: str | None) -> str:
     law = clause(verdict.clause)
-    lines = [f"Decision record: on-field {packet.on_field}; review {verdict.review}; final {verdict.final_decision};"
-             f" card {verdict.card}.", "Facts:", *[f"- {f}" for f in evidence.facts],
+    clubs = league()
+    lines = [f"Decision record: {packet.category.replace('_', ' ')} at {packet.clock} "
+             f"(minute {packet.clock.split(':')[0]}), {clubs[packet.home].name} ({packet.home}) v "
+             f"{clubs[packet.away].name} ({packet.away}); on-field {packet.on_field}; review {verdict.review}; "
+             f"final {verdict.final_decision}; card {verdict.card}; stadium announcement "
+             f"{'due' if verdict.announced else 'not due'}.",
+             "Facts (all measured from tracking data):", *[f"- {f}" for f in evidence.facts],
              f"Law {law.id} ({law.title}): {law.summary}", *[f"- {c}" for c in law.criteria]]
     if precedent_line:
         lines.append(f"Precedent: {precedent_line}")
