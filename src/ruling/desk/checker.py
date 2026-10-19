@@ -57,8 +57,9 @@ class ClaimReview(BaseModel):
 
 @dataclass(frozen=True, slots=True)
 class CheckReport:
-    passed: bool
-    issues: tuple[str, ...]
+    passed: bool  # no blocking issue: the drafts may go to approval
+    issues: tuple[str, ...]  # blocking: unsupported or contradicted claims, video claims, wrong figures...
+    style: tuple[str, ...] = ()  # worth fixing in a rewrite, but never a reason to hold a decision
     claims: tuple[dict, ...] = ()
 
 
@@ -70,6 +71,13 @@ def _figures(text: str) -> list[float]:
     return [_metres(v, u) for v, u in _FIGURE.findall(text)]
 
 
+def style_issues(drafts: Drafts) -> list[str]:
+    texts = {"match_centre": drafts.match_centre, "stadium": drafts.stadium,
+             "broadcaster": " ".join(drafts.broadcaster), "fan": drafts.fan}
+    return [f"{name}: uses a gendered pronoun; refer to players by name or role"
+            for name, text in texts.items() if _PRONOUN.search(text)]
+
+
 def rule_issues(drafts: Drafts, packet: CheckPacket, evidence: Evidence, verdict: Verdict) -> list[str]:
     known = _figures(" ".join(evidence.facts))
     channels = {"match_centre": drafts.match_centre, "stadium": drafts.stadium,
@@ -78,8 +86,6 @@ def rule_issues(drafts: Drafts, packet: CheckPacket, evidence: Evidence, verdict
     for name, text in channels.items():
         if _VIDEO.search(text):
             issues.append(f"{name}: mentions video or replays, but the facts come from tracking data")
-        if _PRONOUN.search(text):
-            issues.append(f"{name}: uses a gendered pronoun; refer to players by name or role")
         issues += [f"{name}: relies on removed Law wording ({s})"
                    for s in stale_citations(text, packet.category, verdict.final_decision)]
         for figure in _figures(text):
@@ -113,6 +119,9 @@ def _record(packet: CheckPacket, evidence: Evidence, verdict: Verdict, precedent
 async def check(drafts: Drafts, packet: CheckPacket, evidence: Evidence, verdict: Verdict,
                 precedent_line: str | None = None) -> tuple[CheckReport, llm.Usage | None]:
     issues = rule_issues(drafts, packet, evidence, verdict)
+    style = tuple(style_issues(drafts))
+    if issues:  # no need for the model review: the rewrite has work to do already
+        return CheckReport(False, tuple(issues), style), None
     messages = "\n".join([f"Match Centre: {drafts.match_centre}", f"Stadium: {drafts.stadium or '(none)'}",
                           *[f"Broadcaster: {b}" for b in drafts.broadcaster], f"Fan: {drafts.fan}"])
     prompt = f"{_record(packet, evidence, verdict, precedent_line)}\n\nMessages to check:\n{messages}"
@@ -120,4 +129,4 @@ async def check(drafts: Drafts, packet: CheckPacket, evidence: Evidence, verdict
     for claim in review.claims:
         if claim.status != "supported":
             issues.append(f"{claim.status} claim {claim.text!r}: {claim.why}")
-    return CheckReport(not issues, tuple(issues), tuple(c.model_dump() for c in review.claims)), usage
+    return CheckReport(not issues, tuple(issues), style, tuple(c.model_dump() for c in review.claims)), usage

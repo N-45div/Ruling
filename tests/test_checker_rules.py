@@ -1,5 +1,5 @@
 from ruling.desk.assessor import Verdict
-from ruling.desk.checker import rule_issues
+from ruling.desk.checker import rule_issues, style_issues
 from ruling.desk.communicator import Drafts
 from ruling.desk.evidence import Evidence
 from ruling.desk.packet import CheckPacket
@@ -22,10 +22,12 @@ def test_a_clean_draft_passes_the_rules():
     assert rule_issues(drafts(), PACKET, EVIDENCE, VERDICT) == []
 
 
-def test_video_claims_pronouns_and_invented_figures_are_caught():
+def test_video_claims_and_invented_figures_block_and_pronouns_are_style():
     bad = drafts(fan="Replays show his foot was 9 cm beyond the line, so the goal is disallowed.")
     issues = " | ".join(rule_issues(bad, PACKET, EVIDENCE, VERDICT))
-    assert "video" in issues and "pronoun" in issues and "0.09 m is not in the evidence" in issues
+    assert "video" in issues and "0.09 m is not in the evidence" in issues
+    assert "pronoun" not in issues
+    assert any("pronoun" in s for s in style_issues(bad))
 
 
 def test_the_fan_card_must_state_the_decision():
