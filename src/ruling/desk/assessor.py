@@ -17,6 +17,7 @@ class Verdict:
     review: str  # check_complete | var_overturn | on_field_review
     clause: str
     explanation: str = ""
+    announced: bool = False  # the referee announces the outcome in the stadium
 
 
 def card_after(category: str, final: str, law_card: str) -> str:
@@ -34,4 +35,4 @@ def assess(packet: CheckPacket, evidence: Evidence) -> Verdict:
                          clear_and_obvious=not evidence.borderline, factual_offside=kind.factual_offside,
                          reviewable=kind.reviewable)
     return Verdict(outcome.final, card_after(packet.category, outcome.final, evidence.card), outcome.review,
-                   evidence.clause)
+                   evidence.clause, announced=outcome.announced)

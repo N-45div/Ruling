@@ -61,3 +61,42 @@ async def explain(packet: CheckPacket, evidence: Evidence, verdict: Verdict) -> 
     value, usage = await llm.structured("communicator", INSTRUCTIONS, prompt_for(packet, evidence, verdict),
                                         FanExplanation, effort="low")
     return value.explanation, usage
+
+
+class Drafts(BaseModel):
+    match_centre: str = Field(description="The league Match Centre post, at most 280 characters.")
+    stadium: str = Field(description='The referee\'s stadium announcement as REF: "...", or "" if none is due.')
+    broadcaster: list[str] = Field(description="Three short bullet points for a broadcaster's refereeing analyst.")
+    fan: str = Field(description="The fan card, at most 60 words.")
+
+
+CHANNEL_INSTRUCTIONS = INSTRUCTIONS + (
+    " Write four messages about the same decision. "
+    "match_centre: the league Match Centre post, at most 280 characters. If the decision changed, start with "
+    "'#<HOMEAWAY> – <minute>' VAR OVERTURN' and say what the referee overturned; if it stood, say the referee's call "
+    "was checked and confirmed by VAR. "
+    "stadium: only if an announcement is due, the referee's words as REF: \"<Club> No.<shirt> ... Final decision is "
+    "<decision>.\" in at most 25 words; otherwise an empty string. "
+    "broadcaster: exactly three bullets: the decision, the measured evidence it rests on, and the Law with any "
+    "precedent. fan: at most 60 words."
+)
+
+
+def channel_prompt(packet: CheckPacket, evidence: Evidence, verdict: Verdict, clubs: dict[str, str],
+                   precedent_line: str | None, feedback: list[str]) -> str:
+    lines = [prompt_for(packet, evidence, verdict),
+             f"Clubs: {packet.home} is {clubs[packet.home]}, {packet.away} is {clubs[packet.away]}. "
+             f"Hashtag: #{packet.home}{packet.away}. Minute: {packet.clock.split(':')[0]}.",
+             "A stadium announcement is due." if verdict.announced else "No stadium announcement is due."]
+    if precedent_line:
+        lines.append(f"Precedent: {precedent_line}")
+    if feedback:
+        lines.append("Your previous draft failed these checks; fix every one:")
+        lines += [f"- {issue}" for issue in feedback]
+    return "\n".join(lines)
+
+
+async def draft(packet: CheckPacket, evidence: Evidence, verdict: Verdict, clubs: dict[str, str],
+                precedent_line: str | None = None, feedback: list[str] | None = None) -> tuple[Drafts, llm.Usage]:
+    prompt = channel_prompt(packet, evidence, verdict, clubs, precedent_line, feedback or [])
+    return await llm.structured("communicator", CHANNEL_INSTRUCTIONS, prompt, Drafts, effort="low")
