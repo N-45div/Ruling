@@ -14,6 +14,7 @@ dependencies = [
 [project.scripts]
 ruling-sim = "ruling.sim.cli:main"
 ruling-eval = "ruling.eval.run:main"
+ruling-desk = "ruling.desk.cli:main"
 
 [build-system]
 requires = ["hatchling"]
