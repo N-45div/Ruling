@@ -1,3 +1,4 @@
+import asyncio
 import json
 
 import pytest
@@ -54,4 +55,20 @@ def test_incident_detail_is_the_packet_the_desk_sees(client):
 
 def test_unknown_checks_and_incidents_are_404(client):
     assert client.get("/api/checks/nope").status_code == 404
+    assert client.get("/api/checks/nope/events").status_code == 404
+    assert client.post("/api/checks/nope/decision", json={"decision": "approve"}).status_code == 404
+    assert client.post("/api/checks/nope/translate", json={"language": "es"}).status_code == 404
     assert client.post("/api/checks", json={"incident_id": "AGA-BRC-5001:1:offside"}).status_code == 404
+
+
+def test_finished_checks_are_served_from_the_store_after_a_restart(client):
+    held = {"check_id": "c0ffee000001", "incident_id": "MLA-HFW-5001:1:offside", "match_id": "MLA-HFW-5001",
+            "status": "held", "holding": "VAR check in progress.", "drafts": None}
+    asyncio.run(app.state.checks.store.save(held))  # the session itself is gone, as after a redeploy
+    body = client.get("/api/checks/c0ffee000001").json()
+    assert body["done"] and not body["awaiting_approval"] and body["case"]["status"] == "held"
+    events = client.get("/api/checks/c0ffee000001/events").text
+    assert json.loads(events.removeprefix("data: "))["type"] == "final"
+    assert client.post("/api/checks/c0ffee000001/decision", json={"decision": "approve"}).status_code == 409
+    assert client.post("/api/checks/c0ffee000001/translate", json={"language": "es"}).status_code == 409
+    assert any(c["check_id"] == "c0ffee000001" for c in client.get("/api/cases?match_id=MLA-HFW-5001").json())

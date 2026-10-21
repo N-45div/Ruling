@@ -12,6 +12,9 @@ class Store:
     async def cases(self, match_id: str | None = None) -> list[dict]:
         raise NotImplementedError
 
+    async def case(self, check_id: str) -> dict | None:
+        raise NotImplementedError
+
 
 class MemoryStore(Store):
     def __init__(self):
@@ -22,6 +25,9 @@ class MemoryStore(Store):
 
     async def cases(self, match_id: str | None = None) -> list[dict]:
         return [c for c in self._cases.values() if match_id is None or c["match_id"] == match_id]
+
+    async def case(self, check_id: str) -> dict | None:
+        return next((c for c in self._cases.values() if c.get("check_id") == check_id), None)
 
 
 def make_store() -> Store:

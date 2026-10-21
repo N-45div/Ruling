@@ -9,6 +9,7 @@
     GET  /api/checks/{check_id}               the case file so far
     GET  /api/checks/{check_id}/events        every agent step, live (server-sent events)
     POST /api/checks/{check_id}/decision      a person approves or holds the messages
+    POST /api/checks/{check_id}/translate     the approved fan card in another language
     GET  /api/cases?match_id=                 finished case files (the post-match review)
     POST /api/live                            replay a match through Event Hubs {"seed", "speed", "from_minute"}
     GET  /api/live                            feed state and recent events
@@ -67,6 +68,7 @@ def _incident(incident_id: str):
 async def lifespan(app: FastAPI):
     app.state.tracing = telemetry.configure()
     app.state.checks = Checks(make_store())
+    app.state.translations = {}  # (check_id, language) -> (text, verified)
     app.state.live = LiveFeed(app.state.checks, os.environ.get("EVENTHUB_NAMESPACE"), os.environ.get("EVENTHUB_NAME"))
     app.state.live.start_consumer()
     try:
@@ -83,6 +85,10 @@ app = FastAPI(title="Ruling", description="A decision desk for refereeing calls.
 class StartCheck(BaseModel):
     incident_id: str
     auto_approve: bool = False
+
+
+class Translate(BaseModel):
+    language: str  # es, hi, fr, pt
 
 
 class StartFeed(BaseModel):
@@ -137,25 +143,32 @@ async def start_check(body: StartCheck):
     return {"check_id": session.id}
 
 
-def _session(check_id: str):
-    session = app.state.checks.sessions.get(check_id)
-    if session is None:
+async def _stored(check_id: str) -> dict:
+    """A finished case file from the store, for a check run before a restart or on another replica."""
+    case = await app.state.checks.store.case(check_id)
+    if case is None:
         raise HTTPException(404, "unknown check")
-    return session
+    return case
 
 
 @app.get("/api/checks/{check_id}")
 async def check(check_id: str):
-    s = _session(check_id)
+    s = app.state.checks.sessions.get(check_id)
+    if s is None:
+        return {"check_id": check_id, "done": True, "awaiting_approval": False, "case": await _stored(check_id)}
     return {"check_id": s.id, "done": s.done, "awaiting_approval": s.request_id is not None,
             "case": serialize.case_dict(s.case) if s.case else None}
 
 
 @app.get("/api/checks/{check_id}/events")
 async def check_events(check_id: str):
-    s = _session(check_id)
+    s = app.state.checks.sessions.get(check_id)
+    stored = await _stored(check_id) if s is None else None
 
     async def stream():
+        if stored:
+            yield f"data: {json.dumps({'type': 'final', 'check_id': check_id, 'case': stored})}\n\n"
+            return
         async for event in s.follow():
             yield ": ping\n\n" if event is None else f"data: {json.dumps(event)}\n\n"
 
@@ -165,11 +178,33 @@ async def check_events(check_id: str):
 
 @app.post("/api/checks/{check_id}/decision", status_code=202)
 async def decide(check_id: str, body: Decision):
-    s = _session(check_id)
-    if s.request_id is None:
+    s = app.state.checks.sessions.get(check_id)
+    if s is None:
+        await _stored(check_id)  # 404 if it never existed
+    if s is None or s.request_id is None:
         raise HTTPException(409, "this check is not waiting for approval")
     app.state.checks.decide(s, body.decision)
     return {"check_id": s.id, "decision": body.decision}
+
+
+@app.post("/api/checks/{check_id}/translate")
+async def translate(check_id: str, body: Translate):
+    from ..desk import communicator
+
+    s = app.state.checks.sessions.get(check_id)
+    if s is None:
+        case = await _stored(check_id)
+    else:
+        case = serialize.case_dict(s.case) if s.case else {"status": None}
+    if case["status"] != "published":
+        raise HTTPException(409, "only a published fan card is translated")
+    if body.language not in communicator.LANGUAGES:
+        raise HTTPException(422, f"supported: {', '.join(communicator.LANGUAGES)}")
+    key, cache = (check_id, body.language), app.state.translations
+    if key not in cache:
+        cache[key] = await communicator.translate(case["drafts"]["fan"], body.language)
+    text, verified = cache[key]
+    return {"language": body.language, "text": text, "verified": verified}
 
 
 @app.get("/api/cases")

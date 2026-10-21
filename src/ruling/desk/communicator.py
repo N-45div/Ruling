@@ -129,6 +129,30 @@ def channel_prompt(packet: CheckPacket, evidence: Evidence, verdict: Verdict, cl
     return "\n".join(lines)
 
 
+LANGUAGES = {"es": "Spanish", "hi": "Hindi", "fr": "French", "pt": "Portuguese"}
+
+
+class Translation(BaseModel):
+    text: str
+
+
+def _figures(text: str) -> list[str]:
+    return sorted(re.findall(r"\d+(?:\.\d+)?", text))
+
+
+async def translate(text: str, language: str) -> tuple[str, bool]:
+    """Translate an approved fan card. Names, shirt numbers and every figure must survive
+    unchanged; if they do not after one retry, the card stays in English (returns False)."""
+    instructions = (f"Translate this explanation of a VAR decision into {LANGUAGES[language]} for football fans. "
+                    "Keep every player name, club code, shirt number and figure exactly as written. "
+                    "Add nothing and leave nothing out.")
+    for _ in range(2):
+        result, _usage = await llm.structured("translator", instructions, text, Translation, effort="minimal")
+        if _figures(result.text) == _figures(text):
+            return result.text, True
+    return text, False
+
+
 async def draft(packet: CheckPacket, evidence: Evidence, verdict: Verdict, clubs: dict[str, str],
                 precedent_line: str | None = None, feedback: list[str] | None = None,
                 effort: str = "low") -> tuple[Drafts, llm.Usage]:

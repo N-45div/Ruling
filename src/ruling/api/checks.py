@@ -89,7 +89,7 @@ class CheckSession:
         if outputs:
             self.case, self.done = outputs[-1], True
             unlisten(self.id)
-            await self.store.save(case_dict(self.case))
+            await self.store.save({"check_id": self.id, **case_dict(self.case)})
             self._push("final", case=case_dict(self.case))
             return
         self.request_id = result.get_request_info_events()[0].request_id

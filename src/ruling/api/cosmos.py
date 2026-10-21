@@ -31,4 +31,15 @@ class CosmosStore(Store):
                                               partition_key=match_id)
         else:
             items = self._cases().query_items("SELECT * FROM c")
-        return [{k: v for k, v in item.items() if not k.startswith("_")} async for item in items]
+        return [_clean(item) async for item in items]
+
+    async def case(self, check_id: str) -> dict | None:
+        items = self._cases().query_items("SELECT * FROM c WHERE c.check_id = @c",
+                                          parameters=[{"name": "@c", "value": check_id}])
+        async for item in items:
+            return _clean(item)
+        return None
+
+
+def _clean(item: dict) -> dict:
+    return {k: v for k, v in item.items() if not k.startswith("_")}
