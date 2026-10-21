@@ -6,6 +6,8 @@ Built on synthetic, football-realistic data with fictional clubs and players.
 
 Work in progress. The evaluation was pre-registered before any data or prompts existed: [docs/eval-plan.md](docs/eval-plan.md).
 
+Live on Azure: https://ruling-api.proudsea-2ac99296.eastus2.azurecontainerapps.io (API reference at `/docs`).
+
 ## License
 
 MIT
