@@ -30,7 +30,7 @@ from .. import settings
 from ..desk import precedent
 from ..sim import events as ev
 from ..sim.cli import SETS, match_for_seed
-from . import serialize
+from . import serialize, telemetry
 from .checks import Checks
 from .store import make_store
 
@@ -59,6 +59,7 @@ def _incident(incident_id: str):
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    app.state.tracing = telemetry.configure()
     app.state.checks = Checks(make_store())
     try:
         app.state.precedents = len(precedent.load_index())
@@ -85,7 +86,8 @@ async def health():
         model = settings.chat_model()
     except RuntimeError:  # no Foundry settings: matches still load, checks cannot run
         model = None
-    return {"ok": True, "model": model, "precedents": app.state.precedents}
+    return {"ok": True, "model": model, "precedents": app.state.precedents, "tracing": app.state.tracing,
+            "store": type(app.state.checks.store).__name__}
 
 
 @app.get("/api/matches")
