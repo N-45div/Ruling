@@ -10,6 +10,10 @@
     GET  /api/checks/{check_id}/events        every agent step, live (server-sent events)
     POST /api/checks/{check_id}/decision      a person approves or holds the messages
     GET  /api/cases?match_id=                 finished case files (the post-match review)
+    POST /api/live                            replay a match through Event Hubs {"seed", "speed", "from_minute"}
+    GET  /api/live                            feed state and recent events
+    GET  /api/live/events                     the feed, live; VAR checks start the desk on their own
+    POST /api/live/stop
 
 Run locally: uv run uvicorn ruling.api.app:app --reload
 """
@@ -17,6 +21,7 @@ Run locally: uv run uvicorn ruling.api.app:app --reload
 from __future__ import annotations
 
 import json
+import os
 from contextlib import asynccontextmanager
 from functools import lru_cache
 from pathlib import Path
@@ -32,6 +37,7 @@ from ..sim import events as ev
 from ..sim.cli import SETS, match_for_seed
 from . import serialize, telemetry
 from .checks import Checks
+from .live import LiveFeed
 from .store import make_store
 
 DEMO_SEEDS = SETS["dev"]  # never the held-out set
@@ -61,11 +67,14 @@ def _incident(incident_id: str):
 async def lifespan(app: FastAPI):
     app.state.tracing = telemetry.configure()
     app.state.checks = Checks(make_store())
+    app.state.live = LiveFeed(app.state.checks, os.environ.get("EVENTHUB_NAMESPACE"), os.environ.get("EVENTHUB_NAME"))
+    app.state.live.start_consumer()
     try:
         app.state.precedents = len(precedent.load_index())
     except FileNotFoundError:
         app.state.precedents = 0  # the desk carries on without precedent
     yield
+    await app.state.live.close()
 
 
 app = FastAPI(title="Ruling", description="A decision desk for refereeing calls.", lifespan=lifespan)
@@ -74,6 +83,12 @@ app = FastAPI(title="Ruling", description="A decision desk for refereeing calls.
 class StartCheck(BaseModel):
     incident_id: str
     auto_approve: bool = False
+
+
+class StartFeed(BaseModel):
+    seed: int
+    speed: float = 30.0  # match seconds per real second
+    from_minute: int = 0
 
 
 class Decision(BaseModel):
@@ -160,6 +175,35 @@ async def decide(check_id: str, body: Decision):
 @app.get("/api/cases")
 async def cases(match_id: str | None = None):
     return await app.state.checks.store.cases(match_id)
+
+
+@app.post("/api/live", status_code=202)
+async def start_feed(body: StartFeed):
+    if not 1 <= body.speed <= 600:
+        raise HTTPException(422, "speed must be between 1 and 600")
+    app.state.live.play(_match(body.seed), body.speed, body.from_minute)
+    return app.state.live.state
+
+
+@app.get("/api/live")
+async def feed_state():
+    return {**app.state.live.state, "recent": list(app.state.live.log)[-60:]}
+
+
+@app.get("/api/live/events")
+async def feed_events():
+    async def stream():
+        async for event in app.state.live.follow():
+            yield ": ping\n\n" if event is None else f"data: {json.dumps(event)}\n\n"
+
+    return StreamingResponse(stream(), media_type="text/event-stream",
+                             headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+
+
+@app.post("/api/live/stop")
+async def stop_feed():
+    app.state.live.stop()
+    return app.state.live.state
 
 
 if Path(WEB).is_dir():
