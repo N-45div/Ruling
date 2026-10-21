@@ -15,6 +15,7 @@ only a holding line. Nothing is published until a person approves it.
 from __future__ import annotations
 
 import time
+from collections.abc import Callable
 from dataclasses import dataclass, field
 
 from agent_framework import Case, Default, Executor, WorkflowBuilder, WorkflowContext, handler, response_handler
@@ -47,6 +48,18 @@ class Step:
     note: str = ""
 
 
+_LISTENERS: dict[str, Callable[["CaseFile", Step], None]] = {}
+
+
+def listen(key: str, callback: Callable[["CaseFile", Step], None]) -> None:
+    """Call `callback(case, step)` after every step of case files carrying `listener=key`."""
+    _LISTENERS[key] = callback
+
+
+def unlisten(key: str) -> None:
+    _LISTENERS.pop(key, None)
+
+
 @dataclass
 class CaseFile:
     packet: CheckPacket
@@ -66,9 +79,18 @@ class CaseFile:
     check_history: list[list[str]] = field(default_factory=list)  # the checker's findings on each draft
     tokens_in: int = 0
     tokens_out: int = 0
+    # Key of a listener told after every step (see `listen`). The workflow copies case files
+    # between agents, so the case carries only the key, never the callback itself.
+    listener: str | None = None
+
+    def add(self, step: Step) -> None:
+        self.steps.append(step)
+        callback = _LISTENERS.get(self.listener) if self.listener else None
+        if callback:
+            callback(self, step)
 
     def log(self, agent: str, started: float, note: str = "") -> None:
-        self.steps.append(Step(agent, round(time.perf_counter() - started, 3), note))
+        self.add(Step(agent, round(time.perf_counter() - started, 3), note))
 
     def spend(self, usage: llm.Usage | None) -> None:
         if usage:
@@ -223,7 +245,7 @@ class Approval(Executor):
             case.status = "published"
         else:
             case.status, case.holding = "held", "VAR check in progress."
-        case.steps.append(Step("approval", 0.0, answer))
+        case.add(Step("approval", 0.0, answer))
         await ctx.yield_output(case)
 
 
@@ -236,7 +258,7 @@ class FailSafe(Executor):
         else:
             case.holding = f"VAR check in progress: possible {case.packet.category.replace('_', ' ')}."
         case.status = "held"
-        case.steps.append(Step("fail-safe", 0.0, case.failure or ""))
+        case.add(Step("fail-safe", 0.0, case.failure or ""))
         await ctx.yield_output(case)
 
 
