@@ -1,0 +1,10 @@
+.git
+.github
+.venv
+.azure
+.pytest_cache
+**/__pycache__
+data/generated
+results
+tests
+infra
