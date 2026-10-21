@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ruling · Post-match review pack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>@media print { body { background: #fff; color: #000; } .panel { border-color: #ccc; background: #fff; } .no-print { display: none; } }</style>
+</head>
+<body>
+<main style="max-width:1440px;margin:0 auto;padding:28px 24px 40px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px">
+    <div>
+      <div class="kicker">Post-match review pack</div>
+      <h1 id="title" style="margin-top:6px;font-size:28px">Loading…</h1>
+      <div class="muted" style="margin-top:4px">Every VAR check in the match, with the evidence, the Law and how similar calls went</div>
+    </div>
+    <div class="no-print" style="display:flex;gap:10px;flex-wrap:wrap">
+      <a class="btn" id="back" href="index.html" style="display:inline-flex;align-items:center;text-decoration:none;color:inherit">Back to the desk</a>
+      <button type="button" class="btn" id="csv">Download CSV</button>
+      <button type="button" class="btn primary" id="print">Print or save as PDF</button>
+    </div>
+  </div>
+  <div class="tiles" id="tiles"></div>
+  <div class="panel table-box" style="padding:0">
+    <table>
+      <thead><tr><th scope="col">Time</th><th scope="col">Decision type</th><th scope="col">On-field</th><th scope="col">VAR</th><th scope="col">Final</th><th scope="col">Law</th><th scope="col">Evidence</th><th scope="col">Precedent</th><th scope="col">Desk time</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <p class="small muted" style="margin:0">Built on synthetic matches with fictional clubs and players. Laws paraphrased from the IFAB Laws of the Game 2026/27; see the official text for the wording.</p>
+</main>
+<script type="module" src="js/review.js"></script>
+</body>
+</html>
