@@ -1,12 +1,62 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ruling</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ruling · Match Centre desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body>
-  <h1>Ruling</h1>
-  <p>The decision desk for refereeing calls. The desk console is coming; the API is live at <a href="/docs">/docs</a>.</p>
+<header class="bar">
+  <div class="brand">
+    <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><rect x="1" y="1" width="24" height="24" rx="6" fill="none" stroke="#F5B544" stroke-width="2"/><path d="M8 13h10M13 8v10" stroke="#F5B544" stroke-width="2"/></svg>
+    <b>Ruling</b><span class="muted">Match Centre desk</span>
+  </div>
+  <div class="scoreline" aria-live="polite">
+    <span class="team"><span class="dot" id="home-dot"></span><span id="home-name">Home</span></span>
+    <span class="score" id="score">0 – 0</span>
+    <span class="team"><span id="away-name">Away</span><span class="dot" id="away-dot"></span></span>
+    <span class="mono muted" id="clock">00:00</span>
+  </div>
+  <div class="controls">
+    <label class="sr-only" for="match">Match</label>
+    <select class="field" id="match"></select>
+    <label class="small muted" for="speed">Replay speed</label>
+    <select class="field" id="speed"><option value="30">30×</option><option value="60" selected>60×</option><option value="120">120×</option></select>
+    <button type="button" class="btn primary small" id="start">Start live feed</button>
+    <span class="live-chip idle" id="live-chip">Feed idle</span>
+    <a class="small" id="review-link" href="review.html">Review pack</a>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="col-main" aria-label="Live match">
+    <div class="panel">
+      <div class="panel-head"><h2>Live pitch</h2><span class="small muted" id="pitch-note">Positions at kick-off</span></div>
+      <svg class="pitch" id="pitch" viewBox="-12 -12 654 432" role="img" aria-label="The pitch with all players and the ball"></svg>
+      <div class="legend">
+        <span><span class="dot" id="legend-home"></span><span id="legend-home-name">Home</span></span>
+        <span><span class="dot" id="legend-away"></span><span id="legend-away-name">Away</span></span>
+        <span><span style="width:16px;border-top:2px dashed #FF6B6B"></span>Offside line of the open check</span>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>Live feed</h2><span class="small muted">via Azure Event Hubs</span></div>
+      <div class="ticker" id="ticker" aria-live="polite"><div class="muted">Start the live feed to replay this match.</div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>VAR checks this match</h2><span class="small muted">Run any check, or let the live feed start them</span></div>
+      <div class="checks" id="checks"></div>
+    </div>
+  </section>
+
+  <section class="col-side" id="check" aria-label="Active VAR check" aria-live="polite">
+    <div class="panel empty">Start the live feed, or run a check from the list. The desk computes the evidence, finds the Law and similar past calls, writes the messages and checks every claim. Nothing is published until you approve.</div>
+  </section>
+</main>
+<script type="module" src="js/desk.js"></script>
 </body>
 </html>
