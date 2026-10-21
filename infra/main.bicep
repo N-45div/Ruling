@@ -63,10 +63,22 @@ module data 'data.bicep' = {
   }
 }
 
+module events 'events.bicep' = {
+  name: 'events'
+  scope: rg
+  params: {
+    location: location
+    tags: tags
+    resourceToken: resourceToken
+    appPrincipalId: identity.outputs.principalId
+    developerPrincipalId: principalId
+  }
+}
+
 module app 'app.bicep' = {
   name: 'app'
   scope: rg
-  dependsOn: [registry, foundry, data]
+  dependsOn: [registry, foundry, data, events]
   params: {
     location: location
     tags: tags
@@ -82,6 +94,8 @@ module app 'app.bicep' = {
     embeddingModel: foundry.outputs.embeddingDeployment
     cosmosEndpoint: data.outputs.endpoint
     cosmosDatabase: data.outputs.databaseName
+    eventHubNamespace: events.outputs.namespace
+    eventHubName: events.outputs.hubName
   }
 }
 
@@ -93,5 +107,7 @@ output FOUNDRY_PROJECT_ENDPOINT string = foundry.outputs.projectEndpoint
 output FOUNDRY_CHAT_MODEL string = foundry.outputs.chatDeployment
 output FOUNDRY_EMBEDDING_MODEL string = foundry.outputs.embeddingDeployment
 output COSMOS_ENDPOINT string = data.outputs.endpoint
+output EVENTHUB_NAMESPACE string = events.outputs.namespace
+output EVENTHUB_NAME string = events.outputs.hubName
 output SERVICE_API_NAME string = app.outputs.name
 output SERVICE_API_URI string = app.outputs.url

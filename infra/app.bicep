@@ -18,6 +18,8 @@ param chatModel string
 param embeddingModel string
 param cosmosEndpoint string
 param cosmosDatabase string
+param eventHubNamespace string
+param eventHubName string
 
 resource environment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'ruling-env-${resourceToken}'
@@ -68,6 +70,8 @@ resource api 'Microsoft.App/containerApps@2024-03-01' = {
             { name: 'FOUNDRY_EMBEDDING_MODEL', value: embeddingModel }
             { name: 'COSMOS_ENDPOINT', value: cosmosEndpoint }
             { name: 'COSMOS_DATABASE', value: cosmosDatabase }
+            { name: 'EVENTHUB_NAMESPACE', value: eventHubNamespace }
+            { name: 'EVENTHUB_NAME', value: eventHubName }
             { name: 'APPLICATIONINSIGHTS_CONNECTION_STRING', secretRef: 'insights' }
           ]
         }
