@@ -9,6 +9,8 @@ dependencies = [
     "agent-framework-core>=1.22.0",
     "agent-framework-foundry>=1.15.0",
     "azure-identity>=1.26.0",
+    "fastapi>=0.156.4",
+    "uvicorn[standard]>=0.54.0",
 ]
 
 [project.scripts]
@@ -24,7 +26,10 @@ build-backend = "hatchling.build"
 packages = ["src/ruling"]
 
 [dependency-groups]
-dev = ["pytest>=8"]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=8",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
