@@ -9,6 +9,9 @@ param resourceToken string
 @description('Object ID of the developer to grant Foundry User on the resource. Empty skips the assignment.')
 param principalId string = ''
 
+@description('Object ID of the app identity, which calls the models in Azure. Empty skips the assignment.')
+param appPrincipalId string = ''
+
 @description('Tokens-per-minute capacity, in thousands, for the chat deployment.')
 param chatCapacity int = 200
 
@@ -76,6 +79,16 @@ resource developerAccess 'Microsoft.Authorization/roleAssignments@2022-04-01' = 
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', foundryUserRoleId)
     principalId: principalId
     principalType: 'User'
+  }
+}
+
+resource appAccess 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (!empty(appPrincipalId)) {
+  name: guid(account.id, appPrincipalId, foundryUserRoleId)
+  scope: account
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', foundryUserRoleId)
+    principalId: appPrincipalId
+    principalType: 'ServicePrincipal'
   }
 }
 
