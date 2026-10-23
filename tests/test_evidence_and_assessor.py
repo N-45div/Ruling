@@ -41,3 +41,13 @@ def test_every_fact_is_a_plain_sentence(cases):
     for _, _, evidence, _ in cases:
         assert evidence.facts
         assert all(f.endswith(".") for f in evidence.facts)
+
+
+@pytest.mark.parametrize("incident_id, attempt", [("TDA-GLH-31:333:red_card", "tried to play the ball."),
+                                                   ("WVF-FVT-1:539:red_card", "made no attempt to play the ball.")])
+def test_dogso_in_the_area_states_what_decides_red_or_yellow(incident_id, attempt):
+    # Inside the area, a genuine attempt to play the ball makes DOGSO a caution: both facts must be stated.
+    match = match_for_seed(int(incident_id.split(":")[0].split("-")[-1]))
+    incident = next(i for i in match.incidents if i.id == incident_id)
+    facts = gather(packet_for(match, incident)).facts
+    assert any("inside the penalty area" in f for f in facts) and facts[-1].endswith(attempt)

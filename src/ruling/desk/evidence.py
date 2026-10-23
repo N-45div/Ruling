@@ -159,7 +159,8 @@ def _dogso_fact(dg: m.DogsoFacts) -> str:
 def _foul(packet: CheckPacket, s: m.FoulSituation) -> Evidence:
     r = fouls.judge(s)
     facts, numbers = [], {"area_margin_m": r.area_margin_m, "force": r.force}
-    if r.area_margin_m is not None and s.kind != m.RED_CARD:
+    # For a possible red card the area matters only for DOGSO, where it can turn red into yellow.
+    if r.area_margin_m is not None and (s.kind != m.RED_CARD or s.dogso):
         facts.append(_area_fact(r.area_margin_m))
     if s.challenge:
         facts += _challenge_facts(s.challenge, _name(packet, s.offender), _name(packet, s.victim))
@@ -170,6 +171,10 @@ def _foul(packet: CheckPacket, s: m.FoulSituation) -> Evidence:
     if s.dogso:
         facts.append(_dogso_fact(s.dogso))
         numbers.update(dogso_distance_m=s.dogso.distance_m, defenders_able=s.dogso.defenders_able)
+        if s.challenge:  # inside the area, a genuine attempt to play the ball makes it a caution
+            who = _name(packet, s.offender)
+            facts.append(f"{who} tried to play the ball." if s.challenge.attempt_to_play_ball
+                         else f"{who} made no attempt to play the ball.")
     borderline, why = _foul_borderline(s)
     return Evidence(s.kind, r.decision, r.clause, r.reason, r.card, tuple(facts), numbers, borderline, why)
 
