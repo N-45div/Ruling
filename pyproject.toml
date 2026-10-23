@@ -33,6 +33,9 @@ dev = [
     "httpx>=0.28.1",
     "pytest>=8",
 ]
+eval = [
+    "azure-ai-evaluation>=1.18",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
