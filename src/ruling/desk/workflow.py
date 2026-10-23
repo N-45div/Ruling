@@ -28,7 +28,7 @@ from .assessor import Verdict, assess
 from .checker import CheckReport
 from .communicator import Drafts
 from .evidence import Evidence, gather
-from .packet import CheckPacket
+from .packet import CheckPacket, gaps
 from .precedent import Precedent
 
 MAX_REVISIONS = 2
@@ -116,9 +116,9 @@ class Intake(Executor):
     @handler
     async def run(self, case: CaseFile, ctx: WorkflowContext[CaseFile]) -> None:
         started = time.perf_counter()
-        facts = case.packet.facts
-        if not facts or not facts.get("bodies") and case.packet.category == "offside":
-            case.status, case.failure = "failed", "the packet has no positions to measure"
+        gap = gaps(case.packet)
+        if gap:
+            case.status, case.failure = "failed", gap
         case.log("intake", started, case.failure or "packet complete")
         await ctx.send_message(case)
 
