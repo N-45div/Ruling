@@ -91,3 +91,29 @@ On the development and precedent seeds only (5001-5020 and 1-120, 140 matches), 
 - Claims the desk's checker lists must appear in the drafts.
 
 *Development result on the final code (commit f8a8e08).* Unsupported claims were low for both arms: 1.0% for the model alone and 1.2% for Ruling. No advantage for Ruling on this metric is claimed from development data.
+
+**4. 2026-10-24, before any held-out match has been generated.**
+
+*Metric code completed.* The scoring code computed verdict accuracy, the unsupported-claim rate and the interval for the verdict difference, but not every metric this plan names. It now also computes, from the same per-incident records:
+- the 95% interval of the unsupported-claim rate difference (paired bootstrap over incidents, 10,000 resamples, each rate recomputed on every resample), which the success test needs;
+- planted-error detection. An arm flags an incident when its final decision differs from the on-field call. A planted error is an incident whose correct final decision differs from it. Precision and recall follow;
+- cost per incident at the gpt-5-mini list price: $0.25 per million input tokens and $2.00 per million output tokens. The embedding calls for precedent are not counted;
+- median and 90th-percentile time;
+- every metric per category and for the contested subset. Until now only verdict accuracy had both.
+
+The success test is computed from these intervals as written above.
+
+*Desk changes since amendment 3.* All were made on development data and failure drills, while no held-out data existed:
+- intake holds a check whose tracking misses a player the decision depends on;
+- model calls have time limits (30 s for writing and 45 s for checking, per attempt), and each check has a 90-second deadline, after which only a holding line goes out;
+- the checker's decision record states the on-field decision, what the VAR did and the final decision in words.
+
+A held check keeps the verdict computed before it was held, so verdict accuracy is unaffected; its explanation is the holding line.
+
+*Run conditions.* All four arms run on the held-out set in one run, at most 6 checks at a time, against the same Foundry deployment (gpt-5-mini, version 2025-08-07). The code is the commit recorded in the results file, the same code that runs the live demo.
+
+*Hand check.* The 50-claim hand check is done by the AI coding assistant used to build Ruling (Claude Code), reading each claim against the evidence record, not by a person. Its agreement with the automated judge is reported as exactly that.
+
+*Not pre-registered, reported as exploratory.* Azure AI Foundry's groundedness evaluator is run on the fan explanations of the model-only arm and the full desk, as an independent judge alongside our own claim audit.
+
+*Categories not covered.* The generator does not produce serious foul play as a separate category (it is part of the possible red cards), mistaken identity, or the ball going out of play before a goal. Results are reported for the five categories in amendment 2 only.
