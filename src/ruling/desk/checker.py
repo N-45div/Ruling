@@ -19,7 +19,7 @@ from ..laws.clauses import clause
 from ..sim.clubs import league
 from . import llm
 from .assessor import Verdict
-from .communicator import Drafts
+from .communicator import DECISION_WORDS, Drafts
 from .evidence import Evidence
 from .packet import CheckPacket
 
@@ -43,6 +43,9 @@ CHECK_INSTRUCTIONS = (
     "positions, distances, contact, actions, involvement, rules of the game, the decision and any precedent. "
     "Mark each claim supported if the facts, the Law summary or the decision record state it or directly imply it; "
     "unsupported if they do not; contradicted if it conflicts with them. "
+    "Every statement of what the decision is (lines like 'Decision: ...', 'the goal stands', 'penalty') must match "
+    "the record's FINAL decision. One that gives a different outcome is contradicted, including the on-field "
+    "decision presented as the outcome after the VAR overturned or changed it. "
     "These are supported: a restatement of the Law that matches the Law summary; statements about the VAR process "
     "that match the decision record (the VAR checked, the on-field decision stands, the VAR corrected a factual "
     "decision, the referee reviewed it at the monitor and changed it); the clock, club names and shirt numbers in "
@@ -115,14 +118,21 @@ def rule_issues(drafts: Drafts, packet: CheckPacket, evidence: Evidence, verdict
     return issues
 
 
+_REVIEW_WORDS = {"check_complete": "the VAR checked it and the on-field decision stands",
+                 "var_overturn": "the VAR overturned the on-field decision",
+                 "on_field_review": "the referee reviewed it at the monitor and changed the decision"}
+
+
 def _record(packet: CheckPacket, evidence: Evidence, verdict: Verdict, precedent_line: str | None) -> str:
     law = clause(verdict.clause)
     clubs = league()
     lines = [f"Decision record: {packet.category.replace('_', ' ')} at {packet.clock} "
              f"(minute {packet.clock.split(':')[0]}), {clubs[packet.home].name} ({packet.home}) v "
-             f"{clubs[packet.away].name} ({packet.away}); on-field {packet.on_field}; review {verdict.review}; "
-             f"final {verdict.final_decision}; card {verdict.card}; stadium announcement "
-             f"{'due' if verdict.announced else 'not due'}.",
+             f"{clubs[packet.away].name} ({packet.away}).",
+             f"On-field decision: {DECISION_WORDS.get(packet.on_field, packet.on_field)}. "
+             f"VAR review: {_REVIEW_WORDS[verdict.review]}.",
+             f"FINAL decision: {DECISION_WORDS[verdict.final_decision]}; card: {DECISION_WORDS[verdict.card]}; "
+             f"stadium announcement {'due' if verdict.announced else 'not due'}.",
              *([f"Close call recorded ({evidence.borderline_reason}): the on-field decision stands because it was "
                 "not a clear and obvious error."] if evidence.borderline and verdict.review == "check_complete" else []),
              "Facts (all measured from tracking data):", *[f"- {f}" for f in evidence.facts],

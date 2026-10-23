@@ -42,9 +42,7 @@ WRITE_TIMEOUT, CHECK_TIMEOUT = 30.0, 45.0
 # Seconds from the start of a check to checked messages (slowest seen: 63 s). Past it, a holding line.
 DEADLINE = 90.0
 APPROVE = "approve"
-_WORDS = {"goal": "the goal stands", "no_goal": "the goal is disallowed", "penalty": "a penalty is awarded",
-          "free_kick": "a free kick is awarded outside the area", "no_foul": "no foul", "red": "a red card",
-          "yellow": "a yellow card", "no_card": "no card"}
+_WORDS = communicator.DECISION_WORDS
 
 
 @dataclass

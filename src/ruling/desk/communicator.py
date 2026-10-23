@@ -40,6 +40,10 @@ _REVIEWS = {
 
 # Shared with the checker: a close call that stands is explained in exactly these words.
 CLOSE_CALL = "It was a close call, so the on-field decision stands: not a clear and obvious error."
+# Each final decision in words, for holding lines and the checker's decision record.
+DECISION_WORDS = {"goal": "the goal stands", "no_goal": "the goal is disallowed", "penalty": "a penalty is awarded",
+                  "free_kick": "a free kick is awarded outside the area", "no_foul": "no foul", "red": "a red card",
+                  "yellow": "a yellow card", "no_card": "no card"}
 # Words the fan card must contain for each final decision (the checker looks for them).
 DECISION_PHRASE = {"goal": "the goal stands", "no_goal": "the goal is disallowed", "penalty": "penalty",
                    "free_kick": "free kick", "no_foul": "no foul", "red": "red card", "yellow": "yellow card",
