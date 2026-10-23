@@ -61,6 +61,20 @@ def test_unknown_checks_and_incidents_are_404(client):
     assert client.post("/api/checks", json={"incident_id": "AGA-BRC-5001:1:offside"}).status_code == 404
 
 
+def test_a_drill_check_holds_and_is_never_stored(client):
+    assert [d["id"] for d in client.get("/api/drills").json()] == [
+        "tracking_dropout", "player_missing", "model_timeout", "wrong_draft"]
+    incident_id = client.get("/api/matches/5003").json()["incidents"][0]["id"]
+    assert client.post("/api/checks", json={"incident_id": incident_id, "drill": "nope"}).status_code == 422
+    started = client.post("/api/checks", json={"incident_id": incident_id, "drill": "tracking_dropout"}).json()
+    events = client.get(f"/api/checks/{started['check_id']}/events").text  # streams until the check ends
+    assert '"type": "final"' in events
+    case = client.get(f"/api/checks/{started['check_id']}").json()["case"]
+    assert case["status"] == "held" and case["drill"] == "tracking_dropout"
+    assert case["holding"].startswith("VAR check in progress") and case["verdict"] is None
+    assert all(c["incident_id"] != incident_id for c in client.get("/api/cases").json())
+
+
 def test_finished_checks_are_served_from_the_store_after_a_restart(client):
     held = {"check_id": "c0ffee000001", "incident_id": "MLA-HFW-5001:1:offside", "match_id": "MLA-HFW-5001",
             "status": "held", "holding": "VAR check in progress.", "drafts": None}

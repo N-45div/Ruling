@@ -18,10 +18,11 @@ from .store import Store
 
 
 class CheckSession:
-    def __init__(self, packet: CheckPacket, store: Store):
+    def __init__(self, packet: CheckPacket, store: Store, drill: str | None = None):
         self.id = uuid.uuid4().hex[:12]
         self.packet = packet
         self.store = store
+        self.drill = drill
         self.workflow = build()
         self.events: list[dict] = []
         self.case: CaseFile | None = None
@@ -70,7 +71,7 @@ class CheckSession:
         self._push("started", incident_id=self.packet.incident_id)
         try:
             listen(self.id, self._on_step)
-            result = await run_within(self.workflow, CaseFile(self.packet, listener=self.id))
+            result = await run_within(self.workflow, CaseFile(self.packet, listener=self.id, drill=self.drill))
             if isinstance(result, CaseFile):  # held at the deadline
                 await self._finish(result)
             else:
@@ -90,7 +91,8 @@ class CheckSession:
     async def _finish(self, case: CaseFile) -> None:
         self.case, self.done = case, True
         unlisten(self.id)
-        await self.store.save({"check_id": self.id, **case_dict(case)})
+        if not self.drill:  # drills never become case files
+            await self.store.save({"check_id": self.id, **case_dict(case)})
         self._push("final", case=case_dict(case))
 
     async def _settle(self, result, auto_approve: bool) -> None:
@@ -110,8 +112,8 @@ class Checks:
         self.sessions: dict[str, CheckSession] = {}
         self._tasks: set[asyncio.Task] = set()
 
-    def start(self, packet: CheckPacket, auto_approve: bool = False) -> CheckSession:
-        session = CheckSession(packet, self.store)
+    def start(self, packet: CheckPacket, auto_approve: bool = False, drill: str | None = None) -> CheckSession:
+        session = CheckSession(packet, self.store, drill)
         self.sessions[session.id] = session
         task = asyncio.create_task(session.run(auto_approve))
         self._tasks.add(task)

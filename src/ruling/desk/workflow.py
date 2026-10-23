@@ -25,7 +25,7 @@ from agent_framework import Case, Default, Executor, WorkflowBuilder, WorkflowCo
 from ..laws.clauses import Clause, clause
 from ..sim.clubs import league
 from . import checker as checking
-from . import communicator, llm, precedent
+from . import communicator, drills, llm, precedent
 from .assessor import Verdict, assess
 from .checker import CheckReport
 from .communicator import Drafts
@@ -85,6 +85,7 @@ class CaseFile:
     check_history: list[list[str]] = field(default_factory=list)  # the checker's findings on each draft
     tokens_in: int = 0
     tokens_out: int = 0
+    drill: str | None = None  # a failure drill injected into this check (see drills.py)
     # Key of a listener told after every step (see `listen`). The workflow copies case files
     # between agents, so the case carries only the key, never the callback itself.
     listener: str | None = None
@@ -187,12 +188,16 @@ class CommunicatorAgent(Executor):
         started = time.perf_counter()
         clubs = {code: club.name for code, club in league().items()}
         line = precedent_line(case.precedent, case.verdict.final_decision)
+        timeout = drills.DRILL_TIMEOUT if case.drill == "model_timeout" else WRITE_TIMEOUT
         try:
             case.drafts, usage = await llm.with_retry(lambda: communicator.draft(
                 case.packet, case.evidence, case.verdict, clubs, line, case.feedback, effort=WRITE_EFFORT),
-                timeout=WRITE_TIMEOUT)
+                timeout=timeout)
             case.spend(usage)
             note = f"draft {case.revisions + 1}"
+            if case.drill == "wrong_draft" and not drills.caught(case.check_history, case.verdict.final_decision):
+                case.drafts = drills.plant(case.drafts, case.verdict.final_decision)
+                note += ", wrong decision planted"
         except Exception as exc:
             case.status, case.failure, note = "failed", f"drafting failed: {type(exc).__name__}", "failed"
         case.log("communicator", started, note)

@@ -72,7 +72,7 @@ def case_dict(case: CaseFile) -> dict:
     return {
         "incident_id": p.incident_id, "category": p.category, "match_id": p.match_id, "clock": p.clock,
         "home": p.home, "away": p.away, "score": list(p.score), "team": p.team, "on_field": p.on_field,
-        "status": case.status, "failure": case.failure, "holding": case.holding,
+        "status": case.status, "failure": case.failure, "holding": case.holding, "drill": case.drill,
         "evidence": None if not e else {"facts": list(e.facts), "numbers": e.numbers, "borderline": e.borderline,
                                         "borderline_reason": e.borderline_reason, "law_decision": e.law_decision,
                                         "reason": e.reason, "offside_line_x": offside_line},

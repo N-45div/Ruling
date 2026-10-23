@@ -5,7 +5,8 @@
     GET  /api/matches/{seed}                  events, incidents (no ground truth), players
     GET  /api/matches/{seed}/frames/{index}   where all 22 players stand at an event
     GET  /api/incidents/{incident_id}         the check packet the desk works from
-    POST /api/checks                          start a VAR check {"incident_id", "auto_approve"}
+    GET  /api/drills                          failure drills a check can be run with
+    POST /api/checks                          start a VAR check {"incident_id", "auto_approve", "drill"}
     GET  /api/checks/{check_id}               the case file so far
     GET  /api/checks/{check_id}/events        every agent step, live (server-sent events)
     POST /api/checks/{check_id}/decision      a person approves or holds the messages
@@ -85,6 +86,7 @@ app = FastAPI(title="Ruling", description="A decision desk for refereeing calls.
 class StartCheck(BaseModel):
     incident_id: str
     auto_approve: bool = False
+    drill: str | None = None  # a failure drill to inject (GET /api/drills)
 
 
 class Translate(BaseModel):
@@ -134,13 +136,24 @@ async def incident(incident_id: str):
     return serialize.incident_detail(*_incident(incident_id))
 
 
+@app.get("/api/drills")
+async def drills():
+    from ..desk.drills import DRILLS
+
+    return [{"id": key, "label": label} for key, label in DRILLS.items()]
+
+
 @app.post("/api/checks", status_code=202)
 async def start_check(body: StartCheck):
+    from ..desk.drills import DRILLS, break_packet
     from ..desk.packet import packet_for
 
+    if body.drill is not None and body.drill not in DRILLS:
+        raise HTTPException(422, f"drills: {', '.join(DRILLS)}")
     incident, m = _incident(body.incident_id)
-    session = app.state.checks.start(packet_for(m, incident), body.auto_approve)
-    return {"check_id": session.id}
+    packet = break_packet(packet_for(m, incident), body.drill)
+    session = app.state.checks.start(packet, body.auto_approve, body.drill)
+    return {"check_id": session.id, "drill": body.drill}
 
 
 async def _stored(check_id: str) -> dict:
