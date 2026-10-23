@@ -1,0 +1,29 @@
+{
+ "results": "held-out-20261023T2139Z.json",
+ "judge": "gpt-5-mini",
+ "arms": {
+  "model_only": {
+   "explanations": 328,
+   "scored": 328,
+   "mean": 4.53,
+   "pass_rate": 0.8689,
+   "studio_url": "https://ai.azure.com/resource/build/evaluation/2e800e35-0452-4f78-b660-5a86c73acc83?wsid=/subscriptions/605942cf-54a3-4fdf-acaa-3de82b50cdb1/resourceGroups/rg-ruling-dev/providers/Microsoft.CognitiveServices/accounts/ruling-ai-4l2vlhz6t52ii/projects/ruling&tid=293adb14-cb25-4946-a242-b50e827e272d"
+  },
+  "ruling": {
+   "explanations": 328,
+   "scored": 328,
+   "mean": 4.674,
+   "pass_rate": 0.8994,
+   "studio_url": "https://ai.azure.com/resource/build/evaluation/59c66f16-e795-4ce7-8250-1e69bfc0bce7?wsid=/subscriptions/605942cf-54a3-4fdf-acaa-3de82b50cdb1/resourceGroups/rg-ruling-dev/providers/Microsoft.CognitiveServices/accounts/ruling-ai-4l2vlhz6t52ii/projects/ruling&tid=293adb14-cb25-4946-a242-b50e827e272d"
+  }
+ },
+ "difference": {
+  "comparison": "ruling - model_only",
+  "mean": 0.143,
+  "ci95": [
+   0.003,
+   0.284
+  ],
+  "pairs": 328
+ }
+}

@@ -1,0 +1,457 @@
+{
+ "checked_by": "Claude Code (AI coding assistant), not a person",
+ "sample": "50 fact and law claims, 25 per arm, seed 20261024",
+ "agreement": 49,
+ "rows": [
+  {
+   "n": 1,
+   "arm": "model_only",
+   "incident": "WVF-NBR-9043:1188:penalty_claim",
+   "claim": "Defender NBR-25 trips WVF-11.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 2,
+   "arm": "model_only",
+   "incident": "IVC-FVT-9042:612:penalty_claim",
+   "claim": "IVC-34 made ankle contact with FVT-19.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 3,
+   "arm": "ruling",
+   "incident": "RHU-MLA-9031:152:offside",
+   "claim": "At the pass, RHU No.38 Nils Praholme was 40.3 m behind the offside line set by MLA No.4 Jonah Uldello.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 4,
+   "arm": "model_only",
+   "incident": "RHU-MLA-9047:647:offside",
+   "claim": "MLA-12 was ahead of the second-last opponent RHU-28 (x=3.88).",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 5,
+   "arm": "ruling",
+   "incident": "KBF-PLC-9051:77:offside",
+   "claim": "PLC No.25 Dario Vaswellby received the ball directly from a throw-in.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 6,
+   "arm": "model_only",
+   "incident": "MLA-PLC-9008:799:offside",
+   "claim": "so PLC-10 was onside.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 7,
+   "arm": "model_only",
+   "incident": "BRC-QMF-9035:1285:handball_goal",
+   "claim": "It was close to the body (arm_away_m 0.2).",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 8,
+   "arm": "ruling",
+   "incident": "HFW-GLH-9070:1163:handball",
+   "claim": "The contact occurred at 75:46 and the point of contact was 5.5 m inside the penalty area",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 9,
+   "arm": "model_only",
+   "incident": "IVC-FVT-9042:996:handball",
+   "claim": "The arm position was justified by movement",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 10,
+   "arm": "model_only",
+   "incident": "PLC-KBF-9080:794:offside",
+   "claim": "Therefore, KBF-33 was not in an offside position when the pass was played.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 11,
+   "arm": "ruling",
+   "incident": "EHA-BRC-9058:110:red_card",
+   "claim": "The speed of the challenge was 5.8 m/s",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 12,
+   "arm": "ruling",
+   "incident": "CWR-KBF-9075:1519:offside",
+   "claim": "At the pass, Florin Evurza (KBF No.14) was 20.1 m behind the offside line set by Viktor Lunurza (CWR No.38).",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 13,
+   "arm": "model_only",
+   "incident": "TDA-HFW-9067:891:penalty_claim",
+   "claim": "HFW-22 attempted to play the ball.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 14,
+   "arm": "model_only",
+   "incident": "NBR-WVF-9040:723:offside",
+   "claim": "When WVF‑4 played the ball (ball x=10.97).",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 15,
+   "arm": "ruling",
+   "incident": "CWR-KBF-9063:115:penalty_claim",
+   "claim": "KBF No.31 Zeno Brenwellby held CWR No.25 Umar Falholme.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 16,
+   "arm": "ruling",
+   "incident": "FVT-RHU-9007:951:offside",
+   "claim": "FVT No.39 Bram Evholme was 26.4 m behind the offside line set by RHU No.12 Bram Corurza at the pass",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 17,
+   "arm": "ruling",
+   "incident": "QMF-HFW-9010:1283:penalty_claim",
+   "claim": "It was a close call",
+   "judge": "unsupported",
+   "hand": "unsupported",
+   "agree": true
+  },
+  {
+   "n": 18,
+   "arm": "model_only",
+   "incident": "IVC-EHA-9061:1520:penalty_claim",
+   "claim": "Contact was at the foot, low speed (4.0 m/s).",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 19,
+   "arm": "model_only",
+   "incident": "KBF-PLC-9051:1122:handball_goal",
+   "claim": "PLC-34 (Emre Quininni) made contact with the ball using his arm.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 20,
+   "arm": "model_only",
+   "incident": "BRC-EHA-9011:71:offside",
+   "claim": "EHA‑6 was not nearer the goal line than the second‑last defender.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 21,
+   "arm": "model_only",
+   "incident": "CWR-KBF-9063:1330:penalty_claim",
+   "claim": "CWR-4 played the ball first.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 22,
+   "arm": "ruling",
+   "incident": "CWR-IVC-9052:294:offside",
+   "claim": "Tracking data show IVC No.37 Eli Kalovar was 99 cm offside at the pass",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 23,
+   "arm": "ruling",
+   "incident": "MLA-PLC-9008:317:offside",
+   "claim": "The offside line was set by PLC No.7 Dmitri Zansendt (the second-last opponent).",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 24,
+   "arm": "model_only",
+   "incident": "TDA-HFW-9067:173:red_card",
+   "claim": "Foul at x=65.97.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 25,
+   "arm": "model_only",
+   "incident": "LKU-SMA-9009:1281:offside",
+   "claim": "At the pass from LKU-29 the ball location was x=21.56.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 26,
+   "arm": "ruling",
+   "incident": "WVF-AGA-9003:1236:offside",
+   "claim": "WVF No.16 Rafael Morfordt was 21 cm behind the offside line",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 27,
+   "arm": "model_only",
+   "incident": "HFW-GLH-9070:307:red_card",
+   "claim": "GLH-37 contacted HFW-7 on the shin and did not play the ball",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 28,
+   "arm": "model_only",
+   "incident": "KBF-PLC-9022:774:red_card",
+   "claim": "Offender made no attempt to play the ball.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 29,
+   "arm": "ruling",
+   "incident": "MLA-CWR-9037:60:offside",
+   "claim": "CWR No.10 Oscar Quinezar was 3 cm behind the offside line at the pass (only an arm was beyond)",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 30,
+   "arm": "ruling",
+   "incident": "OHT-GLH-9019:117:red_card",
+   "claim": "Tracking data show contact at the ankle 0.8 s after the ball left at 5.8 m/s",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 31,
+   "arm": "ruling",
+   "incident": "KBF-PLC-9004:933:offside",
+   "claim": "Tomas Sevovar was 20.3 m behind the offside line at the pass.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 32,
+   "arm": "model_only",
+   "incident": "FVT-EHA-9055:659:offside",
+   "claim": "The second-last opponent (offside line) was FVT-6 at x 6.06.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 33,
+   "arm": "model_only",
+   "incident": "GLH-CWR-9024:946:penalty_claim",
+   "claim": "The contact was with the foot.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 34,
+   "arm": "ruling",
+   "incident": "LKU-SMA-9009:1368:handball_goal",
+   "claim": "A team‑mate then scored",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 35,
+   "arm": "ruling",
+   "incident": "LKU-RHU-9045:655:offside",
+   "claim": "At the pass, RHU No.36 Viktor Zansendt was 2.2 m behind the offside line.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 36,
+   "arm": "ruling",
+   "incident": "HFW-MLA-9020:1165:handball",
+   "claim": "The ball hit MLA No.18 Felix Gorsendt’s arm 1.9 m inside the penalty area.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 37,
+   "arm": "ruling",
+   "incident": "NBR-WVF-9040:1319:offside",
+   "claim": "At the moment of the pass, WVF No.16 Rafael Morfordt was 6 cm behind the offside line set by NBR No.7 Idris Kalezar.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 38,
+   "arm": "model_only",
+   "incident": "KBF-PLC-9022:932:offside",
+   "claim": "At the moment of the pass (KBF‑4 at x=12.16) KBF‑3 was not closer to the opponents' goal than the second‑last defender.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 39,
+   "arm": "model_only",
+   "incident": "HFW-MLA-9020:1165:handball",
+   "claim": "The arm was in a natural position (justified by the body's movement).",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 40,
+   "arm": "model_only",
+   "incident": "RHU-OHT-9034:348:offside",
+   "claim": "At the pass the second-last opponent OHT-23 (Lucas Tordello) was at x≈81.94.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 41,
+   "arm": "model_only",
+   "incident": "TDA-HFW-9067:173:red_card",
+   "claim": "Contact was at the ankle.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 42,
+   "arm": "ruling",
+   "incident": "GLH-CWR-9024:946:penalty_claim",
+   "claim": "The contact happened 1.0 m inside the penalty area",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 43,
+   "arm": "ruling",
+   "incident": "NBR-WVF-9040:829:offside",
+   "claim": "The offside line was set by WVF No.16 Rafael Morfordt at the pass",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 44,
+   "arm": "model_only",
+   "incident": "OHT-WVF-9002:911:handball_goal",
+   "claim": "The ball contacted attacker WVF-25’s arm 1.53 m from goal immediately before the score.",
+   "judge": "supported",
+   "hand": "contradicted",
+   "agree": false
+  },
+  {
+   "n": 45,
+   "arm": "ruling",
+   "incident": "LKU-WVF-9017:1214:offside",
+   "claim": "Under Law 11.3 the goal stands.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 46,
+   "arm": "model_only",
+   "incident": "MLA-WVF-9077:187:offside",
+   "claim": "At the pass (ball x=77.21) the second‑last opponent (WVF-16) was at x=97.68.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 47,
+   "arm": "ruling",
+   "incident": "TDA-LKU-9036:233:penalty_claim",
+   "claim": "TDA No.29 Arlo Dalanek tripped LKU No.16 Sami Sevdello",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 48,
+   "arm": "ruling",
+   "incident": "WVF-AGA-9003:972:penalty_claim",
+   "claim": "The contact was 9.8 m inside the penalty area.",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 49,
+   "arm": "ruling",
+   "incident": "QMF-HFW-9010:758:handball",
+   "claim": "The arm was 0.42 m from the body",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  },
+  {
+   "n": 50,
+   "arm": "ruling",
+   "incident": "NBR-WVF-9040:829:offside",
+   "claim": "NBR No.29 Goran Vasdello was 39.9 m behind the offside line at the moment of the pass",
+   "judge": "supported",
+   "hand": "supported",
+   "agree": true
+  }
+ ]
+}
