@@ -95,8 +95,12 @@ def load_index() -> tuple[tuple[PastCase, tuple[float, ...]], ...]:
     return tuple((PastCase(**{k: v for k, v in r.items() if k != "vector"}), tuple(r["vector"])) for r in rows)
 
 
-def nearest(vector: list[float], category: str, k: int = 8) -> list[tuple[PastCase, float]]:
-    scored = [(case, sum(a * b for a, b in zip(vector, v))) for case, v in load_index() if case.category == category]
+def nearest(vector: list[float], category: str, k: int = 8, exclude: str | None = None,
+            index=None) -> list[tuple[PastCase, float]]:
+    """The k most similar past checks in the category; `exclude` is the incident being checked, which
+    can never be its own precedent (it matters only when an archive incident is checked)."""
+    scored = [(case, sum(a * b for a, b in zip(vector, v))) for case, v in (index or load_index())
+              if case.category == category and case.id != exclude]
     return sorted(scored, key=lambda pair: pair[1], reverse=True)[:k]
 
 
@@ -113,4 +117,4 @@ def summarize(neighbours: list[tuple[PastCase, float]], recommended: str) -> Pre
 
 async def find(packet: CheckPacket, evidence: Evidence, recommended: str) -> Precedent:
     vector = (await embed([case_text(packet, evidence)]))[0]
-    return summarize(nearest(vector, packet.category), recommended)
+    return summarize(nearest(vector, packet.category, exclude=packet.incident_id), recommended)

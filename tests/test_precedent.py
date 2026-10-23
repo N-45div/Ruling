@@ -1,6 +1,6 @@
 from ruling.desk.evidence import gather
 from ruling.desk.packet import packet_for
-from ruling.desk.precedent import PastCase, case_text, summarize
+from ruling.desk.precedent import PastCase, case_text, nearest, summarize
 from ruling.sim.cli import match_for_seed
 
 
@@ -28,3 +28,9 @@ def test_summary_counts_outcomes_and_flags_inconsistency():
 
 def test_no_neighbours_is_not_an_inconsistency():
     assert summarize([], "goal").consistent
+
+
+def test_a_check_is_never_its_own_precedent():
+    index = [(past("goal", 0), (1.0, 0.0)), (past("no_goal", 1), (0.9, 0.1)), (past("goal", 2), (0.0, 1.0))]
+    found = nearest([1.0, 0.0], "offside", k=2, exclude="m:0:offside", index=index)
+    assert [case.id for case, _ in found] == ["m:1:offside", "m:2:offside"]
