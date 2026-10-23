@@ -9,11 +9,13 @@ A case file travels through the graph and every agent adds its part. Numbers com
 code (evidence, assessor); the model writes and checks the words (communicator,
 checker). A draft that fails the checker goes back to the communicator with the
 issues, at most twice. Anything that breaks routes to the fail-safe, which publishes
-only a holding line. Nothing is published until a person approves it.
+only a holding line; a check that runs past its deadline is stopped and held the same
+way. Nothing is published until a person approves it.
 """
 
 from __future__ import annotations
 
+import asyncio
 import time
 from collections.abc import Callable
 from dataclasses import dataclass, field
@@ -35,6 +37,10 @@ MAX_REVISIONS = 2
 # Reasoning effort for the model calls; the verdict itself never depends on them.
 WRITE_EFFORT = "minimal"  # measured: minimal halves the time and needs fewer rewrites
 CHECK_EFFORT = "low"
+# Seconds per model call attempt (slowest seen on the demo matches: 10 s writing, 53 s checking with a retry).
+WRITE_TIMEOUT, CHECK_TIMEOUT = 30.0, 45.0
+# Seconds from the start of a check to checked messages (slowest seen: 63 s). Past it, a holding line.
+DEADLINE = 90.0
 APPROVE = "approve"
 _WORDS = {"goal": "the goal stands", "no_goal": "the goal is disallowed", "penalty": "a penalty is awarded",
           "free_kick": "a free kick is awarded outside the area", "no_foul": "no foul", "red": "a red card",
@@ -183,7 +189,8 @@ class CommunicatorAgent(Executor):
         line = precedent_line(case.precedent, case.verdict.final_decision)
         try:
             case.drafts, usage = await llm.with_retry(lambda: communicator.draft(
-                case.packet, case.evidence, case.verdict, clubs, line, case.feedback, effort=WRITE_EFFORT))
+                case.packet, case.evidence, case.verdict, clubs, line, case.feedback, effort=WRITE_EFFORT),
+                timeout=WRITE_TIMEOUT)
             case.spend(usage)
             note = f"draft {case.revisions + 1}"
         except Exception as exc:
@@ -208,7 +215,8 @@ class CheckerAgent(Executor):
         line = precedent_line(case.precedent, case.verdict.final_decision)
         try:
             case.check, usage = await llm.with_retry(lambda: checking.check(
-                case.drafts, case.packet, case.evidence, case.verdict, line, effort=CHECK_EFFORT))
+                case.drafts, case.packet, case.evidence, case.verdict, line, effort=CHECK_EFFORT),
+                timeout=CHECK_TIMEOUT)
             case.spend(usage)
         except Exception as exc:
             case.status, case.failure = "failed", f"checking failed: {type(exc).__name__}"
@@ -249,17 +257,21 @@ class Approval(Executor):
         await ctx.yield_output(case)
 
 
+def hold(case: CaseFile) -> CaseFile:
+    """Only a holding line: the decision if it is known, never an explanation that was not checked."""
+    if case.verdict:
+        case.holding = f"VAR check complete: {_WORDS[case.verdict.final_decision]}."
+    else:
+        case.holding = f"VAR check in progress: possible {case.packet.category.replace('_', ' ')}."
+    case.status = "held"
+    case.add(Step("fail-safe", 0.0, case.failure or ""))
+    return case
+
+
 class FailSafe(Executor):
     @handler
     async def run(self, case: CaseFile, ctx: WorkflowContext[CaseFile, CaseFile]) -> None:
-        # Only a holding line: the decision if it is known, never an explanation that was not checked.
-        if case.verdict:
-            case.holding = f"VAR check complete: {_WORDS[case.verdict.final_decision]}."
-        else:
-            case.holding = f"VAR check in progress: possible {case.packet.category.replace('_', ' ')}."
-        case.status = "held"
-        case.add(Step("fail-safe", 0.0, case.failure or ""))
-        await ctx.yield_output(case)
+        await ctx.yield_output(hold(case))
 
 
 def _failed(case: CaseFile) -> bool:
@@ -286,12 +298,41 @@ def build(use_precedent: bool = True, use_checker: bool = True):
     )
 
 
+async def run_within(workflow, case: CaseFile, deadline: float = DEADLINE):
+    """Run a check until it asks for approval or ends, and return the workflow result. Past the
+    deadline the check is stopped and held, with whatever the desk had established by then."""
+    latest = [case]
+    key = case.listener or f"deadline-{id(case)}"
+    outer = _LISTENERS.get(key)
+
+    def track(current: CaseFile, step: Step) -> None:
+        latest[0] = current
+        if outer:
+            outer(current, step)
+
+    case.listener = key
+    listen(key, track)
+    try:
+        return await asyncio.wait_for(workflow.run(case), deadline)
+    except TimeoutError:
+        late = latest[0]
+        late.status, late.failure = "failed", f"the desk ran past its {deadline:g} s deadline"
+        return hold(late)
+    finally:
+        if outer:
+            listen(key, outer)
+        else:
+            unlisten(key)
+
+
 async def run_check(packet: CheckPacket, approve=None, use_precedent: bool = True,
                     use_checker: bool = True) -> CaseFile:
     """Run one VAR check through the desk. `approve` receives the PublishRequest and returns
     "approve" or anything else to hold; by default every checked case is approved."""
     workflow = build(use_precedent, use_checker)
-    result = await workflow.run(CaseFile(packet))
+    result = await run_within(workflow, CaseFile(packet))
+    if isinstance(result, CaseFile):  # held at the deadline
+        return result
     outputs = result.get_outputs()
     if outputs:
         return outputs[-1]

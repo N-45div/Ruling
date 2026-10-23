@@ -2,11 +2,15 @@
 before any model call, so no service is involved."""
 
 import asyncio
+import time
 from dataclasses import replace
 
+import pytest
+
+from ruling.desk import llm
 from ruling.desk.evidence import situation_from_facts
 from ruling.desk.packet import gaps, packet_for
-from ruling.desk.workflow import run_check
+from ruling.desk.workflow import CaseFile, build, run_check, run_within
 from ruling.laws.offside import judge
 from ruling.sim.cli import SETS, match_for_seed
 
@@ -73,6 +77,28 @@ def test_a_challenge_with_a_player_missing_is_not_measured():
     case = asyncio.run(run_check(broken))
     assert case.status == "held" and case.holding == "VAR check in progress: possible penalty claim."
     assert case.failure == "tracking lost a player in the challenge"
+
+
+def test_a_model_call_that_hangs_is_cut_off_and_retried():
+    attempts = []
+
+    async def hang():
+        attempts.append(time.perf_counter())
+        await asyncio.sleep(30)
+
+    started = time.perf_counter()
+    with pytest.raises(TimeoutError):
+        asyncio.run(llm.with_retry(hang, attempts=3, timeout=0.05, backoff=0.0))
+    assert len(attempts) == 3 and time.perf_counter() - started < 2
+
+
+def test_a_check_past_its_deadline_gets_only_a_holding_line():
+    # A zero deadline stops the check before its first agent runs, so no service is called.
+    case = asyncio.run(run_within(build(), CaseFile(_packet()), deadline=0))
+    assert isinstance(case, CaseFile) and case.status == "held"
+    assert case.failure == "the desk ran past its 0 s deadline"
+    assert case.holding == "VAR check in progress: possible offside."
+    assert [s.agent for s in case.steps] == ["fail-safe"]
 
 
 def test_facts_that_cannot_be_measured_never_produce_a_guess():

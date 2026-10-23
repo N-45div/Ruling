@@ -28,17 +28,18 @@ def client() -> FoundryChatClient:
                              credential=credential)
 
 
-async def with_retry(call, attempts: int = 3):
-    """Retry a model call on rate limits and transient service errors."""
+async def with_retry(call, attempts: int = 3, timeout: float | None = None, backoff: float = 4.0):
+    """Retry a model call on rate limits, transient service errors and timeouts. Each attempt
+    gets `timeout` seconds, so a call that hangs is cut off instead of stalling the desk."""
     import asyncio
 
     for attempt in range(attempts):
         try:
-            return await call()
+            return await asyncio.wait_for(call(), timeout)
         except Exception:
             if attempt == attempts - 1:
                 raise
-            await asyncio.sleep(4 * (attempt + 1))
+            await asyncio.sleep(backoff * (attempt + 1))
 
 
 async def structured(name: str, instructions: str, prompt: str, schema: type, effort: str = "low") -> tuple[Any, Usage]:

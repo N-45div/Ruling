@@ -12,7 +12,7 @@ import uuid
 from dataclasses import asdict
 
 from ..desk.packet import CheckPacket
-from ..desk.workflow import APPROVE, CaseFile, Step, build, listen, unlisten
+from ..desk.workflow import APPROVE, CaseFile, Step, build, listen, run_within, unlisten
 from .serialize import case_dict
 from .store import Store
 
@@ -70,8 +70,11 @@ class CheckSession:
         self._push("started", incident_id=self.packet.incident_id)
         try:
             listen(self.id, self._on_step)
-            result = await self.workflow.run(CaseFile(self.packet, listener=self.id))
-            await self._settle(result, auto_approve)
+            result = await run_within(self.workflow, CaseFile(self.packet, listener=self.id))
+            if isinstance(result, CaseFile):  # held at the deadline
+                await self._finish(result)
+            else:
+                await self._settle(result, auto_approve)
         except Exception as exc:  # the desk must never leave a viewer waiting
             self.done = True
             unlisten(self.id)
@@ -84,13 +87,16 @@ class CheckSession:
         result = await self.workflow.run(responses={request_id: decision})
         await self._settle(result, auto_approve=False)
 
+    async def _finish(self, case: CaseFile) -> None:
+        self.case, self.done = case, True
+        unlisten(self.id)
+        await self.store.save({"check_id": self.id, **case_dict(case)})
+        self._push("final", case=case_dict(case))
+
     async def _settle(self, result, auto_approve: bool) -> None:
         outputs = result.get_outputs()
         if outputs:
-            self.case, self.done = outputs[-1], True
-            unlisten(self.id)
-            await self.store.save({"check_id": self.id, **case_dict(self.case)})
-            self._push("final", case=case_dict(self.case))
+            await self._finish(outputs[-1])
             return
         self.request_id = result.get_request_info_events()[0].request_id
         self._push("awaiting_approval", case=case_dict(self.case))
