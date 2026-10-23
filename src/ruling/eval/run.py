@@ -66,18 +66,26 @@ def _commit() -> str:
 
 
 def _print(summary: dict) -> None:
-    print(f"{'arm':20} {'n':>4} {'verdict':>8} {'contested':>11} {'law':>6} {'clause':>7} {'stale':>6}"
-          f" {'unsupp':>7} {'sec':>6}")
+    nan = float("nan")
+    print(f"{'arm':20} {'n':>4} {'verdict':>8} {'contested':>12} {'clause':>7} {'stale':>6} {'unsupp':>7}"
+          f" {'raw':>6} {'recall':>7} {'median s':>9} {'$/check':>8}")
     for arm, s in summary["arms"].items():
-        c = s["contested"]
+        c, p = s["contested"], s["planted_errors"]
         unsupported = s.get("unsupported_claim_rate")
-        print(f"{arm:20} {s['incidents']:>4} {s['verdict_ok']:>8.3f} {c['verdict_ok'] or 0:>6.3f} ({c['incidents']:>2})"
-              f" {s['law_ok']:>6.3f} {s['clause_ok']:>7.3f} {s['stale_rate']:>6.3f}"
-              f" {unsupported if unsupported is not None else float('nan'):>7.3f} {s['mean_seconds']:>6.1f}")
+        print(f"{arm:20} {s['incidents']:>4} {s['verdict_ok']:>8.3f} {c.get('verdict_ok') or 0:>6.3f} ({c['incidents']:>3})"
+              f" {s['clause_ok']:>7.3f} {s['stale_rate']:>6.3f} {unsupported if unsupported is not None else nan:>7.3f}"
+              f" {s['raw_data_rate']:>6.3f} {p['recall'] if p['recall'] is not None else nan:>7.3f}"
+              f" {s['median_seconds']:>9.1f} {s['cost_usd_per_incident']:>8.4f}")
     for arm, by_subset in summary.get("difference", {}).items():
         for label, d in by_subset.items():
-            print(f"difference ({label}): {d['comparison']} = {d['verdict_ok']:+.3f}, "
-                  f"95% CI [{d['ci95'][0]:+.3f}, {d['ci95'][1]:+.3f}], n={d['pairs']}")
+            line = (f"difference ({label}): {d['comparison']}: verdict {d['verdict_ok']:+.3f} "
+                    f"[{d['ci95'][0]:+.3f}, {d['ci95'][1]:+.3f}]")
+            if "unsupported_claim_rate" in d:
+                u = d["unsupported_claim_rate"]
+                line += f", unsupported claims {u['difference']:+.4f} [{u['ci95'][0]:+.4f}, {u['ci95'][1]:+.4f}]"
+            print(f"{line}, n={d['pairs']}")
+    if "success" in summary:
+        print(f"pre-registered success (verdict and unsupported claims): {summary['success']}")
 
 
 def main(argv: list[str] | None = None) -> None:

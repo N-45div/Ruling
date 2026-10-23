@@ -1,7 +1,8 @@
 import pytest
 
 from ruling.desk.assessor import Verdict
-from ruling.eval.scoring import ArmResult, expected, paired_bootstrap, score, summarize
+from ruling.eval.scoring import (ArmResult, Score, cost_per_incident, expected, paired_bootstrap,
+                                 paired_claim_bootstrap, planted_errors, score, summarize)
 from ruling.eval.stale import stale_citations
 from ruling.sim.cli import match_for_seed
 
@@ -58,6 +59,34 @@ def test_summary_reports_both_arms_and_their_difference(incidents):
     summary = summarize(rows)
     assert summary["arms"]["b"]["verdict_ok"] == 1.0
     assert summary["difference"]["b"]["all"]["comparison"] == "b - a"
+    b = summary["arms"]["b"]
+    assert b["planted_errors"]["recall"] == 1.0 and b["planted_errors"]["precision"] in (1.0, None)
+    assert set(b["by_category"]) == {i.category for i in incidents}
+    assert all("clause_ok" in m and "planted_errors" in m for m in b["by_category"].values())
+    assert b["contested"]["incidents"] == sum(r.contested for r in rows if r.arm == "b")
+
+
+def _row(arm, n, planted=False, flagged=False, scored=0, unsupported=0, tokens=(0, 0)):
+    return Score(arm, f"i{n}", "offside", False, True, True, True, True, True, True, planted=planted,
+                 flagged=flagged, claims_scored=scored, claims_unsupported=unsupported,
+                 input_tokens=tokens[0], output_tokens=tokens[1])
+
+
+def test_planted_error_detection_counts_flags_against_wrong_on_field_calls():
+    rows = [_row("a", 0, planted=True, flagged=True), _row("a", 1, planted=True), _row("a", 2, flagged=True),
+            _row("a", 3)]
+    assert planted_errors(rows) == {"planted": 2, "flagged": 2, "caught": 1, "precision": 0.5, "recall": 0.5}
+
+
+def test_cost_uses_the_list_price_per_million_tokens():
+    assert cost_per_incident([_row("a", 0, tokens=(1_000_000, 0)), _row("a", 1, tokens=(0, 1_000_000))]) == 1.125
+
+
+def test_the_claim_rate_difference_has_an_interval():
+    pairs = [(_row("a", n, scored=4, unsupported=1), _row("b", n, scored=4, unsupported=0)) for n in range(60)]
+    diff, low, high = paired_claim_bootstrap(pairs, resamples=500)
+    assert diff == -0.25 and low <= diff <= high
+    assert paired_claim_bootstrap([(_row("a", 0), _row("b", 0))]) is None
 
 
 def test_above_the_shoulder_counts_as_stale_only_when_it_explains_an_offence():
