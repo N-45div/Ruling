@@ -61,6 +61,11 @@ def test_unknown_checks_and_incidents_are_404(client):
     assert client.post("/api/checks", json={"incident_id": "AGA-BRC-5001:1:offside"}).status_code == 404
 
 
+def test_the_feed_can_only_be_frozen_while_a_match_plays(client):
+    assert client.post("/api/live/stall", json={"seconds": 15}).status_code == 409
+    assert {"stale", "run", "dropped"} <= set(client.get("/api/live").json())
+
+
 def test_a_drill_check_holds_and_is_never_stored(client):
     assert [d["id"] for d in client.get("/api/drills").json()] == [
         "tracking_dropout", "player_missing", "model_timeout", "wrong_draft"]

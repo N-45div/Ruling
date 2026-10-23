@@ -16,6 +16,7 @@
     GET  /api/live                            feed state and recent events
     GET  /api/live/events                     the feed, live; VAR checks start the desk on their own
     POST /api/live/stop
+    POST /api/live/stall                      a drill: the upstream feed freezes {"seconds"}
 
 Run locally: uv run uvicorn ruling.api.app:app --reload
 """
@@ -97,6 +98,10 @@ class StartFeed(BaseModel):
     seed: int
     speed: float = 30.0  # match seconds per real second
     from_minute: int = 0
+
+
+class Stall(BaseModel):
+    seconds: float = 15.0  # how long the upstream feed freezes (a drill)
 
 
 class Decision(BaseModel):
@@ -251,6 +256,16 @@ async def feed_events():
 @app.post("/api/live/stop")
 async def stop_feed():
     app.state.live.stop()
+    return app.state.live.state
+
+
+@app.post("/api/live/stall", status_code=202)
+async def stall_feed(body: Stall):
+    if not app.state.live.state["running"]:
+        raise HTTPException(409, "no match is playing")
+    if not 1 <= body.seconds <= 60:
+        raise HTTPException(422, "seconds must be between 1 and 60")
+    app.state.live.stall(body.seconds)
     return app.state.live.state
 
 
