@@ -1,7 +1,7 @@
 // The Match Centre desk: live feed, pitch, VAR checks and the approval step.
 import { follow, get, params, post } from "./api.js";
 import { drawFreezeFrame, drawPitch } from "./pitch.js";
-import { CATEGORY, DECISION, REVIEW, esc, total } from "./labels.js";
+import { CATEGORY, DECISION, DRILL, REVIEW, esc, total } from "./labels.js";
 
 const AGENTS = ["intake", "evidence", "laws", "assessor", "precedent", "communicator", "checker", "approval"];
 const TABS = [["match_centre", "Match Centre"], ["stadium", "Stadium"], ["broadcaster", "Broadcaster"], ["fan", "Fan card"]];
@@ -68,9 +68,24 @@ function onFeed(event) {
     state.byIncident.set(event.incident_id, event.check_id);
     renderChecks();
     if (!state.active || state.checks.get(state.active)?.done) openCheck(event.check_id);
+    else pollInBackground(state.checks.get(event.check_id));
+  } else if (event.type === "feed_stale") {
+    setLive("stale", event.seconds);
+    note(`Feed stale: no data for ${event.seconds} s. Checks already running carry on.`);
+  } else if (event.type === "feed_resumed") {
+    setLive("live");
+    note(`Feed back after ${event.gap} s without data.`);
+  } else if (event.type === "feed_drill") {
+    note(`Drill: the upstream feed freezes for ${event.seconds} s.`);
   } else if (event.type === "feed_ended") {
-    setLive(false);
+    setLive("idle");
   }
+}
+
+function note(text) {
+  state.ticker.unshift(`<div><span class="mono">${esc($("clock").textContent)}</span><span class="warn">${esc(text)}</span></div>`);
+  state.ticker = state.ticker.slice(0, 14);
+  $("ticker").innerHTML = state.ticker.join("");
 }
 
 function addTicker(e) {
@@ -83,17 +98,40 @@ function addTicker(e) {
   $("ticker").innerHTML = state.ticker.join("");
 }
 
-function setLive(on) {
+function setLive(mode, seconds) {
   const chip = $("live-chip");
-  chip.className = on ? "live-chip" : "live-chip idle";
-  chip.textContent = on ? "Live · Event Hubs" : "Feed idle";
+  chip.className = { live: "live-chip", stale: "live-chip stale", idle: "live-chip idle" }[mode];
+  const stale = seconds ? `Feed stale · no data for ${seconds} s` : "Feed stale";
+  chip.textContent = { live: "Live · Event Hubs", stale, idle: "Feed idle" }[mode];
+  const freeze = $("drill-freeze");
+  if (freeze) freeze.disabled = mode !== "live";
 }
 
 async function startFeed() {
   await post("/api/live", { seed: state.match.seed, speed: Number($("speed").value), from_minute: 0 });
   state.ticker = [];
   $("ticker").innerHTML = "";
-  setLive(true);
+  setLive("live");
+}
+
+// ---- failure drills ------------------------------------------------------------------
+
+async function loadDrills() {
+  const drills = await get("/api/drills");
+  $("drills").innerHTML = drills.map((d) => `<button type="button" class="btn small" data-drill="${esc(d.id)}" title="${esc(d.label)}">${esc(DRILL[d.id] ?? d.label)}</button>`).join("")
+    + '<button type="button" class="btn small" id="drill-freeze" title="The upstream feed stops sending for 15 seconds" disabled>The feed freezes for 15 s</button>';
+  for (const button of $("drills").querySelectorAll("[data-drill]")) button.onclick = () => runDrill(button.dataset.drill);
+  $("drill-freeze").onclick = () => post("/api/live/stall", { seconds: 15 });
+  const live = await get("/api/live");
+  if (live.running && live.match_id === state.match.id) setLive(live.stale ? "stale" : "live");
+}
+
+async function runDrill(drill) {
+  const incidentId = state.checks.get(state.active)?.incident ?? state.match.incidents[0]?.id;
+  if (!incidentId) return;
+  const { check_id } = await post("/api/checks", { incident_id: incidentId, drill });
+  state.checks.set(check_id, { id: check_id, incident: incidentId, case: null, waiting: false, done: false, drill });
+  openCheck(check_id);  // drills never take over the row of the real check
 }
 
 async function pumpFrames() {
@@ -146,12 +184,30 @@ async function runOrOpen(incidentId) {
   openCheck(check_id);
 }
 
+// A check that is not on screen keeps its row up to date by polling, so the browser never holds
+// more than one check stream (it allows only a few connections per host).
+function pollInBackground(check) {
+  if (!check || check.done || check.poll) return;
+  check.poll = setInterval(async () => {
+    try {
+      const s = await get(`/api/checks/${check.id}`);
+      if (s.case) check.case = s.case;
+      check.waiting = s.awaiting_approval;
+      check.done = s.done;
+      if (check.done) { clearInterval(check.poll); check.poll = null; }
+      renderChecks();
+    } catch { /* try again on the next tick */ }
+  }, 2000);
+}
+
 async function openCheck(checkId) {
   if (state.stopCheck) state.stopCheck();
   state.stopCheck = null;
+  if (state.active !== checkId) pollInBackground(state.checks.get(state.active));
   state.active = checkId;
   state.tab = "match_centre";
   const check = state.checks.get(checkId);
+  if (check.poll) { clearInterval(check.poll); check.poll = null; }
   if (!state.packets.has(check.incident)) state.packets.set(check.incident, (await get(`/api/incidents/${check.incident}`)).packet);
   renderChecks();
   renderCheck();
@@ -192,14 +248,18 @@ async function decide(decision) {
 function stepsHtml(c) {
   const seen = new Map();
   for (const s of c?.steps ?? []) seen.set(s.agent, s);
-  const next = AGENTS.find((a) => !seen.has(a));
-  return AGENTS.map((agent) => {
+  const finished = c?.status === "held" || c?.status === "published";
+  const next = finished ? null : AGENTS.find((a) => !seen.has(a));
+  const rows = AGENTS.map((agent) => {
     const s = seen.get(agent);
     const cls = s ? "done" : agent === next ? "active" : "";
     const seconds = s && (s.seconds < 0.01 ? "< 0.01 s" : `${s.seconds.toFixed(2)} s`);
-    const time = s ? (agent === "approval" ? s.note : seconds) : agent === next ? "working" : "";
+    const working = agent === "approval" ? "your call" : "working";
+    const time = s ? (agent === "approval" ? s.note : seconds) : agent === next ? working : finished ? "skipped" : "";
     return `<li class="${cls}"><span class="dot"></span><span>${agent[0].toUpperCase() + agent.slice(1)}</span><span class="mono muted small">${esc(time)}</span></li>`;
-  }).join("");
+  });
+  if (seen.has("fail-safe")) rows.push('<li class="done"><span class="dot" style="background:#FF9A9A"></span><span>Fail-safe</span><span class="mono muted small">holding line</span></li>');
+  return rows.join("");
 }
 
 function draftHtml(c) {
@@ -209,15 +269,26 @@ function draftHtml(c) {
   return esc(d[state.tab]);
 }
 
+// What the checker sent back on each draft, so a caught mistake stays visible after the rewrite.
+function caughtHtml(c, open) {
+  const rounds = (c.check_history ?? []).map((issues, n) => [n + 1, issues]).filter(([, issues]) => issues.length);
+  if (!rounds.length) return "";
+  const items = rounds.flatMap(([n, issues]) => issues.map((i) => `<li><span class="mono muted">draft ${n}</span> ${esc(i)}</li>`));
+  return `<details class="caught" style="margin-top:12px"${open ? " open" : ""}><summary>What the checker sent back (${items.length})</summary><ul>${items.join("")}</ul></details>`;
+}
+
 function renderCheck() {
   const check = state.checks.get(state.active);
   const c = check?.case;
   const packet = state.packets.get(check?.incident);
   const side = $("check");
+  const drill = check?.drill ?? c?.drill;
+  const kicker = `${drill ? "Drill · " : ""}VAR check`;
+  const banner = drill ? `<div class="panel drill-banner"><div class="label" style="color:var(--accent)">Failure drill</div><p style="margin:6px 0 0">${esc(DRILL[drill] ?? drill)}. Real data and real models; nothing from a drill is saved.</p></div>` : "";
   if (!c) {
-    side.innerHTML = check?.error
-      ? `<div class="panel"><div class="kicker">VAR check</div><div class="verdict-title" style="margin-top:8px">The check failed</div><p class="small warn" style="margin:8px 0 0">${esc(check.error)}</p><p class="small muted" style="margin:6px 0 0">Nothing was published.</p></div>`
-      : `<div class="panel"><div class="kicker">VAR check</div><div class="verdict-title" style="margin-top:8px">The desk is working…</div><ol class="steps" style="margin-top:14px">${stepsHtml(null)}</ol></div>`;
+    side.innerHTML = banner + (check?.error
+      ? `<div class="panel"><div class="kicker">${kicker}</div><div class="verdict-title" style="margin-top:8px">The check failed</div><p class="small warn" style="margin:8px 0 0">${esc(check.error)}</p><p class="small muted" style="margin:6px 0 0">Nothing was published.</p></div>`
+      : `<div class="panel"><div class="kicker">${kicker}</div><div class="verdict-title" style="margin-top:8px">The desk is working…</div><ol class="steps" style="margin-top:14px">${stepsHtml(null)}</ol></div>`);
     return;
   }
   const v = c.verdict;
@@ -233,13 +304,13 @@ function renderCheck() {
        <div class="actions">
          <button type="button" class="btn primary" id="approve" ${check.waiting ? "" : "disabled"}>${c.status === "published" ? "Published" : "Approve and publish"}</button>
          <button type="button" class="btn" id="hold" ${check.waiting ? "" : "disabled"}>Hold</button>
-         <span class="small muted">${c.status === "published" ? `Published. <a href="fan.html?check=${esc(check.id)}" target="_blank" rel="noopener">Open the fan card</a>` : check.waiting ? "Nothing is published until you approve." : "Waiting for the checker."}</span>
-       </div></div>`
-    : c.status === "held" ? `<div class="panel"><div class="label">Fail-safe</div><p style="margin:6px 0 0">Only the holding line goes out: <b>${esc(c.holding)}</b></p>${c.failure ? `<p class="small muted" style="margin:6px 0 0">${esc(c.failure)}</p>` : ""}</div>` : "";
-  side.innerHTML = `
+         <span class="small muted">${c.status === "published" ? (drill ? "Approved. A drill publishes nothing." : `Published. <a href="fan.html?check=${esc(check.id)}" target="_blank" rel="noopener">Open the fan card</a>`) : check.waiting ? "Nothing is published until you approve." : "Waiting for the checker."}</span>
+       </div>${caughtHtml(c, Boolean(drill))}</div>`
+    : c.status === "held" ? `<div class="panel"><div class="label">Fail-safe</div><p style="margin:6px 0 0">Only the holding line goes out: <b>${esc(c.holding)}</b></p>${c.failure ? `<p class="small muted" style="margin:6px 0 0">Why: ${esc(c.failure)}</p>` : ""}${caughtHtml(c, Boolean(drill))}</div>` : "";
+  side.innerHTML = `${banner}
     <div class="panel">
       <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:center">
-        <div class="kicker">VAR check · ${esc(CATEGORY[c.category])} · ${esc(c.clock)}</div>
+        <div class="kicker">${kicker} · ${esc(CATEGORY[c.category])} · ${esc(c.clock)}</div>
         <div class="small muted">On-field: <b style="color:var(--text)">${esc(DECISION[c.on_field] ?? c.on_field)}</b></div>
       </div>${verdict}
       ${c.consistency_flag ? `<p class="small warn" style="margin:10px 0 0">Internal: ${esc(c.consistency_flag)}</p>` : ""}
@@ -263,4 +334,4 @@ function renderCheck() {
 
 $("start").onclick = startFeed;
 follow("/api/live/events", onFeed);
-loadMatches().then(pumpFrames);
+loadMatches().then(() => { pumpFrames(); loadDrills(); });

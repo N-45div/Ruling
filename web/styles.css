@@ -51,6 +51,11 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
 .field { background: var(--panel); border: 1px solid var(--line-strong); border-radius: 8px; padding: 8px 10px; min-height: 40px; max-width: 100%; }
 .live-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; background: #10261C; color: var(--ok); border: 1px solid #1E4A34; }
 .live-chip.idle { background: var(--panel); color: var(--muted); border-color: var(--line); }
+.live-chip.stale { background: var(--chip-overturn-bg); color: var(--accent); border-color: #5A4512; }
+.drills { display: flex; flex-wrap: wrap; gap: 8px; }
+.drill-banner { border-color: #5A4512; background: var(--chip-overturn-bg); }
+details.caught summary { cursor: pointer; color: var(--soft); font-size: 13px; font-weight: 600; }
+details.caught ul { margin: 8px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--soft); }
 
 /* Layout */
 .layout { display: flex; flex-wrap: wrap; gap: 20px; padding: 20px 24px 32px; max-width: 1440px; margin: 0 auto; }

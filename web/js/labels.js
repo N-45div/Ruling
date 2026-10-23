@@ -9,6 +9,10 @@ export const DECISION = {
   no_foul: "No foul", red: "Red card", yellow: "Yellow card", no_card: "No card",
 };
 export const REVIEW = { check_complete: "Check complete", var_overturn: "VAR overturn", on_field_review: "On-field review" };
+export const DRILL = {
+  tracking_dropout: "Tracking drops out", player_missing: "A player vanishes from tracking",
+  model_timeout: "The model times out", wrong_draft: "The writer states the wrong decision",
+};
 
 export const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
