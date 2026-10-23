@@ -62,16 +62,20 @@ def _law_summary(category: str) -> str:
     return "\n".join(lines)
 
 
-async def audit(packet: CheckPacket, explanation: str) -> tuple[ClaimScore, llm.Usage]:
-    facts = gather(packet).facts
+def record(packet: CheckPacket) -> str:
+    """What an explanation is judged against, for every arm alike: the clubs, the raw check data,
+    the facts measured from it and a summary of the relevant Laws."""
     clubs = league()
-    prompt = "\n\n".join([
+    return "\n\n".join([
         f"Clubs: {packet.home} is {clubs[packet.home].name}; {packet.away} is {clubs[packet.away].name}.",
         f"Raw check data:\n{json.dumps(packet_dict(packet), separators=(',', ':'))}",
-        "Measured facts:\n" + "\n".join(f"- {f}" for f in facts),
+        "Measured facts:\n" + "\n".join(f"- {f}" for f in gather(packet).facts),
         f"Laws of the Game summary:\n{_law_summary(packet.category)}",
-        f"Explanation to audit:\n{explanation}",
     ])
+
+
+async def audit(packet: CheckPacket, explanation: str) -> tuple[ClaimScore, llm.Usage]:
+    prompt = f"{record(packet)}\n\nExplanation to audit:\n{explanation}"
     result, usage = await llm.with_retry(lambda: llm.structured("claim-judge", JUDGE_INSTRUCTIONS, prompt, Audit,
                                                                 effort="low"))
     scored = [c for c in result.claims if c.kind != "decision"]
