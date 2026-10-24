@@ -8,6 +8,16 @@
 
 Everything runs on synthetic, football-realistic matches with fictional clubs and players.
 
+## Try it in two minutes
+
+No sign-in is needed.
+
+1. Open the desk at [the 63rd minute of a demo match](https://ruling-api.proudsea-2ac99296.eastus2.azurecontainerapps.io/?seed=5004&from=63) and press **Start live feed**. The match plays through Azure Event Hubs; when the 64:51 goal arrives and the VAR checks it, the desk opens the check by itself and its agents light up one by one.
+2. When **Approve and publish** turns amber, press it. Nothing goes out before that. Then **Open the fan card** and switch it to Español or हिन्दी.
+3. Under **Failure drills**, press **A player vanishes from tracking**: the desk refuses to measure an offside line it cannot see and holds, saying why. Try **The model times out** and **The writer states the wrong decision** too.
+4. Open the **Review pack** for the whole match as a table, a CSV or a PDF.
+5. Point an MCP client at `/mcp` (see below) and ask it to explain a VAR check.
+
 ## A check, start to finish
 
 A goal goes in at 64:51 and the VAR checks it for offside. Within about 20 seconds the desk has:
