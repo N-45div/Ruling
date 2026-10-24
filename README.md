@@ -87,6 +87,25 @@ The decision difference is +10.7 points (95% CI +7.6 to +14.0). The pre-register
 
 As an exploratory check, Microsoft Foundry's groundedness evaluator scored the fan cards 4.67 out of 5 for the desk and 4.53 for the model alone (difference +0.14, 95% CI +0.003 to +0.284).
 
+## Use the desk from an assistant (MCP)
+
+The desk is also an MCP server, so GitHub Copilot, a Foundry agent or any MCP client can use it as a tool:
+
+| Tool | What it returns |
+|---|---|
+| `list_var_checks` | the VAR checks in a demo match, never the correct outcome |
+| `explain_var_check` | a real desk check: the decision measured from tracking data, the Law clause, precedent and the four checked messages; nothing is published until a person approves it on the desk |
+| `law_clause` | a Law of the Game as the desk paraphrases it, with its criteria and the official link |
+| `similar_past_checks` | how the most similar archived checks ended (Foundry embeddings) |
+
+In VS Code (`.vscode/mcp.json`):
+
+```json
+{ "servers": { "ruling": { "type": "http", "url": "https://ruling-api.proudsea-2ac99296.eastus2.azurecontainerapps.io/mcp" } } }
+```
+
+The public demo limits how often one client can start checks and caps model use per hour, so it stays available to everyone.
+
 ## Built on Azure
 
 ```mermaid
@@ -148,6 +167,7 @@ uv run ruling-eval --set dev                   # the evaluation on the developme
 | `GET /api/cases?match_id=` | finished case files, for the review pack |
 | `POST /api/live`, `GET /api/live/events` | replay a match through Event Hubs, and follow it |
 | `GET /api/drills`, `POST /api/live/stall` | failure drills |
+| `POST /mcp` | the desk as MCP tools (streamable HTTP) |
 
 ## Repository
 
