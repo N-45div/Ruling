@@ -58,7 +58,7 @@ flowchart LR
 
 ## When it refuses to guess
 
-- **Incomplete tracking.** The offside line comes from the second-last defender. If tracking loses that player, the line silently moves to the next one and the measurement still looks exact. On the demo matches, that would have disallowed 7 of 39 good goals. The desk now knows how many players each side has on the pitch and holds any check that is missing one.
+- **Incomplete tracking.** The offside line comes from the second-last defender. If tracking loses that player, the line silently moves to the next one and the measurement still looks exact. On the demo matches, 7 of the 39 offside checks would have wrongly disallowed a good goal. The desk now knows how many players each side has on the pitch and holds any check that is missing one.
 - **Time limits.** Each model call has a time limit, and every check has a 90-second deadline. Past it, only a holding line goes out, built from what had been established, for example "VAR check complete: the goal is disallowed."
 - **Claims that fail the check.** A draft goes back to the writer at most twice. If it still fails, the check is held.
 - **Disagreement with precedent.** If the measured decision differs from how most similar checks ended, the person approving sees a flag. Precedent never overrides the measurement.

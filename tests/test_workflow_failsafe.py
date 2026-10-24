@@ -32,7 +32,7 @@ def test_every_demo_packet_is_complete():
 
 
 def test_losing_the_line_setter_is_always_caught():
-    # Without this check, 7 of the 39 demo offside goals would be wrongly disallowed.
+    # Without this check, 7 of the 39 demo offside checks would wrongly disallow a good goal.
     caught = 0
     for seed in SETS["dev"]:
         match = match_for_seed(seed)
