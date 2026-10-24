@@ -110,7 +110,9 @@ function setLive(mode, seconds) {
 async function startFeed() {
   // ?from=63 starts the replay at that minute, e.g. just before a VAR check.
   const fromMinute = Math.max(0, Math.min(95, Number(params.get("from")) || 0));
-  await post("/api/live", { seed: state.match.seed, speed: Number($("speed").value), from_minute: fromMinute });
+  try {
+    await post("/api/live", { seed: state.match.seed, speed: Number($("speed").value), from_minute: fromMinute });
+  } catch (err) { notice(err); return; }
   state.ticker = [];
   $("ticker").innerHTML = "";
   setLive("live");
@@ -123,15 +125,25 @@ async function loadDrills() {
   $("drills").innerHTML = drills.map((d) => `<button type="button" class="btn small" data-drill="${esc(d.id)}" title="${esc(d.label)}">${esc(DRILL[d.id] ?? d.label)}</button>`).join("")
     + '<button type="button" class="btn small" id="drill-freeze" title="The upstream feed stops sending for 15 seconds" disabled>The feed freezes for 15 s</button>';
   for (const button of $("drills").querySelectorAll("[data-drill]")) button.onclick = () => runDrill(button.dataset.drill);
-  $("drill-freeze").onclick = () => post("/api/live/stall", { seconds: 15 });
+  $("drill-freeze").onclick = () => post("/api/live/stall", { seconds: 15 }).catch(notice);
   const live = await get("/api/live");
   if (live.running && live.match_id === state.match.id) setLive(live.stale ? "stale" : "live");
+}
+
+// A refused request (a rate limit, the hourly model budget) is shown, never swallowed.
+function notice(err) {
+  const detail = String(err?.message ?? err).match(/"detail":"([^"]+)"/);
+  $("check").innerHTML = `<div class="panel"><div class="kicker">The desk is busy</div>
+    <p style="margin:8px 0 0">${esc(detail ? detail[1] : "That did not go through; try again in a moment.")}</p></div>`;
 }
 
 async function runDrill(drill) {
   const incidentId = state.checks.get(state.active)?.incident ?? state.match.incidents[0]?.id;
   if (!incidentId) return;
-  const { check_id } = await post("/api/checks", { incident_id: incidentId, drill });
+  let check_id;
+  try {
+    ({ check_id } = await post("/api/checks", { incident_id: incidentId, drill }));
+  } catch (err) { notice(err); return; }
   state.checks.set(check_id, { id: check_id, incident: incidentId, case: null, waiting: false, done: false, drill });
   openCheck(check_id);  // drills never take over the row of the real check
 }
@@ -180,7 +192,10 @@ function renderChecks() {
 async function runOrOpen(incidentId) {
   const existing = state.byIncident.get(incidentId);
   if (existing) return openCheck(existing);
-  const { check_id } = await post("/api/checks", { incident_id: incidentId });
+  let check_id;
+  try {
+    ({ check_id } = await post("/api/checks", { incident_id: incidentId }));
+  } catch (err) { notice(err); return; }
   state.checks.set(check_id, { id: check_id, incident: incidentId, case: null, waiting: false, done: false });
   state.byIncident.set(incidentId, check_id);
   openCheck(check_id);
