@@ -108,7 +108,9 @@ function setLive(mode, seconds) {
 }
 
 async function startFeed() {
-  await post("/api/live", { seed: state.match.seed, speed: Number($("speed").value), from_minute: 0 });
+  // ?from=63 starts the replay at that minute, e.g. just before a VAR check.
+  const fromMinute = Math.max(0, Math.min(95, Number(params.get("from")) || 0));
+  await post("/api/live", { seed: state.match.seed, speed: Number($("speed").value), from_minute: fromMinute });
   state.ticker = [];
   $("ticker").innerHTML = "";
   setLive("live");
