@@ -61,6 +61,17 @@ def test_unknown_checks_and_incidents_are_404(client):
     assert client.post("/api/checks", json={"incident_id": "AGA-BRC-5001:1:offside"}).status_code == 404
 
 
+def test_one_client_cannot_flood_the_desk(client):
+    from ruling.api.app import LIMITER
+
+    LIMITER.hits.clear()
+    incident_id = client.get("/api/matches/5002").json()["incidents"][0]["id"]
+    codes = [client.post("/api/checks", json={"incident_id": incident_id, "drill": "tracking_dropout"}).status_code
+             for _ in range(9)]
+    assert codes[:8] == [202] * 8 and codes[8] == 429
+    LIMITER.hits.clear()
+
+
 def test_the_feed_can_only_be_frozen_while_a_match_plays(client):
     assert client.post("/api/live/stall", json={"seconds": 15}).status_code == 409
     assert {"stale", "run", "dropped"} <= set(client.get("/api/live").json())

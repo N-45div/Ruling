@@ -17,6 +17,9 @@
     GET  /api/live/events                     the feed, live; VAR checks start the desk on their own
     POST /api/live/stop
     POST /api/live/stall                      a drill: the upstream feed freezes {"seconds"}
+    POST /mcp                                 the desk as MCP tools (streamable HTTP; see mcp_server.py)
+
+Requests that start work are rate limited per client, and model use has an hourly budget (limits.py).
 
 Run locally: uv run uvicorn ruling.api.app:app --reload
 """
@@ -29,7 +32,7 @@ from contextlib import asynccontextmanager
 from functools import lru_cache
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -38,7 +41,7 @@ from .. import settings
 from ..desk import precedent
 from ..sim import events as ev
 from ..sim.cli import SETS, match_for_seed
-from . import serialize, telemetry
+from . import limits, mcp_server, serialize, telemetry
 from .checks import Checks
 from .live import LiveFeed
 from .store import make_store
@@ -77,11 +80,14 @@ async def lifespan(app: FastAPI):
         app.state.precedents = len(precedent.load_index())
     except FileNotFoundError:
         app.state.precedents = 0  # the desk carries on without precedent
-    yield
+    app.state.limiter = LIMITER
+    async with MCP.session_manager.run():
+        yield
     await app.state.live.close()
 
 
 app = FastAPI(title="Ruling", description="A decision desk for refereeing calls.", lifespan=lifespan)
+LIMITER = limits.Limiter()
 
 
 class StartCheck(BaseModel):
@@ -149,13 +155,15 @@ async def drills():
 
 
 @app.post("/api/checks", status_code=202)
-async def start_check(body: StartCheck):
+async def start_check(body: StartCheck, request: Request):
     from ..desk.drills import DRILLS, break_packet
     from ..desk.packet import packet_for
 
     if body.drill is not None and body.drill not in DRILLS:
         raise HTTPException(422, f"drills: {', '.join(DRILLS)}")
     incident, m = _incident(body.incident_id)
+    # The tracking drills stop at intake, before any model call.
+    limits.enforce(LIMITER, request, "check", uses_model=body.drill not in ("tracking_dropout", "player_missing"))
     packet = break_packet(packet_for(m, incident), body.drill)
     session = app.state.checks.start(packet, body.auto_approve, body.drill)
     return {"check_id": session.id, "drill": body.drill}
@@ -206,7 +214,7 @@ async def decide(check_id: str, body: Decision):
 
 
 @app.post("/api/checks/{check_id}/translate")
-async def translate(check_id: str, body: Translate):
+async def translate(check_id: str, body: Translate, request: Request):
     from ..desk import communicator
 
     s = app.state.checks.sessions.get(check_id)
@@ -220,6 +228,7 @@ async def translate(check_id: str, body: Translate):
         raise HTTPException(422, f"supported: {', '.join(communicator.LANGUAGES)}")
     key, cache = (check_id, body.language), app.state.translations
     if key not in cache:
+        limits.enforce(LIMITER, request, "translate", uses_model=True)
         cache[key] = await communicator.translate(case["drafts"]["fan"], body.language)
     text, verified = cache[key]
     return {"language": body.language, "text": text, "verified": verified}
@@ -231,10 +240,12 @@ async def cases(match_id: str | None = None):
 
 
 @app.post("/api/live", status_code=202)
-async def start_feed(body: StartFeed):
+async def start_feed(body: StartFeed, request: Request):
     if not 1 <= body.speed <= 600:
         raise HTTPException(422, "speed must be between 1 and 600")
-    app.state.live.play(_match(body.seed), body.speed, body.from_minute)
+    match = _match(body.seed)
+    limits.enforce(LIMITER, request, "feed")
+    app.state.live.play(match, body.speed, body.from_minute)
     return app.state.live.state
 
 
@@ -260,14 +271,19 @@ async def stop_feed():
 
 
 @app.post("/api/live/stall", status_code=202)
-async def stall_feed(body: Stall):
+async def stall_feed(body: Stall, request: Request):
     if not app.state.live.state["running"]:
         raise HTTPException(409, "no match is playing")
     if not 1 <= body.seconds <= 60:
         raise HTTPException(422, "seconds must be between 1 and 60")
+    limits.enforce(LIMITER, request, "feed")
     app.state.live.stall(body.seconds)
     return app.state.live.state
 
+
+# The desk as MCP tools for assistants (see mcp_server.py); its session manager runs in the lifespan.
+MCP = mcp_server.build(app)
+app.router.routes.extend(mcp_server.routes(MCP, LIMITER))
 
 if Path(WEB).is_dir():
     app.mount("/", StaticFiles(directory=WEB, html=True), name="web")
