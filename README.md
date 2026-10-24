@@ -28,7 +28,7 @@ A goal goes in at 64:51 and the VAR checks it for offside. Within about 20 secon
 - **written four messages:** a Match Centre post, a stadium announcement when one is due, three bullets for a broadcaster's referee analyst, and a fan card of 60 words or fewer;
 - **checked them:** every factual claim is compared with the measurements and the Law, and a draft that fails goes back to be rewritten.
 
-Nothing goes out until a person approves it. The fan card can then be read in Spanish, Hindi, French or Portuguese, with names and figures kept exactly. After the match, a review pack lists every check with its evidence, Law and precedent, as a table, a CSV or a PDF.
+Nothing goes out until a person approves it. The fan card can then be switched to Spanish or Hindi (French and Portuguese too, through the API), with names and figures kept exactly. After the match, a review pack lists every check with its evidence, Law and precedent, as a table, a CSV or a PDF.
 
 <p>
   <img src="docs/images/fan-card.png" alt="The fan card on a phone, in Spanish" width="260">
