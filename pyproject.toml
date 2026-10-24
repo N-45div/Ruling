@@ -13,6 +13,7 @@ dependencies = [
     "azure-identity>=1.26.0",
     "azure-monitor-opentelemetry>=1.8.11",
     "fastapi>=0.156.4",
+    "mcp>=2.3.0",
     "uvicorn[standard]>=0.54.0",
 ]
 
