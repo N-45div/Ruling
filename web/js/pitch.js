@@ -18,6 +18,22 @@ function clear(svg) {
   while (svg.firstChild) svg.removeChild(svg.firstChild);
 }
 
+let clips = 0;
+
+// The grass: a rounded green field with mowing stripes cut in metres (18 bands across the length),
+// so the zoomed freeze-frame shows the same bands as the whole pitch.
+function grass(svg, map, x, y, width, height, rx) {
+  const id = `grass-${++clips}`;
+  el("rect", { x, y, width, height, rx, fill: "#17402B" }, el("clipPath", { id }, el("defs", {}, svg)));
+  el("rect", { x, y, width, height, rx, fill: "#17402B" }, svg);
+  const g = el("g", { "clip-path": `url(#${id})`, fill: "#1C4B33" }, svg);
+  const band = LENGTH / 18;
+  for (let i = 0; i < 18; i += 2) {
+    const [xa] = map(i * band, 0), [xb] = map((i + 1) * band, 0);
+    el("rect", { x: Math.min(xa, xb), y, width: Math.abs(xb - xa), height }, g);
+  }
+}
+
 // Pitch markings drawn through a mapping from metres to screen units.
 function markings(svg, map, strokeWidth) {
   const g = el("g", { fill: "none", stroke: "rgba(255,255,255,0.55)", "stroke-width": strokeWidth }, svg);
@@ -41,7 +57,7 @@ function player(svg, x, y, r, team, shirt, ring) {
   el("circle", { cx: x, cy: y, r, fill, stroke: ring || "#FFFFFF", "stroke-width": ring ? 3 : 1.5 }, svg);
   const text = el("text", {
     x, y: y + r * 0.36, fill: team === "home" ? "#FFFFFF" : "#0B1220", "text-anchor": "middle",
-    "font-family": "IBM Plex Mono, monospace", "font-size": r * 1.05, "font-weight": 600,
+    "font-family": "Barlow Condensed, sans-serif", "font-size": r * 1.05, "font-weight": 600,
   }, svg);
   text.textContent = shirt;
 }
@@ -51,7 +67,7 @@ export function drawPitch(svg, frame, homeCode, offsideLineX = null) {
   clear(svg);
   const s = 6;
   const map = (x, y) => [x * s, (WIDTH - y) * s];
-  el("rect", { x: -12, y: -12, width: 654, height: 432, rx: 10, fill: "#17402B" }, svg);
+  grass(svg, map, -12, -12, 654, 432, 10);
   markings(svg, map, 1.5);
   if (offsideLineX !== null) {
     const [x] = map(offsideLineX, 0);
@@ -82,7 +98,7 @@ export function drawFreezeFrame(svg, packet, caseFile, homeCode) {
   const x0 = Math.min(Math.max(focus[0] - 10, 0), LENGTH - W / s);
   const y0 = Math.min(Math.max(focus[1] - 7.5, 0), WIDTH - H / s);
   const map = (x, y) => [(x - x0) * s, (y0 + H / s - y) * s];
-  el("rect", { x: 0, y: 0, width: W, height: H, rx: 8, fill: "#17402B" }, svg);
+  grass(svg, map, 0, 0, W, H, 8);
   markings(svg, map, 1.5);
 
   const team = (b) => (b.team === homeCode ? "home" : "away");
@@ -114,6 +130,6 @@ function inset(svg, margin) {
   const left = 50 - gap / 2, right = 50 + gap / 2;  // the label sits clear of the lines
   el("line", { x1: left, y1: 212, x2: left, y2: 276, stroke: COLOURS.onside, "stroke-width": 2 }, svg);
   el("line", { x1: right, y1: 212, x2: right, y2: 276, stroke: margin > 0 ? COLOURS.offside : COLOURS.onside, "stroke-width": 2 }, svg);
-  const label = el("text", { x: right + 12, y: 248, fill: "#E8ECF3", "text-anchor": "start", "font-family": "IBM Plex Mono, monospace", "font-size": 12, "font-weight": 600 }, svg);
+  const label = el("text", { x: right + 12, y: 248, fill: "#E8ECF3", "text-anchor": "start", "font-family": "Barlow Condensed, sans-serif", "font-size": 12, "font-weight": 600 }, svg);
   label.textContent = cm === 0 ? "level" : `${cm} cm`;
 }
