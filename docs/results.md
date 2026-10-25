@@ -129,3 +129,7 @@ Agreement with the judge was **49 of 50**. The one disagreement was a model-only
 - **The correct outcomes come from our own encoding of the Laws.** The desk computes the same geometry the generator used, so its edge on factual calls is expected by design. The subjective categories and the claims carry the information.
 - **Synthetic incidents** use points and labelled attributes, not video, and on-field errors are planted at higher rates than in real matches.
 - **The claim judge is a model** (gpt-5-mini at low effort, with a different prompt from the checker), so it can be wrong. The hand check suggests it is close but lenient.
+
+## Changed after the evaluation
+
+- **The stadium announcement template (Oct 25).** When the announcements were about to be read aloud by Azure AI Speech, a look back at this run found that 19 of the 31 announcements had copied the template's `...` placeholder literally (for example `REF: "Westerly Vale No.2 Felix Jormannis ... Final decision is free kick."`), and none said what the review found. The writer now uses `REF: "After review, <what the review found>. Final decision is <decision>."`, and the checker sends back any announcement that still contains `...`. On the 10 announced checks in the demo matches, all 10 were checked with a full announcement and none was held. The decisions, cards and Law clauses above come from code and are unaffected. The writer's other messages were not measured again after this change.
