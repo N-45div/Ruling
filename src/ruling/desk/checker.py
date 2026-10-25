@@ -111,6 +111,8 @@ def rule_issues(drafts: Drafts, packet: CheckPacket, evidence: Evidence, verdict
         issues.append("broadcaster: must be exactly three bullets")
     if verdict.announced and not drafts.stadium.strip().startswith("REF:"):
         issues.append('stadium: an announcement is due and must read REF: "..."')
+    if verdict.announced and ("..." in drafts.stadium or "…" in drafts.stadium):
+        issues.append('stadium: it is read aloud, so say what the review found instead of "..."')
     if not verdict.announced and drafts.stadium.strip():
         issues.append("stadium: no announcement is due, so leave it empty")
     if not re.search(_DECISION[verdict.final_decision], drafts.fan, re.I):

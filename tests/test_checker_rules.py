@@ -43,6 +43,14 @@ def test_stadium_announcements_only_when_due():
     assert any("must read REF" in i for i in rule_issues(drafts(), PACKET, EVIDENCE, due))
 
 
+def test_an_announcement_read_aloud_never_says_dot_dot_dot():
+    due = Verdict("no_goal", "no_card", "on_field_review", "11.2", announced=True)
+    placeholder = drafts(stadium='REF: "Brightcombe No.9 Ade Okoro ... Final decision is no goal."')
+    assert any('instead of "..."' in i for i in rule_issues(placeholder, PACKET, EVIDENCE, due))
+    spoken = drafts(stadium='REF: "After review, Brightcombe No.9 was offside. Final decision is no goal."')
+    assert not any("stadium" in i for i in rule_issues(spoken, PACKET, EVIDENCE, due))
+
+
 def test_speeds_in_metres_per_second_are_not_read_as_distances():
     fine = drafts(broadcaster=["Goal disallowed.", "Right foot 4 cm beyond the line at 6.5 m/s.", "Law 11.2."])
     assert rule_issues(fine, PACKET, EVIDENCE, VERDICT) == []

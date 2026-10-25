@@ -101,8 +101,9 @@ CHANNEL_INSTRUCTIONS = INSTRUCTIONS + (
     "match_centre: the league Match Centre post, at most 280 characters. If the decision changed, start with "
     "'#<HOMEAWAY> – <minute>' VAR OVERTURN' and say what the referee overturned; if it stood, say the referee's call "
     "was checked and confirmed by VAR. "
-    "stadium: only if an announcement is due, the referee's words as REF: \"<Club> No.<shirt> ... Final decision is "
-    "<decision>.\" in at most 25 words; otherwise an empty string. "
+    "stadium: only if an announcement is due, the referee's words to the crowd as REF: \"After review, <what the "
+    "review found, naming the player as <Club> No.<shirt>>. Final decision is <decision>.\" in at most 25 words, "
+    "every angle-bracket part filled in and never a literal '...'; otherwise an empty string. "
     "broadcaster: exactly three bullets: the decision, the measured evidence it rests on, and the Law with any "
     "precedent. fan: at most 60 words."
 )
@@ -124,7 +125,8 @@ def channel_prompt(packet: CheckPacket, evidence: Evidence, verdict: Verdict, cl
         "- Refer to players by name or role, never as he, him, his, she or her.",
         "- The facts come from tracking data: say 'tracking data', never video, replays or cameras.",
         "- Say who did what: the VAR checks; only for an on-field review does the referee review at the monitor.",
-        "- stadium: " + ('REF: "<Club> No.<shirt> ... Final decision is ..." in at most 25 words.'
+        "- stadium: " + ('REF: "After review, <what the review found>. Final decision is <decision>." in at most '
+                         '25 words; it is read aloud to the crowd, so never write "...".'
                          if verdict.announced else "an empty string."),
     ]
     if feedback:
