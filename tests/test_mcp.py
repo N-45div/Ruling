@@ -30,9 +30,9 @@ def setup_module():
     app.state.limiter = LIMITER
 
 
-def test_the_four_tools_are_listed():
+def test_the_five_tools_are_listed():
     names = {t.name for t in _call("__list__").tools}
-    assert names == {"list_var_checks", "explain_var_check", "law_clause", "similar_past_checks"}
+    assert names == {"list_var_checks", "explain_var_check", "law_clause", "similar_past_checks", "post_match_panel"}
 
 
 def test_a_match_lists_its_checks_without_the_truth():
@@ -64,3 +64,14 @@ def test_a_finished_case_is_explained_from_the_store():
     assert out["checker"] == {"passed": True, "claims_backed": 2} and out["desk"].endswith("?seed=5004")
     unknown = _call("explain_var_check", {"incident_id": "nope"})
     assert unknown.is_error and "list_var_checks gives the ids" in unknown.content[0].text
+
+
+def test_the_panel_needs_a_published_decision_and_keeps_its_votes():
+    unpublished = _call("post_match_panel", {"incident_id": "NBR-FVT-5004:221:penalty_claim"})
+    assert unpublished.is_error and "no published decision" in unpublished.content[0].text
+    case = {"check_id": "def", "incident_id": "NBR-FVT-5004:425:offside", "match_id": "NBR-FVT-5004",
+            "status": "published", "verdict": {"final_decision": "goal"},
+            "panel": {"decision_correct": "5-0", "var_right": "5-0", "verdict": "decision upheld", "members": []}}
+    asyncio.run(app.state.checks.store.save(case))
+    out = _payload(_call("post_match_panel", {"incident_id": "NBR-FVT-5004:425:offside"}))
+    assert out["decision_correct"] == "5-0" and out["desk_decision"] == "goal"

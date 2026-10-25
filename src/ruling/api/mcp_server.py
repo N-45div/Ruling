@@ -3,7 +3,7 @@ Claude) can use it as a tool.
 
     POST /mcp   streamable HTTP, stateless, JSON responses
 
-Tools: list_var_checks, explain_var_check, law_clause, similar_past_checks. A check started
+Tools: list_var_checks, explain_var_check, law_clause, similar_past_checks, post_match_panel. A check started
 here is a real desk check: it is measured, written and checked like any other, and nothing is
 published until a person approves it on the desk.
 """
@@ -25,8 +25,8 @@ INSTRUCTIONS = (
     "Ruling is a decision desk for VAR calls on synthetic football matches (fictional clubs and players). "
     "Use list_var_checks to see a match's VAR checks, explain_var_check to have the desk measure one from "
     "tracking data, cite the Law, compare precedent and write checked messages, law_clause for the IFAB "
-    f"Laws of the Game {EDITION} as paraphrased by the desk, and similar_past_checks for how similar calls "
-    "ended. Never present a decision as published unless its status says published: a person approves "
+    f"Laws of the Game {EDITION} as paraphrased by the desk, similar_past_checks for how similar calls "
+    "ended, and post_match_panel for five independent reviewers' votes on a published decision. Never present a decision as published unless its status says published: a person approves "
     "every message on the desk."
 )
 
@@ -136,6 +136,26 @@ def build(app) -> MCPServer:
         return {"incident_id": incident_id, "desk_decision": verdict.final_decision,
                 "agreeing": p.agreeing, "of": sum(p.finals.values()), "finals": p.finals,
                 "closest": list(p.similar)}
+
+    @server.tool(description="The post-match Key Match Incidents panel on a published decision: five independent "
+                             "reviewers (a former striker, a former defender, a former coach, a league "
+                             "representative and a referees' representative) vote on whether the decision was "
+                             "correct and whether the VAR was right to step in, with one reason each. Convened "
+                             "once (about 20 seconds), then kept with the case file.")
+    async def post_match_panel(incident_id: str) -> dict:
+        from .app import convene_panel
+
+        _incident(incident_id)
+        published = [c for c in await app.state.checks.store.cases(incident_id.rsplit(":", 2)[0])
+                     if c["incident_id"] == incident_id and c["status"] == "published"]
+        if not published:
+            raise ToolError("this check has no published decision yet: run explain_var_check, then a person "
+                            "approves it on the desk")
+        case = published[-1]
+        if not case.get("panel"):
+            _spend_model_budget()
+        return {"incident_id": incident_id, "desk_decision": (case.get("verdict") or {}).get("final_decision"),
+                **(case.get("panel") or await convene_panel(case))}
 
     return server
 

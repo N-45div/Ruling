@@ -12,6 +12,7 @@
     POST /api/checks/{check_id}/decision      a person approves or holds the messages
     POST /api/checks/{check_id}/translate     the approved fan card in another language
     GET  /api/checks/{check_id}/announcement  the checked stadium announcement, spoken (audio/mpeg)
+    POST /api/checks/{check_id}/panel         the post-match panel's five votes on a published decision
     GET  /api/cases?match_id=               finished case files (the post-match review)
     POST /api/live                            replay a match through Event Hubs {"seed", "speed", "from_minute"}
     GET  /api/live                            feed state and recent events
@@ -76,6 +77,7 @@ async def lifespan(app: FastAPI):
     app.state.checks = Checks(make_store())
     app.state.translations = {}  # (check_id, language) -> (text, verified)
     app.state.announcements = {}  # check_id -> mp3 bytes of the spoken stadium announcement
+    app.state.panels_sitting = set()  # check_ids the post-match panel is reviewing right now
     app.state.live = LiveFeed(app.state.checks, os.environ.get("EVENTHUB_NAMESPACE"), os.environ.get("EVENTHUB_NAME"))
     app.state.live.start_consumer()
     try:
@@ -257,6 +259,49 @@ async def announcement(check_id: str, request: Request):
         except Exception as exc:
             raise HTTPException(502, "the announcement could not be spoken; try again in a moment") from exc
     return Response(cache[check_id], media_type="audio/mpeg", headers={"Cache-Control": "public, max-age=3600"})
+
+
+async def convene_panel(case: dict) -> dict:
+    """Convene the post-match panel on a published case file, and keep its votes with the case."""
+    from ..desk import panel as kmi
+    from ..desk.assessor import assess
+    from ..desk.evidence import gather
+    from ..desk.packet import packet_for
+
+    incident, m = _incident(case["incident_id"])
+    packet = packet_for(m, incident)  # the measurement is code, so it is rebuilt exactly
+    evidence = gather(packet)
+    votes = await kmi.convene(packet, evidence, assess(packet, evidence), case.get("precedent_line"))
+    await app.state.checks.store.save({**case, "panel": votes})
+    return votes
+
+
+@app.post("/api/checks/{check_id}/panel")
+async def panel(check_id: str, request: Request):
+    """The post-match panel's votes on a published decision; convened once, then kept with the case file."""
+    case = await app.state.checks.store.case(check_id)
+    if case is None:
+        s = app.state.checks.sessions.get(check_id)
+        if s is None:
+            raise HTTPException(404, "unknown check")
+        case = {"check_id": check_id, **serialize.case_dict(s.case)} if s.case else {"status": None}
+    if case["status"] != "published":
+        raise HTTPException(409, "the panel reviews published decisions only")
+    if case.get("panel"):
+        return case["panel"]
+    sitting = app.state.panels_sitting
+    if check_id in sitting:
+        raise HTTPException(409, "the panel is already reviewing this decision")
+    limits.enforce(LIMITER, request, "panel", uses_model=True)
+    sitting.add(check_id)
+    try:
+        return await convene_panel(case)
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(502, "the panel could not sit; try again in a moment") from exc
+    finally:
+        sitting.discard(check_id)
 
 
 @app.get("/api/cases")

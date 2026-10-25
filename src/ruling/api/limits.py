@@ -16,6 +16,7 @@ LIMITS = {
     "check": (8, 60),        # VAR checks and drills, from the desk or over MCP
     "translate": (20, 60),
     "speech": (12, 60),      # stadium announcements read aloud (each is made once, then cached)
+    "panel": (6, 60),        # post-match panel reviews (five model calls each, kept with the case file)
     "feed": (6, 60),         # starting or freezing the live feed
 }
 MODEL_BUDGET = (180, 3600)  # checks that may call the model, all clients together, per hour
