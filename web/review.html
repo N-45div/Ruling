@@ -27,9 +27,15 @@
   <div class="tiles" id="tiles"></div>
   <div class="panel table-box" style="padding:0">
     <table>
-      <thead><tr><th scope="col">Time</th><th scope="col">Decision type</th><th scope="col">On-field</th><th scope="col">VAR</th><th scope="col">Final</th><th scope="col">Law</th><th scope="col">Evidence</th><th scope="col">Precedent</th><th scope="col">Desk time</th></tr></thead>
+      <thead><tr><th scope="col">Time</th><th scope="col">Decision type</th><th scope="col">On-field</th><th scope="col">VAR</th><th scope="col">Final</th><th scope="col">Law</th><th scope="col">Evidence</th><th scope="col">Precedent</th><th scope="col">Panel</th><th scope="col">Desk time</th></tr></thead>
       <tbody id="rows"></tbody>
     </table>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><h2>Key Match Incidents panel</h2><button type="button" class="btn small no-print" id="convene">Convene the panel</button></div>
+    <p class="small muted" style="margin:0 0 14px">Five independent reviewers (a former striker, a former defender, a former coach, a league representative and a referees' representative) each read the decision record and vote on two questions: was the decision correct, and was the VAR right to step in or stay out? They never see each other's votes. The measured decision stands; the panel's view is reported exactly as it voted.</p>
+    <div class="small muted" id="panel-note" aria-live="polite"></div>
+    <div class="kmi-grid" id="panel-cards"></div>
   </div>
   <p class="small muted" style="margin:0">Built on synthetic matches with fictional clubs and players. Laws paraphrased from the IFAB Laws of the Game 2026/27; see the official text for the wording.</p>
 </main>
