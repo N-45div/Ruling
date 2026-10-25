@@ -99,5 +99,5 @@ async def convene(packet: CheckPacket, evidence: Evidence, verdict: Verdict, pre
         result = await build().run(record)
         return result.get_outputs()[-1]
 
-    votes = await llm.with_retry(run, attempts=2, timeout=60.0)
+    votes = await llm.with_retry(run, attempts=2, timeout=75.0)
     return summarise(votes, list(evidence.facts))
