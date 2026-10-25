@@ -115,6 +115,8 @@ def test_only_a_checked_announcement_is_spoken(client):
         asyncio.run(app.state.checks.store.save(case))
     assert client.get("/api/checks/c0ffee000002/announcement").status_code == 409
     assert client.post("/api/checks/c0ffee000002/panel").status_code == 409  # the panel reviews published decisions
+    assert client.get("/api/checks/c0ffee000002/listen").status_code == 409  # only a published fan card is read
+    assert client.get("/api/checks/c0ffee000003/listen?language=xx").status_code == 422
     assert client.post("/api/checks/nope/panel").status_code == 404
     reviewed = {**factual, "check_id": "c0ffee000004", "incident_id": "MLA-HFW-5001:3:offside",
                 "panel": {"decision_correct": "5-0", "members": []}}

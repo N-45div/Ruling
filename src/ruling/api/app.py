@@ -12,6 +12,7 @@
     POST /api/checks/{check_id}/decision      a person approves or holds the messages
     POST /api/checks/{check_id}/translate     the approved fan card in another language
     GET  /api/checks/{check_id}/announcement  the checked stadium announcement, spoken (audio/mpeg)
+    GET  /api/checks/{check_id}/listen?language=  the published fan card read aloud, in the fan's language
     POST /api/checks/{check_id}/panel         the post-match panel's five votes on a published decision
     GET  /api/cases?match_id=               finished case files (the post-match review)
     POST /api/live                            replay a match through Event Hubs {"seed", "speed", "from_minute"}
@@ -78,6 +79,7 @@ async def lifespan(app: FastAPI):
     app.state.translations = {}  # (check_id, language) -> (text, verified)
     app.state.announcements = {}  # check_id -> mp3 bytes of the spoken stadium announcement
     app.state.panels_sitting = set()  # check_ids the post-match panel is reviewing right now
+    app.state.listens = {}  # (check_id, language) -> mp3 bytes of the fan card read aloud
     app.state.live = LiveFeed(app.state.checks, os.environ.get("EVENTHUB_NAMESPACE"), os.environ.get("EVENTHUB_NAME"))
     app.state.live.start_consumer()
     try:
@@ -259,6 +261,37 @@ async def announcement(check_id: str, request: Request):
         except Exception as exc:
             raise HTTPException(502, "the announcement could not be spoken; try again in a moment") from exc
     return Response(cache[check_id], media_type="audio/mpeg", headers={"Cache-Control": "public, max-age=3600"})
+
+
+@app.get("/api/checks/{check_id}/listen")
+async def listen(check_id: str, request: Request, language: str = "en"):
+    """The published fan card read aloud, in English or in a translation that kept every name and figure."""
+    from ..desk import communicator, speech
+
+    s = app.state.checks.sessions.get(check_id)
+    if s is None:
+        case = await _stored(check_id)
+    else:
+        case = serialize.case_dict(s.case) if s.case else {"status": None}
+    if case["status"] != "published":
+        raise HTTPException(409, "only a published fan card is read aloud")
+    if language != "en" and language not in communicator.LANGUAGES:
+        raise HTTPException(422, f"supported: en, {', '.join(communicator.LANGUAGES)}")
+    key, audio = (check_id, language), app.state.listens
+    if key not in audio:
+        limits.enforce(LIMITER, request, "speech", uses_model=True)
+        words, voice = case["drafts"]["fan"], "en"
+        try:
+            if language != "en":
+                if key not in app.state.translations:
+                    app.state.translations[key] = await communicator.translate(words, language)
+                translated, verified = app.state.translations[key]
+                if verified:  # an unverified translation stays in English, and so does its voice
+                    words, voice = translated, language
+            audio[key] = await speech.speak(words, voice)
+        except Exception as exc:
+            raise HTTPException(502, "the fan card could not be read aloud; try again in a moment") from exc
+    return Response(audio[key], media_type="audio/mpeg", headers={"Cache-Control": "public, max-age=3600"})
 
 
 async def convene_panel(case: dict) -> dict:
