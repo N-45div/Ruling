@@ -262,6 +262,19 @@ async function decide(decision) {
 
 // ---- the active check ----------------------------------------------------------------
 
+// The desk's crew, one character per agent (pixel-art cast in img/cast, CC0 artwork).
+const CREW = {
+  intake: ["Gatekeeper", "checks the packet"], evidence: ["Analyst", "measures tracking"], laws: ["Lawkeeper", "finds the clause"],
+  assessor: ["The VAR", "applies the protocol"], precedent: ["Archivist", "finds past checks"], communicator: ["Writer", "drafts four messages"],
+  checker: ["Fact-checker", "checks every claim"], approval: ["You", "approve or hold"],
+};
+
+function crewCard(agent, cls, status) {
+  const [name, role] = CREW[agent];
+  return `<li class="crew-card ${cls}" title="${esc(`${name}: ${role}`)}"><span class="avatar"><img src="img/cast/${agent}.svg" alt="" width="44" height="44"></span>
+    <b>${esc(name)}</b><span class="role">${esc(role)}</span><span class="mono status">${esc(status)}</span></li>`;
+}
+
 function stepsHtml(c) {
   const seen = new Map();
   for (const s of c?.steps ?? []) seen.set(s.agent, s);
@@ -269,13 +282,13 @@ function stepsHtml(c) {
   const next = finished ? null : AGENTS.find((a) => !seen.has(a));
   const rows = AGENTS.map((agent) => {
     const s = seen.get(agent);
-    const cls = s ? "done" : agent === next ? "active" : "";
+    const cls = s ? "done" : agent === next ? "active" : finished ? "skipped" : "";
     const seconds = s && (s.seconds < 0.01 ? "< 0.01 s" : `${s.seconds.toFixed(2)} s`);
     const working = agent === "approval" ? "your call" : "working";
-    const time = s ? (agent === "approval" ? s.note : seconds) : agent === next ? working : finished ? "skipped" : "";
-    return `<li class="${cls}"><span class="dot"></span><span>${agent[0].toUpperCase() + agent.slice(1)}</span><span class="mono muted small">${esc(time)}</span></li>`;
+    const time = s ? (agent === "approval" ? s.note : seconds) : agent === next ? working : finished ? "skipped" : "waiting";
+    return crewCard(agent, cls, time);
   });
-  if (seen.has("fail-safe")) rows.push('<li class="done"><span class="dot" style="background:#FF9A9A"></span><span>Fail-safe</span><span class="mono muted small">holding line</span></li>');
+  if (seen.has("fail-safe")) rows.push('<li class="crew-card failsafe"><span class="avatar">!</span><b>Fail-safe</b><span class="role">holding line only</span><span class="mono status">held</span></li>');
   return rows.join("");
 }
 

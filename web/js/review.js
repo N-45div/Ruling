@@ -4,7 +4,9 @@ import { get, params, post } from "./api.js";
 import { CATEGORY, DECISION, REVIEW, esc, total } from "./labels.js";
 
 const seed = Number(params.get("seed") || 5001);
-const SEAT_INITIALS = { "Former striker": "ST", "Former defender": "DF", "Former coach": "CO", "League representative": "LG", "Referees' representative": "RF" };
+// Each seat's character in img/cast (pixel-art, CC0 artwork).
+const SEAT_CAST = { "Former striker": "former_striker", "Former defender": "former_defender", "Former coach": "former_coach",
+  "League representative": "league", "Referees' representative": "referees" };
 
 function deskSeconds(c) {
   return c.steps.filter((s) => s.agent !== "approval").reduce((sum, s) => sum + s.seconds, 0);
@@ -26,7 +28,7 @@ function panelCard(c) {
   const p = c.panel, v = c.verdict;
   const seats = p.members.map((m) => {
     const dissent = p.dissent.includes(m.seat);
-    return `<li class="${dissent ? "dissent" : ""}"><span class="seat-badge" aria-hidden="true">${SEAT_INITIALS[m.seat] ?? "?"}</span>
+    return `<li class="${dissent ? "dissent" : ""}"><span class="seat-badge" aria-hidden="true"><img src="img/cast/${SEAT_CAST[m.seat] ?? "league"}.svg" alt="" width="40" height="40"></span>
       <div><div class="seat-line"><b>${esc(m.seat)}</b>${dissent ? '<span class="small" style="color:var(--accent)">dissent</span>' : ""}
         <span class="vote ${m.decision_correct ? "yes" : "no"}">${m.decision_correct ? "Decision right" : "Decision wrong"}</span>
         <span class="vote ${m.var_right ? "yes" : "no"}">${m.var_right ? "VAR right" : "VAR wrong"}</span></div>
