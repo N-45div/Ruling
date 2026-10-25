@@ -141,8 +141,9 @@ td { padding: 14px; border-bottom: 1px solid #1A2438; vertical-align: top; }
 /* Phone (fan card) */
 .phone { max-width: 390px; margin: 24px auto; padding: 20px 18px; display: flex; flex-direction: column; gap: 16px; font-size: 15px; line-height: 1.5; }
 .phone .verdict-title { font-size: 26px; }
-.lang { display: flex; gap: 8px; }
-.lang button { flex: 1; min-height: 44px; border-radius: 10px; border: 1px solid var(--line-strong); background: transparent; color: var(--soft); }
+.lang { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.lang button { min-height: 44px; padding: 6px 4px; border-radius: 10px; border: 1px solid var(--line-strong); background: transparent; color: var(--soft); font-size: 14px; }
+.listen { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding: 0 16px 16px; }
 .lang button[aria-pressed="true"] { border-color: var(--accent); background: #1A1F2E; color: #fff; font-weight: 600; }
 
 @media (max-width: 640px) {
