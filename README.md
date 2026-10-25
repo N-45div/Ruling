@@ -201,7 +201,6 @@ uv run ruling-eval --set dev                   # the evaluation on the developme
 - **A model still writes the words.** The checker catches most mistakes, but not every one: in failure drills it caught a planted wrong decision in 46 of 47 measured runs.
 - **One replica.** A check in progress lives in memory; finished checks are in Cosmos DB and survive a restart.
 
-Built in coordination with an AI coding assistant, Claude Code.
 
 ## License
 
