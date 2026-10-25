@@ -1,0 +1,3913 @@
+{
+ "summary": {
+  "checks": 79,
+  "panel_failures": [],
+  "unanimous": 74,
+  "split": 5,
+  "split_by_category": {
+   "handball": 2,
+   "red_card": 1,
+   "offside": 2
+  },
+  "split_on_factual_calls": 2,
+  "questioned": [
+   {
+    "incident_id": "OHT-DMU-5009:158:handball",
+    "on_field": "penalty",
+    "law_decision": "no_foul",
+    "final": "penalty",
+    "borderline": true,
+    "tally": "0-5",
+    "var_right": "3-2"
+   }
+  ],
+  "close_calls": [
+   {
+    "incident_id": "OHT-DMU-5009:158:handball",
+    "tally": "0-5",
+    "var_right": "3-2"
+   },
+   {
+    "incident_id": "OHT-DMU-5009:548:red_card",
+    "tally": "4-1",
+    "var_right": "5-0"
+   }
+  ],
+  "median_seconds": 14.0
+ },
+ "rows": [
+  {
+   "incident_id": "MLA-HFW-5001:426:handball",
+   "category": "handball",
+   "on_field": "no_foul",
+   "law_decision": "no_foul",
+   "final": "no_foul",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 95.9,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck MLA No.11 Goran Zanivic's arm, held 0.60 m from the body while the arm was supporting a fall 10.3 m inside the penalty area, and precedent (8 of the 8 most similar past checks) ended the same way, so the on-field decision of no foul was correct and the VAR was right to let it stand."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The final decision was correct because the ball struck MLA No.11 Goran Zanivic's arm held 0.60 m from the body while the arm was supporting a fall, which is justifiable by the body's movement and matches the precedent where 8 of the 8 most similar past checks ended no foul."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The arm was supporting a fall, held 0.60 m from the body, the point of contact was 10.3 m inside the penalty area, and 8 of the 8 most similar past checks ended no foul, so the on-field no-foul decision was correct and the VAR was justified in checking and upholding it."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck MLA No.11 Goran Zanivic's arm, which was 0.60 m from the body and was supporting a fall, and precedent 8 of the 8 most similar past checks ended the same way (no foul)."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The on-field decision to call no foul was correct because the ball struck MLA No.11 Goran Zanivic's arm, which was 0.60 m from the body and was supporting a fall, the contact occurred 10.3 m inside the penalty area, and the 8 of 8 most similar past checks ended the same way (no foul)."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "MLA-HFW-5001:738:penalty_claim",
+   "category": "penalty_claim",
+   "on_field": "no_foul",
+   "law_decision": "no_foul",
+   "final": "no_foul",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 105.5,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "MLA No.8 Dario Falinni played the ball before making ankle contact 1.9 m inside the penalty area with HFW No.6 Mateo Zanleigh, and 8 of the 8 most similar past checks ended the same way, so no foul stands."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "MLA No.8 Dario Falinni played the ball before making ankle contact with HFW No.6 Mateo Zanleigh 1.9 m inside the penalty area, and 8 of the 8 most similar past checks also ended with no foul, so the on-field decision to award no foul was correct and the VAR was right to check and leave the decision as called."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "MLA No.8 Dario Falinni played the ball before making ankle contact with HFW No.6 Mateo Zanleigh 1.9 m inside the penalty area, and the 8 comparable past checks all ended with no foul."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 1.9 m inside the penalty area, MLA No.8 Dario Falinni played the ball before making ankle contact with HFW No.6 Mateo Zanleigh."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 1.9 m inside the penalty area but MLA No.8 Dario Falinni played the ball before the contact and made a tackle at the ankle on HFW No.6 Mateo Zanleigh, and precedent (8 of 8) shows similar checks ended no foul, so there was no clear and obvious error to overturn."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "MLA-HFW-5001:785:handball_goal",
+   "category": "handball_goal",
+   "on_field": "goal",
+   "law_decision": "no_goal",
+   "final": "no_goal",
+   "review": "var_overturn",
+   "borderline": false,
+   "seconds": 12.9,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball touched HFW No.24 Dario Nevivic's arm immediately before they scored, and Law 12.1 states it is an offence if a player scores in the opponents' goal immediately after the ball touched the hand or arm, even accidentally."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball touched HFW No.24 Dario Nevivic's arm immediately before they scored, and Law 12 specifies a goal scored immediately after the ball touched the arm is an offence even if accidental."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball touched HFW No.24 Dario Nevivic's arm immediately before they scored, Law 12 states a goal is an offence if scored immediately after the ball touched a hand or arm even accidentally, and precedent 8 of the 8 most similar past checks ended with the goal disallowed."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball touched HFW No.24 Dario Nevivic's arm immediately before they scored, and Law 12 states a goal is an offence if a player scores immediately after the ball touched the arm, even accidentally."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball touched HFW No.24 Dario Nevivic's arm immediately before they scored, and Law 12 states a goal is an offence if a team scores immediately after the ball touched an arm."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "MLA-HFW-5001:890:penalty_claim",
+   "category": "penalty_claim",
+   "on_field": "penalty",
+   "law_decision": "no_foul",
+   "final": "no_foul",
+   "review": "on_field_review",
+   "borderline": false,
+   "seconds": 14.9,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "There was no contact between MLA No.15 Callum Ultano and HFW No.3 Lucas Yorkova, so the final decision of no foul was correct and the VAR was right to intervene."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "There was no contact between MLA No.15 Callum Ultano and HFW No.3 Lucas Yorkova, the point of contact was 7.0 m inside the penalty area, and 8 of the 8 most similar past checks ended the same way (no foul)."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "There was no contact between MLA No.15 Callum Ultano and HFW No.3 Lucas Yorkova, and Law 12 requires contact for a direct free kick offence, so overturning the awarded penalty was correct."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "There was no contact between MLA No.15 Callum Ultano and HFW No.3 Lucas Yorkova, and the point of contact was 7.0 m inside the penalty area."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "There was no contact between MLA No.15 Callum Ultano and HFW No.3 Lucas Yorkova, so the on-field penalty decision was incorrect and the VAR review correctly removed the foul."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "MLA-HFW-5001:990:red_card",
+   "category": "red_card",
+   "on_field": "yellow",
+   "law_decision": "red",
+   "final": "red",
+   "review": "on_field_review",
+   "borderline": false,
+   "seconds": 17.0,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "HFW No.22 Goran Nevberik made contact with MLA No.8 Dario Falinni in a lunging tackle with studs showing at 6.9 m/s that contacted the knee, matching Law 12.3-sfp descriptions and the precedent where 5 of the 8 most similar checks ended as red cards."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Given that HFW No.22 Goran Nevberik made contact with MLA No.8 Dario Falinni at the knee in a studs showing, lunging tackle at 6.9 m/s, the challenge met Law 12.3-sfp criteria for serious foul play, so the red card was correct and the VAR was right to intervene."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "HFW No.22 Goran Nevberik lunged with studs showing at 6.9 m/s and made contact with MLA No.8 Dario Falinni at the knee, which under Law 12.3-sfp endangered player safety and aligns with precedent where 5 of the 8 most similar checks resulted in a red card."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "HFW No.22 Goran Nevberik lunged with studs showing at 6.9 m/s and made knee contact with MLA No.8 Dario Falinni, meeting Law 12.3 SFP criteria and matching the majority precedent (5 of the 8 most similar checks resulted in a red card)."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "HFW No.22 Goran Nevberik made contact with MLA No.8 Dario Falinni in a studs-showing lunging tackle at the knee at 6.9 m/s, and 5 of the 8 most similar past checks ended with a red card."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "MLA-HFW-5001:1327:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 16.6,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to MLA No.26 Zeno Rudwellby directly from a corner and Law 11.3 states there is no offside offence if the player receives the ball directly from a corner, so the goal stands."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to MLA No.26 Zeno Rudwellby directly from a corner and Law 11.3 states there is no offside offence if the player receives the ball directly from a corner, so the goal stands."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "MLA No.26 Zeno Rudwellby received the ball directly from a corner, so under Law 11.3 there is no offside offence and the on-field decision to let the goal stand was correct."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "MLA No.26 Zeno Rudwellby received the ball directly from a corner, and Law 11.3 states there is no offside offence if the player receives the ball directly from a corner."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Zeno Rudwellby received the ball directly from a corner and Law 11.3 states there is no offside offence if the player receives the ball directly from a corner kick."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "MLA-HFW-5001:1438:handball",
+   "category": "handball",
+   "on_field": "no_foul",
+   "law_decision": "no_foul",
+   "final": "no_foul",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 25.8,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The no-foul decision is correct because the ball struck Jonah Uldello's arm held 0.04 m from the body, the arm position follows from the body's movement and therefore was not unnaturally bigger."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck MLA No.4 Jonah Uldello's arm which was held 0.04 m from the body and the arm position follows from the body's movement, so the contact did not make the body unnaturally bigger and no offence occurred."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck MLA No.4 Jonah Uldello's arm held 0.04 m from the body with the arm position following from the body's movement, and 8 of the 8 most similar past checks ended the same way, so the on-field no-foul decision was correct and the VAR review that upheld it was appropriate."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The final decision was correct because the ball struck MLA No.4 Jonah Uldello's arm held 0.04 m from the body and the arm position follows from the body's movement, so it was not 'unnaturally bigger' despite the point of contact being 8.2 m inside the penalty area."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The arm was held 0.04 m from the body and the arm position follows from the body's movement, so the arm was not making the body unnaturally bigger and the on-field no-foul decision was correct."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "BRC-GLH-5002:242:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 23.2,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass Callum Brenurza was level with the offside line set by Nils Cordello, and Law 11.1 states level with the second-last opponent is not an offside position."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, GLH No.16 Callum Brenurza was level with the offside line set by BRC No.39 Nils Cordello and level with the second-last opponent is not an offside position under Law 11.1, so the on-field decision to allow the goal was correct."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, GLH No.16 Callum Brenurza was level with the offside line set by BRC No.39 Nils Cordello, and level with the second-last opponent is not an offside position."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass GLH No.16 Callum Brenurza was level with the offside line set by BRC No.39 Nils Cordello, and Law 11.1 states being level with the second-last opponent is not an offside position, so the on-field decision to allow the goal was correct and the VAR review correctly confirmed it."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass Callum Brenurza was level with the offside line set by Nils Cordello and being level with the second-last opponent is not an offside position."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "BRC-GLH-5002:1159:handball",
+   "category": "handball",
+   "on_field": "no_foul",
+   "law_decision": "no_foul",
+   "final": "no_foul",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.0,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The arm was held 0.45 m from the body above the shoulder but the arm position follows from the body's movement, so it was not making the body unnaturally bigger and the on-field no foul decision aligns with precedent of 8 of the 8 most similar past checks."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck BRC No.3 Umar Kalholme's arm 10.0 m inside the penalty area with the arm held 0.45 m from the body above the shoulder, and the record states the arm position follows from the body's movement so it was not made unnaturally bigger, supporting the on-field no foul decision and justifying the VAR check that upheld it."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck BRC No.3 Umar Kalholme's arm, held 0.45 m from the body, above the shoulder, but the arm position follows from the body's movement so the contact inside the penalty area at 10.0 m did not meet the 'unnaturally bigger' or deliberate criteria and no foul was correctly given."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The arm position follows from the body's movement so it was not 'unnaturally bigger', the ball struck the arm accidentally 10.0 m inside the penalty area with the arm 0.45 m from the body and above the shoulder, and 8 of the 8 most similar past checks ended no foul."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Umar Kalholme's arm was held 0.45 m from the body above the shoulder at the point of contact 10.0 m inside the penalty area, the arm position follows from the body's movement and therefore was not 'unnaturally bigger', so the on-field decision of no foul was correct and the VAR was right not to intervene."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "BRC-GLH-5002:1498:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "no_goal",
+   "final": "no_goal",
+   "review": "var_overturn",
+   "borderline": false,
+   "seconds": 12.8,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, GLH No.33 Sami Kalinni's left foot was 3 cm beyond the offside line set by BRC No.28 Florin Evezar, so the VAR was right to intervene and the final decision to disallow the goal was correct."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, GLH No.33 Sami Kalinni's left foot was 3 cm beyond the offside line set by BRC No.28 Florin Evezar, so Kalinni was offside when becoming involved in play."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Sami Kalinni's left foot was 3 cm beyond the offside line at the moment of the pass (offside line set by Florin Evezar), and 8 of the 8 most similar past checks ended with the goal disallowed."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, GLH No.33 Sami Kalinni's left foot was 3 cm beyond the offside line set by BRC No.28 Florin Evezar, so the goal was correctly disallowed."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass GLH No.33 Sami Kalinni's left foot was 3 cm beyond the offside line set by BRC No.28 Florin Evezar, so Kalinni was in an offside position when the ball was played."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "QMF-OHT-5003:58:offside",
+   "category": "offside",
+   "on_field": "no_goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "var_overturn",
+   "borderline": false,
+   "seconds": 13.2,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, QMF No.5 Adem Rudholme's left foot was 4 cm behind the offside line set by OHT No.23 Lucas Tordello and only an arm was beyond the line, and arms are ignored for offside, so the goal stand decision was correct and VAR was right to overturn the on-field call."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Adem Rudholme's left foot was 4 cm behind the offside line and only an arm (ignored for offside) was beyond the line, so Adem Rudholme was not in an offside position."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, QMF No.5 Adem Rudholme's left foot was 4 cm behind the offside line and only an arm was beyond the line (arms are not counted for offside), so the player was not in an offside position."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, QMF No.5 Adem Rudholme's left foot was 4 cm behind the offside line, only an arm was beyond the line and arms are not counted for offside, so Adem Rudholme was not in an offside position and the VAR correctly overturned the on-field disallowance."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, QMF No.5 Adem Rudholme's left foot was 4 cm behind the offside line set by OHT No.23 Lucas Tordello, and only an arm (which is ignored) was beyond the line, so Rudholme was not in an offside position."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "QMF-OHT-5003:243:red_card",
+   "category": "red_card",
+   "on_field": "red",
+   "law_decision": "yellow",
+   "final": "yellow",
+   "review": "on_field_review",
+   "borderline": false,
+   "seconds": 14.5,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Idris Lunovar made contact with Jonah Zanezar (tackle, at the ankle) 0.9 s after the ball had gone at speed 5.5 m/s, and 6 of the 8 most similar past checks ended with a yellow card, so the change to a yellow was consistent with the measured facts."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Contact with QMF No.20 Jonah Zanezar at the ankle 0.9 s after the ball with speed 5.5 m/s aligns with reckless (yellow) rather than excessive force, and precedent 6 of the 8 most similar past checks ended the same way (a yellow card)."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Contact was at the ankle 0.9 s after the ball had gone with speed 5.5 m/s, and 6 of the 8 most similar past checks ended in a yellow card."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Idris Lunovar made contact with Jonah Zanezar at the ankle 0.9 s after the ball had gone at speed 5.5 m/s, and precedent shows 6 of the 8 most similar past checks ended with a yellow card."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "OHT No.16 Idris Lunovar made contact with QMF No.20 Jonah Zanezar 0.9 s after the ball had gone at speed 5.5 m/s, Law 12.1 states reckless conduct merits a caution while using excessive force merits a sending-off, and 6 of 8 similar past checks resulted in a yellow, so the change to a yellow was correct and the VAR was right to intervene."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "QMF-OHT-5003:475:handball",
+   "category": "handball",
+   "on_field": "no_foul",
+   "law_decision": "no_foul",
+   "final": "no_foul",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.5,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The decision was correct because the ball struck OHT No.16 Idris Lunovar's arm 6.2 m inside the penalty area while the arm was held 0.05 m from the body and the arm position follows from the body's movement, so it was not unnaturally bigger."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck OHT No.16 Idris Lunovar's arm 6.2 m inside the penalty area while the arm was held 0.05 m from the body and the arm position follows from the body's movement, and 8 of 8 most similar past checks ended no foul, so the on-field decision was correctly upheld."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The on-field decision was correct because the ball struck OHT No.16 Idris Lunovar's arm 0.05 m from the body at 6.2 m inside the penalty area and the arm position followed from the body's movement, so the arm did not make the body unnaturally bigger."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck OHT No.16 Idris Lunovar's arm 6.2 m inside the penalty area while the arm was held 0.05 m from the body and the arm position follows from the body's movement, and 8 of 8 most similar past checks ended no foul."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck OHT No.16 Idris Lunovar's arm held 0.05 m from the body, the arm position follows from the body's movement, and precedent of 8 of 8 similar checks ended the same way, so no foul was correctly upheld."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "QMF-OHT-5003:921:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 13.7,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, QMF No.23 Jonah Wenfordt's left foot was 13 cm behind the offside line set by OHT No.38 Florin Yorholme, and only an arm was beyond the line so under Law 11.1 the player was not in an offside position, therefore the on-field goal decision stands."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass QMF No.23 Jonah Wenfordt's left foot was 13 cm behind the offside line and only an arm was beyond the line (arms are not counted), so the on-field decision to allow the goal was correct and the VAR was right to review and confirm it."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass Jonah Wenfordt's left foot was 13 cm behind the offside line and only an arm was beyond the line, and arms are ignored for offside."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Jonah Wenfordt's left foot was 13 cm behind the offside line and only an arm was beyond the line (arms are ignored), so the player was not in an offside position and the goal correctly stood."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass QMF No.23 Jonah Wenfordt's left foot was 13 cm behind the offside line set by OHT No.38 Florin Yorholme and only an arm was beyond the line, and arms are not counted for offside."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "QMF-OHT-5003:1000:handball",
+   "category": "handball",
+   "on_field": "no_foul",
+   "law_decision": "no_foul",
+   "final": "no_foul",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.3,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 7.2 m inside the penalty area where the ball struck Nils Halholme's arm held 0.33 m from the body above the shoulder, and the arm position follows from the body's movement."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck QMF No.8 Nils Halholme's arm, held 0.33 m from the body above the shoulder, and the arm position follows from the body's movement, so the on-field decision of no foul was correct and the VAR was right to check and uphold it."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck QMF No.8 Nils Halholme's arm held 0.33 m from the body above the shoulder, the arm position follows from the body's movement, the point of contact was 7.2 m inside the penalty area, and 8 of the 8 most similar past checks ended the same way (no foul)."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The on-field decision to play on was correct because the ball struck QMF No.8 Nils Halholme's arm 0.33 m from the body above the shoulder at 7.2 m inside the penalty area, and the arm position follows from the body's movement so it was not made unnaturally bigger."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 7.2 m inside the penalty area, the ball struck QMF No.8 Nils Halholme's arm held 0.33 m from the body above the shoulder, and the arm position follows from the body's movement, so no offence."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "QMF-OHT-5003:1038:penalty_claim",
+   "category": "penalty_claim",
+   "on_field": "no_foul",
+   "law_decision": "no_foul",
+   "final": "no_foul",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 13.6,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "QMF No.5 Adem Rudholme played the ball before making contact with OHT No.39 Bastian Aldfordt at the ankle 1.0 m inside the penalty area, there was no indication of reckless or excessive force and the 8 most similar past checks ended no foul."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "QMF No.5 Adem Rudholme played the ball before making ankle contact with OHT No.39 Bastian Aldfordt 1.0 m inside the penalty area, and 8 of the 8 most similar past checks ended no foul."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "QMF No.5 Adem Rudholme played the ball before the contact with OHT No.39 Bastian Aldfordt at the ankle 1.0 m inside the penalty area, and the 8 of the 8 most similar past checks also ended no foul, so no foul is the correct decision."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "QMF No.5 Adem Rudholme played the ball before contact and although contact with OHT No.39 Bastian Aldfordt occurred 1.0 m inside the penalty area at the ankle, the tackle matched precedent (8 of 8 similar checks resulted in no foul) and did not meet the thresholds of careless, reckless or excessive force required for a foul under Law 12.1."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "QMF No.5 Adem Rudholme played the ball before the contact with OHT No.39 Bastian Aldfordt 1.0 m inside the penalty area, and precedent 8 of the 8 most similar past checks ended the same way (no foul)."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "NBR-FVT-5004:221:penalty_claim",
+   "category": "penalty_claim",
+   "on_field": "penalty",
+   "law_decision": "free_kick",
+   "final": "free_kick",
+   "review": "var_overturn",
+   "borderline": false,
+   "seconds": 13.2,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 6 cm outside the penalty area where No.10 Bram Istberik made contact tripping No.19 Yusuf Falurza at the ankle, so a free kick outside the area is the correct outcome."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 6 cm outside the penalty area and NBR No.10 Bram Istberik made contact with FVT No.19 Yusuf Falurza (trip, at the ankle), and under Law 12.1 contact offences are penalised where the contact happens, so a free kick outside the area is correct."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 6 cm outside the penalty area and Law 12 states contact offences are penalised where the contact happens, so awarding a free kick outside the area (no card) is consistent with NBR No.10 Bram Istberik making contact with FVT No.19 Yusuf Falurza (trip, at the ankle)."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 6 cm outside the penalty area when NBR No.10 Bram Istberik made contact with FVT No.19 Yusuf Falurza (trip, at the ankle)."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 6 cm outside the penalty area when NBR No.10 Bram Istberik made contact with FVT No.19 Yusuf Falurza (trip, at the ankle)."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "NBR-FVT-5004:425:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.0,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass Bram Evholme's right foot was 20.2 m behind the offside line set by Idris Kalezar, so Bram Evholme was not in an offside position and the goal standing was correct."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass FVT No.39 Bram Evholme's right foot was 20.2 m behind the offside line set by NBR No.7 Idris Kalezar, so the on-field decision to allow the goal was correct and the VAR was right to check and confirm it."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, FVT No.39 Bram Evholme's right foot was 20.2 m behind the offside line set by NBR No.7 Idris Kalezar, so Bram Evholme was not in an offside position and the on-field decision to allow the goal was correct."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, FVT No.39 Bram Evholme's right foot was 20.2 m behind the offside line set by NBR No.7 Idris Kalezar, therefore the attacker was onside and the on-field decision and VAR confirmation that the goal stands were correct."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass FVT No.39 Bram Evholme's right foot was 20.2 m behind the offside line set by NBR No.7 Idris Kalezar, so Bram was not in an offside position and the goal stands."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "NBR-FVT-5004:794:penalty_claim",
+   "category": "penalty_claim",
+   "on_field": "no_foul",
+   "law_decision": "no_foul",
+   "final": "no_foul",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.5,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The tackle by FVT No.18 Callum Halwellby made contact with NBR No.3 Eli Yordello at the ankle 13.6 m inside the penalty area after Halwellby played the ball, and 8 of the 8 most similar past checks ended the same way."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Callum Halwellby played the ball before the tackle that made ankle contact with Eli Yordello 13.6 m inside the penalty area, and 8 of 8 most similar past checks ended no foul."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The contact occurred 13.6 m inside the penalty area but FVT No.18 Callum Halwellby played the ball before making a tackle at the ankle on NBR No.3 Eli Yordello, and 8 of the 8 most similar past checks ended the same way, supporting the on-field no foul decision."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The contact occurred 13.6 m inside the penalty area when FVT No.18 Callum Halwellby played the ball before making ankle contact with NBR No.3 Eli Yordello, and 8 of the 8 most similar past checks ended no foul."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "FVT No.18 Callum Halwellby played the ball before contact when making a tackle at the ankle on NBR No.3 Eli Yordello; the point of contact was 13.6 m inside the penalty area, and 8 of the 8 most similar past checks ended the same way."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "NBR-FVT-5004:1044:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "no_goal",
+   "final": "no_goal",
+   "review": "var_overturn",
+   "borderline": false,
+   "seconds": 14.0,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, FVT No.31 Umar Yorwellby's left foot was 15 cm beyond the offside line set by NBR No.7 Idris Kalezar, so he was offside when the ball was played."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "FVT No.31 Umar Yorwellby was 15 cm beyond the offside line set by NBR No.7 Idris Kalezar at the moment of the pass, and under Law 11.2(a) a player in that position is penalised for interfering with play by playing the ball."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass FVT No.31 Umar Yorwellby's left foot was 15 cm beyond the offside line set by NBR No.7 Idris Kalezar, indicating an offside position at the pass and supporting disallowing the goal."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At 64:51 FVT No.31 Umar Yorwellby's left foot was 15 cm beyond the offside line set by NBR No.7 Idris Kalezar, which under Law 11.2 and the 8 of the 8 precedent cases supports disallowing the goal."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, FVT No.31 Umar Yorwellby's left foot was 15 cm beyond the offside line set by NBR No.7 Idris Kalezar, so the player was in an offside position and the VAR was correct to overturn the on-field decision."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "HFW-DMU-5005:715:offside",
+   "category": "offside",
+   "on_field": "no_goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "var_overturn",
+   "borderline": false,
+   "seconds": 12.7,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass DMU No.23 Emre Halholme's right foot was 2 cm behind the offside line and only an arm (which is ignored for offside) was beyond the line, so the goal-stand decision was correct."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, DMU No.23 Emre Halholme's right foot was 2 cm behind the offside line and only an arm was beyond the line, and arms are not counted for offside, so Emre was not in an offside position."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass DMU No.23 Emre Halholme's right foot was 2 cm behind the offside line set by HFW No.22 Goran Nevberik and only an arm was beyond the line, and arms are not counted for offside, so the goal stands."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, DMU No.23 Emre Halholme's right foot was 2 cm behind the offside line set by HFW No.22 Goran Nevberik and only an arm (which is ignored for offside) was beyond the line, so the player was not in an offside position."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "DMU No.23 Emre Halholme's right foot was 2 cm behind the offside line set by HFW No.22 Goran Nevberik, and only an arm (which is ignored for offside) was beyond the line, so the goal correctly stands and the VAR was right to intervene."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "HFW-DMU-5005:736:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 13.1,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, DMU No.24 Idris Lundello's left foot was 18.0 m behind the offside line set by HFW No.6 Mateo Zanleigh, so the on-field decision to allow the goal was correct and the VAR was right to confirm it."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, DMU No.24 Idris Lundello's left foot was 18.0 m behind the offside line."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, DMU No.24 Idris Lundello's left foot was 18.0 m behind the offside line set by HFW No.6 Mateo Zanleigh, so Lundello was not in an offside position and the goal stands."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, DMU No.24 Idris Lundello's left foot was 18.0 m behind the offside line set by HFW No.6 Mateo Zanleigh, so Lundello was not in an offside position and the VAR review correctly upheld the on-field decision."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass DMU No.24 Idris Lundello's left foot was 18.0 m behind the offside line set by HFW No.6 Mateo Zanleigh, so Lundello was not in an offside position and the on-field goal decision was correct, with the VAR check appropriately confirming the factual measurement."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "HFW-DMU-5005:964:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 13.0,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to DMU No.8 Umar Sevanek directly from a corner and Law 11.3 states there is no offside offence when a player receives the ball directly from a corner, so the goal stands."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to DMU No.8 Umar Sevanek directly from a corner and Law 11.3 states there is no offside offence if the player receives the ball directly from a corner, so the on-field decision to allow the goal was correct."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to DMU No.8 Umar Sevanek directly from a corner, and Law 11.3 states there is no offside offence if the player receives the ball directly from a corner kick."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "DMU No.8 Umar Sevanek received the ball directly from a corner and Law 11.3 states there is no offside offence when a player receives the ball directly from a corner, so the goal stands."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "DMU No.8 Umar Sevanek received the ball directly from a corner, and Law 11.3 states there is no offside offence if the player receives the ball directly from a corner kick."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "HFW-DMU-5005:1009:penalty_claim",
+   "category": "penalty_claim",
+   "on_field": "no_foul",
+   "law_decision": "no_foul",
+   "final": "no_foul",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 13.4,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "There was no contact between HFW No.28 Tomas Morberik and DMU No.32 Viktor Brenleigh, and Law 12 states contact offences are penalised where the contact happens, so the on-field decision of no foul was correct and the VAR was right to let it stand."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 3.6 m inside the penalty area and there was no contact between HFW No.28 Tomas Morberik and DMU No.32 Viktor Brenleigh, so the on-field decision of no foul was correct."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "There was no contact between HFW No.28 Tomas Morberik and DMU No.32 Viktor Brenleigh, and the precedent shows 8 of the 8 most similar past checks ended the same way."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "There was no contact between HFW No.28 Tomas Morberik and DMU No.32 Viktor Brenleigh, so the on-field decision of no foul was correct and the VAR check was appropriate."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "There was no contact between HFW No.28 Tomas Morberik and DMU No.32 Viktor Brenleigh, and under Law 12 contact offences are penalised where the contact happens, so the on-field no foul decision was correct and the VAR was right not to intervene."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "HFW-CWR-5006:24:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.4,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass HFW No.7 Felix Brenmannis's right foot was 25.6 m behind the offside line set by CWR No.38 Viktor Lunurza, so the on-field decision and the VAR check to let the goal stand were correct."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, HFW No.7 Felix Brenmannis's right foot was 25.6 m behind the offside line set by CWR No.38 Viktor Lunurza, so Brenmannis was not in an offside position and the on-field decision to allow the goal was correct."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, HFW No.7 Felix Brenmannis's right foot was 25.6 m behind the offside line set by CWR No.38 Viktor Lunurza, so Brenmannis was not nearer to the opponents' goal than the second-last opponent."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass Felix Brenmannis was 25.6 m behind the offside line set by Viktor Lunurza, so Brenmannis was not in an offside position and the VAR correctly reviewed and upheld the on-field decision that the goal stands."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, HFW No.7 Felix Brenmannis's right foot was 25.6 m behind the offside line set by CWR No.38 Viktor Lunurza, so Felix Brenmannis was not nearer to the opponents' goal than the second-last opponent."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "HFW-CWR-5006:267:penalty_claim",
+   "category": "penalty_claim",
+   "on_field": "no_foul",
+   "law_decision": "no_foul",
+   "final": "no_foul",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.3,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 6.4 m inside the penalty area, CWR No.39 Lucas Ulurza played the ball before the contact with HFW No.7 Felix Brenmannis, and precedent: 8 of the 8 most similar past checks ended the same way (no foul)."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Contact occurred 6.4 m inside the penalty area, CWR No.39 Lucas Ulurza played the ball before making ankle contact with HFW No.7 Felix Brenmannis, and 8 of the 8 most similar past checks also resulted in no foul."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "CWR No.39 Lucas Ulurza played the ball before making ankle contact with HFW No.7 Felix Brenmannis 6.4 m inside the penalty area, the on-field referee ruled no foul, and 8 of the 8 most similar past checks ended the same way (no foul)."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "CWR No.39 Lucas Ulurza played the ball before the contact with HFW No.7 Felix Brenmannis at a point 6.4 m inside the penalty area, and 8 of the 8 most similar past checks ended the same way (no foul)."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "CWR No.39 Lucas Ulurza played the ball before making contact with HFW No.7 Felix Brenmannis' ankle 6.4 m inside the penalty area, and 8 of the 8 most similar past checks ended the same way (no foul)."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "HFW-CWR-5006:939:offside",
+   "category": "offside",
+   "on_field": "no_goal",
+   "law_decision": "no_goal",
+   "final": "no_goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.5,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, HFW No.25 Florin Evholme's left foot was 23 cm beyond the offside line set by CWR No.38 Viktor Lunurza, so the goal was correctly disallowed."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass HFW No.25 Florin Evholme's left foot was 23 cm beyond the offside line set by CWR No.38 Viktor Lunurza (the second-last opponent), so the goal being disallowed was correct and the VAR was right to intervene."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, HFW No.25 Florin Evholme's left foot was 23 cm beyond the offside line set by CWR No.38 Viktor Lunurza."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass HFW No.25 Florin Evholme's left foot was 23 cm beyond the offside line set by CWR No.38 Viktor Lunurza, so the player was offside and the goal was correctly disallowed."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass HFW No.25 Florin Evholme was 23 cm beyond the offside line set by CWR No.38 Viktor Lunurza, placing Evholme in an offside position and matching the 8/8 precedent outcomes, so the on-field disallowing of the goal was correct and the VAR was right not to change it."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "QMF-GLH-5007:1079:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.6,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass GLH No.20 Emre Kalvanek's right foot was 3.8 m behind the offside line set by QMF No.31 Bastian Lunsendt, so the attacker was onside and the goal correctly stood; the VAR was right to check and confirm."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass GLH No.20 Emre Kalvanek's right foot was 3.8 m behind the offside line set by QMF No.31 Bastian Lunsendt, so Emre Kalvanek was not in an offside position and the goal standing was correct."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass GLH No.20 Emre Kalvanek's right foot was 3.8 m behind the offside line set by QMF No.31 Bastian Lunsendt, so Emre was not in an offside position and the VAR was right to check and confirm the on-field decision."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass GLH No.20 Emre Kalvanek's right foot was 3.8 m behind the offside line set by QMF No.31 Bastian Lunsendt, so Emre was not in an offside position and the goal correctly stands, which the VAR was right to check and confirm."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, GLH No.20 Emre Kalvanek's right foot was 3.8 m behind the offside line set by QMF No.31 Bastian Lunsendt, so Emre Kalvanek was onside and the goal-standing decision was correct."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "QMF-GLH-5007:1315:penalty_claim",
+   "category": "penalty_claim",
+   "on_field": "penalty",
+   "law_decision": "free_kick",
+   "final": "free_kick",
+   "review": "var_overturn",
+   "borderline": false,
+   "seconds": 15.4,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 27 cm outside the penalty area, and QMF No.37 Mateo Dalleigh made contact with GLH No.14 Rafael Zanwellby (trip, at the ankle), so a free kick outside the area is correct."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Because the point of contact was 27 cm outside the penalty area when QMF No.37 Mateo Dalleigh made contact with GLH No.14 Rafael Zanwellby (trip, at the ankle), penalising the contact where it happened and awarding a free kick outside the area (no card) was correct and the VAR was right to intervene."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 27 cm outside the penalty area and QMF No.37 Mateo Dalleigh made contact with GLH No.14 Rafael Zanwellby (trip, at the ankle), and contact offences are penalised where the contact happens, so a free kick outside the area was correct."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Given the point of contact was 27 cm outside the penalty area and QMF No.37 Mateo Dalleigh made contact with GLH No.14 Rafael Zanwellby (trip, at the ankle), Law 12 states contact offences are penalised where the contact happens so a direct free kick outside the area with no card is appropriate and the VAR was right to intervene to correct the on-field penalty."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 27 cm outside the penalty area when QMF No.37 Mateo Dalleigh made contact by tripping GLH No.14 Rafael Zanwellby, so overturning the on-field penalty to a free kick outside the area with no card aligns with the recorded facts and precedent."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "QMF-GLH-5007:1422:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 16.6,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, QMF No.14 Sami Ruddello's left foot was 5.7 m behind the offside line set by GLH No.38 Kofi Nevurza, so the player was not in an offside position and the goal stands."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass Sami Ruddello's left foot was 5.7 m behind the offside line set by GLH No.38 Kofi Nevurza, so Sami Ruddello was not in an offside position and the goal stands with VAR confirmation."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass QMF No.14 Sami Ruddello's left foot was 5.7 m behind the offside line set by GLH No.38 Kofi Nevurza, so Ruddello was not nearer to the opponents' goal line than the second-last opponent and the on-field decision to allow the goal was correct."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, QMF No.14 Sami Ruddello's left foot was 5.7 m behind the offside line set by GLH No.38 Kofi Nevurza, so Ruddello was not in an offside position under Law 11.1 and the on-field decision to allow the goal was correct and the VAR was right to check and confirm."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, QMF No.14 Sami Ruddello's left foot was 5.7 m behind the offside line set by GLH No.38 Kofi Nevurza, so the on-field decision to allow the goal was correct and the VAR was right to check and confirm."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "HFW-DMU-5008:674:handball_goal",
+   "category": "handball_goal",
+   "on_field": "no_goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "var_overturn",
+   "borderline": false,
+   "seconds": 15.2,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball touched HFW No.3 Lucas Yorkova's arm earlier but an accidental touch by an attacker that is followed by a team-mate scoring is not an offence, and 8 of the 8 most similar past checks ended the same way (the goal stands)."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Lucas Yorkova's arm was touched earlier and the Laws state an accidental touch by an attacker followed by a team-mate scoring is not an offence, and precedent 8 of the 8 most similar checks ended with the goal standing."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball touched HFW No.3 Lucas Yorkova's arm (the arm starts at the bottom of the armpit), and an accidental touch by an attacker that is followed by a team-mate scoring is not an offence (Precedent: 8 of the 8 most similar past checks ended the same way, the goal stands)."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The final decision is correct because the ball touched HFW No.3 Lucas Yorkova's arm earlier in the move but an accidental touch by an attacker that is followed by a team-mate scoring is not an offence and the 8 of the 8 most similar past checks ended the same way."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "An accidental touch by attacker HFW No.3 Lucas Yorkova occurred earlier in the move and Law 12 states an accidental touch by an attacker that is followed by a team-mate scoring is not an offence, so the goal should stand."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "HFW-DMU-5008:1254:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "no_goal",
+   "final": "no_goal",
+   "review": "var_overturn",
+   "borderline": false,
+   "seconds": 14.3,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass HFW No.25 Florin Evholme's right foot was 22 cm beyond the offside line set by DMU No.22 Emre Wenholme, and 8 of the 8 most similar past checks ended with the goal disallowed."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass HFW No.25 Florin Evholme's right foot was 22 cm beyond the offside line set by DMU No.22 Emre Wenholme, so Evholme was in an offside position under Law 11.2 and disallowing the goal is correct; VAR intervention is supported by the record and precedent (8 of the 8 most similar past checks ended the same way)."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass HFW No.25 Florin Evholme's right foot was 22 cm beyond the offside line set by DMU No.22 Emre Wenholme, so disallowing the goal is consistent with offside being penalised when involved in play."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass HFW No.25 Florin Evholme's right foot was 22 cm beyond the offside line set by DMU No.22 Emre Wenholme, matching 8 of 8 similar past checks that ended with the goal disallowed."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, HFW No.25 Florin Evholme's right foot was 22 cm beyond the offside line set by DMU No.22 Emre Wenholme, so under Law 11 and the precedent the goal is disallowed."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "HFW-DMU-5008:1302:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 13.8,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass Felix Brenmannis's left foot was 23.0 m behind the offside line set by DMU No.38 Eli Yorkova, so Brenmannis was not in an offside position under Law 11.1 and the on-field decision to allow the goal was correct and appropriately confirmed by the VAR review."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, HFW No.7 Felix Brenmannis's left foot was 23.0 m behind the offside line set by DMU No.38 Eli Yorkova, so the goal stand decision was correct and the VAR review was appropriate."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, HFW No.7 Felix Brenmannis's left foot was 23.0 m behind the offside line set by DMU No.38 Eli Yorkova, so the attacker was not nearer to the goal than the second-last opponent and the on-field decision to allow the goal was correct."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, HFW No.7 Felix Brenmannis's left foot was 23.0 m behind the offside line set by DMU No.38 Eli Yorkova, so Felix Brenmannis was not in an offside position and the goal stands."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, HFW No.7 Felix Brenmannis's left foot was 23.0 m behind the offside line set by DMU No.38 Eli Yorkova, so the on-field decision that the goal stands was correct."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "OHT-DMU-5009:158:handball",
+   "category": "handball",
+   "on_field": "penalty",
+   "law_decision": "no_foul",
+   "final": "penalty",
+   "review": "check_complete",
+   "borderline": true,
+   "seconds": 13.4,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": false,
+      "var_right": true,
+      "reason": "The arm was held 0.31 m from the body but its position follows from the body's movement and therefore did not make the body unnaturally bigger, so the penalty should not have been awarded."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": false,
+      "var_right": true,
+      "reason": "The arm was held 0.31 m from the body and the arm position follows from the body's movement, so awarding a penalty was not a clear and obvious error for the VAR to overturn."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": false,
+      "var_right": false,
+      "reason": "The ball struck OHT No.23 Lucas Tordello's arm, held 0.31 m from the body, the arm position follows from the body's movement and the arm starts at the bottom of the armpit, so the arm was not 'unnaturally bigger' under Law 12.1 and the penalty was not supported by the measured facts."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": false,
+      "var_right": false,
+      "reason": "The ball struck OHT No.23 Lucas Tordello's arm, held 0.31 m from the body, and the arm position follows from the body's movement, so the arm did not make the body unnaturally bigger."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": false,
+      "var_right": true,
+      "reason": "The arm was held 0.31 m from the body, its position follows from the body's movement and started at the bottom of the armpit, so it was not an arm position that made the body unnaturally bigger and the on-field penalty decision was therefore incorrect, while the VAR was right not to overturn the close call as it was not a clear and obvious error."
+     }
+    ],
+    "decision_correct": "0-5",
+    "var_right": "3-2",
+    "verdict": "decision questioned",
+    "unanimous": false,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "OHT-DMU-5009:265:penalty_claim",
+   "category": "penalty_claim",
+   "on_field": "penalty",
+   "law_decision": "penalty",
+   "final": "penalty",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 13.7,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 6.2 m inside the penalty area and OHT No.32 Hugo Joranek made contact with DMU No.32 Viktor Brenleigh (tackle, at the ankle)."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Contact occurred 6.2 m inside the penalty area when OHT No.32 Hugo Joranek made a tackle at the ankle on DMU No.32 Viktor Brenleigh, which meets Law 14 criteria for a direct free kick offence inside the penalty area."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Contact occurred 6.2 m inside the penalty area when OHT No.32 Hugo Joranek made contact with DMU No.32 Viktor Brenleigh (tackle, at the ankle), which under Law 14 is a direct free kick offence inside the area, so the on-field penalty decision was correct and the VAR was right to leave it unchanged."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 6.2 m inside the penalty area and OHT No.32 Hugo Joranek made contact with DMU No.32 Viktor Brenleigh (tackle, at the ankle), and the VAR checked the incident with the on-field decision standing."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Contact occurred 6.2 m inside the penalty area when OHT No.32 Hugo Joranek made contact with DMU No.32 Viktor Brenleigh (tackle, at the ankle), and under Law 14 a direct free-kick offence inside the penalty area is a penalty, so the on-field award and VAR non-intervention were correct."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "OHT-DMU-5009:450:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.1,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass OHT No.32 Hugo Joranek's right foot was 1.1 m behind the offside line set by DMU No.35 Florin Wenwellby, so the player was not in an offside position and the on-field decision to award the goal was correct."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, OHT No.32 Hugo Joranek's right foot was 1.1 m behind the offside line set by DMU No.35 Florin Wenwellby, so Joranek was not in an offside position and the goal stands."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass OHT No.32 Hugo Joranek's right foot was 1.1 m behind the offside line set by DMU No.35 Florin Wenwellby, so Hugo Joranek was not nearer to the opponents' goal line than the second-last opponent and the goal stands."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, OHT No.32 Hugo Joranek's right foot was 1.1 m behind the offside line set by DMU No.35 Florin Wenwellby, so the player was onside and the goal correctly stood, and the VAR check that confirmed this was appropriate."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, OHT No.32 Hugo Joranek's right foot was 1.1 m behind the offside line set by DMU No.35 Florin Wenwellby, so Hugo Joranek was onside and the on-field decision to allow the goal was correct."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "OHT-DMU-5009:548:red_card",
+   "category": "red_card",
+   "on_field": "red",
+   "law_decision": "red",
+   "final": "red",
+   "review": "check_complete",
+   "borderline": true,
+   "seconds": 13.9,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Studs showed and contact was made at the shin at 6.6 m/s by DMU No.30 Yusuf Ulwellby on OHT No.38 Florin Yorholme, and 6 of the 8 most similar past checks ended with a red card."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": false,
+      "var_right": true,
+      "reason": "Studs were showing, speed was 6.6 m/s, contact was at the shin, the incident was recorded as close with recklessness debatable, and 6 of the 8 most similar past checks ended with a red card."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "DMU No.30 Yusuf Ulwellby made contact with OHT No.38 Florin Yorholme (studs showing at the shin) at speed 6.6 m/s, and the VAR review upheld the on-field red card as it was not a clear and obvious error (6 of the 8 most similar past checks ended the same way)."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "DMU No.30 Yusuf Ulwellby made contact with OHT No.38 Florin Yorholme at the shin with studs showing at 6.6 m/s, the Law allows a sending-off for serious foul play and 6 of the 8 most similar past checks resulted in a red card."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "DMU No.30 Yusuf Ulwellby made studs-on-shin contact with OHT No.38 Florin Yorholme at 36:06 at 6.6 m/s, and under Law 12.3-sfp such a tackle can be sending-off offence; the VAR checked and found no clear and obvious error so the on-field red card stands."
+     }
+    ],
+    "decision_correct": "4-1",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": false,
+    "dissent": [
+     "Former defender"
+    ]
+   }
+  },
+  {
+   "incident_id": "OHT-DMU-5009:672:penalty_claim",
+   "category": "penalty_claim",
+   "on_field": "penalty",
+   "law_decision": "free_kick",
+   "final": "free_kick",
+   "review": "var_overturn",
+   "borderline": false,
+   "seconds": 13.3,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The tracking data shows the point of contact was 25 cm outside the penalty area when DMU No.8 Umar Sevanek made contact with OHT No.4 Sami Sevkova (tackle, at the ankle) and Law 12 states contact offences are penalised where the contact happens, so a free kick outside the area is correct."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 25 cm outside the penalty area when DMU No.8 Umar Sevanek made contact with OHT No.4 Sami Sevkova (tackle, at the ankle), so a free kick outside the area is the correct sanction."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 25 cm outside the penalty area when DMU No.8 Umar Sevanek made contact with OHT No.4 Sami Sevkova, so the correct sanction was a free kick awarded outside the area."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 25 cm outside the penalty area when DMU No.8 Umar Sevanek made contact with OHT No.4 Sami Sevkova with a tackle at the ankle, and Law 12 states contact offences are penalised where the contact happens, so a free kick outside the area is correct."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 25 cm outside the penalty area when DMU No.8 Umar Sevanek made contact with OHT No.4 Sami Sevkova (tackle, at the ankle), so awarding a free kick outside the area rather than a penalty was correct."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "OHT-DMU-5009:881:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 12.8,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass OHT No.3 Kofi Zankova's left foot was 12.4 m behind the offside line set by DMU No.35 Florin Wenwellby (the second-last opponent), so Kofi was onside and the goal was rightly allowed."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, OHT No.3 Kofi Zankova's left foot was 12.4 m behind the offside line set by DMU No.35 Florin Wenwellby, so Zankova was well onside and the goal stands."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, OHT No.3 Kofi Zankova's left foot was 12.4 m behind the offside line set by DMU No.35 Florin Wenwellby, so the on-field decision to allow the goal was correct."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass OHT No.3 Kofi Zankova's left foot was 12.4 m behind the offside line set by DMU No.35 Florin Wenwellby, so the on-field decision that the goal stands is correct and the VAR was right to check and confirm."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass OHT No.3 Kofi Zankova's left foot was 12.4 m behind the offside line set by DMU No.35 Florin Wenwellby, so Kofi Zankova was not in an offside position and the goal correctly stood."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "OHT-DMU-5009:908:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.4,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass DMU No.24 Idris Lundello was 1.1 m beyond the offside line but involvement observed: none, and under Law 11.2 a player in an offside position is penalised only on becoming involved in active play, so the goal stands."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, DMU No.24 Idris Lundello's right foot was 1.1 m beyond the offside line, but involvement observed: none, so the on-field decision to allow the goal was correct and the VAR review was appropriate."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass DMU No.24 Idris Lundello was 1.1 m beyond the offside line set by OHT No.23 Lucas Tordello but involvement observed: none, so under Law 11.2 the on-field decision to let the goal stand was correct and the VAR was right to check and uphold it."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, DMU No.24 Idris Lundello's right foot was 1.1 m beyond the offside line, but involvement observed: none, so the on-field decision that the goal stands was correct."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "DMU No.24 Idris Lundello was in an offside position (right foot 1.1 m beyond the offside line) at the moment of the pass but involvement observed: none, so under Law 11 the goal is not an offside offence."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "OHT-DMU-5009:1042:red_card",
+   "category": "red_card",
+   "on_field": "yellow",
+   "law_decision": "yellow",
+   "final": "yellow",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 15.0,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Idris Lundello made contact with Dmitri Evmannis at the ankle 0.6 s after the ball had gone at speed 5.1 m/s, and 8 of the 8 most similar past checks ended with a yellow card."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "DMU No.24 Idris Lundello made contact with OHT No.1 Dmitri Evmannis (tackle, at the ankle) 0.6 s after the ball had gone at speed 5.1 m/s, and 8 of the 8 most similar past checks ended the same way (a yellow card)."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "DMU No.24 Idris Lundello made contact with OHT No.1 Dmitri Evmannis at the ankle 0.6 s after the ball had gone at speed 5.1 m/s and 8 of the 8 most similar past checks ended the same way (a yellow card)."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "DMU No.24 Idris Lundello made contact with OHT No.1 Dmitri Evmannis at the ankle 0.6 s after the ball had gone with a speed of 5.1 m/s, and the 8 of the 8 most similar past checks ended with a yellow card."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "DMU No.24 Idris Lundello made contact with OHT No.1 Dmitri Evmannis at the ankle 0.6 s after the ball had gone at a speed of 5.1 m/s, which matches the precedent of 8/8 similar checks resulting in a yellow card, so the on-field yellow was correct and the VAR was right to check and confirm it."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "OHT-DMU-5009:1256:red_card",
+   "category": "red_card",
+   "on_field": "yellow",
+   "law_decision": "red",
+   "final": "red",
+   "review": "on_field_review",
+   "borderline": false,
+   "seconds": 13.9,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Idris Lundello lunged with studs showing at 7.4 m/s and made contact with Hugo Rudfordt at the knee, meeting Law 12.3-sfp criteria for endangering safety and matching the majority of similar past checks (5 of the 8)."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "DMU No.24 Idris Lundello made contact with OHT No.22 Hugo Rudfordt with a lunging tackle at the knee, studs showing and speed 7.4 m/s, fitting Law 12.3-sfp criteria for serious foul play."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Idris Lundello made contact with Hugo Rudfordt at the knee with studs showing while lunging at 7.4 m/s, and 5 of the 8 most similar past checks ended with a red card."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "DMU No.24 Idris Lundello made contact with OHT No.22 Hugo Rudfordt at the knee in a lunging tackle with studs showing at 7.4 m/s, matching Law 12.3-sfp (serious foul play) and the majority precedent of similar checks resulting in a red card."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "DMU No.24 Idris Lundello made studs-showing, lunging contact with OHT No.22 Hugo Rudfordt at the knee at 7.4 m/s, and the on-field yellow was changed to a red after VAR review."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "OHT-DMU-5009:1389:offside",
+   "category": "offside",
+   "on_field": "no_goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "var_overturn",
+   "borderline": false,
+   "seconds": 13.4,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, OHT No.24 Bastian Ulovar was level with the offside line set by DMU No.38 Eli Yorkova, and being level with the second-last opponent is not an offside position."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass OHT No.24 Bastian Ulovar was level with the offside line set by DMU No.38 Eli Yorkova, and level with the second-last opponent is not an offside position, so the goal stands."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "OHT No.24 Bastian Ulovar was level with the offside line set by DMU No.38 Eli Yorkova at the moment of the pass, and level with the second-last opponent is not an offside position, so the goal stands."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, OHT No.24 Bastian Ulovar was level with the offside line set by DMU No.38 Eli Yorkova, and level with the second-last opponent is not an offside position."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, OHT No.24 Bastian Ulovar was level with the offside line set by DMU No.38 Eli Yorkova, and level with the second-last opponent is not an offside position."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "SMA-LKU-5010:78:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.3,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass SMA No.2 Emre Istsendt's right foot was 7.8 m behind the offside line set by LKU No.8 Viktor Coranek, so Emre was not nearer to the opponents' goal line than the second-last opponent."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "SMA No.2 Emre Istsendt's right foot was 7.8 m behind the offside line set by LKU No.8 Viktor Coranek, so Emre Istsendt was not in an offside position at the moment of the pass."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, SMA No.2 Emre Istsendt's right foot was 7.8 m behind the offside line set by LKU No.8 Viktor Coranek, so Emre Istsendt was not in an offside position and the on-field decision to allow the goal was correct."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, SMA No.2 Emre Istsendt's right foot was 7.8 m behind the offside line set by LKU No.8 Viktor Coranek, and the VAR review confirmed the on-field decision to let the goal stand."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": false,
+      "reason": "At the moment of the pass, SMA No.2 Emre Istsendt's right foot was 7.8 m behind the offside line set by LKU No.8 Viktor Coranek, so the player was not in an offside position and the on-field decision to award the goal was correct, but the VAR should not have intervened because there was no clear and obvious error to overturn."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "4-1",
+    "verdict": "decision upheld",
+    "unanimous": false,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "TDA-CWR-5012:541:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 13.1,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to CWR No.10 Oscar Quinezar directly from a corner, and Law 11.3 states there is no offside offence if the player receives the ball directly from a corner kick."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to CWR No.10 Oscar Quinezar directly from a corner and Law 11.3 (No offside offence) states there is no offside offence if the player receives the ball directly from a corner kick, so the goal stands."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to CWR No.10 Oscar Quinezar directly from a corner, and Law 11.3 states there is no offside offence if the player receives the ball directly from a corner kick."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "CWR No.10 Oscar Quinezar received the ball directly from a corner and Law 11.3 states there is no offside offence if the player receives the ball directly from a corner."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to CWR No.10 Oscar Quinezar directly from a corner and Law 11.3 states there is no offside offence when a player receives the ball directly from a corner, so the on-field decision to allow the goal was correct and the VAR was right not to change it."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "TDA-CWR-5012:678:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 12.5,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, TDA No.4 Viktor Rudanek's left foot was 21.9 m behind the offside line set by CWR No.38 Viktor Lunurza, so Rudanek was clearly not in an offside position and the on-field decision to allow the goal was correct."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, TDA No.4 Viktor Rudanek's left foot was 21.9 m behind the offside line set by CWR No.38 Viktor Lunurza, so the on-field decision that the goal stands was correct and the VAR was right to check and uphold it."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Viktor Rudanek's left foot was 21.9 m behind the offside line set by Viktor Lunurza at the moment of the pass, so Rudanek was not nearer to the opponents' goal line than the second-last opponent and therefore onside, making the decision to let the goal stand correct and the VAR check appropriate."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, TDA No.4 Viktor Rudanek's left foot was 21.9 m behind the offside line set by CWR No.38 Viktor Lunurza, so Rudanek was not in an offside position and the goal properly stood after VAR review."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, TDA No.4 Viktor Rudanek's left foot was 21.9 m behind the offside line set by CWR No.38 Viktor Lunurza, so Rudanek was not in an offside position and the on-field goal stood."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "TDA-CWR-5012:774:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 13.3,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass Felix Aldurza's left foot was 25.6 m behind the offside line set by CWR No.22 Tomas Lunanek, so Felix Aldurza was not in an offside position and the goal correctly stood."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, TDA No.10 Felix Aldurza's left foot was 25.6 m behind the offside line set by CWR No.22 Tomas Lunanek, so Felix Aldurza was not in an offside position and the on-field decision that the goal stands is correct."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, TDA No.10 Felix Aldurza's left foot was 25.6 m behind the offside line set by CWR No.22 Tomas Lunanek, so Aldurza was not nearer to the opponents' goal line than the second-last opponent."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, Felix Aldurza's left foot was 25.6 m behind the offside line set by Tomas Lunanek, so the player was not in an offside position and the goal stands."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, TDA No.10 Felix Aldurza's left foot was 25.6 m behind the offside line set by CWR No.22 Tomas Lunanek, so Felix Aldurza was not in an offside position and the goal stands."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "IVC-KBF-5013:661:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 12.4,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, KBF No.11 Eli Falholme's right foot was 27.2 m behind the offside line set by IVC No.22 Pavel Evberik, so the player was clearly onside."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass KBF No.11 Eli Falholme's right foot was 27.2 m behind the offside line set by IVC No.22 Pavel Evberik (the second-last opponent), so the player was onside and the goal stands."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, KBF No.11 Eli Falholme's right foot was 27.2 m behind the offside line set by IVC No.22, so the player was not in an offside position and the on-field goal decision was correct with VAR confirmation."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, KBF No.11 Eli Falholme's right foot was 27.2 m behind the offside line set by IVC No.22 Pavel Evberik, so Falholme was not in an offside position under Law 11.1 and the VAR was right to review and uphold the on-field goal decision."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, KBF No.11 Eli Falholme's right foot was 27.2 m behind the offside line set by IVC No.22 Pavel Evberik, so Falholme was not nearer to the opponents' goal line than the second-last opponent."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "IVC-KBF-5013:1450:handball",
+   "category": "handball",
+   "on_field": "no_foul",
+   "law_decision": "no_foul",
+   "final": "no_foul",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 11.9,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck Viktor Gormannis's arm which was held 0.36 m from the body while the arm was supporting a fall (5.6 m inside the penalty area) and 8 of the 8 most similar past checks also resulted in no foul."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The on-field no-foul decision was correct because the ball struck IVC No.4 Viktor Gormannis's arm, which was 0.36 m from the body and was supporting a fall, and 8 of the 8 most similar past checks ended no foul."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck IVC No.4 Viktor Gormannis's arm, held 0.36 m from the body and supporting a fall, so the arm position was justifiable by the body's movement and the precedents (8 of 8) support no foul."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "IVC No.4 Viktor Gormannis's arm, held 0.36 m from the body while supporting a fall, was struck 5.6 m inside the penalty area, and the precedent of 8 of the 8 most similar past checks ended no foul."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Viktor Gormannis's arm was 0.36 m from the body and supporting a fall, so the arm position was justifiable by the body's movement and the on-field decision of no foul was correct with the VAR right not to overturn after review."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "IVC-KBF-5013:1467:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 24.2,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, KBF No.3 Idris Gorleigh's right foot was 8.1 m behind the offside line set by IVC No.27 Sami Yorfordt, meaning Idris Gorleigh was not nearer to the opponents' goal line than the second-last opponent."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, KBF No.3 Idris Gorleigh's right foot was 8.1 m behind the offside line set by IVC No.27 Sami Yorfordt, so Idris Gorleigh was not in an offside position and the VAR was right to leave the on-field goal decision standing."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, KBF No.3 Idris Gorleigh's right foot was 8.1 m behind the offside line set by IVC No.27 Sami Yorfordt, so the player was not in an offside position and the goal correctly stood while the VAR was correct to check and confirm the on-field decision."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, KBF No.3 Idris Gorleigh's right foot was 8.1 m behind the offside line set by IVC No.27 Sami Yorfordt, so Gorleigh was not nearer to the opponents' goal line than the second-last opponent and the on-field goal decision was correct and the VAR was right to check and confirm."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, KBF No.3 Idris Gorleigh's right foot was 8.1 m behind the offside line set by IVC No.27 Sami Yorfordt, so Idris was not in an offside position and the on-field decision to allow the goal was correct."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "IVC-KBF-5013:1515:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 10.3,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, KBF No.11 Eli Falholme's right foot was 24.9 m behind the offside line set by IVC No.4 Viktor Gormannis, so Falholme was not nearer to the opponents' goal line than the second-last opponent and thus onside."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, KBF No.11 Eli Falholme's right foot was 24.9 m behind the offside line set by IVC No.4 Viktor Gormannis, so Eli Falholme was clearly onside and the on-field goal decision was correct."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass KBF No.11 Eli Falholme's right foot was 24.9 m behind the offside line set by IVC No.4 Viktor Gormannis, so the on-field decision to let the goal stand was correct."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, Eli Falholme's right foot was 24.9 m behind the offside line set by IVC No.4 Viktor Gormannis, so Falholme was not in an offside position and the on-field decision to allow the goal was correct and the VAR was right not to intervene."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass KBF No.11 Eli Falholme's right foot was 24.9 m behind the offside line set by IVC No.4 Viktor Gormannis, so Eli Falholme was not in an offside position and the goal stands."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "AGA-NBR-5014:48:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 12.6,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass NBR No.14 Adem Praezar's left foot was 4.6 m behind the offside line set by AGA No.9 Umar Morinni, so the player was not in an offside position and the goal stands."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, NBR No.14 Adem Praezar's left foot was 4.6 m behind the offside line set by AGA No.9 Umar Morinni, so Adem Praezar was not in an offside position."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass Adem Praezar's left foot was 4.6 m behind the offside line set by Umar Morinni, so Praezar was not in an offside position and the goal stands, making the VAR review and confirmation correct."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, NBR No.14 Adem Praezar's left foot was 4.6 m behind the offside line set by AGA No.9 Umar Morinni, so Adem Praezar was not in an offside position and the on-field decision to allow the goal was correct."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, NBR No.14 Adem Praezar's left foot was 4.6 m behind the offside line set by AGA No.9 Umar Morinni, so Adem Praezar was not in an offside position."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "AGA-NBR-5014:421:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 13.9,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, AGA No.33 Goran Gorurza's right foot was 15.1 m behind the offside line set by NBR No.7 Idris Kalezar, so Goran Gorurza was not nearer to the opponents' goal line than the second-last opponent."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, AGA No.33 Goran Gorurza was 15.1 m behind the offside line set by NBR No.7 Idris Kalezar, so the on-field decision to allow the goal was correct and the VAR was right to check and confirm it."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, AGA No.33 Goran Gorurza's right foot was 15.1 m behind the offside line set by NBR No.7 Idris Kalezar, so the player was not nearer to the opponents' goal line than the second-last opponent and the on-field decision to award the goal was correct and appropriately confirmed by the VAR."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, AGA No.33 Goran Gorurza's right foot was 15.1 m behind the offside line set by NBR No.7 Idris Kalezar, therefore Gorurza was not nearer to the opponents' goal line than the second-last opponent."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, AGA No.33 Goran Gorurza's right foot was 15.1 m behind the offside line set by NBR No.7 Idris Kalezar."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "KBF-WVF-5015:687:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 13.2,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, WVF No.37 Yusuf Jorsendt was level with the offside line set by KBF No.31 Zeno Brenwellby and only an arm was beyond the line, and level with the second-last opponent is not an offside position, so the goal stands."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, WVF No.37 Yusuf Jorsendt was level with the offside line set by KBF No.31 Zeno Brenwellby, only an arm was beyond the line and arms are ignored for offside, and level is not an offside position, so the goal stands and the VAR checked and the on-field decision stands."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, WVF No.37 Yusuf Jorsendt was level with the offside line set by KBF No.31 Zeno Brenwellby, only an arm was beyond the line and arms are not counted for offside, and being level with the second-last opponent is not an offside position."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, WVF No.37 Yusuf Jorsendt was level with the offside line set by KBF No.31 Zeno Brenwellby, only an arm was beyond the line (arms are not counted for offside), and level with the second-last opponent is not an offside position, so the goal stands."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass WVF No.37 Yusuf Jorsendt was level with the offside line set by KBF No.31 Zeno Brenwellby, with only an arm beyond the line and arms ignored, so level is not offside and the goal stands."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "KBF-WVF-5015:820:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 13.8,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Tomas Sevovar was 3.3 m beyond the offside line at the pass but involvement observed: none, and Law 11.2 penalises only on becoming involved in active play, so the goal stands."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass KBF No.33 Tomas Sevovar was 3.3 m beyond the offside line, involvement observed: none, Tomas Sevovar stood 11.9 m from the goalkeeper's line of sight, and Law 11.2 states a player in an offside position is penalised only on becoming involved in active play."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Although KBF No.33 Tomas Sevovar was 3.3 m beyond the offside line at the moment of the pass, involvement observed was none and KBF No.33 Tomas Sevovar stood 11.9 m from the goalkeeper's line of sight to the shot, and Law 11.2 states a player in an offside position is penalised only on becoming involved in active play, so the goal stands."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass KBF No.33 Tomas Sevovar was 3.3 m beyond the offside line but involvement observed: none, and Tomas Sevovar stood 11.9 m from the goalkeeper's line of sight so, under Law 11.2 and consistent with the 8 similar precedents, the goal stands."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Although KBF No.33 Tomas Sevovar was 3.3 m beyond the offside line at the moment of the pass, involvement observed: none, so under Law 11.2 the player was not penalised and the on-field decision to let the goal stand was correct, and the VAR was right to review the factual offside position and involvement."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "KBF-WVF-5015:1347:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 34.3,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, WVF No.4 Idris Istvanek's left foot was 9.2 m behind the offside line set by KBF No.2 Idris Dalmannis, so Idris Istvanek was not in an offside position and the on-field decision to allow the goal was correct."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, WVF No.4 Idris Istvanek's left foot was 9.2 m behind the offside line set by KBF No.2 Idris Dalmannis, so the on-field decision to allow the goal stands and the VAR was justified in reviewing and confirming it."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, WVF No.4 Idris Istvanek's left foot was 9.2 m behind the offside line set by KBF No.2 Idris Dalmannis, so the player was onside and the goal stands."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass WVF No.4 Idris Istvanek's left foot was 9.2 m behind the offside line set by KBF No.2 Idris Dalmannis, so the on-field decision that the goal stands was correct and the VAR was justified to check and confirm that no offside offence occurred."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, WVF No.4 Idris Istvanek's left foot was 9.2 m behind the offside line set by KBF No.2 Idris Dalmannis, so Istvanek was not in an offside position and the on-field decision to allow the goal was correct, therefore the VAR was right not to intervene."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "IVC-KBF-5016:128:handball",
+   "category": "handball",
+   "on_field": "no_foul",
+   "law_decision": "no_foul",
+   "final": "no_foul",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 11.2,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The decision to award no foul was correct because the ball struck KBF No.35 Idris Rudholme's arm, held 0.39 m from the body above the shoulder, and the arm position follows from the body's movement so it was not 'unnaturally bigger'."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Idris Rudholme's arm was held 0.39 m from the body, above the shoulder, but the arm position follows from the body's movement so it did not make the body 'unnaturally bigger' and the on-field decision of no foul was correct with the VAR right to check and confirm it."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck KBF No.35 Idris Rudholme's arm, held 0.39 m from the body above the shoulder, but the arm position follows from the body's movement and 8 of the 8 most similar past checks ended no foul, supporting the on-field decision no foul."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Idris Rudholme's arm was held 0.39 m from the body, above the shoulder, but the arm position follows from the body's movement so it was not unnaturally bigger and the on-field no foul decision is consistent with precedent."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck KBF No.35 Idris Rudholme's arm, held 0.39 m from the body, above the shoulder, but the arm position follows from the body's movement and therefore was not making the body unnaturally bigger."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "IVC-KBF-5016:216:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 12.4,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass IVC No.22 Pavel Evberik's right foot was 42.2 m behind the offside line set by KBF No.2 Idris Dalmannis, so the player was not in an offside position and the VAR check confirming the on-field decision was consistent with the measured data."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass IVC No.22 Pavel Evberik's right foot was 42.2 m behind the offside line set by KBF No.2 Idris Dalmannis, so Evberik was not nearer to the opponents' goal than the second-last opponent."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Pavel Evberik was 42.2 m behind the offside line set by Idris Dalmannis at the moment of the pass, so Evberik was not nearer to the opponents' goal line than the second-last opponent and the on-field goal decision was correct."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, IVC No.22 Pavel Evberik's right foot was 42.2 m behind the offside line set by KBF No.2 Idris Dalmannis, so Evberik was not in an offside position and the goal correctly stands."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass IVC No.22 Pavel Evberik's right foot was 42.2 m behind the offside line set by KBF No.2 Idris Dalmannis, so Evberik was not nearer to the opponents' goal than the second-last opponent and therefore not in an offside position, meaning the on-field goal stands and the VAR was correct not to overturn it."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "IVC-KBF-5016:359:handball",
+   "category": "handball",
+   "on_field": "no_foul",
+   "law_decision": "no_foul",
+   "final": "no_foul",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.4,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The arm was held 0.33 m from the body, above the shoulder, its position follows from the body's movement, and precedent 8 of the 8 most similar past checks ended the same way (no foul)."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Correct because the ball struck KBF No.22 Idris Vasdello's arm, held 0.33 m from the body above the shoulder, but the arm position follows from the body's movement and 8 of the 8 most similar past checks ended no foul."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Idris Vasdello's arm was held 0.33 m from the body, above the shoulder, but the arm position follows from the body's movement and the point of contact was 2.3 m inside the penalty area, so no foul."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck KBF No.22 Idris Vasdello's arm, held 0.33 m from the body, above the shoulder, with the arm position following from the body's movement and the point of contact 2.3 m inside the penalty area."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The final decision was correct because the ball struck KBF No.22 Idris Vasdello's arm held 0.33 m from the body above the shoulder at a point 2.3 m inside the penalty area and the arm position follows from the body's movement, so it was not making the body unnaturally bigger."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "IVC-KBF-5016:592:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 19.4,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, IVC No.37 Eli Kalovar's right foot was 10.3 m behind the offside line set by KBF No.2 Idris Dalmannis, so Eli Kalovar was not in an offside position and the goal standing was correct."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, IVC No.37 Eli Kalovar's right foot was 10.3 m behind the offside line set by KBF No.2 Idris Dalmannis, so the on-field decision that the goal stands was correct and the VAR was right to check and confirm."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, IVC No.37 Eli Kalovar's right foot was 10.3 m behind the offside line set by KBF No.2 Idris Dalmannis, so Kalovar was not in an offside position and the goal stands."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass IVC No.37 Eli Kalovar's right foot was 10.3 m behind the offside line set by KBF No.2 Idris Dalmannis, so Kalovar was not nearer to the opponents' goal line than the second-last opponent."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, IVC No.37 Eli Kalovar's right foot was 10.3 m behind the offside line set by KBF No.2 Idris Dalmannis, so Kalovar was not in an offside position and the goal decision was correct and appropriately upheld by the VAR."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "IVC-KBF-5016:664:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 26.2,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to IVC No.37 Eli Kalovar directly from a throw in and Law 11.3 states there is no offside offence if the player receives the ball directly from a throw-in."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Eli Kalovar received the ball directly from a throw-in, and Law 11.3 states there is no offside offence when a player receives the ball directly from a throw-in."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to IVC No.37 Eli Kalovar directly from a throw in and Law 11.3 states there is no offside offence if the player receives the ball directly from a throw-in."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "IVC No.37 Eli Kalovar received the ball directly from a throw in and Law 11.3 states there is no offside offence if the player receives the ball directly from a throw-in, and 8 of the 8 most similar past checks ended the same way."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to IVC No.37 Eli Kalovar directly from a throw in and Law 11.3 states there is no offside offence if the player receives the ball directly from a throw-in, so the on-field decision to allow the goal was correct."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "IVC-KBF-5016:1264:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 22.6,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, KBF No.3 Idris Gorleigh's left foot was 11 cm behind the offside line, only an arm was beyond the line and arms are not counted for offside, so the on-field decision to let the goal stand was correct and the VAR was right not to overturn it."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "KBF No.3 Idris Gorleigh's left foot was 11 cm behind the offside line set by IVC No.29 Pavel Ostivic, and only an arm was beyond the line while arms are not counted for offside, so the goal stands was correct."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass KBF No.3 Idris Gorleigh's left foot was 11 cm behind the offside line set by IVC No.29 Pavel Ostivic, only an arm was beyond the line and arms are not counted for offside."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass KBF No.3 Idris Gorleigh's left foot was 11 cm behind the offside line set by IVC No.29 Pavel Ostivic and only an arm—ignored for offside—was beyond the line."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "KBF No.3 Idris Gorleigh's left foot was 11 cm behind the offside line set by IVC No.29 Pavel Ostivic, and only an arm (which is ignored) was beyond the line, so the on-field decision to allow the goal was correct."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "TDA-PLC-5017:580:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.0,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, PLC No.11 Emre Vasholme's right foot was 24.6 m behind the offside line set by TDA No.9 Lucas Vasdello, so Vasholme was not in an offside position and the goal stands."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass Emre Vasholme's right foot was 24.6 m behind the offside line set by TDA No.9 Lucas Vasdello and under Law 11.1 a player behind the second-last opponent is not in an offside position, so the goal stands."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, PLC No.11 Emre Vasholme's right foot was 24.6 m behind the offside line set by TDA No.9 Lucas Vasdello, so PLC No.11 Emre Vasholme was not in an offside position."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass PLC No.11 Emre Vasholme's right foot was 24.6 m behind the offside line set by TDA No.9 Lucas Vasdello, so Vasholme was not nearer to the opponents' goal line than the second-last opponent under Law 11.1 and the VAR was correct to check and confirm the on-field decision that the goal stands."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass PLC No.11 Emre Vasholme's right foot was 24.6 m behind the offside line set by TDA No.9 Lucas Vasdello (the second-last opponent), so the player was onside and the goal should stand."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "TDA-PLC-5017:850:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.7,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Dario Vaswellby (PLC No.25) received the ball directly from a corner at 51:35, so Law 11.3 applies and there is no offside, making the on-field goal decision and VAR non-intervention correct (8 of the 8 similar checks ended the same)."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to PLC No.25 Dario Vaswellby directly from a corner and Law 11.3 states there is no offside offence if the player receives the ball directly from a corner, so the goal standing was correct."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to PLC No.25 Dario Vaswellby directly from a corner and Law 11.3 states there is no offside offence if the player receives the ball directly from a corner kick."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to PLC No.25 Dario Vaswellby directly from a corner, and Law 11.3 states there is no offside offence when a player receives the ball directly from a corner, with 8 of 8 most similar past checks resulting in the goal standing."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Dario Vaswellby received the ball directly from a corner and Law 11.3 states there is no offside offence if the player receives the ball directly from a corner, so the goal stands."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "TDA-PLC-5017:903:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.9,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, TDA No.35 Idris Vasivic's left foot was 31.8 m behind the offside line set by PLC No.28 Idris Brenholme, so Vasivic was not in an offside position under Law 11.1 and the on-field goal decision was correct with the VAR right to check and confirm."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, TDA No.35 Idris Vasivic's left foot was 31.8 m behind the offside line set by PLC No.28 Idris Brenholme, so Vasivic was clearly onside and the on-field decision to award the goal was correct."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass TDA No.35 Idris Vasivic's left foot was 31.8 m behind the offside line set by PLC No.28 Idris Brenholme, so Vasivic was not in an offside position and the goal correctly stands."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, TDA No.35 Idris Vasivic's left foot was 31.8 m behind the offside line set by PLC No.28 Idris Brenholme, so the player was onside and the goal stands."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass TDA No.35 Idris Vasivic's left foot was 31.8 m behind the offside line set by PLC No.28 Idris Brenholme, so Vasivic was not nearer to the opponents' goal line than the second-last opponent and the on-field decision to allow the goal was correct and the VAR was right to check and confirm."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "BRC-FVT-5018:298:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 23.4,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass BRC No.23 Umar Wenezar's right foot was 5.0 m behind the offside line set by FVT No.37 Pavel Torezar, so Umar Wenezar was not in an offside position and the goal was correctly allowed."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "BRC No.23 Umar Wenezar was 5.0 m behind the offside line set by FVT No.37 Pavel Torezar at the moment of the pass, so Umar Wenezar was not in an offside position."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, BRC No.23 Umar Wenezar's right foot was 5.0 m behind the offside line set by FVT No.37 Pavel Torezar, so Umar Wenezar was not in an offside position and the on-field decision to allow the goal was correct, and the VAR was right to check and confirm that measurement."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass BRC No.23 Umar Wenezar's right foot was 5.0 m behind the offside line set by FVT No.37 Pavel Torezar, so Umar Wenezar was not nearer to the opponents' goal line than the second-last opponent."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, BRC No.23 Umar Wenezar's right foot was 5.0 m behind the offside line set by FVT No.37 Pavel Torezar, so the on-field decision that the goal stands was correct."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "BRC-FVT-5018:483:penalty_claim",
+   "category": "penalty_claim",
+   "on_field": "no_foul",
+   "law_decision": "no_foul",
+   "final": "no_foul",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 13.3,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Although FVT No.18 Callum Halwellby made contact (trip, at the ankle) with BRC No.11 Zeno Gorleigh 11.0 m inside the penalty area, BRC No.11 Zeno Gorleigh moved into the contact and 8 of the 8 most similar past checks ended the same way, supporting the on-field decision to play on."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The final decision to rule no foul was correct because FVT No.18 Callum Halwellby made contact (trip, at the ankle) with BRC No.11 Zeno Gorleigh 11.0 m inside the penalty area but BRC No.11 Zeno Gorleigh moved into the contact, and 8 of the 8 most similar past checks ended the same way."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "FVT No.18 Callum Halwellby made contact (trip, at the ankle) with BRC No.11 Zeno Gorleigh but BRC No.11 Zeno Gorleigh moved into the contact, the point of contact was 11.0 m inside the penalty area, and 8 of the 8 most similar past checks ended the same way."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "FVT No.18 Callum Halwellby made contact with BRC No.11 Zeno Gorleigh (trip, at the ankle), BRC No.11 Zeno Gorleigh moved into the contact, the point of contact was 11.0 m inside the penalty area, and 8 of the 8 most similar past checks ended the same way."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Contact was at 11.0 m inside the penalty area where FVT No.18 Callum Halwellby made contact with BRC No.11 Zeno Gorleigh (trip, at the ankle) but BRC No.11 Zeno Gorleigh moved into the contact and precedent shows 8 of the 8 most similar past checks ended no foul."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "BRC-FVT-5018:569:penalty_claim",
+   "category": "penalty_claim",
+   "on_field": "free_kick",
+   "law_decision": "free_kick",
+   "final": "free_kick",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.8,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 2.1 m outside the penalty area and Law 12 states contact offences are penalised where the contact happens, so awarding a free kick outside the area and the VAR upholding the on-field decision were correct."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Contact occurred 2.1 m outside the penalty area when FVT No.6 Bastian Yorleigh made a tackle at the ankle on BRC No.23 Umar Wenezar, and Law 12 states contact offences are penalised where the contact happens, so a free kick outside the area was correct and the VAR was right to uphold it."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 2.1 m outside the penalty area when FVT No.6 Bastian Yorleigh made contact with BRC No.23 Umar Wenezar (tackle, at the ankle), so awarding a free kick outside the area and no card aligns with the measured facts."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The contact by FVT No.6 Bastian Yorleigh on BRC No.23 Umar Wenezar occurred 2.1 m outside the penalty area and, per Law 12.1 that contact offences are penalised where the contact happens and absent evidence of reckless or excessive force, a free kick outside the area with no card is appropriate."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 2.1 m outside the penalty area where FVT No.6 Bastian Yorleigh made contact with BRC No.23 Umar Wenezar (tackle, at the ankle), so awarding a free kick outside the area is consistent with Law 12.1 and the VAR correctly left the on-field decision standing."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "BRC-FVT-5018:600:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.6,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "BRC No.11 Zeno Gorleigh received the ball directly from a corner and Law 11.3 states there is no offside offence when receiving the ball directly from a corner, so the goal stands."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to BRC No.11 Zeno Gorleigh directly from a corner, and Law 11.3 states there is no offside offence if the player receives the ball directly from a corner kick."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to BRC No.11 Zeno Gorleigh directly from a corner and Law 11.3 states there is no offside offence if the player receives the ball directly from a corner, so the on-field decision to let the goal stand was correct."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The goal stands because the ball came to BRC No.11 Zeno Gorleigh directly from a corner and Law 11.3 states there is no offside offence if the player receives the ball directly from a corner kick."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "BRC No.11 Zeno Gorleigh received the ball directly from a corner and Law 11.3 states there is no offside offence when a player receives the ball directly from a corner, so the on-field decision to stand the goal was correct and the VAR was right to check this factual matter."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "BRC-FVT-5018:920:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 13.9,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The goal stands is correct because the ball came to BRC No.23 Umar Wenezar directly from a corner and Law 11.3 says there is no offside offence if the player receives the ball directly from a corner kick."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to BRC No.23 Umar Wenezar directly from a corner and Law 11.3 states there is no offside offence if the player receives the ball directly from a corner, so the goal stands."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to BRC No.23 Umar Wenezar directly from a corner, Law 11.3 states there is no offside offence if the player receives the ball directly from a corner, the on-field decision to let the goal stand was therefore correct and the VAR was correct to uphold it; 8 of the 8 most similar past checks also ended the same way."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": false,
+      "reason": "The final decision is correct because the ball came to BRC No.23 Umar Wenezar directly from a corner and Law 11.3 states there is no offside offence if the player receives the ball directly from a corner kick."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball came to BRC No.23 Umar Wenezar directly from a corner, and Law 11.3 states there is no offside offence when a player receives the ball directly from a corner, so the on-field decision to stand the goal was correct and not a clear and obvious error for VAR to overturn."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "4-1",
+    "verdict": "decision upheld",
+    "unanimous": false,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "BRC-FVT-5018:968:penalty_claim",
+   "category": "penalty_claim",
+   "on_field": "no_foul",
+   "law_decision": "penalty",
+   "final": "penalty",
+   "review": "on_field_review",
+   "borderline": false,
+   "seconds": 17.3,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 1.0 m inside the penalty area and FVT No.6 Bastian Yorleigh made contact (holding, at the upper body) with BRC No.11 Zeno Gorleigh, which under Law 14 is a direct free-kick offence inside the penalty area."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 1.0 m inside the penalty area and FVT No.6 Bastian Yorleigh made contact with BRC No.11 Zeno Gorleigh (holding, at the upper body), which meets Law 14 for a direct free kick offence inside the penalty area so a penalty is awarded."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The decision to award a penalty was correct because the point of contact was 1.0 m inside the penalty area and FVT No.6 Bastian Yorleigh made contact with BRC No.11 Zeno Gorleigh (holding, at the upper body), satisfying Law 14, and the VAR was right to intervene given that 7 of the 8 most similar past checks ended the same way."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 1.0 m inside the penalty area and FVT No.6 Bastian Yorleigh made holding contact with BRC No.11 Zeno Gorleigh at the upper body, which is a direct free kick offence inside the penalty area so a penalty is warranted."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 1.0 m inside the penalty area and FVT No.6 Bastian Yorleigh made holding contact with BRC No.11 Zeno Gorleigh, constituting a direct free-kick offence inside the area."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "AGA-QMF-5019:287:handball",
+   "category": "handball",
+   "on_field": "no_foul",
+   "law_decision": "no_foul",
+   "final": "no_foul",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 16.4,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck AGA No.3 Dario Vasvanek's arm 7.3 m inside the penalty area while the arm was held 0.03 m from the body and the arm position follows from the body's movement, so the on-field decision of no foul was correct and the VAR was justified to check and uphold it."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Dario Vasvanek's arm was held 0.03 m from the body and its position follows from the body's movement, the point of contact was 7.3 m inside the penalty area, and 8 of the 8 most similar past checks ended the same way, so upholding the on-field no-foul decision and the VAR review of it was correct."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The final decision of no foul is correct because the ball struck AGA No.3 Dario Vasvanek's arm held 0.03 m from the body, the arm position follows from the body's movement and starts at the bottom of the armpit, and 8 of the 8 most similar past checks ended the same way, so the VAR was right to review and the on-field decision to stand was justified."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The arm was held 0.03 m from the body, started at the bottom of the armpit and its position followed from the body's movement while the ball struck AGA No.3 Dario Vasvanek 7.3 m inside the penalty area, so the arm was not unnaturally bigger and no handball offence occurred."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The on-field decision of no foul was correct because the ball struck AGA No.3 Dario Vasvanek's arm 0.03 m from the body at a point 7.3 m inside the penalty area and the arm position follows from the body's movement so it was not unnaturally bigger."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "RHU-IVC-5020:71:offside",
+   "category": "offside",
+   "on_field": "no_goal",
+   "law_decision": "no_goal",
+   "final": "no_goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.1,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "RHU No.16 Cian Prawellby's right foot was 69 cm beyond the offside line at the moment of the pass and Law 11(a) penalises playing a ball passed by a team-mate, so the goal was correctly disallowed and the VAR was right to review."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "RHU No.16 Cian Prawellby's right foot was 69 cm beyond the offside line at the moment of the pass (offside line set by IVC No.22 Pavel Evberik), so under Law 11.2 (interfering with play: playing or touching a ball passed by a team-mate) the player was offside and the goal was correctly disallowed."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, RHU No.16 Cian Prawellby's right foot was 69 cm beyond the offside line set by IVC No.22 Pavel Evberik, so the player was in an offside position and the on-field disallowance is consistent with Law 11.2."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, RHU No.16 Cian Prawellby's right foot was 69 cm beyond the offside line set by IVC No.22 Pavel Evberik, and precedent 8 of the 8 most similar past checks ended the same way (the goal is disallowed)."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "RHU No.16 Cian Prawellby's right foot was 69 cm beyond the offside line at the moment of the pass, the offside line was set by IVC No.22 Pavel Evberik, and 8 of the 8 most similar past checks ended with the goal disallowed."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "RHU-IVC-5020:332:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.8,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, IVC No.37 Eli Kalovar's right foot was 3.5 m behind the offside line set by RHU No.28 Emre Kalsendt, so not in an offside position."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, IVC No.37 Eli Kalovar's right foot was 3.5 m behind the offside line set by RHU No.28 Emre Kalsendt, so the player was onside and the goal stands."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, IVC No.37 Eli Kalovar's right foot was 3.5 m behind the offside line set by RHU No.28 Emre Kalsendt, so Kalovar was onside and the goal correctly stands, and the VAR was right to check and confirm the on-field decision."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, IVC No.37 Eli Kalovar's right foot was 3.5 m behind the offside line set by RHU No.28 Emre Kalsendt, so Eli Kalovar was not in an offside position and the goal stands."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass IVC No.37 Eli Kalovar's right foot was 3.5 m behind the offside line set by RHU No.28 Emre Kalsendt, so Kalovar was not in an offside position and the on-field decision to allow the goal was correct and the VAR was right to check."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "RHU-IVC-5020:541:handball",
+   "category": "handball",
+   "on_field": "no_foul",
+   "law_decision": "no_foul",
+   "final": "no_foul",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 13.5,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The arm was held 0.32 m from the body above the shoulder but its position follows from the body's movement and the point of contact was 5.0 m inside the penalty area."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck IVC No.34 Viktor Zanvanek's arm 5.0 m inside the penalty area; the arm started at the bottom of the armpit, was held 0.32 m from the body above the shoulder and the arm position follows from the body's movement, and 8 of the 8 most similar past checks ended the same way (no foul)."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck IVC No.34 Viktor Zanvanek's arm 5.0 m inside the penalty area, the arm was held 0.32 m from the body above the shoulder and the arm position follows from the body's movement so it did not make the body unnaturally bigger."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The final decision was correct because the ball struck IVC No.34 Viktor Zanvanek's arm 5.0 m inside the penalty area, the arm was held 0.32 m from the body and above the shoulder, and the arm position follows from the body's movement so it was not making the body unnaturally bigger."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": false,
+      "reason": "The arm struck the ball 5.0 m inside the penalty area, was held 0.32 m from the body and above the shoulder, and the arm position follows from the body's movement so it did not make the body unnaturally bigger."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "4-1",
+    "verdict": "decision upheld",
+    "unanimous": false,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "RHU-IVC-5020:656:handball",
+   "category": "handball",
+   "on_field": "no_foul",
+   "law_decision": "no_foul",
+   "final": "no_foul",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 14.0,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck IVC No.29 Pavel Ostivic's arm which was held 0.18 m from the body, the arm position follows from the body's movement, and the point of contact was 4.4 m inside the penalty area."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Decision correct because the ball struck IVC No.29 Pavel Ostivic's arm held 0.18 m from the body, the arm position follows from the body's movement and starts at the bottom of the armpit so it is not 'unnaturally bigger', and 8 of the 8 most similar past checks ended no foul."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The ball struck IVC No.29 Pavel Ostivic's arm, which was held 0.18 m from the body and whose position follows from the body's movement, the point of contact was 4.4 m inside the penalty area, and 8 of the 8 most similar past checks ended the same way (no foul)."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The on-field decision to play on was correct because the ball struck IVC No.29 Pavel Ostivic's arm 0.18 m from the body while the arm position followed from the body's movement, so it was not 'unnaturally bigger', and precedent (8 of the 8 most similar past checks) also ended no foul."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The final decision was correct and the VAR was right to let it stand because the ball struck IVC No.29 Pavel Ostivic's arm 0.18 m from the body 4.4 m inside the penalty area and the arm position follows from the body's movement so it was not unnaturally bigger (8 of the 8 most similar past checks ended the same way)."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "RHU-IVC-5020:1079:penalty_claim",
+   "category": "penalty_claim",
+   "on_field": "free_kick",
+   "law_decision": "free_kick",
+   "final": "free_kick",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 13.5,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 9 cm outside the penalty area where IVC No.29 Pavel Ostivic made contact by tripping RHU No.36 Viktor Zansendt at the ankle, so awarding a free kick outside the area (and the VAR leaving the on-field decision unchanged) was consistent with Law 12 and the measured facts."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 9 cm outside the penalty area where IVC No.29 Pavel Ostivic made contact tripping RHU No.36 Viktor Zansendt at the ankle, so a free kick outside the area is correct."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 9 cm outside the penalty area when IVC No.29 Pavel Ostivic made contact with RHU No.36 Viktor Zansendt (trip, at the ankle), so awarding a free kick outside the area is consistent with Law 12’s rule that contact offences are penalised where the contact happens."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 9 cm outside the penalty area when IVC No.29 Pavel Ostivic made contact (trip, at the ankle) with RHU No.36 Viktor Zansendt, so awarding a free kick outside the area and issuing no card is consistent with the facts and Law 12."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "The point of contact was 9 cm outside the penalty area when IVC No.29 Pavel Ostivic made contact with RHU No.36 Viktor Zansendt (trip, at the ankle), so a free kick outside the area and the VAR confirmation of the on-field decision are consistent with the recorded facts."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "RHU-IVC-5020:1287:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 12.6,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass IVC No.12 Oscar Brenwellby's left foot was 26.9 m behind the offside line set by RHU No.28 Emre Kalsendt, so Oscar was clearly onside and the goal stands."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, IVC No.12 Oscar Brenwellby's left foot was 26.9 m behind the offside line set by RHU No.28 Emre Kalsendt, so the player was onside and the goal stands."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass IVC No.12 Oscar Brenwellby's left foot was 26.9 m behind the offside line set by RHU No.28 Emre Kalsendt, so Oscar Brenwellby was not in an offside position and the on-field decision to award the goal was correct."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass IVC No.12 Oscar Brenwellby's left foot was 26.9 m behind the offside line set by RHU No.28 Emre Kalsendt, so Oscar Brenwellby was not nearer to the opponents' goal line than the second-last opponent and the on-field decision to allow the goal was correct."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "Decision correct because at the moment of the pass IVC No.12 Oscar Brenwellby's left foot was 26.9 m behind the offside line set by RHU No.28 Emre Kalsendt, so Oscar Brenwellby was not in an offside position."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  },
+  {
+   "incident_id": "RHU-IVC-5020:1501:offside",
+   "category": "offside",
+   "on_field": "goal",
+   "law_decision": "goal",
+   "final": "goal",
+   "review": "check_complete",
+   "borderline": false,
+   "seconds": 12.1,
+   "panel": {
+    "members": [
+     {
+      "seat": "Former striker",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, RHU No.36 Viktor Zansendt's right foot was 3.2 m behind the offside line set by IVC No.29 Pavel Ostivic, so Viktor Zansendt was not in an offside position and the on-field decision to allow the goal was correct."
+     },
+     {
+      "seat": "Former defender",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, RHU No.36 Viktor Zansendt's right foot was 3.2 m behind the offside line set by IVC No.29 Pavel Ostivic, so Zansendt was onside and the goal stands."
+     },
+     {
+      "seat": "Former coach",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, RHU No.36 Viktor Zansendt's right foot was 3.2 m behind the offside line set by IVC No.29 Pavel Ostivic, so the player was not in an offside position and the goal standing was correct, and the VAR was right to check and uphold the on-field decision."
+     },
+     {
+      "seat": "League representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, RHU No.36 Viktor Zansendt's right foot was 3.2 m behind the offside line set by IVC No.29 Pavel Ostivic."
+     },
+     {
+      "seat": "Referees' representative",
+      "decision_correct": true,
+      "var_right": true,
+      "reason": "At the moment of the pass, RHU No.36 Viktor Zansendt's right foot was 3.2 m behind the offside line set by IVC No.29 Pavel Ostivic (the second-last opponent), so the player was not in an offside position and the VAR was correct to check and leave the on-field decision standing."
+     }
+    ],
+    "decision_correct": "5-0",
+    "var_right": "5-0",
+    "verdict": "decision upheld",
+    "unanimous": true,
+    "dissent": []
+   }
+  }
+ ]
+}
