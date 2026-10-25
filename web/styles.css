@@ -111,6 +111,7 @@ svg.pitch { width: 100%; height: auto; display: block; }
 .tab[aria-selected="true"] { background: var(--line); color: #fff; }
 .draft { background: var(--inset); border: 1px solid var(--line); border-radius: 10px; padding: 14px; min-height: 96px; white-space: pre-line; }
 .draft ul { margin: 0; padding-left: 18px; white-space: normal; }
+.announce { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; align-items: center; white-space: normal; }
 .actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; align-items: center; }
 .empty { color: var(--muted); padding: 24px 8px; text-align: center; }
 .ok { color: var(--ok); }

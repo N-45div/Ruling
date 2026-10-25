@@ -282,8 +282,30 @@ function stepsHtml(c) {
 function draftHtml(c) {
   const d = c.drafts;
   if (state.tab === "broadcaster") return `<ul>${d.broadcaster.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>`;
-  if (state.tab === "stadium") return esc(d.stadium || "No stadium announcement is due for this decision.");
+  if (state.tab === "stadium") {
+    if (!d.stadium) return esc("No stadium announcement is due for this decision.");
+    const checked = c.status === "checked" || c.status === "published";
+    return esc(d.stadium) + (checked ? `<div class="announce"><button type="button" class="btn small" id="announce">Hear the announcement</button><span class="small muted" id="announce-note">Read for the stadium PA by Azure AI Speech</span></div>` : "");
+  }
   return esc(d[state.tab]);
+}
+
+// The checked announcement, spoken. The audio outlives a re-render of the panel.
+async function playAnnouncement(button) {
+  const note = $("announce-note");
+  button.disabled = true;
+  note.textContent = "Speaking…";
+  try {
+    const res = await fetch(`/api/checks/${state.active}/announcement`);
+    if (!res.ok) throw new Error((await res.json().catch(() => ({}))).detail ?? `${res.status}`);
+    const audio = new Audio(URL.createObjectURL(await res.blob()));
+    audio.onended = () => { if ($("announce")) $("announce").disabled = false; if ($("announce-note")) $("announce-note").textContent = "Read for the stadium PA by Azure AI Speech"; };
+    await audio.play();
+    note.textContent = "Playing";
+  } catch (err) {
+    button.disabled = false;
+    note.textContent = String(err.message ?? err);
+  }
 }
 
 // What the checker sent back on each draft, so a caught mistake stays visible after the rewrite.
@@ -343,6 +365,7 @@ function renderCheck() {
     ${drafts}`;
   if (c.evidence && packet) drawFreezeFrame($("freeze"), packet, c, state.match.home.code);
   for (const tab of side.querySelectorAll(".tab")) tab.onclick = () => { state.tab = tab.dataset.tab; renderCheck(); };
+  if ($("announce")) $("announce").onclick = (e) => playAnnouncement(e.currentTarget);
   if ($("approve")) $("approve").onclick = () => decide("approve");
   if ($("hold")) $("hold").onclick = () => decide("hold");
 }
