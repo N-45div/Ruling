@@ -135,7 +135,8 @@ def channel_prompt(packet: CheckPacket, evidence: Evidence, verdict: Verdict, cl
     return "\n".join(lines)
 
 
-LANGUAGES = {"es": "Spanish", "hi": "Hindi", "fr": "French", "pt": "Portuguese"}
+LANGUAGES = {"es": "Spanish", "hi": "Hindi", "fr": "French", "pt": "Portuguese", "ar": "Arabic",
+             "id": "Indonesian", "zh": "Simplified Chinese", "de": "German", "ja": "Japanese", "sw": "Swahili"}
 
 
 class Translation(BaseModel):

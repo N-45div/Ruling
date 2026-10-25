@@ -16,6 +16,14 @@ def test_the_words_are_escaped_into_ssml():
     assert body.startswith('<speak version="1.0" xml:lang="en-GB"><voice name="en-GB-RyanNeural">')
 
 
+def test_every_fan_card_language_has_a_voice_in_its_own_locale():
+    from ruling.desk.communicator import LANGUAGES
+
+    assert set(LANGUAGES) | {"en"} == set(speech.VOICES)
+    assert speech.ssml("最终判罚是任意球。", "zh").startswith('<speak version="1.0" xml:lang="zh-CN"><voice name="zh-CN-')
+    assert all(voice.startswith(locale) for locale, voice in speech.VOICES.values())
+
+
 def test_speech_uses_the_foundry_resource_itself(monkeypatch):
     monkeypatch.setattr(speech.settings, "foundry_endpoint",
                         lambda: "https://ruling-ai-abc123.services.ai.azure.com/api/projects/ruling")

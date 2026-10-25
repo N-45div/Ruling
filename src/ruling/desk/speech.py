@@ -1,8 +1,10 @@
-"""The referee's stadium announcement, read aloud by Azure AI Speech for the PA.
+"""Checked words read aloud by Azure AI Speech: the referee's stadium announcement for the PA, and
+the fan card in the fan's language.
 
-Only the announcement the checker passed is spoken, word for word: the words inside REF: "...".
-Speech runs on the same Foundry (AI Services) resource as the models and signs in the same way,
-with the developer's `azd auth login` locally and the app's managed identity in Azure; no keys.
+Only text that has passed the checker (or a translation that kept every name and figure) is
+spoken, word for word. Speech runs on the same Foundry (AI Services) resource as the models and
+signs in the same way, with the developer's `azd auth login` locally and the app's managed
+identity in Azure; no keys.
 """
 
 from __future__ import annotations
@@ -20,6 +22,13 @@ from .. import settings
 from .llm import with_retry
 
 VOICE = "en-GB-RyanNeural"  # a calm British voice, as a stadium PA would carry it
+# One neural voice per fan-card language: (SSML locale, voice).
+VOICES = {
+    "en": ("en-GB", VOICE), "es": ("es-ES", "es-ES-AlvaroNeural"), "hi": ("hi-IN", "hi-IN-MadhurNeural"),
+    "fr": ("fr-FR", "fr-FR-HenriNeural"), "pt": ("pt-BR", "pt-BR-AntonioNeural"), "ar": ("ar-SA", "ar-SA-HamedNeural"),
+    "id": ("id-ID", "id-ID-ArdiNeural"), "zh": ("zh-CN", "zh-CN-YunxiNeural"), "de": ("de-DE", "de-DE-ConradNeural"),
+    "ja": ("ja-JP", "ja-JP-KeitaNeural"), "sw": ("sw-KE", "sw-KE-RafikiNeural"),
+}
 FORMAT = "audio-24khz-96kbitrate-mono-mp3"
 SCOPE = "https://cognitiveservices.azure.com/.default"
 TIMEOUT = 20.0
@@ -33,8 +42,9 @@ def spoken(stadium: str) -> str:
     return (match["words"] if match else stadium or "").strip()
 
 
-def ssml(words: str, voice: str = VOICE) -> str:
-    return f'<speak version="1.0" xml:lang="en-GB"><voice name="{voice}">{escape(words)}</voice></speak>'
+def ssml(words: str, language: str = "en") -> str:
+    locale, voice = VOICES[language]
+    return f'<speak version="1.0" xml:lang="{locale}"><voice name="{voice}">{escape(words)}</voice></speak>'
 
 
 def endpoint() -> str:
@@ -53,11 +63,16 @@ async def announce(stadium: str) -> bytes:
     words = spoken(stadium)
     if not words:
         raise ValueError("no stadium announcement is due")
+    return await speak(words, "en")
+
+
+async def speak(words: str, language: str = "en") -> bytes:
+    """MP3 audio of `words` in the voice for `language` (a key of VOICES)."""
     token = await asyncio.to_thread(_credential().get_token, SCOPE)
 
     async def call() -> bytes:
         async with httpx.AsyncClient(timeout=TIMEOUT) as client:
-            response = await client.post(endpoint(), content=ssml(words).encode("utf-8"), headers={
+            response = await client.post(endpoint(), content=ssml(words, language).encode("utf-8"), headers={
                 "Authorization": f"Bearer {token.token}", "Content-Type": "application/ssml+xml",
                 "X-Microsoft-OutputFormat": FORMAT, "User-Agent": "ruling"})
             response.raise_for_status()
