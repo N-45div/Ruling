@@ -11,7 +11,8 @@
     GET  /api/checks/{check_id}/events        every agent step, live (server-sent events)
     POST /api/checks/{check_id}/decision      a person approves or holds the messages
     POST /api/checks/{check_id}/translate     the approved fan card in another language
-    GET  /api/cases?match_id=                 finished case files (the post-match review)
+    GET  /api/checks/{check_id}/announcement  the checked stadium announcement, spoken (audio/mpeg)
+    GET  /api/cases?match_id=               finished case files (the post-match review)
     POST /api/live                            replay a match through Event Hubs {"seed", "speed", "from_minute"}
     GET  /api/live                            feed state and recent events
     GET  /api/live/events                     the feed, live; VAR checks start the desk on their own
@@ -33,7 +34,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import StreamingResponse
+from fastapi.responses import Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
@@ -74,6 +75,7 @@ async def lifespan(app: FastAPI):
     app.state.tracing = telemetry.configure()
     app.state.checks = Checks(make_store())
     app.state.translations = {}  # (check_id, language) -> (text, verified)
+    app.state.announcements = {}  # check_id -> mp3 bytes of the spoken stadium announcement
     app.state.live = LiveFeed(app.state.checks, os.environ.get("EVENTHUB_NAMESPACE"), os.environ.get("EVENTHUB_NAME"))
     app.state.live.start_consumer()
     try:
@@ -232,6 +234,29 @@ async def translate(check_id: str, body: Translate, request: Request):
         cache[key] = await communicator.translate(case["drafts"]["fan"], body.language)
     text, verified = cache[key]
     return {"language": body.language, "text": text, "verified": verified}
+
+
+@app.get("/api/checks/{check_id}/announcement")
+async def announcement(check_id: str, request: Request):
+    from ..desk import speech
+
+    s = app.state.checks.sessions.get(check_id)
+    if s is None:
+        case = await _stored(check_id)
+    else:
+        case = serialize.case_dict(s.case) if s.case else {"status": None}
+    if case["status"] not in ("checked", "published"):
+        raise HTTPException(409, "only a checked announcement is spoken")
+    if not (case.get("drafts") or {}).get("stadium"):
+        raise HTTPException(404, "no stadium announcement is due for this decision")
+    cache = app.state.announcements
+    if check_id not in cache:
+        limits.enforce(LIMITER, request, "speech", uses_model=True)
+        try:
+            cache[check_id] = await speech.announce(case["drafts"]["stadium"])
+        except Exception as exc:
+            raise HTTPException(502, "the announcement could not be spoken; try again in a moment") from exc
+    return Response(cache[check_id], media_type="audio/mpeg", headers={"Cache-Control": "public, max-age=3600"})
 
 
 @app.get("/api/cases")

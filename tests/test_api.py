@@ -102,3 +102,17 @@ def test_finished_checks_are_served_from_the_store_after_a_restart(client):
     assert client.post("/api/checks/c0ffee000001/decision", json={"decision": "approve"}).status_code == 409
     assert client.post("/api/checks/c0ffee000001/translate", json={"language": "es"}).status_code == 409
     assert any(c["check_id"] == "c0ffee000001" for c in client.get("/api/cases?match_id=MLA-HFW-5001").json())
+
+
+def test_only_a_checked_announcement_is_spoken(client):
+    assert client.get("/api/checks/nope/announcement").status_code == 404
+    held = {"check_id": "c0ffee000002", "incident_id": "MLA-HFW-5001:1:offside", "match_id": "MLA-HFW-5001",
+            "status": "held", "holding": "VAR check in progress.", "drafts": None}
+    factual = {"check_id": "c0ffee000003", "incident_id": "MLA-HFW-5001:2:offside", "match_id": "MLA-HFW-5001",
+               "status": "published", "drafts": {"match_centre": "Goal disallowed.", "stadium": "",
+                                                 "broadcaster": [], "fan": "Offside."}}
+    for case in (held, factual):
+        asyncio.run(app.state.checks.store.save(case))
+    assert client.get("/api/checks/c0ffee000002/announcement").status_code == 409
+    no_words = client.get("/api/checks/c0ffee000003/announcement")
+    assert no_words.status_code == 404 and "no stadium announcement" in no_words.json()["detail"]

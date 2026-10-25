@@ -15,6 +15,7 @@ from fastapi import HTTPException, Request
 LIMITS = {
     "check": (8, 60),        # VAR checks and drills, from the desk or over MCP
     "translate": (20, 60),
+    "speech": (12, 60),      # stadium announcements read aloud (each is made once, then cached)
     "feed": (6, 60),         # starting or freezing the live feed
 }
 MODEL_BUDGET = (180, 3600)  # checks that may call the model, all clients together, per hour

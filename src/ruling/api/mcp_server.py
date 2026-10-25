@@ -31,8 +31,10 @@ INSTRUCTIONS = (
 )
 
 
-def _case_summary(c: dict) -> dict:
+def _case_summary(c: dict, check_id: str | None = None) -> dict:
     v, law, ev, drafts = c.get("verdict") or {}, c.get("law") or {}, c.get("evidence") or {}, c.get("drafts") or {}
+    check_id = check_id or c.get("check_id")
+    spoken = check_id and drafts.get("stadium") and c["status"] in ("checked", "published")
     return {
         "incident_id": c["incident_id"], "clock": c["clock"], "category": c["category"],
         "on_field": c["on_field"], "status": c["status"], "holding_line": c.get("holding"),
@@ -44,6 +46,7 @@ def _case_summary(c: dict) -> dict:
         "measured_facts": ev.get("facts"),
         "precedent": c.get("precedent_line"),
         "checked_messages": {k: drafts.get(k) for k in ("match_centre", "stadium", "broadcaster", "fan")} if drafts else None,
+        "stadium_announcement_audio": f"{DESK}/api/checks/{check_id}/announcement" if spoken else None,
         "checker": {"passed": (c.get("check") or {}).get("passed"), "claims_backed": len((c.get("check") or {}).get("claims") or [])},
         "desk": f"{DESK}/?seed={int(c['match_id'].split('-')[-1])}",
     }
@@ -102,7 +105,7 @@ def build(app) -> MCPServer:
             waited += 0.5
         if session.case is None:
             return {"incident_id": incident_id, "status": "working", "desk": f"{DESK}/?seed={m.seed}"}
-        summary = _case_summary(serialize.case_dict(session.case))
+        summary = _case_summary(serialize.case_dict(session.case), session.id)
         if session.request_id is not None:
             summary["status"] = "awaiting a person's approval on the desk"
         return summary
