@@ -34,7 +34,7 @@ function panelCard(c) {
         <span class="vote ${m.var_right ? "yes" : "no"}">${m.var_right ? "VAR right" : "VAR wrong"}</span></div>
         <p class="small" style="margin:4px 0 0;color:var(--soft)">${m.reason ? esc(m.reason) : '<span class="muted">Reason withheld: it cited a figure that is not in the record.</span>'}</p></div></li>`;
   }).join("");
-  return `<article class="kmi-card"><div class="kmi-head"><span class="mono muted">${esc(c.clock)}</span><b>${esc(CATEGORY[c.category])}</b>
+  return `<article class="kmi-card"><div class="kmi-head"><span class="mono">${esc(c.clock)}</span><b>${esc(CATEGORY[c.category])}</b>
       <span class="muted">Final: ${esc(DECISION[v.final_decision])}</span>${panelChip(p)}<span class="small muted">VAR right ${esc(p.var_right)}</span></div>
     <ul class="kmi-seats">${seats}</ul></article>`;
 }
@@ -47,7 +47,7 @@ function render(match, rows) {
   const reviewed = done.filter((r) => r.c.panel);
   const questioned = reviewed.filter((r) => r.c.panel.verdict !== "decision upheld").length;
   const tile = (label, value, note = "") =>
-    `<div class="panel tile"><div class="label">${label}</div><div style="font-size:30px;font-weight:700;margin-top:4px">${value}</div>${note ? `<div class="small muted">${note}</div>` : ""}</div>`;
+    `<div class="panel tile"><div class="label">${label}</div><div class="tile-value">${value}</div>${note ? `<div class="small muted">${note}</div>` : ""}</div>`;
   document.getElementById("tiles").innerHTML = [
     tile("VAR checks", `${done.length} of ${match.incidents.length}`, "checked by the desk so far"),
     tile("Interventions", interventions),

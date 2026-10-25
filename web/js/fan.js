@@ -24,7 +24,7 @@ async function main() {
   const { packet } = await get(`/api/incidents/${c.incident_id}`);
   const minute = c.clock.split(":")[0].replace(/^0/, "");
   card.innerHTML = `
-    <div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:17px">Match Centre</b><span class="mono muted small">${esc(minute)}'</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center"><b class="phone-title">Match Centre</b><span class="mono muted small">${esc(minute)}'</span></div>
     <div class="panel" style="display:flex;justify-content:space-between;align-items:center;gap:8px">
       <span class="team"><span class="dot" style="background:#E14D5F"></span>${esc(match.home.name)}</span>
       <span class="mono" style="font-size:20px;font-weight:600;white-space:nowrap">${c.score[0]} – ${c.score[1]}</span>
@@ -40,7 +40,7 @@ async function main() {
     </div>
     <div class="lang" role="group" aria-label="Language">${LANGUAGES.map(([code, name]) => `<button type="button" data-lang="${code}" lang="${code}" aria-pressed="${code === current}">${name}</button>`).join("")}</div>
     <div class="panel" style="display:flex;flex-direction:column;gap:8px">
-      <b>How this was decided</b>
+      <b class="phone-title">How this was decided</b>
       <span>Measured from tracking data at the decisive moment</span>
       <span>Law ${esc(c.law.id)}, ${esc(c.law.title.toLowerCase())}</span>
       ${c.precedent ? `<span>${c.precedent.agreeing} of ${total(c.precedent.finals)} similar past checks ended the same way</span>` : ""}
