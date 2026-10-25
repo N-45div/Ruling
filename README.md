@@ -13,10 +13,10 @@ Everything runs on synthetic, football-realistic matches with fictional clubs an
 No sign-in is needed.
 
 1. Open the desk at [the 63rd minute of a demo match](https://ruling-api.proudsea-2ac99296.eastus2.azurecontainerapps.io/?seed=5004&from=63) and press **Start live feed**. The match plays through Azure Event Hubs; when the 64:51 goal arrives and the VAR checks it, the desk opens the check by itself and its agents light up one by one.
-2. When **Approve and publish** turns amber, press it. Nothing goes out before that. Then **Open the fan card** and switch it to Español or हिन्दी.
+2. When **Approve and publish** turns amber, press it. Nothing goes out before that. Then **Open the fan card**, switch it to any of ten languages, and press **Listen**.
 3. Under **VAR checks this match**, run the 10:53 penalty claim. The VAR overturns it, so a stadium announcement is due: open the **Stadium** tab and press **Hear the announcement**, and Azure AI Speech reads the referee's checked words.
 4. Under **Failure drills**, press **A player vanishes from tracking**: the desk refuses to measure an offside line it cannot see and holds, saying why. Try **The model times out** and **The writer states the wrong decision** too.
-5. Open the **Review pack** for the whole match as a table, a CSV or a PDF.
+5. Open the **Review pack** for the whole match and press **Convene the panel**: five independent reviewers vote on every published decision.
 6. Point an MCP client at `/mcp` (see below) and ask it to explain a VAR check.
 
 ## A check, start to finish
@@ -29,7 +29,7 @@ A goal goes in at 64:51 and the VAR checks it for offside. Within about 20 secon
 - **written four messages:** a Match Centre post, a stadium announcement when one is due, three bullets for a broadcaster's referee analyst, and a fan card of 60 words or fewer;
 - **checked them:** every factual claim is compared with the measurements and the Law, and a draft that fails goes back to be rewritten.
 
-Nothing goes out until a person approves it. When the referee announces the decision in the stadium, the checked announcement can be played for the PA, read by Azure AI Speech word for word. The fan card can then be switched to Spanish or Hindi (French and Portuguese too, through the API), with names and figures kept exactly. After the match, a review pack lists every check with its evidence, Law and precedent, as a table, a CSV or a PDF.
+Nothing goes out until a person approves it. When the referee announces the decision in the stadium, the checked announcement can be played for the PA, read by Azure AI Speech word for word. The fan card can then be switched to Spanish, Hindi, French, Portuguese, Arabic, Indonesian, Chinese, German, Japanese or Swahili, with names and figures kept exactly, and read aloud in that language. After the match, a review pack lists every check with its evidence, Law and precedent, as a table, a CSV or a PDF, and a post-match panel votes on each decision.
 
 <p>
   <img src="docs/images/fan-card.png" alt="The fan card on a phone, in Spanish" width="260">
@@ -67,6 +67,14 @@ flowchart LR
 | Checker | Code rules, then every claim against the decision record; up to two rewrites | code + gpt-5-mini |
 | Approval | A person approves or holds; nothing is published before | human in the loop |
 | PA voice | The checked stadium announcement, read aloud word for word | Azure AI Speech |
+
+On the desk, each agent is a character in the crew line-up and lights up as it works.
+
+### After the match: a panel of five
+
+Leagues review key decisions after each round with an independent panel. Ruling convenes one for every published decision: a former striker, a former defender, a former coach, a league representative and a referees' representative. Each reads the same decision record the checker uses and votes, without seeing the others, on two questions: was the decision correct, and was the VAR right to step in or stay out? Agent Framework runs the five concurrently (`ConcurrentBuilder`: fan out, fan in), code tallies the votes, and a reason that cites a figure not in the record is withheld. The measured decision stands; the panel's view is shown exactly as it voted, dissent included.
+
+On all 79 checks in the demo matches ([`results/panel-dev-20261025T1441Z.json`](results/panel-dev-20261025T1441Z.json), `uv run python scripts/panel_study.py`), the panel sat every time, in a median 14 s. On whether the decision was correct it was unanimous on 78; the one split, 4-1, was a close red-card call. It questioned one decision, 0-5: a close handball call where the on-field penalty stood because it was not a clear and obvious error, which is also what the desk's own measurement says. The second question is noisier: on four checks one or two reviewers said the VAR was wrong to act or stay out, twice on factual offside calls where a routine completed check was read as an intervention.
 
 ## When it refuses to guess
 
@@ -109,6 +117,7 @@ The desk is also an MCP server, so GitHub Copilot, a Foundry agent or any MCP cl
 | `explain_var_check` | a real desk check: the decision measured from tracking data, the Law clause, precedent, the four checked messages and, when one is due, a link to the spoken stadium announcement; nothing is published until a person approves it on the desk |
 | `law_clause` | a Law of the Game as the desk paraphrases it, with its criteria and the official link |
 | `similar_past_checks` | how the most similar archived checks ended (Foundry embeddings) |
+| `post_match_panel` | the five-seat panel's votes and reasons on a published decision |
 
 In VS Code (`.vscode/mcp.json`):
 
@@ -131,8 +140,8 @@ flowchart LR
 ```
 
 - **Microsoft Foundry:** gpt-5-mini writes and checks the messages and translates the fan card; text-embedding-3-small powers precedent search. The groundedness evaluator is used in the evaluation.
-- **Azure AI Speech** reads the checked stadium announcement aloud for the PA in a British neural voice. It runs on the same Foundry resource and signs in with the same managed identity.
-- **Microsoft Agent Framework:** the desk is a workflow of executors with switch-case edges, a writer-checker loop, a fail-safe path, and human-in-the-loop approval through `request_info`. Its spans go to Application Insights.
+- **Azure AI Speech** reads the checked stadium announcement aloud for the PA in a British neural voice, and the fan card in the fan's language, one neural voice per language. It runs on the same Foundry resource and signs in with the same managed identity.
+- **Microsoft Agent Framework:** the desk is a workflow of executors with switch-case edges, a writer-checker loop, a fail-safe path, and human-in-the-loop approval through `request_info`; the post-match panel is a concurrent orchestration of five agents. Its spans go to Application Insights.
 - **Azure Container Apps** runs the API and the desk. **Azure Event Hubs** carries the live match feed, and a VAR check arriving on the feed starts the desk on its own. **Azure Cosmos DB** keeps finished case files for the review pack.
 - **Managed identity** everywhere: no keys in the app. Infrastructure is Bicep, deployed with the Azure Developer CLI.
 
@@ -176,8 +185,10 @@ uv run ruling-eval --set dev                   # the evaluation on the developme
 | `POST /api/checks` | start a check `{"incident_id", "auto_approve", "drill"}` |
 | `GET /api/checks/{id}`, `GET /api/checks/{id}/events` | the case file, and every agent step as it happens (server-sent events) |
 | `POST /api/checks/{id}/decision` | approve or hold |
-| `POST /api/checks/{id}/translate` | the published fan card in Spanish, Hindi, French or Portuguese |
+| `POST /api/checks/{id}/translate` | the published fan card in one of ten languages |
+| `GET /api/checks/{id}/listen?language=` | the published fan card read aloud in that language (MP3, Azure AI Speech) |
 | `GET /api/checks/{id}/announcement` | the checked stadium announcement, spoken (MP3, Azure AI Speech) |
+| `POST /api/checks/{id}/panel` | the post-match panel's votes on a published decision, kept with the case file |
 | `GET /api/cases?match_id=` | finished case files, for the review pack |
 | `POST /api/live`, `GET /api/live/events` | replay a match through Event Hubs, and follow it |
 | `GET /api/drills`, `POST /api/live/stall` | failure drills |
@@ -204,8 +215,9 @@ uv run ruling-eval --set dev                   # the evaluation on the developme
 - **Not covered:** mistaken identity, the ball going out of play before a goal, and two incidents in one passage of play.
 - **A model still writes the words.** The checker catches most mistakes, but not every one: in failure drills it caught a planted wrong decision in 46 of 47 measured runs.
 - **One replica.** A check in progress lives in memory; finished checks are in Cosmos DB and survive a restart.
+- **The panel is five model opinions, not referees.** It reads the same record the desk does, so it mostly agrees on clear calls; its value is in showing where reasonable reviewers split.
 
 
 ## License
 
-MIT
+MIT. The characters are generated with [DiceBear](https://www.dicebear.com/)'s pixel-art style, whose artwork is CC0 1.0.
